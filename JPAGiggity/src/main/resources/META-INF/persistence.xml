@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-  <persistence-unit name="FIXMEPU">
+  <persistence-unit name="GiggityPU">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
@@ -14,9 +14,9 @@
 
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/eventtracker?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
-      <property name="javax.persistence.jdbc.user" value="FIXME"/>
-      <property name="javax.persistence.jdbc.password" value="FIXME"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/giggity?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 
       <property name="hibernate.show_sql" value="true" />

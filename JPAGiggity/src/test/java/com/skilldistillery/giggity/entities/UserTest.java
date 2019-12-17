@@ -18,7 +18,7 @@ class UserTest {
 	private User user;
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		emf = Persistence.createEntityManagerFactory("FIXME");
+		emf = Persistence.createEntityManagerFactory("GiggityPU");
 	}
 
 	@AfterAll
@@ -41,7 +41,7 @@ class UserTest {
 	@Test
 	void test() {
 		assertNotNull(user);
-		assertEquals("testuser", user.getUsername());
+		assertEquals("test", user.getUsername());
 	}
 
 }
