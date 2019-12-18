@@ -19,7 +19,7 @@ public class UserController {
 
 	@GetMapping("users/{id}")
 	public User getUser(@PathVariable int id) {
-
+		System.err.println(id);
 		return svc.getUserById(id);
 	}
 
