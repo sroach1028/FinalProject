@@ -44,5 +44,13 @@ class BuyerReviewTest {
 	void test() {
 		assertNotNull(buyerReview);
 	}
+	@Test
+	void test2() {
+		assertNotNull(buyerReview.getJob());
+	}
+	@Test
+	void test3() {
+		assertNotNull(buyerReview.getReviewDate());
+	}
 
 }

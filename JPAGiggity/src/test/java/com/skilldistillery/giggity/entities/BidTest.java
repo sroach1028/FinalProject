@@ -44,5 +44,13 @@ class BidTest {
 	void test() {
 		assertNotNull(bid);
 	}
+	@Test
+	void test2() {
+		assertNotNull(bid.getBidder());
+	}
+	@Test
+	void test3() {
+		assertNotNull(bid.getJob());
+	}
 
 }
