@@ -45,7 +45,7 @@ public class User {
 	@OneToMany(mappedBy = "bidder")
 	private List<Bid> bids;
 
-	@OneToMany(mappedBy = "userSkill")
+	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 
 	@OneToOne
