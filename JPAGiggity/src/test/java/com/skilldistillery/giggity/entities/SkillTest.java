@@ -44,5 +44,17 @@ class SkillTest {
 	void test() {
 		assertNotNull(skill);
 	}
+	@Test
+	void test2() {
+		assertNotNull(skill.getJobSkill());
+	}
+	@Test
+	void test3() {
+		assertNotNull(skill.getForumMessages());
+	}
+	@Test
+	void test4() {
+		assertNotNull(skill.getUserSkills());
+	}
 
 }

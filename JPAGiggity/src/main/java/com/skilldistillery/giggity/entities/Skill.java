@@ -26,7 +26,7 @@ public class Skill {
 	private List<SkillMessage> forumMessages;
 
 	@OneToMany(mappedBy = "skill")
-	private List<UserSkill> userSills;
+	private List<UserSkill> userSkills;
 
 	// C O N S T R U C T O R
 	public Skill() {
@@ -39,12 +39,13 @@ public class Skill {
 		return id;
 	}
 
-	public List<UserSkill> getUserSills() {
-		return userSills;
+
+	public List<UserSkill> getUserSkills() {
+		return userSkills;
 	}
 
-	public void setUserSills(List<UserSkill> userSills) {
-		this.userSills = userSills;
+	public void setUserSkills(List<UserSkill> userSkills) {
+		this.userSkills = userSkills;
 	}
 
 	public List<SkillMessage> getForumMessages() {
