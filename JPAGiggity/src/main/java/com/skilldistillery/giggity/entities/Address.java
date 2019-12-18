@@ -1,9 +1,12 @@
 package com.skilldistillery.giggity.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -21,14 +24,26 @@ public class Address {
 
 	private String street;
 
+	@OneToMany(mappedBy = "address")
+	private List<Job> jobAddress;
+
 	// C O N S T R U C T O R
 	public Address() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
+	}
+
+	public List<Job> getJobAddress() {
+		return jobAddress;
+	}
+
+	public void setJobAddress(List<Job> jobAddress) {
+		this.jobAddress = jobAddress;
 	}
 
 	public void setId(int id) {

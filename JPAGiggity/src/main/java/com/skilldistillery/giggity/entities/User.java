@@ -52,11 +52,12 @@ public class User {
 	@JoinColumn(name = "image_id")
 	private Image avatarImage;
 
-	@Column(name = "address_id")
-	private int addressId;
+	@OneToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
 
-	@Column(name = "image_id")
-	private int imageId;
+	@OneToMany(mappedBy = "user")
+	private List<Job> jobs;
 
 	// C O N S T R U C T O R
 	public User() {
@@ -67,6 +68,22 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public Image getAvatarImage() {
@@ -169,22 +186,6 @@ public class User {
 		this.phone = phone;
 	}
 
-	public int getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
-
-	public int getImageId() {
-		return imageId;
-	}
-
-	public void setImageId(int imageId) {
-		this.imageId = imageId;
-	}
-
 	public List<Booking> getBookings() {
 		return bookings;
 	}
@@ -198,12 +199,10 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + addressId;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
-		result = prime * result + imageId;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
@@ -221,8 +220,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (addressId != other.addressId)
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -239,8 +236,6 @@ public class User {
 		} else if (!firstName.equals(other.firstName))
 			return false;
 		if (id != other.id)
-			return false;
-		if (imageId != other.imageId)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -292,10 +287,6 @@ public class User {
 		builder.append(role);
 		builder.append(", phone=");
 		builder.append(phone);
-		builder.append(", addressId=");
-		builder.append(addressId);
-		builder.append(", imageId=");
-		builder.append(imageId);
 		builder.append("]");
 		return builder.toString();
 	}

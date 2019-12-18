@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class BuyerReview {
@@ -20,11 +22,12 @@ public class BuyerReview {
 
 	private int rating;
 
-	@Column(name = "job_id")
-	private int jobId;
-
 	@Column(name = "review_date")
 	private LocalDateTime reviewDate;
+
+	@ManyToOne
+	@JoinColumn(name = "job_id")
+	private Job job;
 
 	// C O N S T R U C T O R
 	public BuyerReview() {
@@ -32,8 +35,17 @@ public class BuyerReview {
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public void setId(int id) {
@@ -56,13 +68,6 @@ public class BuyerReview {
 		this.rating = rating;
 	}
 
-	public int getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
 
 	public LocalDateTime getReviewDate() {
 		return reviewDate;
@@ -79,7 +84,6 @@ public class BuyerReview {
 		int result = 1;
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + jobId;
 		result = prime * result + rating;
 		result = prime * result + ((reviewDate == null) ? 0 : reviewDate.hashCode());
 		return result;
@@ -101,8 +105,6 @@ public class BuyerReview {
 			return false;
 		if (id != other.id)
 			return false;
-		if (jobId != other.jobId)
-			return false;
 		if (rating != other.rating)
 			return false;
 		if (reviewDate == null) {
@@ -123,8 +125,6 @@ public class BuyerReview {
 		builder.append(comment);
 		builder.append(", rating=");
 		builder.append(rating);
-		builder.append(", jobId=");
-		builder.append(jobId);
 		builder.append(", reviewDate=");
 		builder.append(reviewDate);
 		builder.append("]");

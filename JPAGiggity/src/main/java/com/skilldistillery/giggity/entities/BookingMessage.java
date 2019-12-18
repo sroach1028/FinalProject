@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class BookingMessage {
@@ -16,9 +18,6 @@ public class BookingMessage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "booking_id")
-	private int bookingId;
-
 	private String message;
 
 	@Column(name = "message_date")
@@ -27,8 +26,13 @@ public class BookingMessage {
 	@Column(name = "seller_id")
 	private int sellerid;
 
-	@Column(name = "buyer_id")
-	private int buyerid;
+	@ManyToOne
+	@JoinColumn(name = "booking_id")
+	private Booking booking;
+
+	@ManyToOne
+	@JoinColumn(name = "buyer_id")
+	private Job job;
 
 	// C O N S T R U C T O R
 	public BookingMessage() {
@@ -36,16 +40,25 @@ public class BookingMessage {
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
 	}
 
-	public int getBookingId() {
-		return bookingId;
+	public Job getJob() {
+		return job;
 	}
 
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 
 	public String getMessage() {
@@ -72,13 +85,6 @@ public class BookingMessage {
 		this.sellerid = sellerid;
 	}
 
-	public int getBuyerid() {
-		return buyerid;
-	}
-
-	public void setBuyerid(int buyerid) {
-		this.buyerid = buyerid;
-	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -89,8 +95,6 @@ public class BookingMessage {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + bookingId;
-		result = prime * result + buyerid;
 		result = prime * result + id;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((messageDate == null) ? 0 : messageDate.hashCode());
@@ -107,10 +111,6 @@ public class BookingMessage {
 		if (getClass() != obj.getClass())
 			return false;
 		BookingMessage other = (BookingMessage) obj;
-		if (bookingId != other.bookingId)
-			return false;
-		if (buyerid != other.buyerid)
-			return false;
 		if (id != other.id)
 			return false;
 		if (message == null) {
@@ -134,16 +134,12 @@ public class BookingMessage {
 		StringBuilder builder = new StringBuilder();
 		builder.append("BookingMessage [id=");
 		builder.append(id);
-		builder.append(", bookingId=");
-		builder.append(bookingId);
 		builder.append(", message=");
 		builder.append(message);
 		builder.append(", messageDate=");
 		builder.append(messageDate);
 		builder.append(", sellerid=");
 		builder.append(sellerid);
-		builder.append(", buyerid=");
-		builder.append(buyerid);
 		builder.append("]");
 		return builder.toString();
 	}

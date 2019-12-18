@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class SellerReview {
@@ -20,11 +22,12 @@ public class SellerReview {
 
 	private int rating;
 
-	@Column(name = "booking_id")
-	private int bookingId;
-
 	@Column(name = "review_date")
 	private LocalDateTime reviewDate;
+
+	@ManyToOne
+	@JoinColumn(name = "booking_id")
+	private Booking booking;
 
 	// C O N S T R U C T O R
 	public SellerReview() {
@@ -56,13 +59,6 @@ public class SellerReview {
 		this.rating = rating;
 	}
 
-	public int getBookingId() {
-		return bookingId;
-	}
-
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
-	}
 
 	public LocalDateTime getReviewDate() {
 		return reviewDate;
@@ -77,7 +73,6 @@ public class SellerReview {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + bookingId;
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
 		result = prime * result + rating;
@@ -94,8 +89,6 @@ public class SellerReview {
 		if (getClass() != obj.getClass())
 			return false;
 		SellerReview other = (SellerReview) obj;
-		if (bookingId != other.bookingId)
-			return false;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;
@@ -123,8 +116,6 @@ public class SellerReview {
 		builder.append(comment);
 		builder.append(", rating=");
 		builder.append(rating);
-		builder.append(", bookingId=");
-		builder.append(bookingId);
 		builder.append(", reviewDate=");
 		builder.append(reviewDate);
 		builder.append("]");
