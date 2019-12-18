@@ -12,6 +12,6 @@ import com.skilldistillery.giggity.services.SellerReviewService;
 @CrossOrigin({ "*", "http://localhost:4350" })
 public class SellerReviewController {
 
-	@Autowired
-	SellerReviewService sellerRevSvc;
+//	@Autowired
+//	SellerReviewService sellerRevSvc;
 }

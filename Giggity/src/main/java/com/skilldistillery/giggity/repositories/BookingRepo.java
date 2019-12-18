@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import com.skilldistillery.giggity.entities.Booking;
 
 public interface BookingRepo extends JpaRepository<Booking, Integer> {
-	@Query("SELECT b FROM Booking m WHERE b.completedDate > NOW()")
+	@Query("SELECT b FROM Booking b WHERE b.completedDate > NOW()")
 	List<Booking> queryByActiveGigs();
-	@Query("SELECT b FROM Booking m WHERE b.completeDate < NOW()")
+	@Query("SELECT b FROM Booking b WHERE b.completeDate < NOW()")
 	List<Booking> queryByHistory();
 
 }
