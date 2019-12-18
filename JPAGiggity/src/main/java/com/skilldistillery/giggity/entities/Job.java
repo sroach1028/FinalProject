@@ -15,29 +15,46 @@ import javax.persistence.OneToOne;
 @Entity
 public class Job {
 
+	// F I E L D S
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int price;
-	private String description;
-	private String title;
-	private boolean active;
-	private boolean remote;
 
-	@Column(name = "image_url")
-	private String imageUrl;
-	@Column(name = "date_created")
-	private LocalDateTime dateCreated;
-	@Column(name = "date_updated")
-	private LocalDateTime dateUpdated;
+	@Column(name = "skill_id")
+	private int skillId;
+
+	private double price;
+
+	private String description;
+
+	private String title;
+
+	private Boolean active;
 
 	@OneToMany(mappedBy = "address")
 	private List<Address> addresses;
+
+	private Boolean remote;
+
+	@Column(name = "image_url")
+	private String imageUrl;
+
+	@Column(name = "date_created")
+	private LocalDateTime dateCreated;
+
+	@Column(name = "date_updated")
+	private LocalDateTime dateUpdated;
 
 	@OneToOne
 	@JoinColumn(name = "job_id")
 	private BuyerReview buyerReview;
 
+	// C O N S T R U C T O R
+	public Job() {
+
+	}
+
+	// G E T T E R S && S E T T E R S
 	public int getId() {
 		return id;
 	}
@@ -46,11 +63,19 @@ public class Job {
 		this.id = id;
 	}
 
-	public int getPrice() {
+	public int getSkillId() {
+		return skillId;
+	}
+
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -70,19 +95,27 @@ public class Job {
 		this.title = title;
 	}
 
-	public boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
-	public boolean isRemote() {
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public Boolean getRemote() {
 		return remote;
 	}
 
-	public void setRemote(boolean remote) {
+	public void setRemote(Boolean remote) {
 		this.remote = remote;
 	}
 
@@ -110,14 +143,6 @@ public class Job {
 		this.dateUpdated = dateUpdated;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
 	public BuyerReview getBuyerReview() {
 		return buyerReview;
 	}
@@ -126,38 +151,24 @@ public class Job {
 		this.buyerReview = buyerReview;
 	}
 
-	public Job(int id, int price, String description, String title, boolean active, boolean remote, String imageUrl,
-			LocalDateTime dateCreated, LocalDateTime dateUpdated, List<Address> addresses, BuyerReview buyerReview) {
-		super();
-		this.id = id;
-		this.price = price;
-		this.description = description;
-		this.title = title;
-		this.active = active;
-		this.remote = remote;
-		this.imageUrl = imageUrl;
-		this.dateCreated = dateCreated;
-		this.dateUpdated = dateUpdated;
-		this.addresses = addresses;
-		this.buyerReview = buyerReview;
-	}
-
-	public Job() {
-		super();
-	}
-
+	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
+		result = prime * result + ((buyerReview == null) ? 0 : buyerReview.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
-		result = prime * result + price;
-		result = prime * result + (remote ? 1231 : 1237);
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((remote == null) ? 0 : remote.hashCode());
+		result = prime * result + skillId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -171,7 +182,20 @@ public class Job {
 		if (getClass() != obj.getClass())
 			return false;
 		Job other = (Job) obj;
-		if (active != other.active)
+		if (active == null) {
+			if (other.active != null)
+				return false;
+		} else if (!active.equals(other.active))
+			return false;
+		if (addresses == null) {
+			if (other.addresses != null)
+				return false;
+		} else if (!addresses.equals(other.addresses))
+			return false;
+		if (buyerReview == null) {
+			if (other.buyerReview != null)
+				return false;
+		} else if (!buyerReview.equals(other.buyerReview))
 			return false;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)
@@ -195,9 +219,14 @@ public class Job {
 				return false;
 		} else if (!imageUrl.equals(other.imageUrl))
 			return false;
-		if (price != other.price)
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
-		if (remote != other.remote)
+		if (remote == null) {
+			if (other.remote != null)
+				return false;
+		} else if (!remote.equals(other.remote))
+			return false;
+		if (skillId != other.skillId)
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -207,11 +236,36 @@ public class Job {
 		return true;
 	}
 
+	// T O S T R I N G
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", price=" + price + ", description=" + description + ", title=" + title + ", active="
-				+ active + ", remote=" + remote + ", imageUrl=" + imageUrl + ", dateCreated=" + dateCreated
-				+ ", dateUpdated=" + dateUpdated + ", buyerReview=" + buyerReview + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Job [id=");
+		builder.append(id);
+		builder.append(", skillId=");
+		builder.append(skillId);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", active=");
+		builder.append(active);
+		builder.append(", addresses=");
+		builder.append(addresses);
+		builder.append(", remote=");
+		builder.append(remote);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", dateCreated=");
+		builder.append(dateCreated);
+		builder.append(", dateUpdated=");
+		builder.append(dateUpdated);
+		builder.append(", buyerReview=");
+		builder.append(buyerReview);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
