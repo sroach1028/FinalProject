@@ -25,7 +25,7 @@ public class Address {
 	private String street;
 
 	@OneToMany(mappedBy = "address")
-	private List<Job> jobAddress;
+	private List<Job> jobAddresses;
 
 	// C O N S T R U C T O R
 	public Address() {
@@ -38,12 +38,13 @@ public class Address {
 		return id;
 	}
 
-	public List<Job> getJobAddress() {
-		return jobAddress;
+
+	public List<Job> getJobAddresses() {
+		return jobAddresses;
 	}
 
-	public void setJobAddress(List<Job> jobAddress) {
-		this.jobAddress = jobAddress;
+	public void setJobAddresses(List<Job> jobAddresses) {
+		this.jobAddresses = jobAddresses;
 	}
 
 	public void setId(int id) {
