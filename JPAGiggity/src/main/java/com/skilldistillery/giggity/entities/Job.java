@@ -50,7 +50,7 @@ public class Job {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-
+	
 	@ManyToOne
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
