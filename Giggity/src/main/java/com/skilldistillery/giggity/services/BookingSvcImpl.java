@@ -12,6 +12,6 @@ import com.skilldistillery.giggity.repositories.BookingRepo;
 public class BookingSvcImpl implements BookingService {
 	
 	@Autowired
-	BookingRepo BookingRepo;
+	private BookingRepo bookingRepo;
 
 }
