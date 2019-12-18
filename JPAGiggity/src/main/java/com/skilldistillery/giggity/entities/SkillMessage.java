@@ -28,4 +28,53 @@ public class SkillMessage {
 
 	@Column(name = "in_reply_to")
 	private int inReplyTo;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getPosterId() {
+		return posterId;
+	}
+
+	public void setPosterId(int posterId) {
+		this.posterId = posterId;
+	}
+
+	public int getSkillId() {
+		return skillId;
+	}
+
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public LocalDateTime getMessageDate() {
+		return messageDate;
+	}
+
+	public void setMessageDate(LocalDateTime messageDate) {
+		this.messageDate = messageDate;
+	}
+
+	public int getInReplyTo() {
+		return inReplyTo;
+	}
+
+	public void setInReplyTo(int inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
+	
 }
