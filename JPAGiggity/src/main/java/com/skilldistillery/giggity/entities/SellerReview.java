@@ -14,4 +14,46 @@ public class SellerReview {
 	
 	@Column(name="review_date")
 	private LocalDateTime reviewDate;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public int getBookingid() {
+		return bookingid;
+	}
+
+	public void setBookingid(int bookingid) {
+		this.bookingid = bookingid;
+	}
+
+	public LocalDateTime getReviewDate() {
+		return reviewDate;
+	}
+
+	public void setReviewDate(LocalDateTime reviewDate) {
+		this.reviewDate = reviewDate;
+	}
+	
+	
 }

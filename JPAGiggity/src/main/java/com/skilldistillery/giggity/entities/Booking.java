@@ -29,9 +29,9 @@ public class Booking {
 	private String notes;
 	private boolean accepted;
 
-	@OneToMany
-	@JoinColumn(name = "job_id")
-	private Job job;
+//	@OneToMany
+//	@JoinColumn(name = "job_id")
+//	private Job job;
 
 	public int getId() {
 		return id;
