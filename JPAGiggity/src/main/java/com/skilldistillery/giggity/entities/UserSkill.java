@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class UserSkill {
@@ -24,14 +27,27 @@ public class UserSkill {
 	@Column(name = "logo_image_id")
 	private int logoImageId;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User userSkill;
+
 	// C O N S T R U C T O R
 	public UserSkill() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
+	}
+
+	public User getUserSkill() {
+		return userSkill;
+	}
+
+	public void setUserSkill(User userSkill) {
+		this.userSkill = userSkill;
 	}
 
 	public void setId(int id) {

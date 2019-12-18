@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Bid {
@@ -29,14 +31,27 @@ public class Bid {
 
 	private Boolean accepted;
 
+	@ManyToOne
+	@JoinColumn(name = "bidder_id")
+	private User bidder;
+
 	// C O N S T R U C T O R
 	public Bid() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
+	}
+
+	public User getBidder() {
+		return bidder;
+	}
+
+	public void setBidder(User bidder) {
+		this.bidder = bidder;
 	}
 
 	public void setId(int id) {

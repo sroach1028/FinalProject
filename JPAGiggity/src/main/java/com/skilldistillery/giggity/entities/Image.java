@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Image {
@@ -16,7 +19,7 @@ public class Image {
 
 	@Column(name = "image_url")
 	private String imageUrl;
-
+	
 	// C O N S T R U C T O R
 	public Image() {
 

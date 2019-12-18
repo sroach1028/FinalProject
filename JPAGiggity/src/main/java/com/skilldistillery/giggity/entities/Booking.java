@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -37,15 +38,29 @@ public class Booking {
 	private String notes;
 
 	private boolean accepted;
+	
+	@ManyToOne
+	@JoinColumn(name= "seller_id")
+	private User seller;
 
+	
 	// C O N S T R U C T O R
 	public Booking() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+	
 	public int getId() {
 		return id;
+	}
+
+	public User getSeller() {
+		return seller;
+	}
+
+	public void setSeller(User seller) {
+		this.seller = seller;
 	}
 
 	public void setId(int id) {

@@ -1,10 +1,15 @@
 package com.skilldistillery.giggity.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -31,6 +36,22 @@ public class User {
 
 	private String phone;
 
+	@OneToMany(mappedBy = "seller")
+	private List<Booking> bookings;
+
+	@OneToMany(mappedBy = "poster")
+	private List<SkillMessage> posts;
+
+	@OneToMany(mappedBy = "bidder")
+	private List<Bid> bids;
+
+	@OneToMany(mappedBy = "userSkill")
+	private List<UserSkill> skills;
+
+	@OneToOne
+	@JoinColumn(name = "image_id")
+	private Image avatarImage;
+
 	@Column(name = "address_id")
 	private int addressId;
 
@@ -43,8 +64,41 @@ public class User {
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
+	}
+
+	public Image getAvatarImage() {
+		return avatarImage;
+	}
+
+	public void setAvatarImage(Image avatarImage) {
+		this.avatarImage = avatarImage;
+	}
+
+	public List<UserSkill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<UserSkill> skills) {
+		this.skills = skills;
+	}
+
+	public List<Bid> getBids() {
+		return bids;
+	}
+
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
+	}
+
+	public List<SkillMessage> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<SkillMessage> posts) {
+		this.posts = posts;
 	}
 
 	public void setId(int id) {
@@ -129,6 +183,14 @@ public class User {
 
 	public void setImageId(int imageId) {
 		this.imageId = imageId;
+	}
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
 
 	// H A S H && E Q U A L S
