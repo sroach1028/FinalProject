@@ -43,7 +43,11 @@ class AddressTest {
 	@Test
 	void test() {
 		assertNotNull(addr);
-		assertEquals("test", addr.getState());
+		assertEquals("Denver", addr.getCity());
+		assertEquals("Colorado", addr.getState());
+		assertEquals(80210, addr.getZip());
+		assertEquals("1234 Elm Street", addr.getStreet());
+		assertEquals(1, addr.getJobAddresses().get(0).getId());
 	}
 
 }
