@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class SellerReviewTest {
@@ -41,8 +42,14 @@ class SellerReviewTest {
 	}
 
 	@Test
-	void test() {
-		assertNotNull(sellerReview);
+	@DisplayName("test SellerReview")
+	void test1() {
+		assertEquals("Its gonna rain", sellerReview.getComment());
 	}
 
+	@Test
+	@DisplayName("test SellerReview to Booking")
+	void test2() {
+		assertEquals("test", sellerReview.getBooking().getNotes());
+	}
 }
