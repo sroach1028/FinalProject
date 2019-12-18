@@ -21,9 +21,6 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "seller_id")
-	private int sellerId;
-
 	@JoinColumn(name = "start_date")
 	private LocalDate startDate;
 
@@ -98,14 +95,6 @@ public class Booking {
 		this.id = id;
 	}
 
-	public int getSellerId() {
-		return sellerId;
-	}
-
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
-	}
-
 	public LocalDate getStartDate() {
 		return startDate;
 	}
@@ -156,7 +145,6 @@ public class Booking {
 		result = prime * result + ((expectedCompleteDate == null) ? 0 : expectedCompleteDate.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
-		result = prime * result + sellerId;
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
@@ -189,8 +177,6 @@ public class Booking {
 				return false;
 		} else if (!notes.equals(other.notes))
 			return false;
-		if (sellerId != other.sellerId)
-			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
@@ -205,8 +191,6 @@ public class Booking {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Booking [id=");
 		builder.append(id);
-		builder.append(", sellerId=");
-		builder.append(sellerId);
 		builder.append(", startDate=");
 		builder.append(startDate);
 		builder.append(", completeDate=");
