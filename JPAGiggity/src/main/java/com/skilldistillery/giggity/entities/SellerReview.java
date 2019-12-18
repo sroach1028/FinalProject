@@ -70,11 +70,19 @@ public class SellerReview {
 		this.reviewDate = reviewDate;
 	}
 
-	// H A S H && E Q U A L S
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((booking == null) ? 0 : booking.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
 		result = prime * result + rating;
@@ -91,6 +99,11 @@ public class SellerReview {
 		if (getClass() != obj.getClass())
 			return false;
 		SellerReview other = (SellerReview) obj;
+		if (booking == null) {
+			if (other.booking != null)
+				return false;
+		} else if (!booking.equals(other.booking))
+			return false;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;
