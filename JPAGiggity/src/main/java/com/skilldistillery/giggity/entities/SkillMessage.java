@@ -7,16 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class SkillMessage {
+	
 	// F I E L D S
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "poster_id")
-	private int posterId;
 
 	@Column(name = "skill_id")
 	private int skillId;
@@ -29,26 +29,33 @@ public class SkillMessage {
 	@Column(name = "in_reply_to")
 	private int inReplyTo;
 
+	@ManyToOne
+	@JoinColumn(name = "poster_id")
+	private User poster;
+	
+	
+
 	// C O N S T R U C T O R
 	public SkillMessage() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
 	}
 
+	public User getPoster() {
+		return poster;
+	}
+
+	public void setPoster(User poster) {
+		this.poster = poster;
+	}
+
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getPosterId() {
-		return posterId;
-	}
-
-	public void setPosterId(int posterId) {
-		this.posterId = posterId;
 	}
 
 	public int getSkillId() {
@@ -92,7 +99,6 @@ public class SkillMessage {
 		result = prime * result + inReplyTo;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((messageDate == null) ? 0 : messageDate.hashCode());
-		result = prime * result + posterId;
 		result = prime * result + skillId;
 		return result;
 	}
@@ -120,8 +126,6 @@ public class SkillMessage {
 				return false;
 		} else if (!messageDate.equals(other.messageDate))
 			return false;
-		if (posterId != other.posterId)
-			return false;
 		if (skillId != other.skillId)
 			return false;
 		return true;
@@ -133,8 +137,6 @@ public class SkillMessage {
 		StringBuilder builder = new StringBuilder();
 		builder.append("SkillMessage [id=");
 		builder.append(id);
-		builder.append(", posterId=");
-		builder.append(posterId);
 		builder.append(", skillId=");
 		builder.append(skillId);
 		builder.append(", message=");

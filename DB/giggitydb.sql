@@ -61,13 +61,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `image_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_address_id_idx` (`address_id` ASC),
-  INDEX `fk_user_image_avatar_idx` (`image_id` ASC),
+  INDEX `fk_user_image1_idx` (`image_id` ASC),
   CONSTRAINT `fk_address_id`
     FOREIGN KEY (`address_id`)
     REFERENCES `address` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_image_avatar`
+  CONSTRAINT `fk_user_image1`
     FOREIGN KEY (`image_id`)
     REFERENCES `image` (`id`)
     ON DELETE NO ACTION
@@ -408,7 +408,7 @@ COMMIT;
 START TRANSACTION;
 USE `giggity`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (1, 'test', 'test', 'test', 'test@test.com', 'test', 1, 'admin', NULL, NULL, NULL);
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (2, 'Kelly', 'Cromeans', 'kvothik', 'cromeans15@gmail.com', 'qqaazz11', 1, 'admin', '7196662811', 2, 1);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (2, 'Kelly', 'Cromeans', 'kvothik', 'cromeans15@gmail.com', 'qqaazz11', 1, 'admin', '7196662811', 2, NULL);
 
 COMMIT;
 
