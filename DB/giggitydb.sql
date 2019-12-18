@@ -407,7 +407,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (1, 'test', 'test', 'test', 'test@test.com', 'test', 1, 'admin', NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (1, 'test', 'test', 'test', 'test@test.com', 'test', 1, 'admin', '111111111', 1, 1);
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (2, 'Kelly', 'Cromeans', 'kvothik', 'cromeans15@gmail.com', 'qqaazz11', 1, 'admin', '7196662811', 2, NULL);
 
 COMMIT;
@@ -424,11 +424,21 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `user_skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `giggity`;
+INSERT INTO `user_skill` (`id`, `user_id`, `skill_id`, `description`, `logo_image_id`) VALUES (1, 1, 1, 'test', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `job`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (1, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', NULL, NULL, 1);
+INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (1, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', '2019-12-07 23:59:59', '2019-12-07 23:59:59', 1);
 
 COMMIT;
 
@@ -438,7 +448,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `booking` (`id`, `seller_id`, `job_id`, `start_date`, `complete_date`, `expected_complete_date`, `notes`, `accepted`) VALUES (1, 1, 1, NULL, NULL, NULL, 'test', 1);
+INSERT INTO `booking` (`id`, `seller_id`, `job_id`, `start_date`, `complete_date`, `expected_complete_date`, `notes`, `accepted`) VALUES (1, 1, 1, '2019-12-07', '2019-12-18', '2019-12-18', 'test', 1);
 
 COMMIT;
 
@@ -448,7 +458,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `seller_review` (`id`, `comment`, `rating`, `booking_id`, `review_date`) VALUES (1, 'Its gonna rain', 4, 1, NULL);
+INSERT INTO `seller_review` (`id`, `comment`, `rating`, `booking_id`, `review_date`) VALUES (1, 'Its gonna rain', 4, 1, '2019-12-07 23:59:59');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `skill_message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `giggity`;
+INSERT INTO `skill_message` (`id`, `poster_id`, `skill_id`, `message`, `message_date`, `in_reply_to`) VALUES (1, 1, 1, 'test', '2019-12-18', 1);
 
 COMMIT;
 
@@ -459,6 +479,46 @@ COMMIT;
 START TRANSACTION;
 USE `giggity`;
 INSERT INTO `job_image` (`image_id`, `job_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_skill_image`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `giggity`;
+INSERT INTO `user_skill_image` (`user_skill_id`, `image_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `bid`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `giggity`;
+INSERT INTO `bid` (`id`, `available`, `bid_amount`, `description`, `bidder_id`, `job_id`, `accepted`) VALUES (1, 1, 0, 'test', 1, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `booking_message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `giggity`;
+INSERT INTO `booking_message` (`id`, `booking_id`, `message`, `message_date`, `seller_id`, `buyer_id`) VALUES (1, 1, '2019-12-07 23:59:59', '2019-12-07 23:59:59', 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `buyer_review`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `giggity`;
+INSERT INTO `buyer_review` (`id`, `comment`, `rating`, `job_id`, `review_date`) VALUES (1, '23:59:59', 1, 1, '2019-12-07 23:59:59');
 
 COMMIT;
 
