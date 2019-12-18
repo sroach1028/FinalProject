@@ -16,19 +16,17 @@ import com.skilldistillery.giggity.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService svc;
-	
-	
-	@GetMapping("")
+
+	@GetMapping("users/{id}")
 	public User getUser(@PathVariable int id) {
-		
-		
-		return svc.getUser(id);
+
+		return svc.getUserById(id);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@GetMapping("users/{username}")
+	public User getUser(@PathVariable String username) {
+
+		return svc.getUserByUsername(username);
+	}
+
 }
