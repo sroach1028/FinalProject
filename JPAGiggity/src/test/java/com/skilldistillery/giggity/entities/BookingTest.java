@@ -44,5 +44,21 @@ class BookingTest {
 	void test() {
 		assertNotNull(booking);
 	}
+	@Test
+	void test2() {
+		assertNotNull(booking.getSeller().getFirstName());
+	}
+	@Test
+	void test3() {
+		assertNotNull(booking.getSellerReviews());
+	}
+	@Test
+	void test4() {
+		assertNotNull(booking.getMessages());
+	}
+	@Test
+	void test5() {
+		assertNotNull(booking.getJob());
+	}
 
 }
