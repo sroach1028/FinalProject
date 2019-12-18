@@ -21,13 +21,13 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@JoinColumn(name = "start_date")
+	@Column(name = "start_date")
 	private LocalDate startDate;
 
-	@JoinColumn(name = "complete_date")
+	@Column(name = "complete_date")
 	private LocalDate completeDate;
 
-	@JoinColumn(name = "expected_complete_date")
+	@Column(name = "expected_complete_date")
 	private LocalDate expectedCompleteDate;
 
 	private String notes;

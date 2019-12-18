@@ -10,8 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="user_skill")
 public class UserSkill {
 	// F I E L D S
 	@Id
@@ -22,7 +24,7 @@ public class UserSkill {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User userSkill;
+	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "logo_image_id")
@@ -71,12 +73,12 @@ public class UserSkill {
 		this.skill = skill;
 	}
 
-	public User getUserSkill() {
-		return userSkill;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserSkill(User userSkill) {
-		this.userSkill = userSkill;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setId(int id) {

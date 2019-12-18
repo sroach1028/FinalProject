@@ -40,8 +40,46 @@ class UserTest {
 
 	@Test
 	void test() {
-		assertNotNull(user);
 		assertEquals("test", user.getUsername());
 	}
+	@Test
+	void test1() {
+		assertEquals(1, user.getBookings().size());
+	}
+	@Test
+	void test2() {
+		assertEquals(1, user.getPosts().size());
+	}
+	@Test
+	void test3() {
+		assertEquals(1, user.getBids().size());
+	}
+	@Test
+	void test4() {
+		assertEquals(1, user.getSkills().size());
+	}
+	@Test
+	void test5() {
+		assertNotNull(user.getAvatarImage());
+	}
+	@Test
+	void test6() {
+		assertEquals("Denver", user.getAddress().getCity());
+	}
+	@Test
+	void test7() {
+		assertEquals(1, user.getJobs().size());
+	}
+	@Test
+	void test8() {
+		System.out.println(user.getSkills().get(0).getSkill().getDescription());
+		assertEquals("test", user.getSkills().get(0).getDescription());
+	}
+	@Test
+	void test9() {
+		assertNotNull(user.getSkills().get(0).getLogoImage());
+	}
 
+	
+	
 }
