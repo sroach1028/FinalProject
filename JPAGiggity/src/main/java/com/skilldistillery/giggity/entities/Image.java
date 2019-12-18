@@ -8,25 +8,21 @@ import javax.persistence.Id;
 
 @Entity
 public class Image {
-	
+
+	// F I E L D S
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "image_url")
 	private String imageUrl;
-	
 
+	// C O N S T R U C T O R
 	public Image() {
-		super();
+
 	}
 
-	public Image(int id, String imageUrl) {
-		super();
-		this.id = id;
-		this.imageUrl = imageUrl;
-	}
-
+	// G E T T E R S && S E T T E R S
 	public int getId() {
 		return id;
 	}
@@ -43,12 +39,45 @@ public class Image {
 		this.imageUrl = imageUrl;
 	}
 
+	// H A S H && E Q U A L S
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Image other = (Image) obj;
+		if (id != other.id)
+			return false;
+		if (imageUrl == null) {
+			if (other.imageUrl != null)
+				return false;
+		} else if (!imageUrl.equals(other.imageUrl))
+			return false;
+		return true;
+	}
+
+	// T O S T R I N G
 	@Override
 	public String toString() {
-		return "Image [id=" + id + ", imageUrl=" + imageUrl + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Image [id=");
+		builder.append(id);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
-	
 
 }

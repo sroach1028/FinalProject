@@ -8,11 +8,16 @@ import javax.persistence.Id;
 
 @Entity
 public class Bid {
+
+	// F I E L D S
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private boolean available;
+	private Boolean available;
+
+	@Column(name = "bid_amount")
+	private Double bidAmount;
 
 	private String description;
 
@@ -22,8 +27,14 @@ public class Bid {
 	@Column(name = "job_id")
 	private int jobId;
 
-	private boolean accepted;
+	private Boolean accepted;
 
+	// C O N S T R U C T O R
+	public Bid() {
+
+	}
+
+	// G E T T E R S && S E T T E R S
 	public int getId() {
 		return id;
 	}
@@ -32,12 +43,20 @@ public class Bid {
 		this.id = id;
 	}
 
-	public boolean isAvailable() {
+	public Boolean getAvailable() {
 		return available;
 	}
 
-	public void setAvailable(boolean available) {
+	public void setAvailable(Boolean available) {
 		this.available = available;
+	}
+
+	public Double getBidAmount() {
+		return bidAmount;
+	}
+
+	public void setBidAmount(Double bidAmount) {
+		this.bidAmount = bidAmount;
 	}
 
 	public String getDescription() {
@@ -64,14 +83,87 @@ public class Bid {
 		this.jobId = jobId;
 	}
 
-	public boolean isAccepted() {
+	public Boolean getAccepted() {
 		return accepted;
 	}
 
-	public void setAccepted(boolean accepted) {
+	public void setAccepted(Boolean accepted) {
 		this.accepted = accepted;
 	}
-	
-	
+
+	// H A S H && E Q U A L S
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accepted == null) ? 0 : accepted.hashCode());
+		result = prime * result + ((available == null) ? 0 : available.hashCode());
+		result = prime * result + ((bidAmount == null) ? 0 : bidAmount.hashCode());
+		result = prime * result + bidderId;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + id;
+		result = prime * result + jobId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bid other = (Bid) obj;
+		if (accepted == null) {
+			if (other.accepted != null)
+				return false;
+		} else if (!accepted.equals(other.accepted))
+			return false;
+		if (available == null) {
+			if (other.available != null)
+				return false;
+		} else if (!available.equals(other.available))
+			return false;
+		if (bidAmount == null) {
+			if (other.bidAmount != null)
+				return false;
+		} else if (!bidAmount.equals(other.bidAmount))
+			return false;
+		if (bidderId != other.bidderId)
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id != other.id)
+			return false;
+		if (jobId != other.jobId)
+			return false;
+		return true;
+	}
+
+	// T O S T R I N G
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Bid [id=");
+		builder.append(id);
+		builder.append(", available=");
+		builder.append(available);
+		builder.append(", bidAmount=");
+		builder.append(bidAmount);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", bidderId=");
+		builder.append(bidderId);
+		builder.append(", jobId=");
+		builder.append(jobId);
+		builder.append(", accepted=");
+		builder.append(accepted);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }
