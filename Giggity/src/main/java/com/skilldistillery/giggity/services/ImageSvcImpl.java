@@ -9,8 +9,8 @@ import com.skilldistillery.giggity.repositories.ImageRepo;
 
 @Transactional
 @Service
-public class ImageSvcImpl {
+public class ImageSvcImpl implements ImageService{
 
 	@Autowired
-	ImageRepo imageRepo;
+	private ImageRepo imageRepo;
 }
