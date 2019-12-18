@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class UserSkillTest {
@@ -41,8 +42,32 @@ class UserSkillTest {
 	}
 
 	@Test
-	void test() {
-		assertNotNull(userSkill);
+	@DisplayName("test UserSkill")
+	void test1() {
+		assertEquals("test", userSkill.getDescription());
+	}
+	
+	@Test
+	@DisplayName("test UserSkill to User")
+	void test2() {
+		assertEquals("test", userSkill.getUser().getFirstName());
 	}
 
+	@Test
+	@DisplayName("test UserSkill to Image")
+	void test3() {
+		assertEquals("test", userSkill.getLogoImage().getImageUrl());
+	}
+	
+	@Test
+	@DisplayName("test UserSkill to SkillImage")
+	void test4() {
+		assertEquals("test", userSkill.getPortfolioImages().get(0).getImageUrl());
+	}
+	
+	@Test
+	@DisplayName("test UserSkill to Skill")
+	void test5() {
+		assertEquals("Coding", userSkill.getSkill().getDescription());
+	}
 }
