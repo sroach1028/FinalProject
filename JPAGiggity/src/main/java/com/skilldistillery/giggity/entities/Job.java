@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class Job {
@@ -19,9 +22,6 @@ public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "skill_id")
-	private int skillId;
 
 	private double price;
 
@@ -45,9 +45,30 @@ public class Job {
 	@Column(name = "date_updated")
 	private LocalDateTime dateUpdated;
 
-	@OneToOne
-	@JoinColumn(name = "job_id")
-	private BuyerReview buyerReview;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+
+	@ManyToOne
+	@JoinColumn(name = "skill_id")
+	private Skill skill;
+
+	@OneToMany(mappedBy = "job")
+	private List<Booking> bookings;
+
+	@OneToMany(mappedBy = "job")
+	private List<BuyerReview> buyerReviews;
+
+	@OneToMany(mappedBy = "job")
+	private List<Bid> jobBids;
+
+	@OneToMany(mappedBy = "job")
+	private List<BookingMessage> bookingMessages;
+
+	@ManyToMany
+	@JoinTable(name = "job_image", joinColumns = @JoinColumn(name = "image_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	private List<Image> jobImages;
 
 	// C O N S T R U C T O R
 	public Job() {
@@ -55,20 +76,70 @@ public class Job {
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
 	}
 
+	public List<Bid> getJobBids() {
+		return jobBids;
+	}
+
+	public void setJobBids(List<Bid> jobBids) {
+		this.jobBids = jobBids;
+	}
+
+	public Skill getSkill() {
+		return skill;
+	}
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
+
+	public List<BuyerReview> getBuyerReviews() {
+		return buyerReviews;
+	}
+
+	public void setBuyerReviews(List<BuyerReview> buyerReviews) {
+		this.buyerReviews = buyerReviews;
+	}
+
+	public List<Image> getJobImages() {
+		return jobImages;
+	}
+
+	public void setJobImages(List<Image> jobImages) {
+		this.jobImages = jobImages;
+	}
+
+	public List<BookingMessage> getBookingMessages() {
+		return bookingMessages;
+	}
+
+	public void setBookingMessages(List<BookingMessage> bookingMessages) {
+		this.bookingMessages = bookingMessages;
+	}
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getSkillId() {
-		return skillId;
-	}
-
-	public void setSkillId(int skillId) {
-		this.skillId = skillId;
 	}
 
 	public double getPrice() {
@@ -143,14 +214,6 @@ public class Job {
 		this.dateUpdated = dateUpdated;
 	}
 
-	public BuyerReview getBuyerReview() {
-		return buyerReview;
-	}
-
-	public void setBuyerReview(BuyerReview buyerReview) {
-		this.buyerReview = buyerReview;
-	}
-
 	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
@@ -158,7 +221,6 @@ public class Job {
 		int result = 1;
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
 		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
-		result = prime * result + ((buyerReview == null) ? 0 : buyerReview.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -168,7 +230,6 @@ public class Job {
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((remote == null) ? 0 : remote.hashCode());
-		result = prime * result + skillId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -191,11 +252,6 @@ public class Job {
 			if (other.addresses != null)
 				return false;
 		} else if (!addresses.equals(other.addresses))
-			return false;
-		if (buyerReview == null) {
-			if (other.buyerReview != null)
-				return false;
-		} else if (!buyerReview.equals(other.buyerReview))
 			return false;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)
@@ -226,8 +282,6 @@ public class Job {
 				return false;
 		} else if (!remote.equals(other.remote))
 			return false;
-		if (skillId != other.skillId)
-			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -242,8 +296,6 @@ public class Job {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Job [id=");
 		builder.append(id);
-		builder.append(", skillId=");
-		builder.append(skillId);
 		builder.append(", price=");
 		builder.append(price);
 		builder.append(", description=");
@@ -262,8 +314,6 @@ public class Job {
 		builder.append(dateCreated);
 		builder.append(", dateUpdated=");
 		builder.append(dateUpdated);
-		builder.append(", buyerReview=");
-		builder.append(buyerReview);
 		builder.append("]");
 		return builder.toString();
 	}

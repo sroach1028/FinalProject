@@ -23,17 +23,15 @@ public class Bid {
 
 	private String description;
 
-	@Column(name = "bidder_id")
-	private int bidderId;
-
-	@Column(name = "job_id")
-	private int jobId;
-
 	private Boolean accepted;
 
 	@ManyToOne
 	@JoinColumn(name = "bidder_id")
 	private User bidder;
+
+	@ManyToOne
+	@JoinColumn(name = "job_id")
+	private Job job;
 
 	// C O N S T R U C T O R
 	public Bid() {
@@ -44,6 +42,14 @@ public class Bid {
 
 	public int getId() {
 		return id;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public User getBidder() {
@@ -82,22 +88,6 @@ public class Bid {
 		this.description = description;
 	}
 
-	public int getBidderId() {
-		return bidderId;
-	}
-
-	public void setBidderId(int bidderId) {
-		this.bidderId = bidderId;
-	}
-
-	public int getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
-
 	public Boolean getAccepted() {
 		return accepted;
 	}
@@ -114,10 +104,8 @@ public class Bid {
 		result = prime * result + ((accepted == null) ? 0 : accepted.hashCode());
 		result = prime * result + ((available == null) ? 0 : available.hashCode());
 		result = prime * result + ((bidAmount == null) ? 0 : bidAmount.hashCode());
-		result = prime * result + bidderId;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
-		result = prime * result + jobId;
 		return result;
 	}
 
@@ -145,16 +133,12 @@ public class Bid {
 				return false;
 		} else if (!bidAmount.equals(other.bidAmount))
 			return false;
-		if (bidderId != other.bidderId)
-			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
 		if (id != other.id)
-			return false;
-		if (jobId != other.jobId)
 			return false;
 		return true;
 	}
@@ -171,10 +155,6 @@ public class Bid {
 		builder.append(bidAmount);
 		builder.append(", description=");
 		builder.append(description);
-		builder.append(", bidderId=");
-		builder.append(bidderId);
-		builder.append(", jobId=");
-		builder.append(jobId);
 		builder.append(", accepted=");
 		builder.append(accepted);
 		builder.append("]");

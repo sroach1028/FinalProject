@@ -2,6 +2,7 @@ package com.skilldistillery.giggity.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,9 +24,6 @@ public class Booking {
 	@Column(name = "seller_id")
 	private int sellerId;
 
-	@Column(name = "job_id")
-	private int job_id;
-
 	@JoinColumn(name = "start_date")
 	private LocalDate startDate;
 
@@ -38,21 +36,54 @@ public class Booking {
 	private String notes;
 
 	private boolean accepted;
-	
+
 	@ManyToOne
-	@JoinColumn(name= "seller_id")
+	@JoinColumn(name = "seller_id")
 	private User seller;
 
-	
+	@OneToMany(mappedBy = "booking")
+	private List<SellerReview> sellerReviews;
+
+	@OneToMany(mappedBy = "booking")
+	private List<BookingMessage> messages;
+
+	@ManyToOne
+	@JoinColumn(name = "job_id")
+	private Job job;
+
 	// C O N S T R U C T O R
 	public Booking() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
-	
+
 	public int getId() {
 		return id;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	public List<BookingMessage> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<BookingMessage> messages) {
+		this.messages = messages;
+	}
+
+	public List<SellerReview> getSellerReviews() {
+		return sellerReviews;
+	}
+
+	public void setSellerReviews(List<SellerReview> sellerReviews) {
+		this.sellerReviews = sellerReviews;
 	}
 
 	public User getSeller() {
@@ -73,14 +104,6 @@ public class Booking {
 
 	public void setSellerId(int sellerId) {
 		this.sellerId = sellerId;
-	}
-
-	public int getJob_id() {
-		return job_id;
-	}
-
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
 	}
 
 	public LocalDate getStartDate() {
@@ -132,7 +155,6 @@ public class Booking {
 		result = prime * result + ((completeDate == null) ? 0 : completeDate.hashCode());
 		result = prime * result + ((expectedCompleteDate == null) ? 0 : expectedCompleteDate.hashCode());
 		result = prime * result + id;
-		result = prime * result + job_id;
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + sellerId;
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
@@ -162,8 +184,6 @@ public class Booking {
 			return false;
 		if (id != other.id)
 			return false;
-		if (job_id != other.job_id)
-			return false;
 		if (notes == null) {
 			if (other.notes != null)
 				return false;
@@ -187,8 +207,6 @@ public class Booking {
 		builder.append(id);
 		builder.append(", sellerId=");
 		builder.append(sellerId);
-		builder.append(", job_id=");
-		builder.append(job_id);
 		builder.append(", startDate=");
 		builder.append(startDate);
 		builder.append(", completeDate=");

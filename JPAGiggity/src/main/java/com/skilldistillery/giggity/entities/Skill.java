@@ -1,9 +1,12 @@
 package com.skilldistillery.giggity.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Skill {
@@ -16,14 +19,48 @@ public class Skill {
 
 	private String description;
 
+	@OneToMany(mappedBy = "skill")
+	private List<Job> jobSkill;
+
+	@OneToMany(mappedBy = "skill")
+	private List<SkillMessage> forumMessages;
+
+	@OneToMany(mappedBy = "skill")
+	private List<UserSkill> userSills;
+
 	// C O N S T R U C T O R
 	public Skill() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+
 	public int getId() {
 		return id;
+	}
+
+	public List<UserSkill> getUserSills() {
+		return userSills;
+	}
+
+	public void setUserSills(List<UserSkill> userSills) {
+		this.userSills = userSills;
+	}
+
+	public List<SkillMessage> getForumMessages() {
+		return forumMessages;
+	}
+
+	public void setForumMessages(List<SkillMessage> forumMessages) {
+		this.forumMessages = forumMessages;
+	}
+
+	public List<Job> getJobSkill() {
+		return jobSkill;
+	}
+
+	public void setJobSkill(List<Job> jobSkill) {
+		this.jobSkill = jobSkill;
 	}
 
 	public void setId(int id) {

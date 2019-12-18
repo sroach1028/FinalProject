@@ -12,14 +12,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class SkillMessage {
-	
+
 	// F I E L D S
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "skill_id")
-	private int skillId;
 
 	private String message;
 
@@ -32,8 +29,10 @@ public class SkillMessage {
 	@ManyToOne
 	@JoinColumn(name = "poster_id")
 	private User poster;
-	
-	
+
+	@ManyToOne
+	@JoinColumn(name = "skill_id")
+	private Skill skill;
 
 	// C O N S T R U C T O R
 	public SkillMessage() {
@@ -46,6 +45,14 @@ public class SkillMessage {
 		return id;
 	}
 
+	public Skill getSkill() {
+		return skill;
+	}
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
 	public User getPoster() {
 		return poster;
 	}
@@ -56,14 +63,6 @@ public class SkillMessage {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getSkillId() {
-		return skillId;
-	}
-
-	public void setSkillId(int skillId) {
-		this.skillId = skillId;
 	}
 
 	public String getMessage() {
@@ -99,7 +98,6 @@ public class SkillMessage {
 		result = prime * result + inReplyTo;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((messageDate == null) ? 0 : messageDate.hashCode());
-		result = prime * result + skillId;
 		return result;
 	}
 
@@ -126,8 +124,6 @@ public class SkillMessage {
 				return false;
 		} else if (!messageDate.equals(other.messageDate))
 			return false;
-		if (skillId != other.skillId)
-			return false;
 		return true;
 	}
 
@@ -137,8 +133,6 @@ public class SkillMessage {
 		StringBuilder builder = new StringBuilder();
 		builder.append("SkillMessage [id=");
 		builder.append(id);
-		builder.append(", skillId=");
-		builder.append(skillId);
 		builder.append(", message=");
 		builder.append(message);
 		builder.append(", messageDate=");

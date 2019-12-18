@@ -1,13 +1,13 @@
 package com.skilldistillery.giggity.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Image {
@@ -19,15 +19,38 @@ public class Image {
 
 	@Column(name = "image_url")
 	private String imageUrl;
+
+	@ManyToMany(mappedBy = "jobImages")
+	private List<Job> jobs;
 	
+	@ManyToMany(mappedBy = "portfolioImages")
+	private List<UserSkill> skills;
+
 	// C O N S T R U C T O R
 	public Image() {
 
 	}
 
 	// G E T T E R S && S E T T E R S
+	
 	public int getId() {
 		return id;
+	}
+
+	public List<UserSkill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<UserSkill> skills) {
+		this.skills = skills;
+	}
+
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
 	}
 
 	public void setId(int id) {
