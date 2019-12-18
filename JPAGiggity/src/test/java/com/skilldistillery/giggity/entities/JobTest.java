@@ -45,5 +45,37 @@ class JobTest {
 		assertNotNull(job);
 		assertEquals("test", job.getTitle());
 	}
+	@Test
+	void test2() {
+		assertEquals("Denver", job.getAddress().getCity());
+	}
+	@Test
+	void test3() {
+		assertEquals("test", job.getUser().getFirstName());
+	}
+	@Test
+	void test4() {
+		assertEquals("Software Development", job.getSkill().getName());
+	}
+	@Test
+	void test5() {
+		assertEquals("test", job.getBookings().get(0).getJob().getTitle());
+	}
+	@Test
+	void test6() {
+		assertEquals(1, job.getBuyerReviews().get(0).getRating());
+	}
+	@Test
+	void test7() {
+		assertEquals(0.0, job.getJobBids().get(0).getBidAmount());
+	}
+	@Test
+	void test8() {
+		assertEquals(1, job.getBookingMessages().size());
+	}
+	@Test
+	void test9() {
+		assertEquals(1, job.getJobImages().size());
+	}
 
 }

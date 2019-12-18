@@ -44,5 +44,9 @@ class BookingMessageTest {
 	void test() {
 		assertNotNull(bMess);
 	}
+	@Test
+	void test2() {
+		assertEquals("test", bMess.getBooking().getJob().getTitle());
+	}
 
 }

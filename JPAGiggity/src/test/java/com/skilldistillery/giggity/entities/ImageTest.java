@@ -1,6 +1,7 @@
 package com.skilldistillery.giggity.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,6 +44,14 @@ class ImageTest {
 	@Test
 	void test() {
 		assertNotNull(image);
+	}
+	@Test
+	void test2() {
+		assertEquals(1, image.getJobs().size());
+	}
+	@Test
+	void test3() {
+		assertEquals(1, image.getSkills().size());
 	}
 
 }
