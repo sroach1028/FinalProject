@@ -1,5 +1,6 @@
 package com.skilldistillery.giggity.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,41 +8,28 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
+	// F I E L D S
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="first_name")
+	private String firstName;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	@Column(name="last_name")
+	private String lastName;
 	private String username;
+	private String email;
+	private String password;
+	private Boolean enabled;
+	private String role;
+	private String phone;
+	@Column(name="address_id")
+	private int addressId;
+	@Column(name="image_id")
+	private int imageId;
+	
 
-	public User(int id, String username) {
-		super();
-		this.id = id;
-		this.username = username;
-	}
-
-	public User() {
-		super();
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + "]";
-	}
+	
 
 }
