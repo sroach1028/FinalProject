@@ -2,7 +2,8 @@ package com.skilldistillery.giggity.services;
 
 import com.skilldistillery.giggity.entities.User;
 
-public interface UserService {
+public interface AuthService {
+	
+	public User register(User user);
 
-	public User getUser(int id);
 }
