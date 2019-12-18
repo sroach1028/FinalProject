@@ -305,7 +305,6 @@ CREATE TABLE IF NOT EXISTS `bid` (
   `description` TEXT NULL,
   `bidder_id` INT NOT NULL,
   `job_id` INT NOT NULL,
-  `accepted` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_job_id_job_idx` (`job_id` ASC),
   INDEX `fk_bidder_id_user_idx` (`bidder_id` ASC),
@@ -382,83 +381,11 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `address`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `address` (`id`, `city`, `state`, `zip`, `street`) VALUES (1, 'Denver', 'Colorado', 80210, '1234 Elm Street');
-INSERT INTO `address` (`id`, `city`, `state`, `zip`, `street`) VALUES (2, 'Colorado Springs', 'Colorado', 80925, '9319 Daystar Terrace');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `image`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `image` (`id`, `image_url`) VALUES (1, 'test');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (1, 'test', 'test', 'test', 'test@test.com', 'test', 1, 'admin', NULL, NULL, NULL);
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (2, 'Kelly', 'Cromeans', 'kvothik', 'cromeans15@gmail.com', 'qqaazz11', 1, 'admin', '7196662811', 2, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `skill`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `skill` (`id`, `name`, `description`) VALUES (1, 'Software Development', 'Coding');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `job`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (1, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', NULL, NULL, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `booking`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `booking` (`id`, `seller_id`, `job_id`, `start_date`, `complete_date`, `expected_complete_date`, `notes`, `accepted`) VALUES (1, 1, 1, NULL, NULL, NULL, 'test', 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `seller_review`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `seller_review` (`id`, `comment`, `rating`, `booking_id`, `review_date`) VALUES (1, 'Its gonna rain', 4, 1, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `job_image`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `giggity`;
-INSERT INTO `job_image` (`image_id`, `job_id`) VALUES (1, 1);
 
 COMMIT;
 
