@@ -1,7 +1,5 @@
 package com.skilldistillery.giggity.services;
 
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +15,16 @@ public class UserSvcImpl implements UserService {
 	private UserRepo userRepo;
 
 	@Override
-	public User getUser(int id) {
-		Optional<User> opt = userRepo.findById(id);
-		User user = null;
+	public User getUserByUsername(String username) {
 		
-		if (opt.isPresent()) {
-			user = opt.get();
-			
-		}
 		
-		return user;
+
+		
+		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public User getUserById(int id) {
+		return userRepo.findById(id);
 	}
 }
