@@ -31,8 +31,9 @@ public class Job {
 
 	private Boolean active;
 
-	@OneToMany(mappedBy = "address")
-	private List<Address> addresses;
+	@ManyToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
 
 	private Boolean remote;
 
@@ -174,14 +175,6 @@ public class Job {
 		this.active = active;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
 	public Boolean getRemote() {
 		return remote;
 	}
@@ -220,7 +213,6 @@ public class Job {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
-		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -247,11 +239,6 @@ public class Job {
 			if (other.active != null)
 				return false;
 		} else if (!active.equals(other.active))
-			return false;
-		if (addresses == null) {
-			if (other.addresses != null)
-				return false;
-		} else if (!addresses.equals(other.addresses))
 			return false;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)
@@ -304,8 +291,6 @@ public class Job {
 		builder.append(title);
 		builder.append(", active=");
 		builder.append(active);
-		builder.append(", addresses=");
-		builder.append(addresses);
 		builder.append(", remote=");
 		builder.append(remote);
 		builder.append(", imageUrl=");
@@ -316,6 +301,14 @@ public class Job {
 		builder.append(dateUpdated);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 }
