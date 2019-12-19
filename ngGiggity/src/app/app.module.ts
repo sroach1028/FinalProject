@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +8,9 @@ import { UserComponent } from './components/user/user.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -14,7 +18,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   declarations: [
     AppComponent,
     UserComponent,
-    NavBarComponent
+    NavBarComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +28,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
