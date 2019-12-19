@@ -439,6 +439,7 @@ COMMIT;
 START TRANSACTION;
 USE `giggity`;
 INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (1, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', '2019-12-07 23:59:59', '2019-12-07 23:59:59', 1);
+INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (2, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', '2019-12-07 23:59:59', '2019-12-07 23:59:59', 1);
 
 COMMIT;
 
@@ -449,6 +450,7 @@ COMMIT;
 START TRANSACTION;
 USE `giggity`;
 INSERT INTO `booking` (`id`, `seller_id`, `job_id`, `start_date`, `complete_date`, `expected_complete_date`, `notes`, `accepted`) VALUES (1, 1, 1, '2019-12-07', '2019-12-18', '2019-12-18', 'test', 1);
+INSERT INTO `booking` (`id`, `seller_id`, `job_id`, `start_date`, `complete_date`, `expected_complete_date`, `notes`, `accepted`) VALUES (2, 1, 2, '2019-12-18', NULL, '2020-01-09', 'test', 1);
 
 COMMIT;
 
