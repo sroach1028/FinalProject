@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Skill {
 	// F I E L D S
@@ -18,7 +20,7 @@ public class Skill {
 	private String name;
 
 	private String description;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<Job> jobSkill;
 
