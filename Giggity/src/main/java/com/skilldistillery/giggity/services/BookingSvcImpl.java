@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.giggity.entities.Booking;
+import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.repositories.BookingRepo;
+import com.skilldistillery.giggity.repositories.UserRepo;
 
 @Service
 @Transactional
@@ -16,15 +18,16 @@ public class BookingSvcImpl implements BookingService {
 
 	@Autowired
 	private BookingRepo repo;
+	
 
 	@Override
-	public List<Booking> getActive() {
-		return repo.queryActive();
+	public List<Booking> getActive(int uid) {
+		return repo.queryActive(uid);
 	}
 
 	@Override
-	public List<Booking> getTransactionHistory() {
-		return repo.queryByTransactionHistory();
+	public List<Booking> getTransactionHistory(int uid) {
+		return repo.queryByTransactionHistory(uid);
 	}
 
 	@Override
