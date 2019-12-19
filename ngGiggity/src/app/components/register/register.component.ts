@@ -1,3 +1,4 @@
+import { Address } from './../../models/address';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
@@ -12,10 +13,34 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authSvc: AuthService) { }
 
+
+
+
   register(form: NgForm) {
     form.value.role = 'standard';
     form.value.enabled = true;
-    const user = form.value;
+
+    const user = new User();
+    user.firstName = form.value.firstName;
+    user.lastName = form.value.lastName;
+    user.username = form.value.username;
+    user.email = form.value.email;
+    user.password = form.value.password;
+    user.phone = form.value.phone;
+    user.role = form.value.role;
+    user.enabled = form.value.enabled;
+
+    const address = new Address();
+    address.street = form.value.street;
+    address.state = form.value.state;
+    address.city = form.value.city;
+    address.zip = form.value.zip;
+
+    user.address = address;
+
+
+
+
 
     this.authSvc.register(user).subscribe(
       data => {
@@ -36,7 +61,8 @@ export class RegisterComponent implements OnInit {
       }
     );
 
-    console.log(form);
+    console.log(user);
+    form.reset();
 
   }
 
