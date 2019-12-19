@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.skilldistillery.giggity.entities.Skill;
 
 public interface SkillRepo extends JpaRepository<Skill, Integer> {
-//	public Skill findById(int id);
+	public Skill findById(int id);
 //	public List<Skill> findByNameLike(String skillName);
 //	public List<Skill> findByJobSkill_TitleLike(String jobTitle);
 //	public List<Skill> findByForumMessages_Id(int id);

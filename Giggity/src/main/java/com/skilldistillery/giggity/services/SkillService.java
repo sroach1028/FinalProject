@@ -8,4 +8,6 @@ public interface SkillService {
 
 	List<Skill> findAll();
 
+	Skill findById(int id);
+
 }
