@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Booking {
 
@@ -33,11 +35,12 @@ public class Booking {
 	private String notes;
 
 	private boolean accepted;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "seller_id")
 	private User seller;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "booking")
 	private List<SellerReview> sellerReviews;
 
