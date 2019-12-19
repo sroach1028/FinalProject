@@ -19,12 +19,18 @@ public class BidSvcImpl implements BidService {
 
 	@Override
 	public List<Bid> getBidsByJobId(Integer jobId) {
-		List<Bid> bids = bidRepo.findByJob_Id(jobId);
-		if (bids != null) {
-			return bids;
-		}
-		else
-			return null;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+//	@Override
+//	public List<Bid> getBidsByJobId(Integer jobId) {
+//		List<Bid> bids = bidRepo.findByJob_Id(jobId);
+//		if (bids != null) {
+//			return bids;
+//		}
+//		else
+//			return null;
+//	}
 
 }
