@@ -26,4 +26,8 @@ public class SkillSvcImpl implements SkillService {
 		} else
 			return skills;
 	}
+	@Override
+	public Skill findById(int id) {
+		return skillRepo.findById(id);
+	}
 }

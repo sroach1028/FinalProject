@@ -22,7 +22,7 @@ public class SkillController {
 	private SkillService svc;
 	
 	@GetMapping("skills")
-	public List<Skill> getUser(HttpServletResponse res) {
+	public List<Skill> getSkills(HttpServletResponse res) {
 		List<Skill> allSkills = svc.findAll();
 		if (allSkills.isEmpty()) {
 			res.setStatus(404);
@@ -30,5 +30,15 @@ public class SkillController {
 		else 
 			res.setStatus(200);
 		return allSkills;
+	}
+	@GetMapping("skills/{id}")
+	public Skill getSkillById(@PathVariable Integer id, HttpServletResponse res) {
+		Skill skill = svc.findById(id);
+		if (skill == null) {
+			res.setStatus(404);
+		}
+		else 
+			res.setStatus(200);
+		return skill;
 	}
 }
