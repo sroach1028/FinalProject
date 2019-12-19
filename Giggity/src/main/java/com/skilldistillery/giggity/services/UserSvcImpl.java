@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.services;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,14 @@ public class UserSvcImpl implements UserService {
 	}
 
 	@Override
-	public void destroy(Integer id) {
-		userRepo.deleteById(id);
+	public boolean destroy(Integer id) {
+		Optional<User> opt = userRepo.findById(id);
+		if (opt.isPresent()) {
+			userRepo.deleteById(id);
+			return true;
+		}
+		else
+			return false;
 	}
 
 }

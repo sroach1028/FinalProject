@@ -23,10 +23,10 @@ public class Skill {
 	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<Job> jobSkill;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<SkillMessage> forumMessages;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<UserSkill> userSkills;
 

@@ -29,10 +29,6 @@ public class AuthServiceImpl implements AuthService {
 		
 		uRepo.saveAndFlush(user);
 		
-		
-		
-		
-		
 		return user;
 	}
 

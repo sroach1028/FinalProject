@@ -6,5 +6,5 @@ public interface UserService {
 	public User getUserById(int id);
 //
 	public User getUserByUsername(String username);
-	public void destroy(Integer id);
+	public boolean destroy(Integer id);
 }
