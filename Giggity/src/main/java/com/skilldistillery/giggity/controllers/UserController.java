@@ -17,13 +17,13 @@ public class UserController {
 	@Autowired
 	private UserService svc;
 
-	@GetMapping("users/{id}")
+	@GetMapping("users/id/{id}")
 	public User getUser(@PathVariable int id) {
 		System.err.println(id);
 		return svc.getUserById(id);
 	}
 
-	@GetMapping("users/{username}")
+	@GetMapping("users/username/{username}")
 	public User getUser(@PathVariable String username) {
 
 		return svc.getUserByUsername(username);
