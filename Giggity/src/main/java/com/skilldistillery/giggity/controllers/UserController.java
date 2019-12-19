@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.controllers;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,20 +23,33 @@ public class UserController {
 	private UserService svc;
 
 	@GetMapping("users/id/{id}")
-	public User getUser(@PathVariable int id) {
-		System.err.println(id);
-		return svc.getUserById(id);
+	public User getUser(@PathVariable int id, HttpServletResponse res) {
+		User user = svc.getUserById(id);
+		if (user == null) {
+			res.setStatus(404);
+		}
+		else 
+			res.setStatus(200);
+		return user;
 	}
 
 	@GetMapping("users/username/{username}")
-	public User getUser(@PathVariable String username) {
-
-		return svc.getUserByUsername(username);
+	public User getUser(@PathVariable String username, HttpServletResponse res) {
+		User user = svc.getUserByUsername(username);
+		if (user == null) {
+			res.setStatus(404);
+		} else
+			res.setStatus(200);
+		return user;
 	}
 	
 	@DeleteMapping("users/remove/{id}")
-	public void deleteUser(@PathVariable Integer id) {
-		svc.destroy(id);
+	public void deleteUser(@PathVariable Integer id, HttpServletResponse res) {
+		if (!svc.destroy(id)) {
+			res.setStatus(404);
+		}
+		else 
+			res.setStatus(200);
 	}
 
 }

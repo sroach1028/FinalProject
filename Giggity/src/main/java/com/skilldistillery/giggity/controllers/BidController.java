@@ -2,6 +2,8 @@ package com.skilldistillery.giggity.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +23,14 @@ public class BidController {
 	BidService bidSvc;
 	
 	@GetMapping("bids/{jid}")
-	public List<Bid> getBids(@PathVariable Integer jid) {
-
-		return bidSvc.getBidsByJobId(jid);
+	public List<Bid> getBids(@PathVariable Integer jid, HttpServletResponse res) {
+		List<Bid> bids = bidSvc.getBidsByJobId(jid);
+		if (bids.isEmpty()) {
+			res.setStatus(404);
+		}
+		else
+			res.setStatus(200);
+		return bids;
 	}
 
 }
