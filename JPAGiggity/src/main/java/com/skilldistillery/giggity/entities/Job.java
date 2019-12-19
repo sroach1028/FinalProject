@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Job {
@@ -60,7 +62,7 @@ public class Job {
 
 	@OneToMany(mappedBy = "job")
 	private List<BuyerReview> buyerReviews;
-
+	
 	@OneToMany(mappedBy = "job")
 	private List<Bid> jobBids;
 
@@ -69,6 +71,7 @@ public class Job {
 
 	@ManyToMany
 	@JoinTable(name = "job_image", joinColumns = @JoinColumn(name = "image_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	@JsonIgnore
 	private List<Image> jobImages;
 
 	// C O N S T R U C T O R

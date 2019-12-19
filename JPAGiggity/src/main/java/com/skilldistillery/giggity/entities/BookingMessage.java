@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="booking_message")
 public class BookingMessage {
@@ -27,7 +29,7 @@ public class BookingMessage {
 
 	@Column(name = "seller_id")
 	private int sellerid;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "booking_id")
 	private Booking booking;

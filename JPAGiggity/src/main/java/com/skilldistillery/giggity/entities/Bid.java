@@ -29,6 +29,7 @@ public class Bid {
 
 	@ManyToOne
 	@JoinColumn(name = "bidder_id")
+	@JsonIgnore
 	private User bidder;
 	@JsonIgnore
 	@ManyToOne

@@ -37,6 +37,7 @@ public class UserSkill {
 	private Skill skill;
 
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "user_skill_image", joinColumns = @JoinColumn(name = "user_skill_id"), inverseJoinColumns = @JoinColumn(name = "image_id"))
 	private List<Image> portfolioImages;
 
