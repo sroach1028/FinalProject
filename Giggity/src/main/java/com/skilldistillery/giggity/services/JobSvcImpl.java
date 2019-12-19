@@ -19,9 +19,6 @@ public class JobSvcImpl implements JobService {
 
 	@Autowired
 	JobRepo repo;
-
-	@Autowired
-	UserRepo userRepo;
 	
 	@Override
 	public Job getById(int jobId) {
@@ -150,6 +147,7 @@ public class JobSvcImpl implements JobService {
 		update.setSkill(job.getSkill());
 		update.setTitle(job.getTitle());
 		update.setUser(job.getUser());
+		repo.saveAndFlush(update);
 		return update;
 	}
 
