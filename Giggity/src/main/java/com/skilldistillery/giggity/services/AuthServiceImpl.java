@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.giggity.entities.User;
+import com.skilldistillery.giggity.repositories.AddressRepo;
 import com.skilldistillery.giggity.repositories.UserRepo;
 
 @Service
@@ -12,6 +13,8 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Autowired
 	private UserRepo uRepo;
+	@Autowired
+	private AddressRepo addyRepo;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -26,9 +29,8 @@ public class AuthServiceImpl implements AuthService {
 		user.setEnabled(true);
 		
 		user.setRole("standard");
-		
+		addyRepo.saveAndFlush(user.getAddress());
 		uRepo.saveAndFlush(user);
-		
 		return user;
 	}
 
