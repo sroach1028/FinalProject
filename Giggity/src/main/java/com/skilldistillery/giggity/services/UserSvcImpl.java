@@ -16,10 +16,6 @@ public class UserSvcImpl implements UserService {
 
 	@Override
 	public User getUserByUsername(String username) {
-		
-		
-
-		
 		return userRepo.findByUsername(username);
 	}
 
@@ -27,4 +23,10 @@ public class UserSvcImpl implements UserService {
 	public User getUserById(int id) {
 		return userRepo.findById(id);
 	}
+
+	@Override
+	public void destroy(Integer id) {
+		userRepo.deleteById(id);
+	}
+
 }

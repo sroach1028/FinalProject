@@ -28,9 +28,7 @@ public class AuthController {
 			res.setStatus(400);
 			return null;
 		}
-
 		user = authService.register(user);
-
 		return user;
 	}
 
