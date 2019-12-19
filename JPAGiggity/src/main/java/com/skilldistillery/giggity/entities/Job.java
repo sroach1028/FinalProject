@@ -52,7 +52,7 @@ public class Job {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
