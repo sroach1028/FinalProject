@@ -21,7 +21,6 @@ import com.skilldistillery.giggity.entities.Job;
 import com.skilldistillery.giggity.services.JobService;
 
 @RestController
-@RequestMapping(path = "api")
 @CrossOrigin({ "*", "http://localhost:4350" })
 public class JobController {
 
