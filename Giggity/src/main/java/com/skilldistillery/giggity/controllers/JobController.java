@@ -94,7 +94,7 @@ public class JobController {
 	}
 
 	@GetMapping("jobs/skill/{skillName}")
-	public List<Job> getByZip(@PathVariable String skillName, HttpServletRequest req, HttpServletResponse resp) {
+	public List<Job> getBySkillName(@PathVariable String skillName, HttpServletRequest req, HttpServletResponse resp) {
 		List<Job> results = new ArrayList<>();
 		results = svc.getBySkillName(skillName);
 		if (results.size() == 0) {
@@ -106,7 +106,7 @@ public class JobController {
 	}
 	
 	@GetMapping("jobs/remote/{remote}")
-	public List<Job> getByZip(@PathVariable Boolean remote, HttpServletRequest req, HttpServletResponse resp) {
+	public List<Job> getByRemote(@PathVariable Boolean remote, HttpServletRequest req, HttpServletResponse resp) {
 		List<Job> results = new ArrayList<>();
 		results = svc.getByRemote(remote);
 		if (results.size() == 0) {
@@ -189,7 +189,7 @@ public class JobController {
 		return results;
 	}
 	
-	@GetMapping("jobs/bookingMessageId/{bokingMessageId}")
+	@GetMapping("jobs/bookingMessageId/{bookingMessageId}")
 	public List<Job> getByBookingMessageId(@PathVariable int bookingMessageId, HttpServletRequest req, HttpServletResponse resp) {
 		List<Job> results = new ArrayList<>();
 		results = svc.getByBookingMessageId(bookingMessageId);
@@ -201,7 +201,7 @@ public class JobController {
 		return results;
 	}
 	
-	@GetMapping("jobs/bookingMessage/{bokingMessage}")
+	@GetMapping("jobs/bookingMessage/{bookingMessage}")
 	public List<Job> getByBookingMessage(@PathVariable String bookingMessage, HttpServletRequest req, HttpServletResponse resp) {
 		List<Job> results = new ArrayList<>();
 		results = svc.getByBookingMessage(bookingMessage);
