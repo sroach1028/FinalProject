@@ -1,0 +1,11 @@
+<form #registerForm=ngForm>
+  First Name: <input type="text" name="firstName" ngModel><br>
+  LastName: <input type="text" name="lastName" ngModel><br>
+  Username: <input type="text" name="username" ngModel><br>
+  Email <input type="text" name="email" ngModel><br>
+  Password: <input type="password" name="password" ngModel><br>
+  Phone Number: <input type="number" name="phone" ngModel>
+  <input type="hidden" name="role" ngModel><br>
+  <input type="hidden" name="enabled" ngModel><br>
+  <input type="submit" value="register" (click)=register(registerForm)>
+  </form>

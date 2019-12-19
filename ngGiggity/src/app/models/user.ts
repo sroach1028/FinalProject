@@ -8,8 +8,6 @@ export class User {
   enabled: boolean;
   role: string;
   phone: string;
-  addressId: number;
-  imageId: number;
   constructor(
     id?: number,
     firstName?: string,
@@ -20,8 +18,6 @@ export class User {
     enabled: boolean = true,
     role: string = 'standard',
     phone?: string,
-    addressId?: number,
-    imageId?: number
   ) {
     this.id = id;
     this.firstName = firstName;
@@ -32,7 +28,6 @@ export class User {
     this.enabled = enabled;
     this.role = role;
     this.phone = phone;
-    this.addressId = addressId;
-    this.imageId = imageId;
+
   }
 }
