@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="user_skill")
 public class UserSkill {
@@ -35,6 +37,7 @@ public class UserSkill {
 	private Skill skill;
 
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "user_skill_image", joinColumns = @JoinColumn(name = "user_skill_id"), inverseJoinColumns = @JoinColumn(name = "image_id"))
 	private List<Image> portfolioImages;
 
