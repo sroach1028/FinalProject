@@ -52,20 +52,19 @@ public class Job {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Booking> bookings;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<BuyerReview> buyerReviews;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Bid> jobBids;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<BookingMessage> bookingMessages;
 
