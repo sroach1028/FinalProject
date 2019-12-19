@@ -23,7 +23,7 @@ public class UserSkill {
 	private int id;
 
 	private String description;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -31,7 +31,7 @@ public class UserSkill {
 	@ManyToOne
 	@JoinColumn(name = "logo_image_id")
 	private Image logoImage;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "skill_id")
 	private Skill skill;

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Image {
 
@@ -19,10 +21,10 @@ public class Image {
 
 	@Column(name = "image_url")
 	private String imageUrl;
-
+	@JsonIgnore
 	@ManyToMany(mappedBy = "jobImages")
 	private List<Job> jobs;
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "portfolioImages")
 	private List<UserSkill> skills;
 

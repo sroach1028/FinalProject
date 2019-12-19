@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	// F I E L D S
@@ -35,16 +37,15 @@ public class User {
 	private String role;
 
 	private String phone;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "seller")
 	private List<Booking> bookings;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "poster")
 	private List<SkillMessage> posts;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "bidder")
 	private List<Bid> bids;
-
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 
@@ -55,7 +56,7 @@ public class User {
 	@OneToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Job> jobs;
 
