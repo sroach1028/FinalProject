@@ -21,9 +21,9 @@ public class BidController {
 	BidService bidSvc;
 	
 	@GetMapping("bids/{jid}")
-	public List<Bid> getBids(@PathVariable Integer jobId) {
+	public List<Bid> getBids(@PathVariable Integer jid) {
 
-		return bidSvc.getBidsByJobId(jobId);
+		return bidSvc.getBidsByJobId(jid);
 	}
 
 }
