@@ -62,7 +62,7 @@ public class Job {
 
 	@OneToMany(mappedBy = "job")
 	private List<BuyerReview> buyerReviews;
-
+	
 	@OneToMany(mappedBy = "job")
 	private List<Bid> jobBids;
 

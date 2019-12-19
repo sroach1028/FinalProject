@@ -25,7 +25,7 @@ public class Address {
 	private int zip;
 
 	private String street;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "address")
 	private List<Job> jobAddresses;
 
