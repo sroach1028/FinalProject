@@ -79,14 +79,13 @@ public class JobSvcImpl implements JobService {
 
 	@Override
 	public List<Job> getByUsername(String username) {
-		User user = userRepo.findByUsername('%' + username + '%');
-		List<Job> jobs = repo.findByUser_UsernameLike(user.getUsername());
+		List<Job> jobs = repo.findByUser_UsernameLike('%' + username + '%');
 		return jobs;
 	}
 	
 	@Override
 	public List<Job> getByUserEmail(String email) {
-		List<Job> jobs = repo.findByUser_UsernameLike('%' + email + '%');
+		List<Job> jobs = repo.findByUser_EmailLike('%' + email + '%');
 		return jobs;
 	}
 	
