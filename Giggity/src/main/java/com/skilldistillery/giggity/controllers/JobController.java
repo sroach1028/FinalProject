@@ -1,5 +1,6 @@
 package com.skilldistillery.giggity.controllers;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.giggity.entities.Job;
+import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.services.JobService;
+import com.skilldistillery.giggity.services.UserService;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost:4350" })
@@ -26,6 +28,8 @@ public class JobController {
 
 	@Autowired
 	JobService svc;
+	@Autowired
+	UserService userSvc;
 
 	@GetMapping("jobs/{id}")
 	public Job getByJobId(@PathVariable int id, HttpServletRequest req, HttpServletResponse resp) {
@@ -220,10 +224,13 @@ public class JobController {
 	}
 	
 	@PostMapping("jobs")
-	public Job create(@RequestBody Job j, HttpServletRequest req, HttpServletResponse resp) {
+	public Job create(@RequestBody Job j, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 
 		try {
 			// try to create the provided post
+			User u = userSvc.getUserByUsername(principal.getName());
+			j.setUser(u);
+			j.setAddress(u.getAddress());
 			j = svc.create(j);
 			// if successful, send 201
 			resp.setStatus(201);
