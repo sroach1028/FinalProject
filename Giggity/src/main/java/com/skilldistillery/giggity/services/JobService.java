@@ -6,17 +6,27 @@ import com.skilldistillery.giggity.entities.Job;
 import com.skilldistillery.giggity.entities.User;
 
 public interface JobService {
-//	public List<Job> getAll();
-//
-//    public  List<Job> getByTitle(String title);
-//    
-//    public  List<Job> getByCity(String city);
-//    
-//    public  List<Job> getByUsername(String username);
-//
-//    public Job create(Job job);
-//
-//    public Job update(int jid, Job job);
-//
-//    public boolean delete(int jid);
+	public Job getById(int jobId);
+	public List<Job> getAll();
+	public  List<Job> getByTitle(String title);
+	public  List<Job> getByCity(String city);
+	public  List<Job> getByState(String state);
+	public  List<Job> getByZip(int zip);
+	public  List<Job> getBySkillName(String skillName);
+	public  List<Job> getByRemote(Boolean remote);
+	public  List<Job> getByUserId(int userId);
+	public  List<Job> getByUsername(String username);
+	public  List<Job> getByUserEmail(String email);
+	public  List<Job> getByBookingId(int bookingId);
+	public  List<Job> getByBuyerRating(int rating);
+	public  List<Job> getByJobBidId(int bidId);
+	public  List<Job> getByBookingMessageId(int bookingMessageId);
+	public  List<Job> getByBookingMessage(String bookingMessage);
+	public  List<Job> getByJobImagesId(int jobImageId);
+	
+    public Job create(Job job);
+
+    public Job update(int jid, Job job);
+
+    public boolean delete(int jid);
 }
