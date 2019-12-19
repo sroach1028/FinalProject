@@ -26,14 +26,14 @@ public class BookingController {
 	@Autowired
 	private BookingService svc;
 
-	@GetMapping("booking/active")
-	public List<Booking> getActive(HttpServletRequest req, HttpServletResponse resp) {
-		return svc.getActive();
+	@GetMapping("booking/active/{uid}")
+	public List<Booking> getActive(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
+		return svc.getActive(uid);
 	}
 
-	@GetMapping("booking/history")
-	public List<Booking> getTransactionHistory(HttpServletRequest req, HttpServletResponse resp) {
-		return svc.getTransactionHistory();
+	@GetMapping("booking/history/{uid}")
+	public List<Booking> getTransactionHistory(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
+		return svc.getTransactionHistory(uid);
 	}
 
 	@GetMapping("booking/job/{jid}")
@@ -69,7 +69,7 @@ public class BookingController {
 		return booking;
 	}
 
-	@PutMapping("jobs/{id}")
+	@PutMapping("booking/{id}")
 	public Booking updateBooking(@PathVariable Integer id, @RequestBody Booking booking, HttpServletRequest req,
 			HttpServletResponse resp) {
 

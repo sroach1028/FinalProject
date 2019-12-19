@@ -6,9 +6,9 @@ import com.skilldistillery.giggity.entities.Booking;
 
 public interface BookingService {
 	
-	public List<Booking> getActive();
+	public List<Booking> getActive(int uid);
 	
-	public List<Booking> getTransactionHistory();
+	public List<Booking> getTransactionHistory(int uid);
 	
 	public List<Booking> getAllByJob(int jid);
 	
