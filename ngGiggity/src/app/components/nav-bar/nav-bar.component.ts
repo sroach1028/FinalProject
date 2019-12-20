@@ -10,12 +10,19 @@ export class NavBarComponent implements OnInit {
 
   constructor(private authSvc: AuthService) { }
 
-isLoggedIn() {
-  return this.authSvc.checkLogin();
-}
-logOut() {
-this.authSvc.logout();
-}
+  searchDisplay = 'user';
+
+  searchBy(event: any) {
+    this.searchDisplay = event.target.value;
+    console.log(event);
+  }
+
+  isLoggedIn() {
+    return this.authSvc.checkLogin();
+  }
+  logOut() {
+    this.authSvc.logout();
+  }
 
   ngOnInit() {
   }
