@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.controllers;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,16 @@ public class UserController {
 		} else
 			res.setStatus(200);
 		return user;
+	}
+	
+	@GetMapping("users/getUser")
+	public User getUser(HttpServletResponse res, Principal principal) {
+		User loggedInUser = svc.getUserByUsername(principal.getName());		
+		if (loggedInUser == null) {
+			res.setStatus(404);
+		} else
+			res.setStatus(200);
+		return loggedInUser;
 	}
 	
 	@DeleteMapping("users/remove/{id}")
