@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +16,7 @@ import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.services.UserService;
 
 @RestController
-@RequestMapping(path = "api")
+//@RequestMapping(path = "api")
 @CrossOrigin({ "*", "http://localhost:4350" })
 public class UserController {
 	@Autowired
@@ -34,13 +34,13 @@ public class UserController {
 	}
 
 	@GetMapping("users/username/{username}")
-	public User getUser(@PathVariable String username, HttpServletResponse res) {
-		User user = svc.getUserByUsername(username);
-		if (user == null) {
+	public List<User> getUsersByUsername(@PathVariable String username, HttpServletResponse res) {
+		List<User> users = svc.getUsersByUsername(username);
+		if (users == null) {
 			res.setStatus(404);
 		} else
 			res.setStatus(200);
-		return user;
+		return users;
 	}
 	
 	@DeleteMapping("users/remove/{id}")

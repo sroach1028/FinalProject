@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -19,6 +21,20 @@ public class UserSvcImpl implements UserService {
 	@Override
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
+	}
+	@Override
+	public List<User> getUsersByUsername(String username) {
+		List<User> users = new ArrayList<User>();
+		
+		username = "%" + username + "%";
+		
+		users = userRepo.findByUsernameLike(username);
+		System.err.println(users);
+		
+		
+		
+		
+		return users;
 	}
 
 	@Override
