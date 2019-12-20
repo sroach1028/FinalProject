@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Job } from '../models/job';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Address } from 'cluster';
+import { Address } from '../models/address';
 
 @Injectable({
   providedIn: 'root'
