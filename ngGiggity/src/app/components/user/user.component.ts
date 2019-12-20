@@ -8,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private usersvc: UserService) { }
+  userSelected = null;
 
+  constructor(private userSvc: UserService) { }
 
-
-userSelected = null;
 
   ngOnInit() {
+    this.userSvc.getUserByUsername().subscribe(
+      data => {
+        this.userSelected = data;
+  },
+  err => console.error('Reload error in Component')
+  );
   }
 
 

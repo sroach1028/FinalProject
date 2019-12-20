@@ -34,14 +34,14 @@ public class UserController {
 		return user;
 	}
 
-	@GetMapping("users/username/{username}")
-	public List<User> getUsersByUsername(@PathVariable String username, HttpServletResponse res) {
-		List<User> users = svc.getUsersByUsername(username);
-		if (users == null) {
+	@GetMapping("users/username")
+	public User getUsersByUsername(@PathVariable String username, HttpServletResponse res, Principal principal) {
+		User user = svc.getUserByUsername(principal.getName());
+		if (user == null) {
 			res.setStatus(404);
 		} else
 			res.setStatus(200);
-		return users;
+		return user;
 	}
 	
 	@GetMapping("api/users/getUser")

@@ -35,9 +35,8 @@ export class UserService {
     }
 
   }
-  getUsersByUsername(username: string) {
-
-    return this.http.get<User[]>(this.baseUrl + 'users/username/' + username + '?sorted=true')
+  getUserByUsername() {
+    return this.http.get<User>(this.baseUrl + 'users/username/')
       .pipe(
         catchError((err: any) => {
           console.log(err);
