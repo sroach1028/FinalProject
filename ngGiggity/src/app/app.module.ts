@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DatePipe } from '@angular/common';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 
 
@@ -24,7 +25,8 @@ import { HomeComponent } from './components/home/home.component';
     RegisterComponent,
     LoginComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
