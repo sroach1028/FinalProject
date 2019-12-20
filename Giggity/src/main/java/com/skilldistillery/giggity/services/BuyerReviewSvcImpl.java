@@ -1,6 +1,7 @@
 package com.skilldistillery.giggity.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -18,8 +19,21 @@ public class BuyerReviewSvcImpl implements BuyerReviewService {
 	BuyerReviewRepo repo;
 
 	@Override
+	public BuyerReview findById(int id) {
+		return repo.findById(id);
+	}
+	
+	@Override
 	public BuyerReview findByJobId(int jid) {
 		return repo.findByJob_Id(jid);
+	}
+	
+	@Override
+	public List<BuyerReview> findByJobTitle(String title) {
+		List<BuyerReview> results = repo.findByJob_TitleLike("%" + title + "%" );
+		
+		return results;
+		
 	}
 
 	@Override
@@ -48,5 +62,7 @@ public class BuyerReviewSvcImpl implements BuyerReviewService {
 			return false;
 		}
 	}
+
+	
 
 }
