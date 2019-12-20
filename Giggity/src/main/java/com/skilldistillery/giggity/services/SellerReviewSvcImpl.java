@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.giggity.entities.BuyerReview;
 import com.skilldistillery.giggity.entities.SellerReview;
 import com.skilldistillery.giggity.repositories.SellerReviewRepo;
 
@@ -33,10 +32,10 @@ public class SellerReviewSvcImpl implements SellerReviewService {
 		return repo.findByBooking_Job_Id(id);
 	}
 
-	@Override
-	public SellerReview findByJobTitle(String title) {
-		return repo.findByBooking_Job_Title(title);
-	}
+//	@Override
+//	public List<SellerReview> findByJobTitle(String title) {
+//		return repo.findByBooking_Job_TitleLike("%" + title + "%");
+//	}
 
 	@Override
 	public SellerReview create(SellerReview sellerReview) {
