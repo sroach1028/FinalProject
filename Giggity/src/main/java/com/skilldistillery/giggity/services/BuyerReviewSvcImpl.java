@@ -37,8 +37,8 @@ public class BuyerReviewSvcImpl implements BuyerReviewService {
 	}
 
 	@Override
-	public BuyerReview create(BuyerReview buyerReview) {
-		return repo.saveAndFlush(buyerReview);
+	public BuyerReview create(BuyerReview sellerReview) {
+		return repo.saveAndFlush(sellerReview);
 	}
 
 	@Override
