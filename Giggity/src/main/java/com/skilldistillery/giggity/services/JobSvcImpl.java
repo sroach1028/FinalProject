@@ -2,16 +2,17 @@ package com.skilldistillery.giggity.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.giggity.entities.Address;
 import com.skilldistillery.giggity.entities.Job;
-import com.skilldistillery.giggity.entities.User;
+import com.skilldistillery.giggity.entities.Skill;
 import com.skilldistillery.giggity.repositories.JobRepo;
-import com.skilldistillery.giggity.repositories.UserRepo;
 
 @Transactional
 @Service
@@ -160,6 +161,26 @@ public class JobSvcImpl implements JobService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public Skill findSkillsByJob(Integer jid) {
+		Skill skill = null;
+		Optional<Job> opt  = repo.findById(jid);
+		if (opt.isPresent()) {
+			skill = opt.get().getSkill();
+		}
+		return skill;
+	}
+	
+	@Override
+	public Address findAddressByJob(Integer jid) {
+		Address address = null;
+		Optional<Job> opt  = repo.findById(jid);
+		if (opt.isPresent()) {
+			address = opt.get().getAddress();
+		}
+		return address;
 	}
 
 }

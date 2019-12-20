@@ -1,3 +1,6 @@
+import { Skill } from './skill';
+import { Address } from './address';
+
 export class Job {
   id: number;
   price: number;
@@ -8,6 +11,8 @@ export class Job {
   imageUrl: string;
   dateCreated: Date;
   dateupdated: Date;
+  skill: Skill;
+  address: Address;
   constructor(
     id: number,
     price: number,
@@ -28,6 +33,5 @@ export class Job {
     this.dateupdated = dateupdated;
     this.imageUrl = imageUrl;
     this.remote = remote;
-
   }
 }

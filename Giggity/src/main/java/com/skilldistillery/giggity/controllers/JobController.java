@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.giggity.entities.Address;
 import com.skilldistillery.giggity.entities.Job;
 import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.services.JobService;
@@ -221,6 +222,14 @@ public class JobController {
 		List<Job> results = new ArrayList<>();
 		results = svc.getByJobImagesId(jobImageId);
 		return results;
+	}
+	@GetMapping("jobs/address/{jid}")
+	public Address getAddressByJob(@PathVariable int jid, HttpServletRequest req, HttpServletResponse resp) {
+		Address address = svc.findAddressByJob(jid);
+		if (address == null) {
+			resp.setStatus(404);
+		}
+		return address;
 	}
 	
 	@PostMapping("jobs")
