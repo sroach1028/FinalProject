@@ -35,10 +35,21 @@ export class UserService {
     }
 
   }
+  getUsersByUsername(username: string) {
+
+    return this.http.get<User[]>(this.baseUrl + 'users/username/' + username + '?sorted=true')
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+
+  }
 
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
     private authSvc: AuthService
-  ) {}
+  ) { }
 }
