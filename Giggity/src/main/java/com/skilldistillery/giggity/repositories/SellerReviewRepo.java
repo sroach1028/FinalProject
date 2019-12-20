@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.skilldistillery.giggity.entities.SellerReview;
 
 public interface SellerReviewRepo extends JpaRepository<SellerReview, Integer> {
-//	public SellerReview findById(int id);
-//	public List<SellerReview> findByRating(int id);
-//	public List<SellerReview> findByBooking_id(int id);
+	public SellerReview findById(int id);
+	public SellerReview findByBooking_Id(int id);
+	public SellerReview findByBooking_Job_Id(int id);
+	public SellerReview findByBooking_Job_Title(String title);
 
 }
