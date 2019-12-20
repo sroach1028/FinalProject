@@ -2,7 +2,9 @@ package com.skilldistillery.giggity.services;
 
 import java.util.List;
 
+import com.skilldistillery.giggity.entities.Address;
 import com.skilldistillery.giggity.entities.Job;
+import com.skilldistillery.giggity.entities.Skill;
 import com.skilldistillery.giggity.entities.User;
 
 public interface JobService {
@@ -29,4 +31,6 @@ public interface JobService {
     public Job update(int jid, Job job);
 
     public boolean delete(int jid);
+	public Skill findSkillsByJob(Integer jid);
+	public Address findAddressByJob(Integer jid);
 }

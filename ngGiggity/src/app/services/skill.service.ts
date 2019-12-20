@@ -28,6 +28,17 @@ export class SkillService {
 
   }
 
+  findByJobId(id){
+    return this.http.get<Skill>(this.baseUrl + 'jobskill/' + id)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('KABOOM');
+      })
+    );
+
+  }
+
 
 
 

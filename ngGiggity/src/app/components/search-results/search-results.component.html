@@ -13,9 +13,10 @@
   <tbody>
   <tr #data (click)="displaySelected(job)" class = "border border-info" *ngFor="let job of jobs">
     <td >{{job.title}}</td>
-    <td>GET SKILL</td>
+    <td>{{job.skill.name}}</td>
     <td>{{job.price}}</td>
-    <td>GET ADDRESS</td>
+    <td *ngIf="job.address != null"> {{job.address.state}}</td>
+    <td *ngIf="job.address == null">Remote</td>
   </tr>
   </tbody>
   </table>
@@ -34,9 +35,9 @@
   <tbody>
   <tr class = "border border-info">
     <td >{{selected.title}}</td>
-    <td>GET SKILL</td>
+    <td>{{selected.skill.name}}</td>
     <td>{{selected.price}}</td>
-    <td>GET ADDRESS</td>
+    <td *ngIf="selected.address != null">{{selected.address.state}}</td>
   </tr>
   </tbody>
   </table>

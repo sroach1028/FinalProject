@@ -16,4 +16,5 @@ public interface SkillRepo extends JpaRepository<Skill, Integer> {
 //	public List<Skill> findByForumMessages_Poster_UsernameLike(String posterName);
 //	public List<Skill> findByForumMessages_Poster_EmailLike(String posterEmail);
 //	public List<Skill> findByUserSkills_Id(int id);
+
 }

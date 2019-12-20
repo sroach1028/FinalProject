@@ -30,4 +30,5 @@ public class SkillSvcImpl implements SkillService {
 	public Skill findById(int id) {
 		return skillRepo.findById(id);
 	}
+
 }

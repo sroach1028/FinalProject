@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Job } from '../models/job';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Address } from 'cluster';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,16 @@ export class JobService {
 
   index(){
     return this.http.get<Job[]>(this.url)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('KABOOM');
+      })
+    );
+  }
+
+  findJobAddress(jid){
+    return this.http.get<Address>(this.url + '/address/' + jid)
     .pipe(
       catchError((err: any) => {
         console.log(err);
