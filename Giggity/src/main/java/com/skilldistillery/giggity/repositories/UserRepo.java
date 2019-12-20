@@ -10,6 +10,8 @@ import com.skilldistillery.giggity.entities.User;
 public interface UserRepo extends JpaRepository<User, Integer> {
 	public User findById(int id);
 	public User findByUsername(String username);
+	public List<User> findByUsernameLike(String username);
+
 //	public List<User> findByUsernameLike(String username);
 //	public List<User> findByEmailLike(String email);
 //	public List<User> findByBookings_Id(int id);

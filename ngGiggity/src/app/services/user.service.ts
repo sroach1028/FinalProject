@@ -1,12 +1,11 @@
-import { Job } from "./../models/job";
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
-import { AuthService } from "./auth.service";
-import { environment } from "src/environments/environment";
-import { catchError } from "rxjs/operators";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 import { User } from '../models/user';
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
