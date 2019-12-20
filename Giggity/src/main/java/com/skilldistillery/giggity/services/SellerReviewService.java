@@ -12,7 +12,7 @@ public SellerReview findById(int id);
 
 	public SellerReview findByJobID(int id);
 	
-	public SellerReview findByJobTitle(String title);
+//	public List<SellerReview> findByJobTitle(String title);
 	
 	public SellerReview create(SellerReview buyerReview);
 

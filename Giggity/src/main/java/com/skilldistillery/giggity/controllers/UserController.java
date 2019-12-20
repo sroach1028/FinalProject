@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.controllers;
 
+
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.giggity.entities.User;
@@ -43,7 +44,17 @@ public class UserController {
 		return users;
 	}
 	
-	@DeleteMapping("users/remove/{id}")
+	@GetMapping("api/users/getUser")
+	public User getUser(HttpServletResponse res, Principal principal) {
+		User loggedInUser = svc.getUserByUsername(principal.getName());		
+		if (loggedInUser == null) {
+			res.setStatus(404);
+		} else
+			res.setStatus(200);
+		return loggedInUser;
+	}
+	
+	@DeleteMapping("api/users/remove/{id}")
 	public void deleteUser(@PathVariable Integer id, HttpServletResponse res) {
 		if (!svc.destroy(id)) {
 			res.setStatus(404);

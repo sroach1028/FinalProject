@@ -10,6 +10,6 @@ public interface SellerReviewRepo extends JpaRepository<SellerReview, Integer> {
 	public SellerReview findById(int id);
 	public SellerReview findByBooking_Id(int id);
 	public SellerReview findByBooking_Job_Id(int id);
-	public SellerReview findByBooking_Job_Title(String title);
+//	public List<SellerReview> findByBooking_Job_TitleLike(String title);
 
 }
