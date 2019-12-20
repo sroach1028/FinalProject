@@ -8,4 +8,6 @@ public interface BidService {
 
 	List<Bid> getBidsByJobId(Integer jobId);
 
+	Bid addBid(Bid bid);
+
 }

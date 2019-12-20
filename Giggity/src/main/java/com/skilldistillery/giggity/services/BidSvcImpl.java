@@ -27,4 +27,9 @@ public class BidSvcImpl implements BidService {
 			return null;
 	}
 
+	@Override
+	public Bid addBid(Bid bid) {
+		return bidRepo.saveAndFlush(bid);
+	}
+
 }
