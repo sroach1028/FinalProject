@@ -397,7 +397,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `image` (`id`, `image_url`) VALUES (1, 'test');
+INSERT INTO `image` (`id`, `image_url`) VALUES (1, 'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg');
+INSERT INTO `image` (`id`, `image_url`) VALUES (2, 'https://fiverr-res.cloudinary.com/t_gig_cards_web_x2,q_auto,f_auto/gigs/105561645/original/c935e9736603cc12ba0966219d52f16803020397.png');
+INSERT INTO `image` (`id`, `image_url`) VALUES (3, 'https://www.dhresource.com/600x600/f2/albu/g8/M00/33/15/rBVaVFw21liALA8iAADH3G8Xu58683.jpg');
+INSERT INTO `image` (`id`, `image_url`) VALUES (4, 'https://www.rd.com/wp-content/uploads/2018/02/10_Things-Your-Car-Mechanic-Won%E2%80%99t-Tell-You_572422051_Minerva-Studio.jpg');
 
 COMMIT;
 
@@ -407,8 +410,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (1, 'test', 'test', 'test', 'test@test.com', '$2a$10$KMIQ9vF8CXH7U2Nqn3wTV.dUq0EzW94gzEvT7yb6rx9fuyFyY6OSS', 1, 'admin', '111111111', 1, 1);
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (2, 'Kelly', 'Cromeans', 'kvothik', 'cromeans15@gmail.com', '$2a$10$1SSwukC6.gWafhjs52eOUuFFxxXIOSRYwgv4z19EmJEE9UFq0WF9O', 1, 'admin', '7196662811', 2, 1);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (1, 'admin', 'admin', 'admin', 'admin@admin.com', '$2a$10$KMIQ9vF8CXH7U2Nqn3wTV.dUq0EzW94gzEvT7yb6rx9fuyFyY6OSS', 1, 'admin', '111111111', 1, 1);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (2, 'Kelly', 'Cromeans', 'kvothik', 'cromeans15@gmail.com', '$2a$10$1SSwukC6.gWafhjs52eOUuFFxxXIOSRYwgv4z19EmJEE9UFq0WF9O', 1, 'user', '7196662811', 2, 1);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (3, 'Alex', 'Sandervladi', 'aleksandervladialeksandervladi\naleksandervladi\naleksandervladi\naleksandervladi', 'aleksand@yahoo.com', '12345', 1, 'user', NULL, NULL, 2);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (4, 'Kullen', 'Kee', 'Kkee', 'kullenk@outlook.com', 'kulleniscool', 1, 'user', NULL, NULL, 3);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`) VALUES (5, 'Shaun', 'Roach', 'Sroach', 'sroach@AOL.com', 'ifixstuff', 1, 'user', NULL, 2, 4);
 
 COMMIT;
 
@@ -418,7 +424,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `skill` (`id`, `name`, `description`) VALUES (1, 'Software Development', 'Coding');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (1, 'Software Development', 'Conceiving, specifying, designing, programming, documenting, testing, and bug fixing involved in creating and maintaining applications, frameworks, or other software components.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (2, 'Mechanic', 'Inspecting and repairing vehicles, machinery, and light trucks.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (3, 'Marketing', 'Create advertising campaigns, develop pricing strategies and targeting strategies based on demographic data and work with the you to develop more awareness of what you offer.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (4, 'Art', 'Logo design, blue print creation, artistic visual repusentations.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (5, 'Homework & Tutoring', ' Assist, write, or review research papers. Help students learn, reviewing content with them, explaining how to solve problems and checking completed work. A tutor may also help students develop study skills and organization techniques to help improve their academic performance.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (6, 'Landscaping', 'Perform groundskeeping and building maintenance duties. Mow lawn either by hand or using a riding lawnmower. Cut lawn using hand, power or riding mower and trim and edge around walks, flower beds, and walls. Landscape by planting flowers, grass, shrubs, and bushes.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (7, 'Writing & Translation', 'Interprets written or spoken material into one or more other languages, ensures meaning and context are maintained, creates glossaries or term dictionaries, possesses knowledge of multiple languages, works with individual clients and corporations.');
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (8, 'Home Improvment', 'Electrical, Plumbing, Roofing, Flooring, Drywall, Framing, Masonry, ect...');
 
 COMMIT;
 
@@ -428,7 +441,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `user_skill` (`id`, `user_id`, `skill_id`, `description`, `logo_image_id`) VALUES (1, 1, 1, 'test', 1);
+INSERT INTO `user_skill` (`id`, `user_id`, `skill_id`, `description`, `logo_image_id`) VALUES (1, 2, 1, 'I can do full stack development with dynamic Spring/Angular UIs.', 1);
 
 COMMIT;
 
@@ -438,8 +451,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `giggity`;
-INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (1, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', '2019-12-07 23:59:59', '2019-12-07 23:59:59', 1);
-INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (2, 1, 1.11, 'test', 'test', 1, 1, 1, 'test', '2019-12-07 23:59:59', '2019-12-07 23:59:59', 1);
+INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (1, 1, 47.15, 'Troubleshoot issues with Spring-based applications (Spring Boot, Spring Security, Spring Cloud, etc). Provide suggestions for improvements and enhancements via code reviews, and implementation and application of bug fixes that are identified.', 'I will assist and troubleshoot spring framework applications.', 1, 1, 1, '', '2019-04-20 16:20:11', '2019-12-10 15:24:11', 1);
+INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (2, 7, 5.00, 'Hi, My name is Alex. I offer top quality English to French and French to English Contextual and Localization Translation of Technical, Technological or Legal text. I will check the work for the slightest flaw.\nNB: \nThis pricing will vary according to the working condition, complexity and type of content\nFor additional words, the delivery time would be increased depending on the number of words, so do contact me first.\nFor extra fast delivery of more than 5000 words contact me first.\n\nI can translate contents such as: \nliterature,\npoetry,\nstories,\narticles,\nlegal or\ntechnical\n \nMy commitment: \nAll translations are done manually and proofread. \nI DO NOT use Google Translator, or any other translation services.\nMy translations are literal, not word to word.\nOriginal sense is maintained\nAll the information you provide are kept strictly confidential!', 'I will perfect french to english or english to french translation of any technical text', 1, 1, 1, 'https://fiverr-res.cloudinary.com/t_gig_cards_web_x2,q_auto,f_auto/gigs/105561645/original/c935e9736603cc12ba0966219d52f16803020397.png', '2019-12-07 23:59:59', '2019-12-07 23:59:59', 3);
+INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (3, 4, 113.50, '★★★ 1000+ orders successfully completed in total ★★★\n\n★★★ Professional Service since 2014 ★★★\n\n\n\nNOTE: if you\'re interested only in Logo Design or only in Social Media Design - just send me a message and i\'ll provide you custom offer for separate service.\n\n\nLOGO DESIGN\n\nOur studio provide high-quality UNIQUE logo designs. We\'re very attentive to details, so you can be sure we\'ll hear all your wishes according to your task.', 'Our Studio Will make professional logo design', 1, NULL, 1, 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto/gigs/133456006/original/d40984e6bd0f4f63d050e3e9942845ea636e0a32/make-custom-logo-design-and-animation.jpg', '2019-08-16 11:15:45', '2019-12-10 15:24:11', 4);
+INSERT INTO `job` (`id`, `skill_id`, `price`, `description`, `title`, `active`, `address_id`, `remote`, `image_url`, `date_created`, `date_updated`, `user_id`) VALUES (4, 2, 120.00, 'I will supply all parts and tools. Will come to you. I also offer other remote mechanic work.', 'I will change youe brakes and machine your roters.', 1, 2, 0, 'https://gandgautorepair.com/wp-content/uploads/2019/04/horror-4-555x312.jpg', '2019-04-20 16:20:11', '2019-10-10 16:20:11', 5);
 
 COMMIT;
 
