@@ -5,6 +5,7 @@ import { Job } from '../models/job';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Address } from '../models/address';
+import { Skill } from '../models/skill';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,16 @@ export class JobService {
 
   findJobAddress(jid){
     return this.http.get<Address>(this.url + '/address/' + jid)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('KABOOM');
+      })
+    );
+  }
+
+  findJobBySkill(skillName: string) {
+    return this.http.get<Job[]>(this.url + '/skill/' + skillName)
     .pipe(
       catchError((err: any) => {
         console.log(err);
