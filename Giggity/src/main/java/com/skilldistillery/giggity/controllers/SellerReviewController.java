@@ -43,18 +43,17 @@ public class SellerReviewController {
 		return svc.findByBookingId(id);
 	}
 	
-	@GetMapping("sellerReview/jobTitle/{title}")
-	public SellerReview getByJobTitle(@PathVariable String title, HttpServletRequest req, HttpServletResponse resp) {
-		SellerReview sr = svc.findByJobTitle(title);
-		if (sr == null) {
-			resp.setStatus(404);
-		} else {
-			resp.setStatus(200);
-		}
-		
-		return sr;
-	}
-	
+//	@GetMapping("sellerReview/jobTitle/{title}")
+//	public List<SellerReview> getByJobTitle(@PathVariable String title, HttpServletRequest req, HttpServletResponse resp) {
+//		List<SellerReview> sr = svc.findByJobTitle(title);
+//		if (sr.size() == 0) {
+//			resp.setStatus(404);
+//		} else {
+//			resp.setStatus(200);
+//		}
+//		
+//		return sr;
+//	}
 	
 	@PostMapping("sellerReview")
 	public SellerReview create(@RequestBody SellerReview sr, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
