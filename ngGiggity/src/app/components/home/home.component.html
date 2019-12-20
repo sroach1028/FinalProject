@@ -1,4 +1,7 @@
-<div *ngFor="let skill of skills">
+<div>
+  <ng-container *ngFor="let skill of skills">
 <h1>{{skill.name}}</h1>
 <h1>{{skill.description}}</h1>
+<button [routerLink]="['/search', skill.name]">View Gig</button>
+</ng-container>
 </div>
