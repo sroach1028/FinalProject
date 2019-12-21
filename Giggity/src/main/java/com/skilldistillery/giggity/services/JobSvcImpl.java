@@ -125,6 +125,9 @@ public class JobSvcImpl implements JobService {
 
 	@Override
 	public Job create(Job job) {
+		job.setDateCreated(LocalDateTime.now());
+		job.setDateUpdated(LocalDateTime.now()); 
+		
 		return repo.saveAndFlush(job);
 	}
 
