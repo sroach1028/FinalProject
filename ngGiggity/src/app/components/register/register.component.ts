@@ -1,8 +1,10 @@
+import { UserService } from './../../services/user.service';
 import { Address } from './../../models/address';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +13,7 @@ import { User } from 'src/app/models/user';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authSvc: AuthService) { }
+  constructor(private authSvc: AuthService, private router: Router, private usersvc: UserService) { }
 
   register(form: NgForm) {
     form.value.role = 'standard';
@@ -40,8 +42,8 @@ export class RegisterComponent implements OnInit {
         console.log('RegisterComponent.register(): user registered.');
         this.authSvc.login(user.username, user.password).subscribe(
           next => {
-            console.log('RegisterComponent.register(): user logged in, routing to /todo.');
-            // this.router.navigateByUrl('/todo');
+            console.log('RegisterComponent.register(): user logged in, routing to /user (profile).');
+            this.router.navigateByUrl('/user');
           },
           error => {
             console.error('RegisterComponent.register(): error logging in.');
@@ -53,10 +55,6 @@ export class RegisterComponent implements OnInit {
         console.error(err);
       }
     );
-
-    console.log(user);
-    form.reset();
-
   }
 
   ngOnInit() {
