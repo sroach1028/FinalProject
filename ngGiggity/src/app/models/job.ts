@@ -9,7 +9,6 @@ export class Job {
   description: string;
   title: string;
   active: boolean;
-  activeremote: boolean;
   imageUrl: string;
   dateCreated: Date;
   dateupdated: Date;
