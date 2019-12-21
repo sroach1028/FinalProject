@@ -14,26 +14,26 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <form id="user" *ngIf="(searchDisplay === 'user')" style="padding-right: 35px;">
-          <input class="form-control" type="text" placeholder="Search username" aria-label="Search">
-          <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit">Search</button>
+        <!-- <form #userSearch=ngForm id="user" *ngIf="(searchDisplay === 'user')" style="padding-right: 35px;">
+          <input name="search" class="form-control" type="text" placeholder="Search username" aria-label="Search" ngModel>
+          <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit" (click)="search(userSearch)">Search</button>
         </form>
-        <form id="city" *ngIf="(searchDisplay === 'city')" style="padding-right: 35px;">
-          <input class="form-control" type="text" placeholder="Search jobs by city" aria-label="Search">
+        <form #citySearch=ngForm id="city" *ngIf="(searchDisplay === 'city')" style="padding-right: 35px;">
+          <input name="search" class="form-control" type="text" placeholder="Search jobs by city" aria-label="Search"  ngModel>
           <div>
-          <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit">Search</button>
+          <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit" (click)="search(citySearch)">Search</button>
         </div>
         </form>
-          <form id="skill" *ngIf="(searchDisplay === 'skill')" style="padding-right: 35px;">
-            <input class="form-control" type="text" placeholder="Search users by skill" aria-label="Search">
+          <form #skillSearch=ngForm id="skill" *ngIf="(searchDisplay === 'skill')" style="padding-right: 35px;">
+            <input name="search" class="form-control" type="text" placeholder="Search users by skill" aria-label="Search"  ngModel>
             <div>
-            <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit" >Search</button>
+            <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit" (click)="search(skillSearch)" >Search</button>
           </div>
-          </form>
-          <div>
+          </form> -->
+          <!-- <div>
             <a class="nav-item nav-link text-warning" [routerLink]="['/search']">Search</a>
-          </div>
-        &nbsp;
+          </div> -->
+        <!-- &nbsp;
         &nbsp;
         <h5 style="color: white;">Filter By:</h5>&nbsp; &nbsp;
         <div style="padding-right: 20px;">
@@ -41,9 +41,12 @@
           <option value="user">User &nbsp; &nbsp; &nbsp;</option>
           <option value="city">City &nbsp; &nbsp; &nbsp;</option>
           <option value="skill">Skill &nbsp; &nbsp; &nbsp;</option>
-        </select>
-      </div>
+        </select> -->
+      <!-- </div> -->
       <div>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/search']">Search</a>
+        </li>
         <li class="nav-item" *ngIf="!isLoggedIn()">
           <a class="nav-link" [routerLink]="['/login']">Login</a>
         </li>

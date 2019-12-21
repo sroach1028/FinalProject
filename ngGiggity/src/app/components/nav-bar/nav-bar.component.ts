@@ -1,5 +1,10 @@
+import { SearchResultsComponent } from './../search-results/search-results.component';
+import { HomeComponent } from './../home/home.component';
+import { NgForm } from '@angular/forms';
+import { UserService } from './../../services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private authSvc: AuthService) { }
+  constructor(private authSvc: AuthService, private usersvc: UserService, private router: Router) { }
 
   searchDisplay = 'user';
 
@@ -25,6 +30,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }
