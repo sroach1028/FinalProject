@@ -246,6 +246,7 @@ public class JobController {
 	@PostMapping("jobs/create")
 	public Job create(@RequestBody Job j, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		System.out.println("hello");
+		System.out.println(j);
 		try {
 			System.out.println("hello");
 			// try to create the provided post
