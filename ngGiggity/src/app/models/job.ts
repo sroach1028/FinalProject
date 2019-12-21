@@ -20,8 +20,8 @@ export class Job {
     title: string,
     active: boolean = true,
     remote: boolean,
-    dateCreated: Date,
-    dateupdated: Date,
+    dateCreated?: Date,
+    dateupdated?: Date,
     imageUrl?: string
   ) {
     this.id = id;
