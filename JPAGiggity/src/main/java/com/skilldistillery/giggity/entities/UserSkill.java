@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="user_skill")
@@ -31,7 +32,8 @@ public class UserSkill {
 	@ManyToOne
 	@JoinColumn(name = "logo_image_id")
 	private Image logoImage;
-	@JsonIgnore
+	
+	@JsonIgnoreProperties({"userSkills"})
 	@ManyToOne
 	@JoinColumn(name = "skill_id")
 	private Skill skill;

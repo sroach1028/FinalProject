@@ -33,4 +33,5 @@ public interface JobService {
     public boolean delete(int jid);
 	public Skill findSkillsByJob(Integer jid);
 	public Address findAddressByJob(Integer jid);
+	public List<Job> getJobsByUsername(String name);
 }

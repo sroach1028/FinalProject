@@ -23,4 +23,5 @@ public interface JobRepo extends JpaRepository<Job, Integer> {
 	public List<Job> findByBookingMessages_Id(int id);
 	public List<Job> findByBookingMessages_MessageLike(String message);
 	public List<Job> findByJobImages_Id(int id);
+	public List<Job> findByUser_Username(String username);
 }
