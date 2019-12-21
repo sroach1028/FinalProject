@@ -1,0 +1,17 @@
+
+<h1>IN JOB POSTING COMPONENT</h1>
+<div class = "card mx-auto bg-success mt-5" style="width: 40rem;">
+    <div class = "card-title text-center">
+      <h3 class="display-4">Post New Job</h3>
+    </div>
+      <form #createForm = "ngForm">
+        <div class = "form-group container-fluid">
+            <input type="text" name="title"class="form-control" placeholder="Title" ngModel>
+            <input type="number" name="price"class="form-control" placeholder="Price" ngModel>
+            <input type="text" name="description" class="form-control" placeholder="Description" ngModel>
+            <input type="hidden" name="active" class="form-control" ngModel>
+            <input type="submit" class = "btn btn-warning" value = "CREATE" (click)="postJob(createForm)">
+            <button [routerLink]="['/user']"class="float-right btn btn-danger">CANCEL</button>
+        </div>
+      </form>
+    </div>

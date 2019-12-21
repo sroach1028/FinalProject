@@ -144,6 +144,17 @@ public class JobController {
 		}
 		return results;
 	}
+	@GetMapping("api/jobs/username")
+	public List<Job> getByUsername(HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+		List<Job> results = new ArrayList<>();
+		results = svc.getJobsByUsername(principal.getName());
+		if (results.size() == 0) {
+			resp.setStatus(404);
+		} else {
+			resp.setStatus(200);
+		}
+		return results;
+	}
 	
 	@GetMapping("jobs/userEmail/{email}")
 	public List<Job> getByUserEmail(@PathVariable String email, HttpServletRequest req, HttpServletResponse resp) {
@@ -232,10 +243,12 @@ public class JobController {
 		return address;
 	}
 	
-	@PostMapping("jobs")
+	@PostMapping("jobs/create")
 	public Job create(@RequestBody Job j, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
-
+		System.out.println("hello");
+		System.out.println(j);
 		try {
+			System.out.println("hello");
 			// try to create the provided post
 			User u = userSvc.getUserByUsername(principal.getName());
 			j.setUser(u);
