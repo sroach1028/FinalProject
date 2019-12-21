@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { User } from 'src/app/models/user';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authSvc: AuthService) { }
+  constructor(private authSvc: AuthService, private router: Router) { }
 
 
 
@@ -45,7 +46,7 @@ export class RegisterComponent implements OnInit {
         this.authSvc.login(user.username, user.password).subscribe(
           next => {
             console.log('RegisterComponent.register(): user logged in, routing to /todo.');
-            // this.router.navigateByUrl('/todo');
+            this.router.navigateByUrl('/user');
           },
           error => {
             console.error('RegisterComponent.register(): error logging in.');
