@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PostComponent } from './components/post/post.component';
+import { JobsActivePipe } from './pipes/jobs-active.pipe';
 
 
 
@@ -28,7 +29,8 @@ import { PostComponent } from './components/post/post.component';
     PageNotFoundComponent,
     HomeComponent,
     SearchResultsComponent,
-    PostComponent
+    PostComponent,
+    JobsActivePipe
   ],
   imports: [
     BrowserModule,
