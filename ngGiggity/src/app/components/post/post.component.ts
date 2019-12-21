@@ -5,6 +5,7 @@ import { JobService } from 'src/app/services/job.service';
 import { Component, OnInit } from '@angular/core';
 import { Job } from 'src/app/models/job';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -15,10 +16,9 @@ export class PostComponent implements OnInit {
   skills: Skill[] = [];
 
   newJob: Job = new Job();
-  // newSkill: Skill = new Skill(1, 'Software Development', 'Develop your software');
   newAddy: Address = new Address();
 
-  constructor(private jobSvc: JobService, private skillSvc: SkillService) { }
+  constructor(private jobSvc: JobService, private skillSvc: SkillService, private router: Router) { }
   reload() {
     this.skillSvc.index().subscribe(
       (aGoodThingHappened) => {
@@ -42,6 +42,7 @@ this.reload();
     this.jobSvc.postJob(this.newJob).subscribe(
       data => {
         console.log(data);
+        this.router.navigateByUrl('/user');
       },
       err => console.error('Reload error in Component')
       );

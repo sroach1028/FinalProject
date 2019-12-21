@@ -6,6 +6,7 @@ import { UserSkillService } from 'src/app/services/user-skill.service';
 import { Job } from 'src/app/models/job';
 import { Router } from '@angular/router';
 import { Skill } from 'src/app/models/skill';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user',
@@ -21,6 +22,7 @@ export class UserComponent implements OnInit {
   userJobs: Job[] = [];
   skillName: string;
   skills: Skill[];
+  user: User;
   // tslint:disable-next-line: max-line-length
 
   constructor(private userSvc: UserService, private userSkillSvc: UserSkillService, private jobSvc: JobService, private router: Router) {
