@@ -49,4 +49,16 @@ export class JobService {
       })
     );
   }
+
+  postJob(job: Job){
+    console.log(job);
+
+    return this.http.post(this.url + '/create', job)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('in jobservice postJob');
+      })
+    );
+  }
 }
