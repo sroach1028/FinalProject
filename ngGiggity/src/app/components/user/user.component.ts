@@ -46,21 +46,30 @@ export class UserComponent implements OnInit {
     //     }
     //   }
     // );
-   }
+  }
 
-   displaySelected(job) {
+  remove(job: Job) {
+    job.active = false;
+    this.update(job);
+  }
+
+  displaySelected(job) {
     this.selected = job;
   }
 
-   setUpdateGig() {
-    this.updateGig = Object.assign({}, this.selected);
+  setUpdateGig(job: Job) {
+    this.updateGig = Object.assign({}, job);
+    console.log(this.updateGig);
   }
 
   update(job: Job) {
     this.jobSvc.update(job.id, job).subscribe(
       data => {
         console.error('HEY I\'M IN UPDATE WITH DATA');
-        this.router.navigateByUrl('search/' + job.skill.name);
+        // this.router.navigateByUrl('search/' + job.skill.name);
+        // this.router.navigateByUrl('#/user');
+        this.ngOnInit();
+
         this.updateGig = null;
       },
       err => {
@@ -90,7 +99,7 @@ export class UserComponent implements OnInit {
         console.error(this.userJobs);
       },
       err => console.error('Reload error in Component')
-        );
+    );
   }
 
 

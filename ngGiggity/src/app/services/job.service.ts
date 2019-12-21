@@ -77,11 +77,11 @@ export class JobService {
       })
     };
     return this.http.post(this.url + '/create', job, httpOptions)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('in jobservice postJob');
-      })
-    );
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('in jobservice postJob');
+        })
+      );
   }
 }
