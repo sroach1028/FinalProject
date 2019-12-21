@@ -28,20 +28,24 @@ export class UserComponent implements OnInit {
         console.log('-------------');
       },
       err => console.error('Reload error in Component')
-      );
+    );
     this.userSvc.getSkillsByUsername().subscribe(
-        data => {
-          this.userSkills = data;
-        },
-        err => console.error('Reload error in Component')
-      );
+      data => {
+        this.userSkills = data;
+      },
+      err => console.error('Reload error in Component')
+    );
+
     this.userSvc.getJobsByUsername().subscribe(
-        data => {
-          this.userJobs = data;
-        },
-        err => console.error('Reload error in Component')
+
+
+      data => {
+        this.userJobs = data;
+        console.error(this.userJobs);
+      },
+      err => console.error('Reload error in Component')
         );
-      }
+  }
 
 
   getSkillName(id) {
