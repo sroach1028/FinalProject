@@ -1,8 +1,9 @@
-<h1 class="text-dark">{{title}}</h1>
-<h1 class="text-dark">Username: {{userSelected.username}}</h1>
+<h1 class="text-dark">{{userSelected.username}}'s Profile</h1>
 <!-- <h1 class="text-dark"><span>{{userSelected.username}}</span></h1> -->
 <h1 class="text-dark" *ngIf="userJobs.length > 0"># Jobs: {{userJobs.length}}</h1>
 <h1 class="text-dark" *ngIf="userJobs.length > 0">Active Jobs:</h1>
+<h1 class="text-dark" *ngIf="userJobs.length > 0">Active Jobs: {{userJobs.length}}</h1>
+<h1 class="text-dark" *ngIf="userJobs.length > 0">Jobs:</h1>
 <ul>
   <li *ngFor="let job of userJobs | jobsActive">
     <h5>{{job.title}}</h5>

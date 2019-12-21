@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
       goodStuff => {
         // this.userSvc.index();
         console.log('succsessful login');
+        this.router.navigateByUrl('/user');
+
       },
 
       badStuff => {
@@ -28,7 +31,7 @@ export class LoginComponent implements OnInit {
     );
 
   }
-  constructor(private authSvc: AuthService) { }
+  constructor(private authSvc: AuthService,  private router: Router) { }
 
   ngOnInit() {
   }
