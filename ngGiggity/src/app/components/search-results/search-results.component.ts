@@ -6,7 +6,6 @@ import { Skill } from 'src/app/models/skill';
 import { JobService } from 'src/app/services/job.service';
 import { SkillService } from './../../services/skill.service';
 
-
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',

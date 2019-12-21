@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { PostComponent } from './components/post/post.component';
 
 
 
@@ -26,7 +27,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     LoginComponent,
     PageNotFoundComponent,
     HomeComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

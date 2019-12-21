@@ -39,10 +39,6 @@ export class RegisterComponent implements OnInit {
 
     user.address = address;
 
-
-
-
-
     this.authSvc.register(user).subscribe(
       data => {
         console.log('RegisterComponent.register(): user registered.');
