@@ -1,4 +1,4 @@
-<form #registerForm=ngForm>
+<!-- <form #registerForm=ngForm>
   First Name: <input type="text" name="firstName" ngModel><br>
   LastName: &nbsp;<input type="text" name="lastName" ngModel><br>
 
@@ -20,4 +20,70 @@ Zip <br>
   <input type="hidden" name="role" ngModel><br>
   <input type="hidden" name="enabled" ngModel><br>
   <input type="submit" value="register" (click)=register(registerForm)>
-  </form>
+  </form> -->
+
+
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <form #registerForm=ngForm>
+            <div class="form-group">
+              <strong>Personal:</strong><br>
+              <label for="firstName">First Name:</label><br>
+              <input type="text" name="firstName" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name:</label><br>
+              <input type="text" name="lastName" ngModel>
+            </div>
+            <hr>
+            <strong>Address:</strong><br>
+            <div class="form-group">
+              <label for="street">Street</label><br>
+              <input type="text" name="street" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label><br>
+              <input type="text" name="city" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="state">State</label><br>
+              <input type="text" name="state" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="zip">Zip</label><br>
+              <input type="text" name="zip" ngModel>
+            </div>
+            <hr>
+            <strong>Login Info:</strong><br>
+            <div class="form-group">
+              <label for="username">Username</label><br>
+              <input type="text" name="username" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label><br>
+              <input type="text" name="email" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label><br>
+              <input type="password" name="password" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label><br>
+              <input type="text" name="phone" ngModel>
+            </div>
+            <input type="hidden" name="role" ngModel><br>
+            <input type="hidden" name="enabled" ngModel><br>
+            <div class="form-group">
+              <button class="btn btn-success" (click)="register(registerForm)">
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+  </div>

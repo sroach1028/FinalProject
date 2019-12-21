@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
 
 
+
   register(form: NgForm) {
     form.value.role = 'standard';
     form.value.enabled = true;
