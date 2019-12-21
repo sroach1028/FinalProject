@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.giggity.entities.Skill;
 import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.entities.UserSkill;
 import com.skilldistillery.giggity.services.SkillService;
@@ -52,16 +53,27 @@ public class UserSkillController {
 		return results;
 	}
 	
-	@GetMapping("userSkill/username/{username}")
-	public List<UserSkill> getSkillsByUsername(@PathVariable String username, HttpServletRequest req, HttpServletResponse resp) {
+	@GetMapping("userSkill/username")
+	public List<UserSkill> getSkillsByUsername(HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		List<UserSkill> results = new ArrayList<>();
-		results = svc.getUserSkillByUsername(username);
+		results = svc.getUserSkillByUsername(principal.getName());
 		if (results.size() == 0) {
 			resp.setStatus(404);
 		} else {
 			resp.setStatus(200);
 		}
+		System.out.println(results);
 		return results;
+	}
+	@GetMapping("userSkill/skillName/{id}")
+	public Skill getSkillNameForUserSkill(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+		UserSkill skill = svc.getById(id);
+		if (skill == null) {
+			resp.setStatus(404);
+		} else {
+			resp.setStatus(200);
+		}
+		return skill.getSkill();
 	}
 	
 	@GetMapping("userSkill/skill/{skillName}")

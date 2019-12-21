@@ -1,5 +1,6 @@
 package com.skilldistillery.giggity.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.giggity.entities.Skill;
+import com.skilldistillery.giggity.entities.UserSkill;
 import com.skilldistillery.giggity.services.JobService;
 import com.skilldistillery.giggity.services.SkillService;
 
@@ -52,4 +54,5 @@ public class SkillController {
 			res.setStatus(200);
 		return skill;
 	}
+
 }
