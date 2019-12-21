@@ -15,6 +15,7 @@ export class JobService {
 
   //F I E L D S
   private url = environment.baseUrl + 'jobs';
+  private baseUrl = environment.baseUrl;
 
   //C O N S T R U C T O R
   constructor(private http: HttpClient, private authSvc: AuthService) { }
@@ -64,5 +65,17 @@ export class JobService {
           return throwError('Service Error: Update Method');
         })
       );
+  }
+
+  postJob(job: Job){
+    console.log(job);
+
+    return this.http.post(this.url + '/create', job)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('in jobservice postJob');
+      })
+    );
   }
 }

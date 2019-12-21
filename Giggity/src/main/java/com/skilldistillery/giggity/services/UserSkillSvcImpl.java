@@ -31,8 +31,8 @@ public class UserSkillSvcImpl implements UserSkillService {
 
 	@Override
 	public List<UserSkill> getUserSkillByUsername(String username) {
-		List<UserSkill> allJobs = repo.findByUser_UsernameLike("%" + username + "%");
-		return allJobs;
+		List<UserSkill> skills = repo.findByUser_Username(username);
+		return skills;
 	}
 
 	@Override

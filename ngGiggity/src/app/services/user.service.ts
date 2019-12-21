@@ -1,3 +1,4 @@
+import { Job } from 'src/app/models/job';
 import { DatePipe } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -6,6 +7,8 @@ import { catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { User } from '../models/user';
 import { AuthService } from "./auth.service";
+import { Skill } from '../models/skill';
+import { UserSkill } from '../models/user-skill';
 
 @Injectable({
   providedIn: "root"
@@ -33,11 +36,48 @@ export class UserService {
           })
         );
     }
+  }
+  getUserByUsername() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<User>(this.baseUrl + 'users/username/', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
 
   }
-  getUsersByUsername(username: string) {
 
-    return this.http.get<User[]>(this.baseUrl + 'users/username/' + username + '?sorted=true')
+  getJobsByUsername(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<Job[]>(this.baseUrl + 'api/jobs/username/', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
+
+  getSkillsByUsername(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<UserSkill[]>(this.baseUrl + 'api/userSkill/username/', httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

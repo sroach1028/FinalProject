@@ -1,5 +1,7 @@
-import { Image } from './image';
 import { Address } from './address';
+import { Image } from './image';
+import { Skill } from './skill';
+import { Job } from './job';
 export class User {
   id: number;
   firstName: string;
@@ -12,6 +14,8 @@ export class User {
   phone: string;
   address: Address;
   avatarImage: Image;
+  skills: Skill[];
+  jobs: Job[];
   constructor(
     id?: number,
     firstName?: string,
@@ -23,7 +27,8 @@ export class User {
     role: string = 'standard',
     address?: Address,
     phone?: string,
-    avatarImage?: Image
+    avatarImage?: Image,
+    jobs?: Job[]
     ) {
     this.id = id;
     this.firstName = firstName;
@@ -36,6 +41,7 @@ export class User {
     this.phone = phone;
     this.address = address;
     this.avatarImage = avatarImage;
+    this.jobs = jobs;
 
   }
 }

@@ -28,7 +28,7 @@ export class SearchResultsComponent implements OnInit {
 
   // C O N S T R U C T O R
   constructor(private jobSvc: JobService, private currentRoute: ActivatedRoute, private router: Router,
-    private skillSvc: SkillService) {
+              private skillSvc: SkillService) {
     // //reloads current URL with new search term
     this.navigationSubscription = this.router.events.subscribe(
       (e: any) => {

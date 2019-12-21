@@ -1,4 +1,4 @@
-import { Skill } from './skill';
+import { Skill } from 'src/app/models/skill';
 import { Address } from './address';
 import { User } from './user';
 
@@ -18,14 +18,14 @@ export class Job {
   address: Address;
   user: User;
   constructor(
-    id: number,
-    price: number,
-    description: string,
-    title: string,
     active: boolean = true,
-    remote: boolean,
-    dateCreated: Date,
-    dateupdated: Date,
+    remote?: boolean,
+    dateCreated?: Date,
+    dateupdated?: Date,
+    id?: number,
+    price?: number,
+    description?: string,
+    title?: string,
     imageUrl?: string,
     skill?: Skill,
     address?: Address,
@@ -40,5 +40,7 @@ export class Job {
     this.dateupdated = dateupdated;
     this.imageUrl = imageUrl;
     this.remote = remote;
+    this.skill = skill;
+    this.address = address;
   }
 }

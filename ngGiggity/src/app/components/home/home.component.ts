@@ -18,7 +18,6 @@ reload() {
     (aGoodThingHappened) => {
       console.log(aGoodThingHappened);
       this.skills = aGoodThingHappened;
-
     },
     (didntWork) => {
       console.error(didntWork);

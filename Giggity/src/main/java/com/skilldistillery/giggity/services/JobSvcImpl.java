@@ -183,4 +183,9 @@ public class JobSvcImpl implements JobService {
 		return address;
 	}
 
+	@Override
+	public List<Job> getJobsByUsername(String username) {
+		return repo.findByUser_Username(username);
+	}
+
 }

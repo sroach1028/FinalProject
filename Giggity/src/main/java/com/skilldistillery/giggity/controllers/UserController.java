@@ -43,6 +43,15 @@ public class UserController {
 			res.setStatus(200);
 		return users;
 	}
+	@GetMapping("users/username/")
+	public User getUserByUsername(HttpServletResponse res, Principal principal) {
+		User user = svc.getUserByUsername(principal.getName());
+		if (user == null) {
+			res.setStatus(404);
+		} else
+			res.setStatus(200);
+		return user;
+	}
 	
 	@GetMapping("api/users/getUser")
 	public User getUser(HttpServletResponse res, Principal principal) {
