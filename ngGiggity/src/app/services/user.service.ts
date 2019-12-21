@@ -54,6 +54,18 @@ export class UserService {
 
   }
 
+  getUserSByUsername(term: string) {
+
+    return this.http.get<User[]>(this.baseUrl + 'users/username/' + term)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+
+  }
+
   getJobsByUsername(){
     const httpOptions = {
       headers: new HttpHeaders({
