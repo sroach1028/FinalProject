@@ -9,6 +9,7 @@
             <input type="text" name="title"class="form-control" placeholder="Title" ngModel>
             <input type="number" name="price"class="form-control" placeholder="Price" ngModel>
             <input type="text" name="description" class="form-control" placeholder="Description" ngModel>
+            <input type="hidden" name="active" class="form-control" ngModel>
             <input type="submit" class = "btn btn-warning" value = "CREATE" (click)="postJob(createForm)">
             <button [routerLink]="['/user']"class="float-right btn btn-danger">CANCEL</button>
         </div>

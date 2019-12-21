@@ -67,10 +67,16 @@ export class JobService {
       );
   }
 
-  postJob(job: Job){
+  postJob(job: Job) {
     console.log(job);
 
-    return this.http.post(this.url + '/create', job)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.post(this.url + '/create', job, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log(err);
