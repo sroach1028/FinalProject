@@ -23,35 +23,11 @@ export class SearchResultsComponent implements OnInit {
   jobAddress: Address = new Address();
   updateGig: Job = null;
   skills: Skill[];
-  navigationSubscription;
-  keyword;
 
   // C O N S T R U C T O R
   constructor(private jobSvc: JobService, private currentRoute: ActivatedRoute, private router: Router,
-              private skillSvc: SkillService) {
-    // //reloads current URL with new search term
-    // this.navigationSubscription = this.router.events.subscribe(
-    //   (e: any) => {
-    //     if (e instanceof NavigationEnd) {
-    //       console.log("Inside instanceOf NavigationEnd");
-    //       this.keyword = this.currentRoute.snapshot.paramMap.get('skillName');
-    //       if (this.keyword) {
-    //         this.jobSvc.findJobBySkill(this.keyword).subscribe(
-    //           data => {
-    //             this.selected = data.find(this.checkSkill)
+              private skillSvc: SkillService) {}
 
-
-    //           },
-    //           err => {
-
-    //           }
-    //         );
-
-    //       }
-    //     }
-    //   }
-    // );
-  }
 
 
 // M E T H O D S
@@ -75,21 +51,7 @@ getSkills() {
   );
 }
 
-setUpdateGig() {
-  this.updateGig = Object.assign({}, this.selected);
-}
 
-update(job: Job) {
-  this.jobSvc.update(job.id, job).subscribe(
-    data => {
-      console.error('HEY I\'M IN UPDATE WITH DATA');
-      this.router.navigateByUrl('search/' + job.skill.name);
-      this.updateGig = null;
-    },
-    err => {
-      console.error('Update error in Compnent');
-    });
-}
 
 jobBySkillName(skillName: string) {
   this.jobSvc.findJobBySkill(skillName).subscribe(
@@ -105,7 +67,7 @@ jobBySkillName(skillName: string) {
 }
 
 ngOnInit() {
-  console.log("ngOnInit -- INSIDE");
+  console.log('ngOnInit -- INSIDE');
   this.getSkills();
   this.jobBySkillName(this.currentRoute.snapshot.paramMap.get('skillName'));
   if (!this.currentRoute.snapshot.paramMap.get('skillName')) {
