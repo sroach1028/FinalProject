@@ -1,29 +1,4 @@
-<!-- <form #registerForm=ngForm>
-  First Name: <input type="text" name="firstName" ngModel><br>
-  LastName: &nbsp;<input type="text" name="lastName" ngModel><br>
-
-Address: <br><br>
-Street: <br>
-<input type="text" name="street" ngModel><br>
-State: <br>
-<input type="text" name="state" ngModel><br>
-City: <br>
-<input type="text" name="city" ngModel><br>
-Zip <br>
-<input type="text" name="zip" ngModel><br><br>
-
-
-  Username:<input type="text" name="username" ngModel><br>
-  Email:<input type="email" name="email" ngModel><br>
-  Password:<input type="password" name="password" ngModel><br>
-  Phone Number: <input type="number" name="phone" ngModel>
-  <input type="hidden" name="role" ngModel><br>
-  <input type="hidden" name="enabled" ngModel><br>
-  <input type="submit" value="register" (click)=register(registerForm)>
-  </form> -->
-
-
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="container">
       <div class="row">
         <div class="col-2"></div>
@@ -37,6 +12,14 @@ Zip <br>
             <div class="form-group">
               <label for="lastName">Last Name:</label><br>
               <input type="text" name="lastName" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label><br>
+              <input type="text" name="email" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label><br>
+              <input type="text" name="phone" ngModel>
             </div>
             <hr>
             <strong>Address:</strong><br>
@@ -63,16 +46,8 @@ Zip <br>
               <input type="text" name="username" ngModel>
             </div>
             <div class="form-group">
-              <label for="email">Email</label><br>
-              <input type="text" name="email" ngModel>
-            </div>
-            <div class="form-group">
               <label for="password">Password</label><br>
               <input type="password" name="password" ngModel>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label><br>
-              <input type="text" name="phone" ngModel>
             </div>
             <input type="hidden" name="role" ngModel><br>
             <input type="hidden" name="enabled" ngModel><br>
