@@ -5,6 +5,7 @@ import { Job } from 'src/app/models/job';
 import { Skill } from 'src/app/models/skill';
 import { JobService } from 'src/app/services/job.service';
 import { SkillService } from './../../services/skill.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class SearchResultsComponent implements OnInit {
   jobAddress: Address = new Address();
   updateGig: Job = null;
   skills: Skill[];
+  users: User[];
 
   // C O N S T R U C T O R
   constructor(private jobSvc: JobService, private currentRoute: ActivatedRoute, private router: Router,
@@ -38,7 +40,9 @@ export class SearchResultsComponent implements OnInit {
   return job.skill.name === keyword;
   }
 
-
+  showUsers(user: User []){
+    this.users = user;
+  }
 
 getSkills() {
   this.skillSvc.index().subscribe(

@@ -22,6 +22,8 @@
   </table>
 </div><br>
 
+<h1 *ngFor="let user of users" >{{user.firstName}}</h1>
+
 <div *ngIf="selected && !updateGig" class="card text-center border-dark mb-3 w-50" style="width: 18rem;">
 
   <div class="card-header text-white bg-dark">Created By: {{ selected.user.username}}</div>
