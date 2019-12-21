@@ -30,27 +30,27 @@ export class SearchResultsComponent implements OnInit {
   constructor(private jobSvc: JobService, private currentRoute: ActivatedRoute, private router: Router,
               private skillSvc: SkillService) {
     // //reloads current URL with new search term
-    this.navigationSubscription = this.router.events.subscribe(
-      (e: any) => {
-        if (e instanceof NavigationEnd) {
-          console.log("Inside instanceOf NavigationEnd");
-          this.keyword = this.currentRoute.snapshot.paramMap.get('skillName');
-          if (this.keyword) {
-            this.jobSvc.findJobBySkill(this.keyword).subscribe(
-              data => {
-                this.selected = data.find(this.checkSkill)
+    // this.navigationSubscription = this.router.events.subscribe(
+    //   (e: any) => {
+    //     if (e instanceof NavigationEnd) {
+    //       console.log("Inside instanceOf NavigationEnd");
+    //       this.keyword = this.currentRoute.snapshot.paramMap.get('skillName');
+    //       if (this.keyword) {
+    //         this.jobSvc.findJobBySkill(this.keyword).subscribe(
+    //           data => {
+    //             this.selected = data.find(this.checkSkill)
 
 
-              },
-              err => {
+    //           },
+    //           err => {
 
-              }
-            );
+    //           }
+    //         );
 
-          }
-        }
-      }
-    );
+    //       }
+    //     }
+    //   }
+    // );
   }
 
 
