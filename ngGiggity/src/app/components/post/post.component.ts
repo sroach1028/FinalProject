@@ -24,8 +24,14 @@ export class PostComponent implements OnInit {
   postJob(form: NgForm) {
     this.newJob = form.value;
     this.newJob.skill = this.newSkill;
+    this.newJob.active = true;
     console.log(this.newJob);
-    this.jobSvc.postJob(this.newJob);
+    this.jobSvc.postJob(this.newJob).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => console.error('Reload error in Component')
+      );
   }
 
 }

@@ -13,10 +13,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authSvc: AuthService) { }
 
-
-
-
-
   register(form: NgForm) {
     form.value.role = 'standard';
     form.value.enabled = true;
