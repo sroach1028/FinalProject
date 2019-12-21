@@ -92,8 +92,6 @@ export class UserComponent implements OnInit {
     );
 
     this.userSvc.getJobsByUsername().subscribe(
-
-
       data => {
         this.userJobs = data;
         console.error(this.userJobs);

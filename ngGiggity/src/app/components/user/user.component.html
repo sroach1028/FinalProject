@@ -2,9 +2,9 @@
 <h1 class="text-dark">Username: {{userSelected.username}}</h1>
 <!-- <h1 class="text-dark"><span>{{userSelected.username}}</span></h1> -->
 <h1 class="text-dark" *ngIf="userJobs.length > 0"># Jobs: {{userJobs.length}}</h1>
-<h1 class="text-dark" *ngIf="userJobs.length > 0">Jobs:</h1>
+<h1 class="text-dark" *ngIf="userJobs.length > 0">Active Jobs:</h1>
 <ul>
-  <li *ngFor="let job of userJobs">
+  <li *ngFor="let job of userJobs | jobsActive">
     <h5>{{job.title}}</h5>
     <button class="btn btn-warning" (click)="setUpdateGig(job)">U p d a t e</button>
     <button class="btn btn-danger" (click)="remove(job)">D e l e t e</button>
