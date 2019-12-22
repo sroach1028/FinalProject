@@ -18,10 +18,13 @@ export class SearchResultsComponent implements OnInit {
 
   // F I E L D S
   jobs: Job[];
+  jobTitle: string = null;
   title = 'Available Jobs';
   urlId: number;
   selected: Job = null;
   jobSkill: Skill = null;
+  jobSkillName = null;
+  jobCity=null;
   jobAddress: Address = new Address();
   updateGig: Job = null;
   skills: Skill[];
@@ -58,31 +61,67 @@ getSkills() {
   );
 }
 
+jobsByTitle() {
+  console.log(this.jobTitle);
+  this.jobSvc.findJobsByTitle(this.jobTitle).subscribe(
+    data => {
+      this.jobs = data;
+    },
+    err => {
+      console.error('Job Title search error in Search-results component');
+    }
+  );
+  this.beginSearch = false;
+}
 
-
-jobBySkillName(skillName: string) {
-  this.jobSvc.findJobBySkill(skillName).subscribe(
+jobBySkillName() {
+  this.jobSvc.findJobBySkill(this.jobSkillName).subscribe(
     (aGoodThingHappened) => {
-      console.log(aGoodThingHappened);
-      this.jobs = null;
       this.jobs = aGoodThingHappened;
     },
     (didntWork) => {
       console.error(didntWork);
     }
   );
+  this.beginSearch = false;
 }
+
+jobByCity() {
+  this.jobSvc.findJobByCity(this.jobCity).subscribe(
+    (aGoodThingHappened) => {
+      this.jobs = aGoodThingHappened;
+    },
+    (didntWork) => {
+      console.error(didntWork);
+    }
+  );
+  this.beginSearch = false;
+}
+
+jobByRemote() {
+  this.jobSvc.findJobByRemote(true).subscribe(
+    (aGoodThingHappened) => {
+      this.jobs = aGoodThingHappened;
+    },
+    (didntWork) => {
+      console.error(didntWork);
+    }
+  );
+  this.beginSearch = false;
+}
+
+
 
 ngOnInit() {
 }
 
 backToSearch() {
   this.users = null;
+  this.jobs = null;
   this.beginSearch = true;
 }
 
 searchByUsername() {
-  console.log(this.username);
   this.usersvc.getUserSByUsername(this.username).subscribe(
     data => {
       this.users = data;

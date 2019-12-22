@@ -5,6 +5,8 @@
       <div class="col-2"></div>
       <div class="col-8">
         <form name="username">
+          <h3>Search Users</h3>
+  <hr />
           <div class="form-group">
             <label name="username" for="username">Username</label>
             <input
@@ -25,18 +27,98 @@
             Search by Username
           </button>
         </form>
+
+        <br />
+        <form name="jobTitle">
+          <h3>Search Jobs</h3>
+          <hr />
+          <div class="form-group">
+            <label name="jobtitle" for="jobtitle">Job Title</label>
+            <input
+              name="jobtitle"
+              type="jobtitle"
+              class="form-control"
+              id="jobtitle"
+              placeholder="Job Title"
+              [(ngModel)]="jobTitle"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobsByTitle()"
+          >
+            Search by Job Title
+          </button>
+        </form>
+        <br />
+        <form name="jobSkill">
+          <div class="form-group">
+            <label name="jobskill" for="jobskill">Job Skill</label>
+            <input
+              name="jobskill"
+              type="jobskill"
+              class="form-control"
+              id="jobskill"
+              placeholder="Job Skill"
+              [(ngModel)]="jobSkillName"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobBySkillName()"
+          >
+            Search by Job Skill
+          </button>
+        </form>
+        <br />
+        <form name="jobSkill">
+          <div class="form-group">
+            <label name="jobCity" for="jobCity">Job City</label>
+            <input
+              name="jobCity"
+              type="jobCity"
+              class="form-control"
+              id="jobCity"
+              placeholder="Job City"
+              [(ngModel)]="jobCity"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobByCity()"
+          >
+            Search by Job City
+          </button>
+        </form>
+        <br />
+        <form name="jobRemote">
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobByRemote()"
+          >
+            Search all Remote Jobs
+          </button>
+        </form>
       </div>
       <div class="col-2"></div>
     </div>
-
+  </div>
 </div>
-</div>
 
-<div *ngIf="users">
+<div *ngIf="users && !jobs">
   <h1 class="text-dark"><span>User Search Results</span></h1>
-  <table class="table table-striped table-hover table-danger border border-info">
+  <table
+    class="table table-striped table-hover table-danger border border-info"
+  >
     <thead class="thead thead-dark">
-      <tr >
+      <tr>
         <th>User Id</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -46,35 +128,40 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users" class="border border-info">
-        <td>{{user.id}}</td>
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.email}}</td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <td>
           <button
-          type="button"
-          class="btn btn-secondary btn-block btn-block"
-          (click)="backToSearch()"
-        >
-          Back
-        </button>
-      </td>
+            type="button"
+            class="btn btn-secondary btn-block btn-block"
+            (click)="backToSearch()"
+          >
+            Back
+          </button>
+        </td>
       </tr>
     </tfoot>
   </table>
-</div><br>
+</div>
+<br />
 
-
-
-<div *ngIf="!selected && !beginSearch && !users">
-  <h1 class="text-dark"><span>{{title}}<h6>(select for more details)</h6>
-    </span></h1>
-  <table class="table table-striped table-hover table-danger border border-info">
+<div *ngIf="!selected && !beginSearch && jobs !== null && !users">
+  <h1 class="text-dark">
+    <span
+      >{{ title }}
+      <h6>(select for more details)</h6>
+    </span>
+  </h1>
+  <table
+    class="table table-striped table-hover table-danger border border-info"
+  >
     <thead class="thead thead-dark">
       <tr>
         <th>Job</th>
@@ -84,37 +171,63 @@
       </tr>
     </thead>
     <tbody>
-      <tr #data (click)="displaySelected(job)" class="border border-info" *ngFor="let job of jobs | jobsActive">
-        <td>{{job.title}}</td>
-        <td>{{job.skill.name}}</td>
-        <td>{{job.price}}</td>
-        <td *ngIf="job.address != null"> {{job.address.state}}</td>
+      <tr
+        #data
+        (click)="displaySelected(job)"
+        class="border border-info"
+        *ngFor="let job of jobs | jobsActive"
+      >
+        <td>{{ job.title }}</td>
+        <td>{{ job.skill.name }}</td>
+        <td>{{ job.price }}</td>
+        <td *ngIf="job.address != null">{{ job.address.state }}</td>
         <td *ngIf="job.address == null">Remote</td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          <button
+            type="button"
+            class="btn btn-secondary btn-block btn-block"
+            (click)="backToSearch()"
+          >
+            Back
+          </button>
+        </td>
+      </tr>
+    </tfoot>
   </table>
-</div><br>
+</div>
+<br />
 
 <!-- <h1 *ngFor="let user of users" >{{user.firstName}}</h1> -->
 
-<div *ngIf="selected && !updateGig" class="card text-center border-dark mb-3 w-50" style="width: 18rem;">
-
-  <div class="card-header text-white bg-dark">Created By: {{ selected.user.username}}</div>
+<div
+  *ngIf="selected && !updateGig"
+  class="card text-center border-dark mb-3 w-50"
+  style="width: 18rem;"
+>
+  <div class="card-header text-white bg-dark">
+    Created By: {{ selected.user.username }}
+  </div>
   <img class="card-img-top" [src]="selected.imageUrl" alt="Job Image" />
   <div class="card-body">
-    <h5 class="card-title">{{ selected.title  | uppercase}}</h5>
-    <hr>
+    <h5 class="card-title">{{ selected.title | uppercase }}</h5>
+    <hr />
     <h5 class="card-title">Gig Details:</h5>
     <blockquote class="card-text">{{ selected.description }}</blockquote>
     <br />
     <div class="text-center">
-      <strong>Price: </strong>{{ selected.price | currency}}
+      <strong>Price: </strong>{{ selected.price | currency }}
       <br />
-      <strong>Category: </strong>{{ selected.skill.name}}
+      <strong>Category: </strong>{{ selected.skill.name }}
       <br />
-      <strong>Date Created: </strong>{{ selected.dateCreated | date: "short"}}
+      <strong>Date Created: </strong>{{ selected.dateCreated | date: "short" }}
       <br />
-      <a *ngIf="selected.dateupdated !== null"><strong>Date Last Updated: </strong>{{ selected.dateupdated}}</a>
+      <a *ngIf="selected.dateupdated !== null"
+        ><strong>Date Last Updated: </strong>{{ selected.dateupdated }}</a
+      >
       <br />
     </div>
     <br />
@@ -122,11 +235,13 @@
       <br />
       <hr />
       <ng-container class="container-fluid">
-        <button class="btn btn-success" (click)="displaySelected(null)">B o o k</button>
-        <button class="btn btn-info" (click)="displaySelected(null)">B A C K</button>
+        <button class="btn btn-success" (click)="displaySelected(null)">
+          B o o k
+        </button>
+        <button class="btn btn-info" (click)="displaySelected(null)">
+          B A C K
+        </button>
       </ng-container>
     </div>
   </div>
 </div>
-
-
