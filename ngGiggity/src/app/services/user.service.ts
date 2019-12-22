@@ -45,7 +45,7 @@ export class UserService {
         Authorization: "Basic " + this.authSvc.getCredentials()
       })
     };
-    return this.http.get<User>(this.baseUrl + 'users/username/' + username, httpOptions)
+    return this.http.get<User[]>(this.baseUrl + 'users/username/' + username, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
