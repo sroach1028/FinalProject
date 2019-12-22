@@ -1,4 +1,3 @@
-import { UserService } from 'src/app/services/user.service';
 import { BookingService } from './../../services/booking.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -43,7 +42,6 @@ export class SearchResultsComponent implements OnInit {
     private skillSvc: SkillService,
     private usersvc: UserService,
     private bookingsvc: BookingService,
-    private userSvc: UserService
   ) {}
 
   // M E T H O D S
@@ -162,8 +160,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   getLoggedUser() {
-    return this.userSvc.getUserByUsername();
-    this.userSvc.getUserByUsername().subscribe(
+    return this.usersvc.getUserByUsername();
+    this.usersvc.getUserByUsername().subscribe(
       data => {
         this.user = data;
         return this.user.id;
