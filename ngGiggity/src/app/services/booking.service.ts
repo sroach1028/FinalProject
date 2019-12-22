@@ -49,6 +49,24 @@ export class BookingService {
       );
   }
 
+  createBooking(booking: Booking) {
+    console.log(booking);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.post(this.baseUrl + 'api/booking/', booking, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('in bookingservice create booking');
+        })
+      );
+  }
+
   // C o n s t r u c t o r
   constructor(private http: HttpClient, private authSvc: AuthService) { }
 }

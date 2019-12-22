@@ -1,3 +1,5 @@
+import { UserService } from 'src/app/services/user.service';
+import { BookingService } from './../../services/booking.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -7,6 +9,7 @@ import { Skill } from 'src/app/models/skill';
 import { JobService } from 'src/app/services/job.service';
 import { SkillService } from './../../services/skill.service';
 import { User } from 'src/app/models/user';
+import { Booking } from 'src/app/models/booking';
 
 @Component({
   selector: 'app-search-results',
@@ -24,6 +27,8 @@ export class SearchResultsComponent implements OnInit {
   jobSkillName = null;
   jobCity = null;
   jobAddress: Address = new Address();
+  booking: Booking = new Booking();
+  user: User;
   updateGig: Job = null;
   skills: Skill[];
   users: User[];
@@ -36,7 +41,9 @@ export class SearchResultsComponent implements OnInit {
     private currentRoute: ActivatedRoute,
     private router: Router,
     private skillSvc: SkillService,
-    private usersvc: UserService
+    private usersvc: UserService,
+    private bookingsvc: BookingService,
+    private userSvc: UserService
   ) {}
 
   // M E T H O D S
@@ -112,7 +119,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.currentRoute.snapshot.paramMap.get('skillName')){
+    if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
       this.jobBySkillName();
     }
@@ -153,4 +160,26 @@ export class SearchResultsComponent implements OnInit {
       this.jobAddress = data;
     });
   }
+
+  getLoggedUser() {
+    return this.userSvc.getUserByUsername();
+    this.userSvc.getUserByUsername().subscribe(
+      data => {
+        this.user = data;
+        return this.user.id;
+      },
+      err => console.error('Reload error in Component')
+    );
+  }
+
+  createBookingBuyer() {
+    this.booking.job = this.selected;
+    this.bookingsvc.createBooking(this.booking).subscribe(
+      data => {
+        this.router.navigateByUrl('/user');
+      },
+      err => console.error('Reload error in Component')
+    );
+  }
+
 }

@@ -59,14 +59,13 @@ public class BookingController {
 	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		User u = userSvc.getUserByUsername(principal.getName());
 		List<Booking> currentBookings = u.getBookings();
-		booking.setStartDate(LocalDate.now());
-		booking.setJob(jobSvc.getById(1));
+//		booking.setStartDate(LocalDate.now());
+//		booking.setJob(jobSvc.getById(1));
 		booking.setSeller(u);
 		currentBookings.add(booking);
 		u.setBookings(currentBookings);
 		try {
 			// try to create the provided post
-			
 			booking = svc.create(booking);
 			// if successful, send 201
 			resp.setStatus(201);
