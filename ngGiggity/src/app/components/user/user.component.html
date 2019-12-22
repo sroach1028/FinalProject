@@ -1,15 +1,85 @@
-<h1 class="text-dark">{{userSelected.username}}'s Profile</h1>
+<head>
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+</head>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container" style="margin-bottom: 20px;">
+	<div class="row panel">
+
+        <div class="col-md-8 col-xs-12 bg-warning" style="margin-top: 3px;">
+           <img src="images/IMG_20180811_172633.jpg" class="img-thumbnail picture hidden-xs" />
+           <!-- <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img-thumbnail visible-xs picture_mob" /> -->
+           <div class="header text-secondary">
+                <h1>{{userSelected.firstName}}</h1>
+                <h4>Web Developer</h4>
+                <span>I love to code and sove problems. People have told me I'm the daVinci of computer programming, and I believe them.</span>
+           </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="container-fluid content-row">
+    <div class="row">
+        <div class="col-sm-12 col-lg-4">
+            <div class="card h-100 bg-info text-light">
+              <h1 class="text-dark">Contact {{userSelected.firstName}}</h1>
+              <h3 class="text-dark" *ngIf="userJobs.length > 0"># Open Jobs: {{userJobs.length}}</h3>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-4 ">
+            <div class="card h-100 bg-info text-light">
+              <h1 class="text-dark">{{userSelected.firstName}}'s Skills</h1>
+            </div>
+          </div>
+                <div class="col-sm-12 col-lg-4">
+                  <div class="card h-100 bg-info text-light">
+                    <h1 class="text-dark">{{userSelected.firstName}}'s Jobs</h1>
+                    <h3 class="text-dark" *ngIf="userJobs.length > 0"># Open Jobs: {{userJobs.length}}</h3>
+                  </div>
+                </div>
+
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-4">
+
+      </div>
+      <div class="col-lg-4">
+
+      </div>
+      <div class="col-lg-4">
+          <div>
+              <ul>
+                <li *ngFor="let job of userJobs | jobsActive">
+                  <div class="card bg-secondary text-light">
+                    <div class="card-body">
+                      <h5>{{job.skill.name}}</h5>
+                      <button class="btn btn-warning float-right " (click)="setUpdateGig(job)">U p d a t e</button>
+                      <button class="btn btn-danger" (click)="remove(job)">D e l e t e</button>
+                    </div>
+                </div>
+                </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+
 <!-- <h1 class="text-dark"><span>{{userSelected.username}}</span></h1> -->
-<h1 class="text-dark" *ngIf="userJobs.length > 0"># Jobs: {{userJobs.length}}</h1>
-<h1 class="text-dark" *ngIf="userJobs.length > 0">Active Jobs:</h1>
-<ul>
-  <li *ngFor="let job of userJobs | jobsActive">
-    <h5>{{job.title}}</h5>
-    <button class="btn btn-warning" (click)="setUpdateGig(job)">U p d a t e</button>
-    <button class="btn btn-danger" (click)="remove(job)">D e l e t e</button>
-  </li>
-</ul>
-<h1 class="text-dark" *ngIf="userJobs.length == 0"># Jobs: NO JOBS</h1>
+
+<!-- <h1 class="text-dark" *ngIf="userJobs.length == 0"># Jobs: NO JOBS</h1>
 <h1 class="text-dark" *ngIf="userSkills.length == 0"><span>NO SKILLS</span></h1>
 <h1 class="text-dark" *ngIf="userSkills.length > 0"><span># Skills: {{userSkills[0].skill.name}}</span></h1>
 <a [routerLink]="['/post']"><button>Post New Job</button></a>
@@ -63,7 +133,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- <div class = "container">
 <table class = "table table-striped table-hover table-danger border border-info">
   <thead class="thead thead-dark">
