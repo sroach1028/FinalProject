@@ -85,14 +85,12 @@ export class UserComponent implements OnInit {
         console.log('-------------');
       },
       err => console.error('Reload error in Component')
-    );
-    this.userSvc.getSkillsByUsername().subscribe(
-      data => {
-        this.userSkills = data;
-      },
-      err => console.error('Reload error in Component')
-    );
+      );
+    this.getUserSkills();
+    this.getUserJobs();
+  }
 
+    getUserJobs() {
     this.userSvc.getJobsByUsername().subscribe(
       data => {
         this.userJobs = data;
@@ -100,8 +98,16 @@ export class UserComponent implements OnInit {
       },
       err => console.error('Reload error in Component')
     );
-  }
+    }
 
+    getUserSkills() {
+    this.userSvc.getSkillsByUsername().subscribe(
+      data => {
+        this.userSkills = data;
+      },
+      err => console.error('Reload error in Component')
+    );
+    }
 
   getSkillName(id) {
     this.userSkillSvc.findSkillName(id).subscribe(

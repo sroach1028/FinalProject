@@ -10,10 +10,10 @@
 <div class="container" style="margin-bottom: 20px;">
 	<div class="row panel">
 
-        <div class="col-md-8 col-xs-12 bg-warning" style="margin-top: 3px;">
-           <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Randy_Savage_1986.jpg" class="img-thumbnail picture hidden-xs" />
+        <div class="col-md-8 col-xs-12 bg-success" style="margin-top: 3px;">
+           <img [src]="userSelected.avatarImage.imageUrl" class="img-thumbnail picture hidden-xs" />
            <!-- <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img-thumbnail visible-xs picture_mob" /> -->
-           <div class="header text-secondary">
+           <div class="header text-light">
                 <h1>{{userSelected.firstName}}</h1>
                 <h4>Web Developer</h4>
                 <span>I love to code and sove problems. People have told me I'm the daVinci of computer programming, and I believe them.</span>
@@ -25,6 +25,7 @@
           </div>
           <br>
 
+</div>
 </div>
 
 <div class="container-fluid content-row">
@@ -39,17 +40,17 @@
           <div class="col-sm-12 col-lg-4 ">
             <div class="card h-100 bg-info text-light">
               <h1 class="text-dark">{{userSelected.firstName}}'s Skills</h1>
+              <ol>
+                  <li *ngFor="let skill of userSkills">
+                  <a>{{skill.skill.name}}</a>
+                  </li>
+                </ol>
             </div>
-            <ol>
-                <li *ngFor="let skill of userSkills">
-                <a>{{skill.skill.name}}</a>
-                </li>
-              </ol>
           </div>
                 <div class="col-sm-12 col-lg-4">
                   <div class="card h-100 bg-info text-light">
                     <h1 class="text-dark">{{userSelected.firstName}}'s Jobs</h1>
-                    <h3 class="text-dark" *ngIf="userJobs.length > 0"># Open Jobs: {{userJobs.length}}</h3>
+                    <h3 class="text-dark" *ngIf="userJobs.length > 0"></h3>
                   </div>
                   <div>
                       <h5 *ngIf="userSelected"><a [routerLink]="['/post']">POST NEW JOB</a>
