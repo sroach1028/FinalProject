@@ -1,24 +1,97 @@
-<p>bookings works!</p>
-
-<p>Some aggregate data</p>
-
-<button (click)="showAll()">See All</button>
+<!-- <button (click)="showAll()">See All</button>
 <div class="row" *ngIf="allBoookings">
   <h1>Total Bookings {{allBoookings.length}} </h1>
-<div class="col-lg-3"></div>
-<div class="col-lg-6">
-  <ol>
-    <li *ngFor="let booking of allBoookings">
-  <div class="card">
-    <div>
-      <h6 class="card-header bg-dark text-light">{{booking.startDate}}</h6>
-      <h6>{{booking.job.title}}</h6>
-      <h6>${{booking.job.price}}</h6>
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <ol>
+      <li *ngFor="let booking of allBoookings">
+        <div class="card">
+          <div>
+            <h6 class="card-header bg-dark text-light">{{booking.startDate}}</h6>
+            <h6>{{booking.job.title}}</h6>
+            <h6>${{booking.job.price}}</h6>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div> -->
+
+<h1 style="text-align: center;">Your Active Gigs</h1>
+<hr>
+<div class="container" *ngFor="let active of activeBookings">
+  <div class="col-sm-12 col-lg-10">
+    <div class="row">
+      <br>
+      <div class="card-header text-white bg-dark">Created By: {{ active.job.user.username}}</div>
+      <img class="card-img-top" [src]="active.job.imageUrl" alt="Job Image" />
+      <div class="card-body">
+        <h5 class="card-title">{{ active.job.title  | uppercase}}</h5>
+        <hr>
+        <h5 class="card-title">Gig Details:</h5>
+        <blockquote class="card-text">{{ active.job.description }}</blockquote>
+        <br />
+        <div class="text-center">
+          <strong>Price: </strong>{{ active.job.price | currency}}
+          <br />
+          <strong>Category: </strong>{{ active.job.skill.name}}
+          <br />
+          <strong>Date Created: </strong>{{ active.job.dateCreated | date: "short"}}
+          <br />
+          <a *ngIf="active.job.dateupdated !== null"><strong>Date Last Updated: </strong>{{ active.job.dateupdated}}</a>
+          <br />
+        </div>
+        <br />
+        <div class="text-center">
+          <br />
+          <hr />
+          <ng-container class="container-fluid">
+            <button class="btn btn-success">Message User</button>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
-</li>
-  </ol>
-</div>
 </div>
 
+<br>
+<br>
+<br>
 
+<h1 style="text-align: center;">Your Transaction History</h1>
+<hr>
+<div class="container" *ngFor="let history of transactionHistory">
+  <div class="col-sm-12 col-lg-10">
+    <div class="row">
+      <br>
+      <div class="card-header text-white bg-dark">Created By: {{ history.job.user.username}}</div>
+      <img class="card-img-top" [src]="history.job.imageUrl" alt="Job Image" />
+      <div class="card-body">
+        <h5 class="card-title">{{ history.job.title  | uppercase}}</h5>
+        <hr>
+        <h5 class="card-title">Gig Details:</h5>
+        <blockquote class="card-text">{{ history.job.description }}</blockquote>
+        <br />
+        <div class="text-center">
+          <strong>Price: </strong>{{ history.job.price | currency}}
+          <br />
+          <strong>Category: </strong>{{ history.job.skill.name}}
+          <br />
+          <strong>Date Created: </strong>{{ history.job.dateCreated | date: "short"}}
+          <br />
+          <a *ngIf="history.job.dateupdated !== null"><strong>Date Last Updated:
+            </strong>{{ history.job.dateupdated}}</a>
+          <br />
+        </div>
+        <br />
+        <div class="text-center">
+          <br />
+          <hr />
+          <ng-container class="container-fluid">
+            <button class="btn btn-success" >Message User</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

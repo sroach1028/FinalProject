@@ -13,7 +13,6 @@ export class BookingService {
 
   // F i e l d s
 
-  private url = environment.baseUrl + 'jobs';
   private baseUrl = environment.baseUrl;
 
   // M e t h o d s
@@ -25,7 +24,7 @@ export class BookingService {
         Authorization: 'Basic ' + this.authSvc.getCredentials()
       })
     };
-    return this.http.get<Booking[]>(this.url + '/booking/active/' + uid, httpOptions)
+    return this.http.get<Booking[]>(this.baseUrl + 'api/booking/active/' + uid, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -41,7 +40,7 @@ export class BookingService {
         Authorization: 'Basic ' + this.authSvc.getCredentials()
       })
     };
-    return this.http.get<Booking[]>(this.url + '/booking/history/' + uid, httpOptions)
+    return this.http.get<Booking[]>(this.baseUrl + 'api/booking/history/' + uid, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
