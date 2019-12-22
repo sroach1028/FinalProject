@@ -16,7 +16,7 @@ totalskills: number;
 reload() {
   this.skillSvc.index().subscribe(
     (aGoodThingHappened) => {
-      console.log(aGoodThingHappened);
+      // console.log(aGoodThingHappened);
       this.skills = aGoodThingHappened;
       this.totalskills = this.skills.length;
     },
