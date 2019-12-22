@@ -32,13 +32,19 @@
         <div class="col-sm-12 col-lg-4">
             <div class="card h-100 bg-info text-light">
               <h1 class="text-dark">Contact {{userSelected.firstName}}</h1>
-              <h3 class="text-dark" *ngIf="userJobs.length > 0"># Open Jobs: {{userJobs.length}}</h3>
+              <h3 class="text-dark">{{userSelected.address.city}}, {{userSelected.address.state}}</h3>
+              <h6 class="text-dark">{{userSelected.email}}</h6>
             </div>
           </div>
           <div class="col-sm-12 col-lg-4 ">
             <div class="card h-100 bg-info text-light">
               <h1 class="text-dark">{{userSelected.firstName}}'s Skills</h1>
             </div>
+            <ol>
+                <li *ngFor="let skill of userSkills">
+                <a>{{skill.skill.name}}</a>
+                </li>
+              </ol>
           </div>
                 <div class="col-sm-12 col-lg-4">
                   <div class="card h-100 bg-info text-light">
