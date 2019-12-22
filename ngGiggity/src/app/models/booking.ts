@@ -8,13 +8,15 @@ export class Booking {
   notes: string;
   accepted: boolean;
   job: Job;
+  sellerId: number;
   constructor(
-    id: number,
-    startDate: Date,
-    accepted: boolean,
-    job: Job,
+    sellerId?: number,
+    job?: Job,
+    startDate?: Date,
+    accepted?: boolean,
     completeDate?: Date,
     expectedCompleteDate?: Date,
+    id?: number,
     notes?: string
   ) {
     this.id = id;
@@ -23,6 +25,6 @@ export class Booking {
     this.expectedCompleteDate = expectedCompleteDate;
     this.notes = notes;
     this.accepted = accepted;
-
+    this.sellerId = sellerId;
   }
 }
