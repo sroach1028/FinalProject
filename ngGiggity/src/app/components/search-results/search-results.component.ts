@@ -83,7 +83,7 @@ backToSearch() {
 
 searchByUsername() {
   console.log(this.username);
-  this.usersvc.getUserByUsername(this.username).subscribe(
+  this.usersvc.getUserSByUsername(this.username).subscribe(
     data => {
       this.users = data;
     },
