@@ -1,3 +1,5 @@
+import { Job } from './job';
+
 export class Booking {
   id: number;
   startDate: Date;
@@ -5,6 +7,7 @@ export class Booking {
   expectedCompleteDate: Date;
   notes: string;
   accepted: boolean;
+  job: Job;
   constructor(
     id: number,
     startDate: Date,

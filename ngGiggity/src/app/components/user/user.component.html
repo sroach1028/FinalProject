@@ -19,8 +19,12 @@
                 <span>I love to code and sove problems. People have told me I'm the daVinci of computer programming, and I believe them.</span>
            </div>
           </div>
+          <div>
           <h5 *ngIf="userSelected"><a [routerLink]="['/bookings']">VIEW PAST BOOKINGS</a>
             </h5>
+          </div>
+          <br>
+
 </div>
 
 
@@ -48,6 +52,10 @@
                     <h1 class="text-dark">{{userSelected.firstName}}'s Jobs</h1>
                     <h3 class="text-dark" *ngIf="userJobs.length > 0"># Open Jobs: {{userJobs.length}}</h3>
                   </div>
+                  <div>
+                      <h5 *ngIf="userSelected"><a [routerLink]="['/post']">POST NEW JOB</a>
+                      </h5>
+                    </div>
                 </div>
 
     </div>
@@ -84,7 +92,7 @@
 <!-- <h1 class="text-dark" *ngIf="userJobs.length == 0"># Jobs: NO JOBS</h1>
 <h1 class="text-dark" *ngIf="userSkills.length == 0"><span>NO SKILLS</span></h1>
 <h1 class="text-dark" *ngIf="userSkills.length > 0"><span># Skills: {{userSkills[0].skill.name}}</span></h1>
-<a [routerLink]="['/post']"><button>Post New Job</button></a>
+
 
 <div *ngIf="updateGig">
   <div class="container-fluid">

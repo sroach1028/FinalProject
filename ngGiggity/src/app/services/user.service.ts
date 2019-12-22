@@ -1,3 +1,4 @@
+import { Booking } from './../models/booking';
 import { Job } from 'src/app/models/job';
 import { DatePipe } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -96,7 +97,22 @@ export class UserService {
           return throwError('KABOOM');
         })
       );
+  }
 
+  getBookings(id){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<Booking[]>(this.baseUrl + 'api/booking/user/' + id, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
   }
 
   constructor(

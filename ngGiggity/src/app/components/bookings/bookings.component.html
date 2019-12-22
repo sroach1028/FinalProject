@@ -1,1 +1,21 @@
 <p>bookings works!</p>
+
+<p>Some aggregate data</p>
+
+<button (click)="showAll()">See All</button>
+<h1>{{allBoookings.length}}</h1>
+<div class="row" *ngIf="allBoookings">
+<div class="col-lg-3"></div>
+<div class="col-lg-6">
+  <div *ngFor="let booking of allBoookings" class="card">
+    <div class="card-title">
+      <h1>{{booking.id}}</h1>
+      <h1>{{booking.startDate}}</h1>
+      <h1>{{booking.job.title}}</h1>
+      <h1>{{booking.job.price}}</h1>
+    </div>
+  </div>
+</div>
+</div>
+
+
