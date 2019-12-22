@@ -38,14 +38,14 @@ export class UserService {
         );
     }
   }
-  getUserByUsername(username: string) {
+  getUserByUsername() {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Basic " + this.authSvc.getCredentials()
       })
     };
-    return this.http.get<User[]>(this.baseUrl + 'users/username/' + username, httpOptions)
+    return this.http.get<User[]>(this.baseUrl + 'users/username/',  httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
