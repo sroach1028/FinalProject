@@ -28,7 +28,6 @@ export class SearchResultsComponent implements OnInit {
   users: User[];
   beginSearch = true;
   username = null;
-  user: User;
 
   // C O N S T R U C T O R
   constructor(private jobSvc: JobService, private currentRoute: ActivatedRoute, private router: Router,
@@ -77,12 +76,16 @@ jobBySkillName(skillName: string) {
 ngOnInit() {
 }
 
+backToSearch() {
+  this.users = null;
+  this.beginSearch = true;
+}
+
 searchByUsername() {
   console.log(this.username);
   this.usersvc.getUserByUsername(this.username).subscribe(
     data => {
-      this.user = data;
-      console.log(this.user);
+      this.users = data;
     },
     err => {
       console.error('Username search error in Search-results component');

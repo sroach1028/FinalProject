@@ -32,27 +32,46 @@
 </div>
 </div>
 
-<div *ngIf="user">
+<div *ngIf="users">
   <h1 class="text-dark"><span>User Search Results</span></h1>
   <table class="table table-striped table-hover table-danger border border-info">
     <thead class="thead thead-dark">
-      <tr>
+      <tr >
         <th>User Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         <th>Username</th>
+        <th>Email</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="border border-info">
+      <tr *ngFor="let user of users" class="border border-info">
         <td>{{user.id}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
         <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          <button
+          type="button"
+          class="btn btn-secondary btn-block btn-block"
+          (click)="backToSearch()"
+        >
+          Back
+        </button>
+      </td>
+      </tr>
+    </tfoot>
   </table>
 </div><br>
 
 
 
-<div *ngIf="!selected && !beginSearch && !user">
+<div *ngIf="!selected && !beginSearch && !users">
   <h1 class="text-dark"><span>{{title}}<h6>(select for more details)</h6>
     </span></h1>
   <table class="table table-striped table-hover table-danger border border-info">
@@ -76,7 +95,7 @@
   </table>
 </div><br>
 
-<h1 *ngFor="let user of users" >{{user.firstName}}</h1>
+<!-- <h1 *ngFor="let user of users" >{{user.firstName}}</h1> -->
 
 <div *ngIf="selected && !updateGig" class="card text-center border-dark mb-3 w-50" style="width: 18rem;">
 
