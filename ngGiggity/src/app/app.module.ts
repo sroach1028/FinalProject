@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PostComponent } from './components/post/post.component';
 import { JobsActivePipe } from './pipes/jobs-active.pipe';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 
 
@@ -30,7 +31,8 @@ import { JobsActivePipe } from './pipes/jobs-active.pipe';
     HomeComponent,
     SearchResultsComponent,
     PostComponent,
-    JobsActivePipe
+    JobsActivePipe,
+    BookingsComponent
   ],
   imports: [
     BrowserModule,
