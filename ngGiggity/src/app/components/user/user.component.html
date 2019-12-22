@@ -39,7 +39,7 @@
           </div>
           <div class="col-sm-12 col-lg-4 ">
             <div class="card h-100 bg-info text-light">
-              <h1 class="text-dark">{{userSelected.firstName}}'s Skills</h1>
+              <h2 class="card-header text-dark">{{userSelected.firstName}}'s Skills</h2>
               <ol>
                   <li *ngFor="let skill of userSkills">
                   <a>{{skill.skill.name}}</a>
@@ -49,13 +49,13 @@
           </div>
                 <div class="col-sm-12 col-lg-4">
                   <div class="card h-100 bg-info text-light">
-                    <h1 class="text-dark">{{userSelected.firstName}}'s Jobs</h1>
+                    <h2 class="card-header text-dark">{{userSelected.firstName}}'s Jobs</h2>
                     <h3 class="text-dark" *ngIf="userJobs.length > 0"></h3>
+                    <div>
+                        <h5 *ngIf="userSelected" ><a class="text-light" [routerLink]="['/post']">POST NEW JOB</a>
+                        </h5>
+                      </div>
                   </div>
-                  <div>
-                      <h5 *ngIf="userSelected"><a [routerLink]="['/post']">POST NEW JOB</a>
-                      </h5>
-                    </div>
                 </div>
 
     </div>
