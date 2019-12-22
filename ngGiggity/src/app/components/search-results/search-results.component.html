@@ -1,6 +1,60 @@
-<h1 class="text-dark"><span>{{title}}<h6>(select for more details)</h6>
-  </span></h1>
-<div *ngIf="!selected">
+<!-- START BY DISPLAYING SEARCH FORM -->
+<div *ngIf="beginSearch" class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <form name="username">
+          <div class="form-group">
+            <label name="username" for="username">Username</label>
+            <input
+              name="username"
+              type="username"
+              class="form-control"
+              id="username"
+              placeholder="Username"
+              [(ngModel)]="username"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="searchByUsername()"
+          >
+            Search by Username
+          </button>
+        </form>
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+</div>
+</div>
+
+<div *ngIf="user">
+  <h1 class="text-dark"><span>User Search Results</span></h1>
+  <table class="table table-striped table-hover table-danger border border-info">
+    <thead class="thead thead-dark">
+      <tr>
+        <th>User Id</th>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="border border-info">
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div><br>
+
+
+
+<div *ngIf="!selected && !beginSearch && !user">
+  <h1 class="text-dark"><span>{{title}}<h6>(select for more details)</h6>
+    </span></h1>
   <table class="table table-striped table-hover table-danger border border-info">
     <thead class="thead thead-dark">
       <tr>

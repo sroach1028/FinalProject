@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Address } from 'src/app/models/address';
@@ -25,10 +26,13 @@ export class SearchResultsComponent implements OnInit {
   updateGig: Job = null;
   skills: Skill[];
   users: User[];
+  beginSearch = true;
+  username = null;
+  user: User;
 
   // C O N S T R U C T O R
   constructor(private jobSvc: JobService, private currentRoute: ActivatedRoute, private router: Router,
-              private skillSvc: SkillService) {}
+              private skillSvc: SkillService, private usersvc: UserService) {}
 
 
 
@@ -71,35 +75,49 @@ jobBySkillName(skillName: string) {
 }
 
 ngOnInit() {
-  console.log('ngOnInit -- INSIDE');
-  this.getSkills();
-  this.jobBySkillName(this.currentRoute.snapshot.paramMap.get('skillName'));
-  if (!this.currentRoute.snapshot.paramMap.get('skillName')) {
-    this.jobSvc.index().subscribe(
-      data => {
-        this.jobs = data;
-        if (this.currentRoute.snapshot.paramMap.get('id')) {
-          this.urlId = +this.currentRoute.snapshot.paramMap.get('id');
-          this.jobs.forEach(e => {
-            if (e.id === this.urlId) {
-              this.selected = e;
-            }
-            this.getSkill(e.id);
-            e.skill = this.jobSkill;
-            this.getAddress(e.id);
-            if (this.jobAddress != null) {
-              e.address = this.jobAddress;
-            }
-          });
-          if (this.selected == null) {
-            this.router.navigateByUrl('**');
-          }
-        }
-      },
-      err => console.error('Reload error in Component')
-    );
-  }
 }
+
+searchByUsername() {
+  console.log(this.username);
+  this.usersvc.getUserByUsername(this.username).subscribe(
+    data => {
+      this.user = data;
+      console.log(this.user);
+    },
+    err => {
+      console.error('Username search error in Search-results component');
+    }
+  );
+  this.beginSearch = false;
+}
+
+// this.getSkills();
+//   this.jobBySkillName(this.currentRoute.snapshot.paramMap.get('skillName'));
+//   if (!this.currentRoute.snapshot.paramMap.get('skillName')) {
+//     this.jobSvc.index().subscribe(
+//       data => {
+//         this.jobs = data;
+//         if (this.currentRoute.snapshot.paramMap.get('id')) {
+//           this.urlId = +this.currentRoute.snapshot.paramMap.get('id');
+//           this.jobs.forEach(e => {
+//             if (e.id === this.urlId) {
+//               this.selected = e;
+//             }
+//             this.getSkill(e.id);
+//             e.skill = this.jobSkill;
+//             this.getAddress(e.id);
+//             if (this.jobAddress != null) {
+//               e.address = this.jobAddress;
+//             }
+//           });
+//           if (this.selected == null) {
+//             this.router.navigateByUrl('**');
+//           }
+//         }
+//       },
+//       err => console.error('Reload error in Component')
+//     );
+//   }
 
 displaySelected(job) {
   this.selected = job;
