@@ -3,18 +3,21 @@
 <p>Some aggregate data</p>
 
 <button (click)="showAll()">See All</button>
-<h1>{{allBoookings.length}}</h1>
 <div class="row" *ngIf="allBoookings">
+  <h1>Total Bookings {{allBoookings.length}} </h1>
 <div class="col-lg-3"></div>
 <div class="col-lg-6">
-  <div *ngFor="let booking of allBoookings" class="card">
-    <div class="card-title">
-      <h1>{{booking.id}}</h1>
-      <h1>{{booking.startDate}}</h1>
-      <h1>{{booking.job.title}}</h1>
-      <h1>{{booking.job.price}}</h1>
+  <ol>
+    <li *ngFor="let booking of allBoookings">
+  <div class="card">
+    <div>
+      <h6 class="card-header bg-dark text-light">{{booking.startDate}}</h6>
+      <h6>{{booking.job.title}}</h6>
+      <h6>${{booking.job.price}}</h6>
     </div>
   </div>
+</li>
+  </ol>
 </div>
 </div>
 
