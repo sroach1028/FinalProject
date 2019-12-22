@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   skills: Skill[] = [];
-
+  skillSel: string;
   newJob: Job = new Job();
   newAddy: Address = new Address();
 
@@ -36,7 +36,8 @@ this.reload();
 
   postJob(form: NgForm) {
     this.newJob = form.value;
-    // this.newJob.skill = this.newSkill;
+    this.getSkill();
+    console.log(this.skillSel);
     this.newJob.active = true;
     console.log(this.newJob);
     this.jobSvc.postJob(this.newJob).subscribe(
@@ -46,6 +47,14 @@ this.reload();
       },
       err => console.error('Reload error in Component')
       );
+  }
+
+  getSkill() {
+    this.skills.forEach(e => {
+      if (e.name === this.skillSel) {
+        this.newJob.skill = e;
+      }
+    });
   }
 
 }
