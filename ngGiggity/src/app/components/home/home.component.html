@@ -3,9 +3,9 @@
   <div class="row">
     <ng-container *ngFor="let skill of skills">
     <div class="col-sm-12 col-lg-4">
-    <div class = "card">
+    <div class = "card h-100">
       <div class="card-body">
-      <h1 class="card-header text-center">{{skill.name}}</h1>
+      <h1 class="card-header bg-warning text-center text-secondary">{{skill.name}}</h1>
       <h5 class="text-secondary">{{skill.description}}</h5>
       <div class="card-footer">
       <button class="btn btn-info" [routerLink]="['/search', skill.name]">View {{skill.name}} Availible Gigs</button>
