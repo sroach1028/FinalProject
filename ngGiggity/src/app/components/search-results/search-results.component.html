@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr #data (click)="displaySelected(job)" class="border border-info" *ngFor="let job of jobs">
+      <tr #data (click)="displaySelected(job)" class="border border-info" *ngFor="let job of jobs | jobsActive">
         <td>{{job.title}}</td>
         <td>{{job.skill.name}}</td>
         <td>{{job.price}}</td>
