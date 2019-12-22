@@ -18,7 +18,9 @@
                 <h4>Web Developer</h4>
                 <span>I love to code and sove problems. People have told me I'm the daVinci of computer programming, and I believe them.</span>
            </div>
-    </div>
+          </div>
+          <h5 *ngIf="userSelected"><a [routerLink]="['/bookings']">VIEW PAST BOOKINGS</a>
+            </h5>
 </div>
 
 
