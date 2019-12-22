@@ -1,7 +1,18 @@
-<div>
-  <ng-container *ngFor="let skill of skills">
-<h1>{{skill.name}}</h1>
-<h1>{{skill.description}}</h1>
-<button [routerLink]="['/search', skill.name]">View {{skill.name}} Availible Gigs</button>
+<h1>{{totalskills}} Available Skills</h1>
+
+<div class="container">
+    <div class="col-sm-12 col-lg-10">
+  <div class="row">
+    <ng-container *ngFor="let skill of skills">
+    <div class = "card">
+      <div class="card-body">
+      <h1 class="card-title">{{skill.name}}</h1>
+      <h5 class="text-secondary">{{skill.description}}</h5>
+      <button class="btn btn-info" [routerLink]="['/search', skill.name]">View {{skill.name}} Availible Gigs</button>
+    </div>
+  </div>
 </ng-container>
+  </div>
+</div>
+
 </div>
