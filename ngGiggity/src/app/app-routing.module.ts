@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PostComponent } from './components/post/post.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent },
   { path: 'search', component: SearchResultsComponent },
+  { path: 'bookings', component: BookingsComponent },
   { path: 'search/:skillName', component: SearchResultsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
