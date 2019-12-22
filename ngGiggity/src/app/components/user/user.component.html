@@ -10,7 +10,7 @@
 <div class="container" style="margin-bottom: 20px;">
 	<div class="row panel">
 
-        <div class="col-md-8 col-xs-12 bg-success" style="margin-top: 3px;">
+        <div class="col-md-10 col-xs-12 bg-success" style="margin-top: 3px;">
            <img [src]="userSelected.avatarImage.imageUrl" class="img-thumbnail picture hidden-xs" />
            <!-- <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img-thumbnail visible-xs picture_mob" /> -->
            <div class="header text-light">
@@ -19,14 +19,13 @@
                 <span>I love to code and sove problems. People have told me I'm the daVinci of computer programming, and I believe them.</span>
            </div>
           </div>
-          <div>
-          <h5 *ngIf="userSelected"><a [routerLink]="['/bookings']">VIEW PAST BOOKINGS</a>
-            </h5>
-          </div>
-          <br>
 
-</div>
-</div>
+        </div>
+      </div>
+              <div>
+              <h5 *ngIf="userSelected"><a [routerLink]="['/bookings']">VIEW PAST BOOKINGS</a>
+                </h5>
+              </div>
 
 <div class="container-fluid content-row">
     <div class="row">
