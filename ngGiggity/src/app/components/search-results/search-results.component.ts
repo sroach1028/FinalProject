@@ -63,7 +63,6 @@ export class SearchResultsComponent implements OnInit {
   }
 
   jobsByTitle() {
-    console.log(this.jobTitle);
     this.jobSvc.findJobsByTitle(this.jobTitle).subscribe(
       data => {
         this.jobs = data;
@@ -136,36 +135,6 @@ export class SearchResultsComponent implements OnInit {
     );
     this.beginSearch = false;
   }
-
-  // homeCategorySearch() {
-  //   this.getSkills();
-  //   this.jobBySkillName(this.currentRoute.snapshot.paramMap.get('skillName'));
-  //   if (!this.currentRoute.snapshot.paramMap.get('skillName')) {
-  //     this.jobSvc.index().subscribe(
-  //       data => {
-  //         this.jobs = data;
-  //         if (this.currentRoute.snapshot.paramMap.get('id')) {
-  //           this.urlId = +this.currentRoute.snapshot.paramMap.get('id');
-  //           this.jobs.forEach(e => {
-  //             if (e.id === this.urlId) {
-  //               this.selected = e;
-  //             }
-  //             this.getSkill(e.id);
-  //             e.skill = this.jobSkill;
-  //             this.getAddress(e.id);
-  //             if (this.jobAddress != null) {
-  //               e.address = this.jobAddress;
-  //             }
-  //           });
-  //           if (this.selected == null) {
-  //             this.router.navigateByUrl('**');
-  //           }
-  //         }
-  //       },
-  //       err => console.error('Reload error in Component')
-  //     );
-  //   }
-  // }
 
   displaySelected(job) {
     this.selected = job;
