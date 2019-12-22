@@ -12,12 +12,13 @@ export class HomeComponent implements OnInit {
 
 
 skills: Skill[] = [];
-
+totalskills: number;
 reload() {
   this.skillSvc.index().subscribe(
     (aGoodThingHappened) => {
       console.log(aGoodThingHappened);
       this.skills = aGoodThingHappened;
+      this.totalskills = this.skills.length;
     },
     (didntWork) => {
       console.error(didntWork);
