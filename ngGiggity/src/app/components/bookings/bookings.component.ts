@@ -1,3 +1,4 @@
+import { BookingService } from './../../services/booking.service';
 import { Job } from 'src/app/models/job';
 import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +15,7 @@ export class BookingsComponent implements OnInit {
   userCurrentBookings: Booking[];
   allBoookings: Booking[] = null;
   user: User;
-  constructor(private userSvc: UserService) { }
+  constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
 
   ngOnInit() {
     this.getLoggedUser();
