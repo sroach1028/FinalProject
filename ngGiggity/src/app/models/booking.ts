@@ -12,6 +12,7 @@ export class Booking {
     id: number,
     startDate: Date,
     accepted: boolean,
+    job: Job,
     completeDate?: Date,
     expectedCompleteDate?: Date,
     notes?: string
