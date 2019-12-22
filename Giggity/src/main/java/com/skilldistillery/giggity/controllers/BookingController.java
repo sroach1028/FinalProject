@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.controllers;
 
+import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.giggity.entities.Booking;
+import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.services.BookingService;
+import com.skilldistillery.giggity.services.JobService;
+import com.skilldistillery.giggity.services.UserService;
 
 @RestController
 @RequestMapping(path = "api")
@@ -25,6 +30,10 @@ import com.skilldistillery.giggity.services.BookingService;
 public class BookingController {
 	@Autowired
 	private BookingService svc;
+	@Autowired
+	private JobService jobSvc;
+	@Autowired
+	private UserService userSvc;
 
 	@GetMapping("booking/active/{uid}")
 	public List<Booking> getActive(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
@@ -47,10 +56,17 @@ public class BookingController {
 	}
 
 	@PostMapping("booking")
-	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp) {
-
+	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+		User u = userSvc.getUserByUsername(principal.getName());
+		List<Booking> currentBookings = u.getBookings();
+		booking.setStartDate(LocalDate.now());
+		booking.setJob(jobSvc.getById(1));
+		booking.setSeller(u);
+		currentBookings.add(booking);
+		u.setBookings(currentBookings);
 		try {
 			// try to create the provided post
+			
 			booking = svc.create(booking);
 			// if successful, send 201
 			resp.setStatus(201);

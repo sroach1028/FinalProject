@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Booking {
@@ -43,10 +44,9 @@ public class Booking {
 	@JsonIgnore
 	@OneToMany(mappedBy = "booking")
 	private List<SellerReview> sellerReviews;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "booking")
 	private List<BookingMessage> messages;
-
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job job;
