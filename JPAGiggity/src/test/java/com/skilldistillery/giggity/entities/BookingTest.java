@@ -44,10 +44,10 @@ class BookingTest {
 	void test() {
 		assertNotNull(booking);
 	}
-	@Test
-	void test2() {
-		assertNotNull(booking.getSeller().getFirstName());
-	}
+//	@Test
+//	void test2() {
+//		assertNotNull(booking.getSeller().getFirstName());
+//	}
 	@Test
 	void test3() {
 		assertNotNull(booking.getSellerReviews());

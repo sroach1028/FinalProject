@@ -21,9 +21,11 @@ public class Image {
 
 	@Column(name = "image_url")
 	private String imageUrl;
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "jobImages")
 	private List<Job> jobs;
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "portfolioImages")
 	private List<UserSkill> skills;

@@ -46,7 +46,7 @@ class BookingMessageTest {
 	}
 	@Test
 	void test2() {
-		assertEquals("test", bMess.getBooking().getJob().getTitle());
+		assertEquals("I would like to learn french.", bMess.getBooking().getJob().getTitle());
 	}
 
 }

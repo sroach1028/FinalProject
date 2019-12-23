@@ -20,12 +20,15 @@ public class Skill {
 	private String name;
 
 	private String description;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<Job> jobSkill;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<SkillMessage> forumMessages;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<UserSkill> userSkills;

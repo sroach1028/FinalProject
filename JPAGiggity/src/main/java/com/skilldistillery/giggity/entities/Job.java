@@ -25,6 +25,10 @@ public class Job {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@ManyToOne
+	@JoinColumn(name = "skill_id")
+	private Skill skill;
+	
 	private double price;
 
 	private String description;
@@ -51,22 +55,19 @@ public class Job {
 	@ManyToOne
 	@JoinColumn(name = "requestor_id")
 	private User user;
-
-	@ManyToOne
-	@JoinColumn(name = "skill_id")
-	private Skill skill;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Booking> bookings;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<BuyerReview> buyerReviews;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Bid> jobBids;
-	@JsonIgnore
-	@OneToMany(mappedBy = "job")
-	private List<BookingMessage> bookingMessages;
+	
 
 	@ManyToMany
 	@JoinTable(name = "job_image", joinColumns = @JoinColumn(name = "image_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
@@ -115,14 +116,6 @@ public class Job {
 
 	public void setJobImages(List<Image> jobImages) {
 		this.jobImages = jobImages;
-	}
-
-	public List<BookingMessage> getBookingMessages() {
-		return bookingMessages;
-	}
-
-	public void setBookingMessages(List<BookingMessage> bookingMessages) {
-		this.bookingMessages = bookingMessages;
 	}
 
 	public List<Booking> getBookings() {
@@ -209,22 +202,28 @@ public class Job {
 		this.dateUpdated = dateUpdated;
 	}
 
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
+		result = prime * result + ((buyerReviews == null) ? 0 : buyerReviews.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((dateUpdated == null) ? 0 : dateUpdated.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
+		result = prime * result + ((jobBids == null) ? 0 : jobBids.hashCode());
+		result = prime * result + ((jobImages == null) ? 0 : jobImages.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((remote == null) ? 0 : remote.hashCode());
+		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -241,6 +240,21 @@ public class Job {
 			if (other.active != null)
 				return false;
 		} else if (!active.equals(other.active))
+			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (bookings == null) {
+			if (other.bookings != null)
+				return false;
+		} else if (!bookings.equals(other.bookings))
+			return false;
+		if (buyerReviews == null) {
+			if (other.buyerReviews != null)
+				return false;
+		} else if (!buyerReviews.equals(other.buyerReviews))
 			return false;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)
@@ -264,6 +278,16 @@ public class Job {
 				return false;
 		} else if (!imageUrl.equals(other.imageUrl))
 			return false;
+		if (jobBids == null) {
+			if (other.jobBids != null)
+				return false;
+		} else if (!jobBids.equals(other.jobBids))
+			return false;
+		if (jobImages == null) {
+			if (other.jobImages != null)
+				return false;
+		} else if (!jobImages.equals(other.jobImages))
+			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		if (remote == null) {
@@ -271,20 +295,31 @@ public class Job {
 				return false;
 		} else if (!remote.equals(other.remote))
 			return false;
+		if (skill == null) {
+			if (other.skill != null)
+				return false;
+		} else if (!skill.equals(other.skill))
+			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Job [id=");
 		builder.append(id);
+		builder.append(", skill=");
+		builder.append(skill);
 		builder.append(", price=");
 		builder.append(price);
 		builder.append(", description=");
@@ -293,6 +328,8 @@ public class Job {
 		builder.append(title);
 		builder.append(", active=");
 		builder.append(active);
+		builder.append(", address=");
+		builder.append(address);
 		builder.append(", remote=");
 		builder.append(remote);
 		builder.append(", imageUrl=");
@@ -301,6 +338,16 @@ public class Job {
 		builder.append(dateCreated);
 		builder.append(", dateUpdated=");
 		builder.append(dateUpdated);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", bookings=");
+		builder.append(bookings);
+		builder.append(", buyerReviews=");
+		builder.append(buyerReviews);
+		builder.append(", jobBids=");
+		builder.append(jobBids);
+		builder.append(", jobImages=");
+		builder.append(jobImages);
 		builder.append("]");
 		return builder.toString();
 	}
