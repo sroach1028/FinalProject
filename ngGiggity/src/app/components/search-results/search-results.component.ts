@@ -42,7 +42,7 @@ export class SearchResultsComponent implements OnInit {
     private skillSvc: SkillService,
     private usersvc: UserService,
     private bookingsvc: BookingService,
-  ) {}
+  ) { }
 
   // M E T H O D S
   // onChange(deviceValue) {
@@ -117,6 +117,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getLoggedUser();
+    console.log(this.user);
     if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
       this.jobBySkillName();
@@ -160,17 +162,19 @@ export class SearchResultsComponent implements OnInit {
   }
 
   getLoggedUser() {
-    return this.usersvc.getUserByUsername();
+    // return this.usersvc.getUserByUsername();
     this.usersvc.getUserByUsername().subscribe(
       data => {
         this.user = data;
-        return this.user.id;
       },
       err => console.error('Reload error in Component')
     );
   }
 
   createBookingBuyer() {
+    // this.getLoggedUser();
+    console.log(this.user);
+    this.booking.sellerId = this.user.id;
     this.booking.job = this.selected;
     this.bookingsvc.createBooking(this.booking).subscribe(
       data => {
