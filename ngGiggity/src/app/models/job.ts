@@ -17,11 +17,11 @@ export class Job {
   address: Address;
   user: User;
   constructor(
+    id?: number,
     active: boolean = true,
     remote?: boolean,
     dateCreated?: Date,
     dateupdated?: Date,
-    id?: number,
     price?: number,
     description?: string,
     title?: string,

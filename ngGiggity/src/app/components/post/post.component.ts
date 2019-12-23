@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class PostComponent implements OnInit {
   skills: Skill[] = [];
   skillSel: string;
-  newJob: Job = new Job();
+  // newJob: Job = new Job();
   newAddy: Address = new Address();
 
   constructor(private jobSvc: JobService, private skillSvc: SkillService, private router: Router) { }
@@ -35,12 +35,16 @@ this.reload();
   }
 
   postJob(form: NgForm) {
-    this.newJob = form.value;
-    this.getSkill();
-    console.log(this.skillSel);
-    this.newJob.active = true;
-    console.log(this.newJob);
-    this.jobSvc.postJob(this.newJob).subscribe(
+    const newJob = form.value;
+    // this.getSkill();
+    // console.log(this.skillSel);
+    console.log(newJob);
+    newJob.skill = new Skill( newJob.skillId );
+    delete newJob.skillId;
+
+    newJob.active = true;
+    console.log(newJob);
+    this.jobSvc.postJob(newJob).subscribe(
       data => {
         console.log(data);
         this.router.navigateByUrl('/user');
@@ -49,12 +53,12 @@ this.reload();
       );
   }
 
-  getSkill() {
-    this.skills.forEach(e => {
-      if (e.name === this.skillSel) {
-        this.newJob.skill = e;
-      }
-    });
-  }
+  // getSkill() {
+  //   this.skills.forEach(e => {
+  //     if (e.name === this.skillSel) {
+  //       newJob.skill = e;
+  //     }
+  //   });
+  // }
 
 }
