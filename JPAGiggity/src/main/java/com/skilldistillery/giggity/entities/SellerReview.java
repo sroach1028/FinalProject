@@ -123,7 +123,6 @@ public class SellerReview {
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -135,6 +134,8 @@ public class SellerReview {
 		builder.append(rating);
 		builder.append(", reviewDate=");
 		builder.append(reviewDate);
+		builder.append(", booking=");
+		builder.append(booking);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -25,6 +25,7 @@ public class Address {
 	private int zip;
 
 	private String street;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "address")
 	private List<Job> jobAddresses;
@@ -85,13 +86,13 @@ public class Address {
 		this.street = street;
 	}
 
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((jobAddresses == null) ? 0 : jobAddresses.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		result = prime * result + zip;
@@ -114,6 +115,11 @@ public class Address {
 			return false;
 		if (id != other.id)
 			return false;
+		if (jobAddresses == null) {
+			if (other.jobAddresses != null)
+				return false;
+		} else if (!jobAddresses.equals(other.jobAddresses))
+			return false;
 		if (state == null) {
 			if (other.state != null)
 				return false;
@@ -129,7 +135,6 @@ public class Address {
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -143,6 +148,8 @@ public class Address {
 		builder.append(zip);
 		builder.append(", street=");
 		builder.append(street);
+		builder.append(", jobAddresses=");
+		builder.append(jobAddresses);
 		builder.append("]");
 		return builder.toString();
 	}

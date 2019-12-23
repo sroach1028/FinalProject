@@ -38,15 +38,15 @@ public class User {
 	private String role;
 
 	private String phone;
-	@JsonIgnore
-	@OneToMany(mappedBy = "seller")
-	private List<Booking> bookings;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "poster")
 	private List<SkillMessage> posts;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "bidder")
 	private List<Bid> bids;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
@@ -58,6 +58,7 @@ public class User {
 	@OneToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
+	
 	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy = "user")
 	private List<Job> jobs;
@@ -189,27 +190,25 @@ public class User {
 		this.phone = phone;
 	}
 
-	public List<Booking> getBookings() {
-		return bookings;
-	}
 
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
-
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((avatarImage == null) ? 0 : avatarImage.hashCode());
+		result = prime * result + ((bids == null) ? 0 : bids.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((jobs == null) ? 0 : jobs.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -223,6 +222,21 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (avatarImage == null) {
+			if (other.avatarImage != null)
+				return false;
+		} else if (!avatarImage.equals(other.avatarImage))
+			return false;
+		if (bids == null) {
+			if (other.bids != null)
+				return false;
+		} else if (!bids.equals(other.bids))
+			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -240,6 +254,11 @@ public class User {
 			return false;
 		if (id != other.id)
 			return false;
+		if (jobs == null) {
+			if (other.jobs != null)
+				return false;
+		} else if (!jobs.equals(other.jobs))
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
@@ -255,10 +274,20 @@ public class User {
 				return false;
 		} else if (!phone.equals(other.phone))
 			return false;
+		if (posts == null) {
+			if (other.posts != null)
+				return false;
+		} else if (!posts.equals(other.posts))
+			return false;
 		if (role == null) {
 			if (other.role != null)
 				return false;
 		} else if (!role.equals(other.role))
+			return false;
+		if (skills == null) {
+			if (other.skills != null)
+				return false;
+		} else if (!skills.equals(other.skills))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -268,7 +297,6 @@ public class User {
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -290,6 +318,18 @@ public class User {
 		builder.append(role);
 		builder.append(", phone=");
 		builder.append(phone);
+		builder.append(", posts=");
+		builder.append(posts);
+		builder.append(", bids=");
+		builder.append(bids);
+		builder.append(", skills=");
+		builder.append(skills);
+		builder.append(", avatarImage=");
+		builder.append(avatarImage);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append(", jobs=");
+		builder.append(jobs);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -23,6 +23,14 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@ManyToOne
+	@JoinColumn(name = "bid_id")
+	private Bid bid;
+	
+	@ManyToOne
+	@JoinColumn(name = "job_id")
+	private Job job;
 
 	@Column(name = "start_date")
 	private LocalDate startDate;
@@ -36,20 +44,16 @@ public class Booking {
 	private String notes;
 
 	private boolean accepted;
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "seller_id")
-	private User seller;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "booking")
 	private List<SellerReview> sellerReviews;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "booking")
 	private List<BookingMessage> messages;
-	@ManyToOne
-	@JoinColumn(name = "job_id")
-	private Job job;
+
+	
 
 	// C O N S T R U C T O R
 	public Booking() {
@@ -57,6 +61,13 @@ public class Booking {
 	}
 
 	// G E T T E R S && S E T T E R S
+	public Bid getBid() {
+		return bid;
+	}
+	
+	public void setBid(Bid bid) {
+		this.bid = bid;
+	}
 
 	public int getId() {
 		return id;
@@ -84,14 +95,6 @@ public class Booking {
 
 	public void setSellerReviews(List<SellerReview> sellerReviews) {
 		this.sellerReviews = sellerReviews;
-	}
-
-	public User getSeller() {
-		return seller;
-	}
-
-	public void setSeller(User seller) {
-		this.seller = seller;
 	}
 
 	public void setId(int id) {
@@ -138,16 +141,19 @@ public class Booking {
 		this.accepted = accepted;
 	}
 
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (accepted ? 1231 : 1237);
+		result = prime * result + ((bid == null) ? 0 : bid.hashCode());
 		result = prime * result + ((completeDate == null) ? 0 : completeDate.hashCode());
 		result = prime * result + ((expectedCompleteDate == null) ? 0 : expectedCompleteDate.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((job == null) ? 0 : job.hashCode());
+		result = prime * result + ((messages == null) ? 0 : messages.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
+		result = prime * result + ((sellerReviews == null) ? 0 : sellerReviews.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
@@ -163,6 +169,11 @@ public class Booking {
 		Booking other = (Booking) obj;
 		if (accepted != other.accepted)
 			return false;
+		if (bid == null) {
+			if (other.bid != null)
+				return false;
+		} else if (!bid.equals(other.bid))
+			return false;
 		if (completeDate == null) {
 			if (other.completeDate != null)
 				return false;
@@ -175,10 +186,25 @@ public class Booking {
 			return false;
 		if (id != other.id)
 			return false;
+		if (job == null) {
+			if (other.job != null)
+				return false;
+		} else if (!job.equals(other.job))
+			return false;
+		if (messages == null) {
+			if (other.messages != null)
+				return false;
+		} else if (!messages.equals(other.messages))
+			return false;
 		if (notes == null) {
 			if (other.notes != null)
 				return false;
 		} else if (!notes.equals(other.notes))
+			return false;
+		if (sellerReviews == null) {
+			if (other.sellerReviews != null)
+				return false;
+		} else if (!sellerReviews.equals(other.sellerReviews))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
@@ -188,12 +214,15 @@ public class Booking {
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Booking [id=");
 		builder.append(id);
+		builder.append(", bid=");
+		builder.append(bid);
+		builder.append(", job=");
+		builder.append(job);
 		builder.append(", startDate=");
 		builder.append(startDate);
 		builder.append(", completeDate=");
@@ -204,6 +233,10 @@ public class Booking {
 		builder.append(notes);
 		builder.append(", accepted=");
 		builder.append(accepted);
+		builder.append(", sellerReviews=");
+		builder.append(sellerReviews);
+		builder.append(", messages=");
+		builder.append(messages);
 		builder.append("]");
 		return builder.toString();
 	}
