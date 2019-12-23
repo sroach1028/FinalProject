@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,10 +29,17 @@ public class Bid {
 	private String description;
 
 	private Boolean accepted;
+	
+	private Boolean rejected;
+	
+	@OneToMany(mappedBy = "bid")
+	private List<Booking> bookings;
+
 
 	@ManyToOne
 	@JoinColumn(name = "bidder_id")
 	private User bidder;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "job_id")
@@ -41,9 +51,24 @@ public class Bid {
 	}
 
 	// G E T T E R S && S E T T E R S
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+	
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
 
 	public int getId() {
 		return id;
+	}
+
+	public Boolean getRejected() {
+		return rejected;
+	}
+
+	public void setRejected(Boolean rejected) {
+		this.rejected = rejected;
 	}
 
 	public Job getJob() {
@@ -98,7 +123,6 @@ public class Bid {
 		this.accepted = accepted;
 	}
 
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,8 +130,12 @@ public class Bid {
 		result = prime * result + ((accepted == null) ? 0 : accepted.hashCode());
 		result = prime * result + ((available == null) ? 0 : available.hashCode());
 		result = prime * result + ((bidAmount == null) ? 0 : bidAmount.hashCode());
+		result = prime * result + ((bidder == null) ? 0 : bidder.hashCode());
+		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((job == null) ? 0 : job.hashCode());
+		result = prime * result + ((rejected == null) ? 0 : rejected.hashCode());
 		return result;
 	}
 
@@ -135,6 +163,16 @@ public class Bid {
 				return false;
 		} else if (!bidAmount.equals(other.bidAmount))
 			return false;
+		if (bidder == null) {
+			if (other.bidder != null)
+				return false;
+		} else if (!bidder.equals(other.bidder))
+			return false;
+		if (bookings == null) {
+			if (other.bookings != null)
+				return false;
+		} else if (!bookings.equals(other.bookings))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -142,10 +180,19 @@ public class Bid {
 			return false;
 		if (id != other.id)
 			return false;
+		if (job == null) {
+			if (other.job != null)
+				return false;
+		} else if (!job.equals(other.job))
+			return false;
+		if (rejected == null) {
+			if (other.rejected != null)
+				return false;
+		} else if (!rejected.equals(other.rejected))
+			return false;
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -159,6 +206,14 @@ public class Bid {
 		builder.append(description);
 		builder.append(", accepted=");
 		builder.append(accepted);
+		builder.append(", rejected=");
+		builder.append(rejected);
+		builder.append(", bookings=");
+		builder.append(bookings);
+		builder.append(", bidder=");
+		builder.append(bidder);
+		builder.append(", job=");
+		builder.append(job);
 		builder.append("]");
 		return builder.toString();
 	}

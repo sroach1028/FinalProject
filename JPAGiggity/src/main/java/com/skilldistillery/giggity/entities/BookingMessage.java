@@ -1,6 +1,7 @@
 package com.skilldistillery.giggity.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,21 +23,21 @@ public class BookingMessage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "booking_id")
+	private Booking booking;
+	
 	private String message;
 
 	@Column(name = "message_date")
 	private LocalDateTime messageDate;
 
-	@Column(name = "seller_id")
-	private int sellerid;
-	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "booking_id")
-	private Booking booking;
+	@JoinColumn(name = "bid_id")
+	private Bid bid;
+	
 
-	@ManyToOne
-	@JoinColumn(name = "buyer_id")
-	private Job job;
 
 	// C O N S T R U C T O R
 	public BookingMessage() {
@@ -44,17 +45,17 @@ public class BookingMessage {
 	}
 
 	// G E T T E R S && S E T T E R S
+	public Bid getBid() {
+		return bid;
+	}
+	
+	public void setBid(Bid bid) {
+		this.bid = bid;
+	}
+	
 
 	public int getId() {
 		return id;
-	}
-
-	public Job getJob() {
-		return job;
-	}
-
-	public void setJob(Job job) {
-		this.job = job;
 	}
 
 	public Booking getBooking() {
@@ -81,28 +82,19 @@ public class BookingMessage {
 		this.messageDate = messageDate;
 	}
 
-	public int getSellerid() {
-		return sellerid;
-	}
-
-	public void setSellerid(int sellerid) {
-		this.sellerid = sellerid;
-	}
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((bid == null) ? 0 : bid.hashCode());
+		result = prime * result + ((booking == null) ? 0 : booking.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((messageDate == null) ? 0 : messageDate.hashCode());
-		result = prime * result + sellerid;
 		return result;
 	}
 
@@ -115,6 +107,16 @@ public class BookingMessage {
 		if (getClass() != obj.getClass())
 			return false;
 		BookingMessage other = (BookingMessage) obj;
+		if (bid == null) {
+			if (other.bid != null)
+				return false;
+		} else if (!bid.equals(other.bid))
+			return false;
+		if (booking == null) {
+			if (other.booking != null)
+				return false;
+		} else if (!booking.equals(other.booking))
+			return false;
 		if (id != other.id)
 			return false;
 		if (message == null) {
@@ -127,23 +129,22 @@ public class BookingMessage {
 				return false;
 		} else if (!messageDate.equals(other.messageDate))
 			return false;
-		if (sellerid != other.sellerid)
-			return false;
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("BookingMessage [id=");
 		builder.append(id);
+		builder.append(", booking=");
+		builder.append(booking);
 		builder.append(", message=");
 		builder.append(message);
 		builder.append(", messageDate=");
 		builder.append(messageDate);
-		builder.append(", sellerid=");
-		builder.append(sellerid);
+		builder.append(", bid=");
+		builder.append(bid);
 		builder.append("]");
 		return builder.toString();
 	}

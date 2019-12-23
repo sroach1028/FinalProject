@@ -24,6 +24,9 @@ public class UserSkill {
 	private int id;
 
 	private String description;
+	
+	private Double price;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -52,6 +55,14 @@ public class UserSkill {
 
 	public int getId() {
 		return id;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public List<Image> getPortfolioImages() {
@@ -98,13 +109,17 @@ public class UserSkill {
 		this.description = description;
 	}
 
-	// H A S H && E Q U A L S
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((logoImage == null) ? 0 : logoImage.hashCode());
+		result = prime * result + ((portfolioImages == null) ? 0 : portfolioImages.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -124,10 +139,34 @@ public class UserSkill {
 			return false;
 		if (id != other.id)
 			return false;
+		if (logoImage == null) {
+			if (other.logoImage != null)
+				return false;
+		} else if (!logoImage.equals(other.logoImage))
+			return false;
+		if (portfolioImages == null) {
+			if (other.portfolioImages != null)
+				return false;
+		} else if (!portfolioImages.equals(other.portfolioImages))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
+		if (skill == null) {
+			if (other.skill != null)
+				return false;
+		} else if (!skill.equals(other.skill))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
-	// T O S T R I N G
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -135,6 +174,16 @@ public class UserSkill {
 		builder.append(id);
 		builder.append(", description=");
 		builder.append(description);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", logoImage=");
+		builder.append(logoImage);
+		builder.append(", skill=");
+		builder.append(skill);
+		builder.append(", portfolioImages=");
+		builder.append(portfolioImages);
 		builder.append("]");
 		return builder.toString();
 	}

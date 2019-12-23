@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 class AddressTest {
 	
 	private static EntityManagerFactory emf;
@@ -42,12 +43,11 @@ class AddressTest {
 
 	@Test
 	void test() {
-		assertNotNull(addr);
+//		assertNotNull(addr);
 		assertEquals("Denver", addr.getCity());
 		assertEquals("Colorado", addr.getState());
 		assertEquals(80210, addr.getZip());
 		assertEquals("1234 Elm Street", addr.getStreet());
-		assertEquals(1, addr.getJobAddresses().get(0).getId());
 	}
 
 }
