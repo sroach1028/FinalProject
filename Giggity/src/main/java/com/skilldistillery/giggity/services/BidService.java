@@ -9,5 +9,9 @@ public interface BidService {
 	List<Bid> getBidsByJobId(Integer jobId);
 
 	Bid addBid(Bid bid);
+	
+	public Bid updateBid(int bidID, Bid bid);
+	
+	public boolean deleteBid(int bidID);
 
 }
