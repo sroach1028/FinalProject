@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-
+  error = false;
   login(form: NgForm) {
+    this.error = false;
     const user: User = form.value;
     this.authSvc.login(user.username, user.password).subscribe(
       goodStuff => {
-        // this.userSvc.index();
         console.log('succsessful login');
         this.router.navigateByUrl('/user');
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
       badStuff => {
         console.error(badStuff);
-        console.error('BADDDDD');
+        this.error = true;
 
 
       }
