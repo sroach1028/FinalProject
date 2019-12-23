@@ -61,9 +61,9 @@ public class BookingController {
 		List<Booking> currentBookings = u.getBookings();
 //		booking.setStartDate(LocalDate.now());
 //		booking.setJob(jobSvc.getById(1));
-		booking.setSeller(u);
+//		booking.setSeller(u);
 		currentBookings.add(booking);
-		u.setBookings(currentBookings);
+//		u.setBookings(currentBookings);
 		try {
 			// try to create the provided post
 			booking = svc.create(booking);
