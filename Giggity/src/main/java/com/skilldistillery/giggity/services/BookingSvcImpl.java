@@ -54,10 +54,10 @@ public class BookingSvcImpl implements BookingService {
 		update.setJob(booking.getJob());
 		update.setMessages(booking.getMessages());
 		update.setNotes(booking.getNotes());
-		update.setSeller(booking.getSeller());
 		update.setSellerReviews(booking.getSellerReviews());
 		update.setStartDate(booking.getStartDate());
-		return null;
+		update.setBid(booking.getBid());
+		return update;
 	}
 
 	@Override
