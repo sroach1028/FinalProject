@@ -22,8 +22,6 @@ public interface JobService {
 	public  List<Job> getByBookingId(int bookingId);
 	public  List<Job> getByBuyerRating(int rating);
 	public  List<Job> getByJobBidId(int bidId);
-	public  List<Job> getByBookingMessageId(int bookingMessageId);
-	public  List<Job> getByBookingMessage(String bookingMessage);
 	public  List<Job> getByJobImagesId(int jobImageId);
 	
     public Job create(Job job);
