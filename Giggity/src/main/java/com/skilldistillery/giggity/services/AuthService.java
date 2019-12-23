@@ -5,5 +5,6 @@ import com.skilldistillery.giggity.entities.User;
 public interface AuthService {
 	
 	public User register(User user);
+	public boolean isUserUnique(String username, String email);
 
 }

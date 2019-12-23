@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   constructor(private authSvc: AuthService, private router: Router, private usersvc: UserService) { }
+  error = false;
 
   register(form: NgForm) {
     form.value.role = 'standard';
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
     address.zip = form.value.zip;
 
     user.address = address;
-
+    this.error = false;
     this.authSvc.register(user).subscribe(
       data => {
         console.log('RegisterComponent.register(): user registered.');
@@ -53,6 +54,7 @@ export class RegisterComponent implements OnInit {
       err => {
         console.error('RegisterComponent.register(): error registering.');
         console.error(err);
+        this.error = true;
       }
     );
   }

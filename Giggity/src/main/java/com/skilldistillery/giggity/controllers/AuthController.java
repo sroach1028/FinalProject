@@ -17,17 +17,24 @@ import com.skilldistillery.giggity.services.AuthService;
 @RestController
 @CrossOrigin({ "*", "http://localhost:4350" })
 public class AuthController {
-	
+
 	@Autowired
 	private AuthService authService;
 
 	@PostMapping("/register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
 
+		if (!authService.isUserUnique(user.getUsername(), user.getEmail())) {
+			user = null;
+
+		}
+		System.err.println(user);
+
 		if (user == null) {
 			res.setStatus(400);
 			return null;
 		}
+
 		user = authService.register(user);
 		return user;
 	}
