@@ -35,25 +35,25 @@ public class BookingController {
 	@Autowired
 	private UserService userSvc;
 
-	@GetMapping("booking/active/{uid}")
-	public List<Booking> getActive(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
-		return svc.getActive(uid);
-	}
-
-	@GetMapping("booking/history/{uid}")
-	public List<Booking> getTransactionHistory(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
-		return svc.getTransactionHistory(uid);
-	}
+//	@GetMapping("booking/active/{uid}")
+//	public List<Booking> getActive(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
+//		return svc.getActive(uid);
+//	}
+//
+//	@GetMapping("booking/history/{uid}")
+//	public List<Booking> getTransactionHistory(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
+//		return svc.getTransactionHistory(uid);
+//	}
 
 	@GetMapping("booking/job/{jid}")
 	public List<Booking> getAllByJob(@PathVariable int jid, HttpServletRequest req, HttpServletResponse resp) {
 		return svc.getAllByJob(jid);
 	}
 
-	@GetMapping("booking/user/{uid}")
-	public List<Booking> getByUser(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
-		return svc.getAllByUser(uid);
-	}
+//	@GetMapping("booking/user/{uid}")
+//	public List<Booking> getByUser(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
+//		return svc.getAllByUser(uid);
+//	}
 
 	@PostMapping("booking")
 	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp, Principal principal) {

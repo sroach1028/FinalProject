@@ -20,25 +20,25 @@ public class BookingSvcImpl implements BookingService {
 	private BookingRepo repo;
 	
 
-	@Override
-	public List<Booking> getActive(int uid) {
-		return repo.queryActive(uid);
-	}
-
-	@Override
-	public List<Booking> getTransactionHistory(int uid) {
-		return repo.queryByTransactionHistory(uid);
-	}
+//	@Override
+//	public List<Booking> getActive(int uid) {
+//		return repo.queryActive(uid);
+//	}
+//
+//	@Override
+//	public List<Booking> getTransactionHistory(int uid) {
+//		return repo.queryByTransactionHistory(uid);
+//	}
 
 	@Override
 	public List<Booking> getAllByJob(int jid) {
 		return repo.findByJob_Id(jid);
 	}
 
-	@Override
-	public List<Booking> getAllByUser(int uid) {
-		return repo.findBySeller_Id(uid);
-	}
+//	@Override
+//	public List<Booking> getAllByUser(int uid) {
+//		return repo.findBySeller_Id(uid);
+//	}
 
 	@Override
 	public Booking create(Booking booking) {
