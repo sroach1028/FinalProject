@@ -32,4 +32,40 @@ public class BidSvcImpl implements BidService {
 		return bidRepo.saveAndFlush(bid);
 	}
 
+	@Override
+	public Bid updateBid(int bidID, Bid bid) {
+		Bid toUpdate = bidRepo.findById(bidID);
+		
+		if(toUpdate != null) {
+			toUpdate.setAvailable(bid.getAvailable());
+			toUpdate.setBidAmount(bid.getBidAmount());
+			toUpdate.setDescription(bid.getDescription());
+			toUpdate.setAccepted(bid.getAccepted());
+			toUpdate.setRejected(bid.getRejected());
+			toUpdate.setBookings(bid.getBookings());
+			toUpdate.setBidder(bid.getBidder());			
+		}
+		
+		bidRepo.saveAndFlush(toUpdate);
+		
+		return toUpdate;
+	}
+
+	@Override
+	public boolean deleteBid(int bidID) {
+		Bid toDelete = bidRepo.findById(bidID);
+		
+		if(toDelete != null) {
+			toDelete.setRejected(true);
+			toDelete.setAccepted(false);
+		}
+		
+		bidRepo.saveAndFlush(toDelete);
+		
+		return true;
+		
+	}
+	
+	
+
 }
