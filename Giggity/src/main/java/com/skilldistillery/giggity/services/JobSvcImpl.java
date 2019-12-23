@@ -106,18 +106,6 @@ public class JobSvcImpl implements JobService {
 	}
 	
 	@Override
-	public List<Job> getByBookingMessageId(int bookingMessageId) {
-		List<Job> jobs = repo.findByBookingMessages_Id(bookingMessageId);
-		return jobs;
-	}
-	
-	@Override
-	public List<Job> getByBookingMessage(String bookingMessage) {
-		List<Job> jobs = repo.findByBookingMessages_MessageLike(bookingMessage);
-		return jobs;
-	}
-	
-	@Override
 	public List<Job> getByJobImagesId(int jobImageId) {
 		List<Job> jobs = repo.findByJobImages_Id(jobImageId);
 		return jobs;
@@ -137,7 +125,6 @@ public class JobSvcImpl implements JobService {
 		Job update = repo.findById(jid);
 		update.setActive(job.getActive());
 		update.setAddress(job.getAddress());
-		update.setBookingMessages(job.getBookingMessages());
 		update.setBookings(job.getBookings());
 		update.setBuyerReviews(job.getBuyerReviews());
 		update.setDateCreated(job.getDateCreated());

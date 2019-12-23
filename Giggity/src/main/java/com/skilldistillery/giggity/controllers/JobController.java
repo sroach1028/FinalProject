@@ -204,30 +204,6 @@ public class JobController {
 		return results;
 	}
 	
-	@GetMapping("jobs/bookingMessageId/{bookingMessageId}")
-	public List<Job> getByBookingMessageId(@PathVariable int bookingMessageId, HttpServletRequest req, HttpServletResponse resp) {
-		List<Job> results = new ArrayList<>();
-		results = svc.getByBookingMessageId(bookingMessageId);
-		if (results.size() == 0) {
-			resp.setStatus(404);
-		} else {
-			resp.setStatus(200);
-		}
-		return results;
-	}
-	
-	@GetMapping("jobs/bookingMessage/{bookingMessage}")
-	public List<Job> getByBookingMessage(@PathVariable String bookingMessage, HttpServletRequest req, HttpServletResponse resp) {
-		List<Job> results = new ArrayList<>();
-		results = svc.getByBookingMessage(bookingMessage);
-		if (results.size() == 0) {
-			resp.setStatus(404);
-		} else {
-			resp.setStatus(200);
-		}
-		return results;
-	}
-	
 	@GetMapping("jobs/jobImage/{jobImageId}")
 	public List<Job> getByJobImageId(@PathVariable int jobImageId, HttpServletRequest req, HttpServletResponse resp) {
 		List<Job> results = new ArrayList<>();
