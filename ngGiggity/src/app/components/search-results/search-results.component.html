@@ -1,3 +1,31 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 <!-- START BY DISPLAYING SEARCH FORM -->
 <div *ngIf="beginSearch" class="container-fluid">
   <div class="container">
@@ -171,13 +199,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        #data
-        (click)="displaySelected(job)"
-        class="border border-info"
-        *ngFor="let job of jobs | jobsActive"
-      >
-        <td>{{ job.title }}</td>
+      <tr #data (click)="displaySelected(job)" class="border border-info" *ngFor="let job of jobs | jobsActive">
+        <td><img [src]="job.imageUrl" class="img-thumbnail picture hidden-xs" style="width: 150px; height: 150px"/>
+          {{ job.title }}</td>
         <td>{{ job.skill.name }}</td>
         <td>{{ job.price }}</td>
         <td *ngIf="job.address != null">{{ job.address.state }}</td>
