@@ -49,7 +49,7 @@ public class Job {
 	private LocalDateTime dateUpdated;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "requestor_id")
 	private User user;
 
 	@ManyToOne

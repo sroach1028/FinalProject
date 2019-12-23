@@ -32,10 +32,78 @@
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
-        <form name="username">
-          <h3>Search Users</h3>
-  <hr />
+        <form name="jobTitle">
+          <h3>Search For Gigs</h3>
+          <hr />
           <div class="form-group">
+            <label name="jobtitle" for="jobtitle">Gig Title</label>
+            <input
+              name="jobtitle"
+              type="jobtitle"
+              class="form-control"
+              id="jobtitle"
+              placeholder="Gig Title"
+              [(ngModel)]="jobTitle"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobsByTitle()"
+          >
+            Search by Gig Title
+          </button>
+        </form>
+        <br />
+        <form name="jobSkill">
+          <div class="form-group">
+            <label name="jobskill" for="jobskill">Skill</label>
+            <input
+              name="jobskill"
+              type="jobskill"
+              class="form-control"
+              id="jobskill"
+              placeholder="Skill"
+              [(ngModel)]="jobSkillName"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobBySkillName()"
+          >
+            Search by Skill
+          </button>
+        </form>
+        <br />
+        <form name="jobSkill">
+          <div class="form-group">
+            <label name="jobCity" for="jobCity">City</label>
+            <input
+              name="jobCity"
+              type="jobCity"
+              class="form-control"
+              id="jobCity"
+              placeholder="City"
+              [(ngModel)]="jobCity"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-block"
+            (click)="jobByCity()"
+          >
+            Search by City
+          </button>
+        </form>
+        <br />
+        <form name="username">
+            <h3>Search Users</h3>
+    <hr />
+        <div class="form-group">
             <label name="username" for="username">Username</label>
             <input
               name="username"
@@ -57,81 +125,13 @@
         </form>
 
         <br />
-        <form name="jobTitle">
-          <h3>Search Jobs</h3>
-          <hr />
-          <div class="form-group">
-            <label name="jobtitle" for="jobtitle">Job Title</label>
-            <input
-              name="jobtitle"
-              type="jobtitle"
-              class="form-control"
-              id="jobtitle"
-              placeholder="Job Title"
-              [(ngModel)]="jobTitle"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <button
-            type="button"
-            class="btn btn-primary btn-block btn-block"
-            (click)="jobsByTitle()"
-          >
-            Search by Job Title
-          </button>
-        </form>
-        <br />
-        <form name="jobSkill">
-          <div class="form-group">
-            <label name="jobskill" for="jobskill">Job Skill</label>
-            <input
-              name="jobskill"
-              type="jobskill"
-              class="form-control"
-              id="jobskill"
-              placeholder="Job Skill"
-              [(ngModel)]="jobSkillName"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <button
-            type="button"
-            class="btn btn-primary btn-block btn-block"
-            (click)="jobBySkillName()"
-          >
-            Search by Job Skill
-          </button>
-        </form>
-        <br />
-        <form name="jobSkill">
-          <div class="form-group">
-            <label name="jobCity" for="jobCity">Job City</label>
-            <input
-              name="jobCity"
-              type="jobCity"
-              class="form-control"
-              id="jobCity"
-              placeholder="Job City"
-              [(ngModel)]="jobCity"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <button
-            type="button"
-            class="btn btn-primary btn-block btn-block"
-            (click)="jobByCity()"
-          >
-            Search by Job City
-          </button>
-        </form>
-        <br />
         <form name="jobRemote">
           <button
             type="button"
             class="btn btn-primary btn-block btn-block"
             (click)="jobByRemote()"
           >
-            Search all Remote Jobs
+            Search all Remote Gigs
           </button>
         </form>
       </div>
@@ -168,7 +168,7 @@
         <td>
           <button
             type="button"
-            class="btn btn-secondary btn-block"
+            class="btn btn-secondary"
             (click)="backToSearch()"
           >
             Back to Search
@@ -183,7 +183,7 @@
 <div *ngIf="!selected && !beginSearch && jobs !== null && !users">
   <h1 class="text-dark">
     <span
-      >{{ title }}
+      >Available Gigs Matching Your Search: {{jobs.length}}
       <h6>(select for more details)</h6>
     </span>
   </h1>
@@ -213,10 +213,10 @@
         <td>
           <button
             type="button"
-            class="btn btn-secondary btn-block"
+            class="btn btn-secondary"
             (click)="backToSearch()"
           >
-          Back to Search
+          New Search
           </button>
         </td>
       </tr>

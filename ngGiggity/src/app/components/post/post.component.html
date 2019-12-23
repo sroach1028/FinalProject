@@ -7,9 +7,9 @@
     Remote Job: <input type="checkbox" name="remote" id="" ngModel>
     <div class="form-group container-fluid">
       <input type="text" name="title" class="form-control" placeholder="Title" ngModel>
-      <select [(ngModel)]="skillSel" class="form-control">
+      <select name="skillId" ngModel class="form-control">
         <option disabled>Choose a skill</option>
-        <option *ngFor="let skill of skills">{{skill.name}}</option>
+        <option value="{{skill.id}}" *ngFor="let skill of skills">{{skill.name}}</option>
       </select>
       <input type="number" name="price" class="form-control" placeholder="Price" ngModel>
       <input type="text" name="description" class="form-control" placeholder="Description" ngModel>
