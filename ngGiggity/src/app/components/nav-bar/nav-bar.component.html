@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand-lg navbar-dark static-top">
   <a class="navbar-brand" [routerLink]="['/home']">
     <h1>Gig - gity</h1>
   </a>
@@ -14,6 +14,29 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/search']">Search</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn()">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn()">
+          <a class="nav-link" [routerLink]="['/register']">Register</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="isLoggedIn()" class="nav-link" [routerLink]="['/user']">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="isLoggedIn()" class="nav-link" (click)=logOut() [routerLink]="['/login']">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</nav>
+
+
         <!-- <form #userSearch=ngForm id="user" *ngIf="(searchDisplay === 'user')" style="padding-right: 35px;">
           <input name="search" class="form-control" type="text" placeholder="Search username" aria-label="Search" ngModel>
           <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit" (click)="search(userSearch)">Search</button>
@@ -43,25 +66,3 @@
           <option value="skill">Skill &nbsp; &nbsp; &nbsp;</option>
         </select> -->
       <!-- </div> -->
-      <div>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/search']">Search</a>
-        </li>
-        <li class="nav-item" *ngIf="!isLoggedIn()">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>
-      </div>
-        <li class="nav-item" *ngIf="!isLoggedIn()">
-          <a class="nav-link" [routerLink]="['/register']">Register</a>
-        </li>
-        <li class="nav-item">
-          <a *ngIf="isLoggedIn()" class="nav-link" [routerLink]="['/user']">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a *ngIf="isLoggedIn()" class="nav-link" (click)=logOut() [routerLink]="['/login']">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-</nav>
