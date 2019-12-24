@@ -1,3 +1,4 @@
+import { BidService } from './../../services/bid.service';
 import { BookingService } from './../../services/booking.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,8 @@ import { JobService } from 'src/app/services/job.service';
 import { SkillService } from './../../services/skill.service';
 import { User } from 'src/app/models/user';
 import { Booking } from 'src/app/models/booking';
+import { Bid } from 'src/app/models/bid';
+import { Form, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-search-results',
@@ -27,6 +30,8 @@ export class SearchResultsComponent implements OnInit {
   jobCity = null;
   jobAddress: Address = new Address();
   booking: Booking = new Booking();
+  bid: Bid = new Bid();
+  newBid = false;
   user: User;
   updateGig: Job = null;
   skills: Skill[];
@@ -42,6 +47,7 @@ export class SearchResultsComponent implements OnInit {
     private skillSvc: SkillService,
     private usersvc: UserService,
     private bookingsvc: BookingService,
+    private bidSvc: BidService
   ) { }
 
   // M E T H O D S
@@ -180,7 +186,21 @@ export class SearchResultsComponent implements OnInit {
       data => {
         this.router.navigateByUrl('/user');
       },
-      err => console.error('Reload error in Component')
+      err => console.error('Create error in search-result-Component createBooking')
+    );
+  }
+
+  createBid(form: NgForm) {
+
+    this.bid = form.value;
+    console.log(this.bid.description);
+    console.log(this.bid.bidAmount);
+    this.bidSvc.createBid(this.bid, this.selected.id).subscribe(
+      data => {
+        this.router.navigateByUrl('/user');
+
+      },
+      err => console.error('Create error in search-result-Component createBid')
     );
   }
 
