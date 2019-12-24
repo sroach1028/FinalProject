@@ -1,5 +1,6 @@
+<div class="jumbotron">
 <div class="container">
-    <div class="span3 well">
+    <div class="span well bg-light">
         <div>
         <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img [src]="userSelected.avatarImage.imageUrl" name="aboutme" width="140" height="140" class="img-circle"></a>
         <h3>{{userSelected.firstName}} {{userSelected.lastName}}</h3>
@@ -74,21 +75,23 @@
           <div class="col-sm-12 col-lg-4 ">
             <div class="card h-100 bg-info text-light">
               <h2 class="card-header text-dark">{{userSelected.firstName}}'s Skills</h2>
-              <ol>
+              <div class="card-body">
+                <h5 *ngIf="userSelected && userSkills.length == 0" ><a class="text-light" [routerLink]="['/post']">Add Skills to Start Booking Gigs!</a></h5>
+                <h5 *ngIf="userSelected && userSkills.length > 0" ><a class="text-light" [routerLink]="['/post']">OFFER UP YOUR SKILLS FOR MONEY</a></h5>
+                <ol>
                   <li *ngFor="let skill of userSkills">
                   <a>{{skill.skill.name}}</a>
                   </li>
                 </ol>
+              </div>
             </div>
           </div>
                 <div class="col-sm-12 col-lg-4">
                   <div class="card h-100 bg-info text-light">
                     <h2 class="card-header text-dark">{{userSelected.firstName}}'s Jobs</h2>
-                    <h3 class="text-dark" *ngIf="userJobs.length > 0"></h3>
-                    <div>
-                        <h5 *ngIf="userSelected" ><a class="text-light" [routerLink]="['/post']">POST NEW JOB</a>
-                        </h5>
-                      </div>
+                    <div class="card-body">
+                    <h5 *ngIf="userSelected" ><a class="text-light" [routerLink]="['/post']">ASK SOMEONE TO DO YOUR STUFF</a></h5>
+                    </div>
                   </div>
                 </div>
 
@@ -169,4 +172,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
