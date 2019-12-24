@@ -216,7 +216,9 @@
       <br />
     </div>
     <br />
-    <div class="text-center">
+
+<!-- BID BUTTON (IF LOGGED IN) -->
+    <div *ngIf="user" class="text-center">
         <button class="btn btn-warning" (click)="newBid = true;" data-target="#exampleModal">
             B I D
           </button>
@@ -247,6 +249,42 @@
         </div>
       </ng-container>
     </div>
+
+<!-- BID BUTTON (IF NOT LOGGED IN) -->
+    <div *ngIf="!user" class="text-center">
+      <h6>got what it takes to do the job?</h6>
+        <button class="btn btn-warning" [routerLink]="['/login']" data-target="#exampleModal">
+            LOG IN TO B I D
+          </button>
+      <br />
+      <hr />
+      <ng-container class="container-fluid">
+          <button *ngIf="!newBid && user" style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Contact {{selected.user.firstName}}
+            </button>
+        <!-- Button trigger modal -->
+
+        <button *ngIf="!newBid" style="float: right;" class="btn btn-info" (click)="displaySelected(null)">
+          B a c k
+        </button>
+        <div *ngIf="newBid">
+          <div class="modal-body">
+            <form #createForm="ngForm">
+              <div class="form-group container-fluid">
+                <input type="number" name="bidAmount" class="form-control" placeholder="Bid Amount" ngModel>
+                <input type="text" name="description" class="form-control" placeholder="Message to Requestee" ngModel> <br>
+                <button *ngIf="newBid" style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#bidSubmittedModal" (click)="createBid(createForm)">
+                    Submit Bid
+                  </button>
+                  <button class="btn btn-info" style="float: right;" (click)="newBid = false;">C A N C E L</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+
   </div>
 </div>
 </div>
