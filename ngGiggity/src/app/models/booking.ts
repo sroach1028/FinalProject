@@ -7,11 +7,11 @@ export class Booking {
   expectedCompleteDate: Date;
   notes: string;
   accepted: boolean;
-  job: Job;
-  sellerId: number;
+  jobId: number;
+  bidId: number;
   constructor(
-    sellerId?: number,
-    job?: Job,
+    bidId?: number,
+    jobId?: number,
     startDate?: Date,
     accepted?: boolean,
     completeDate?: Date,
@@ -25,6 +25,7 @@ export class Booking {
     this.expectedCompleteDate = expectedCompleteDate;
     this.notes = notes;
     this.accepted = accepted;
-    this.sellerId = sellerId;
+    this.bidId = bidId ;
+    this.jobId = jobId ;
   }
 }

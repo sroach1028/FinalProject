@@ -81,7 +81,8 @@ public class BookingController {
 	@PutMapping("booking/{id}")
 	public Booking updateBooking(@PathVariable Integer id, @RequestBody Booking booking, HttpServletRequest req,
 			HttpServletResponse resp) {
-
+		LocalDate now = LocalDate.now();
+		booking.setStartDate(now);
 		try {
 			// try to update the provided post
 			booking = svc.update(id, booking);
