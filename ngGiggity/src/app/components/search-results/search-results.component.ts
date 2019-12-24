@@ -197,7 +197,7 @@ export class SearchResultsComponent implements OnInit {
     console.log(this.bid.bidAmount);
     this.bidSvc.createBid(this.bid, this.selected.id).subscribe(
       data => {
-        this.router.navigateByUrl('/user');
+        // this.router.navigateByUrl('/');
 
       },
       err => console.error('Create error in search-result-Component createBid')

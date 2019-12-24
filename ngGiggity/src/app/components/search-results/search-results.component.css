@@ -1,8 +1,8 @@
 .container-fluid{
   padding: 15px;
 }
+#modal{
+  width: 100px;
+  height: 100px;
+}
 
-/* img{
-  width: 150px;
-  height: 150px;
-} */
