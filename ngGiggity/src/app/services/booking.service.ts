@@ -54,8 +54,8 @@ export class BookingService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Basic " + this.authSvc.getCredentials()
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
       })
     };
     return this.http.post(this.baseUrl + 'api/booking/', booking, httpOptions)
