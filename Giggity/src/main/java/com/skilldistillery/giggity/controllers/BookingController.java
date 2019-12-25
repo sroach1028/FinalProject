@@ -56,8 +56,10 @@ public class BookingController {
 //	}
 
 	@PostMapping("booking")
-	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
-		User u = userSvc.getUserByUsername(principal.getName());
+	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp) {
+		LocalDate now = LocalDate.now();
+		booking.setStartDate(now);
+		booking.setAccepted(true);
 		try {
 			// try to create the provided post
 			booking = svc.create(booking);
@@ -81,8 +83,6 @@ public class BookingController {
 	@PutMapping("booking/{id}")
 	public Booking updateBooking(@PathVariable Integer id, @RequestBody Booking booking, HttpServletRequest req,
 			HttpServletResponse resp) {
-		LocalDate now = LocalDate.now();
-		booking.setStartDate(now);
 		try {
 			// try to update the provided post
 			booking = svc.update(id, booking);
