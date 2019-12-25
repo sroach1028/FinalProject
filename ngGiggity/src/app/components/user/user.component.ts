@@ -1,3 +1,4 @@
+import { BookingService } from './../../services/booking.service';
 import { ActiveBidPipe } from './../../pipes/active-bid.pipe';
 import { JobService } from 'src/app/services/job.service';
 import { UserService } from './../../services/user.service';
@@ -10,6 +11,7 @@ import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
 import { BidService } from 'src/app/services/bid.service';
 import { Bid } from 'src/app/models/bid';
+import { Booking } from 'src/app/models/booking';
 
 @Component({
   selector: 'app-user',
@@ -27,10 +29,12 @@ export class UserComponent implements OnInit {
   skills: Skill[];
   user: User;
   bids: Bid[];
+  selectedBid: Bid;
+  booking: Booking = new Booking();
   // tslint:disable-next-line: max-line-length
 
   constructor(private bidSvc: BidService, private userSvc: UserService, private userSkillSvc: UserSkillService,
-              private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe) {
+              private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe, private bookingSvc: BookingService) {
     // //reloads current URL with new search term
     // this.navigationSubscription = this.router.events.subscribe(
     //   (e: any) => {
@@ -131,6 +135,16 @@ export class UserComponent implements OnInit {
 
   hideBids(){
     this.bids = null;
+  }
+
+  acceptBid(bid: Bid) {
+    this.booking.bid = bid;
+    this.booking.job = this.selected;
+    this.bookingSvc.createBooking(this.booking).subscribe(
+      data => {
+      },
+      err => console.error('Create error in search-result-Component createBid')
+    );
   }
 
 

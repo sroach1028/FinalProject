@@ -42,7 +42,6 @@ export class BookingsComponent implements OnInit {
     this.userSvc.getBookings(this.user.id).subscribe(
       data => {
         this.allBoookings = data;
-        console.log(this.allBoookings[0].job);
       },
       err => {
         console.error('Get error in Compnent');
@@ -74,11 +73,11 @@ export class BookingsComponent implements OnInit {
   // }
 
   createBooking(job: Job, bid: Bid) {
+    console.log(this.booking);
     this.booking.jobId = job.id;
     this.booking.bidId = bid.id;
     this.bookingSvc.createBooking(this.booking).subscribe(
       data => {
-        this.booking = data;
       },
       err => console.error('Create error in search-result-Component createBid')
     );

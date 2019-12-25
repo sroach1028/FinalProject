@@ -180,7 +180,7 @@ export class SearchResultsComponent implements OnInit {
   createBookingBuyer() {
     // this.getLoggedUser();
     console.log(this.user);
-    this.booking.sellerId = this.user.id;
+    // this.booking.sellerId = this.user.id;
     this.booking.job = this.selected;
     this.bookingsvc.createBooking(this.booking).subscribe(
       data => {
