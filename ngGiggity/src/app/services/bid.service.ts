@@ -37,4 +37,22 @@ export class BidService {
         })
       );
   }
+
+  getBids(jid: number) {
+    console.log(jid);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<Bid[]>(this.baseUrl + 'api/bids/' + jid, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('In BidSvc getBids');
+        })
+      );
+  }
 }

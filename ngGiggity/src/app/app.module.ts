@@ -17,6 +17,7 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { PostComponent } from './components/post/post.component';
 import { JobsActivePipe } from './pipes/jobs-active.pipe';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { ActiveBidPipe } from './pipes/active-bid.pipe';
 
 
 
@@ -32,7 +33,8 @@ import { BookingsComponent } from './components/bookings/bookings.component';
     SearchResultsComponent,
     PostComponent,
     JobsActivePipe,
-    BookingsComponent
+    BookingsComponent,
+    ActiveBidPipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService, UserService, DatePipe],
+  providers: [AuthService, UserService, DatePipe, ActiveBidPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

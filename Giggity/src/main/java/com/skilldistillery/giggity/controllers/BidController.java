@@ -37,7 +37,7 @@ public class BidController {
 	UserService userSvc;
 	
 	@GetMapping("bids/{jid}")
-	public List<Bid> getBids(@PathVariable Integer jid, HttpServletResponse res) {
+	public List<Bid> getBids(@PathVariable Integer jid, HttpServletResponse res, Principal principal) {
 		List<Bid> bids = bidSvc.getBidsByJobId(jid);
 		if (bids.isEmpty()) {
 			res.setStatus(404);
