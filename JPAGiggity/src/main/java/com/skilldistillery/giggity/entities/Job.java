@@ -64,7 +64,6 @@ public class Job {
 	@OneToMany(mappedBy = "job")
 	private List<BuyerReview> buyerReviews;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Bid> jobBids;
 	

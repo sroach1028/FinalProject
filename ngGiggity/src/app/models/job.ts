@@ -1,6 +1,7 @@
 import { Skill } from 'src/app/models/skill';
 import { Address } from './address';
 import { User } from './user';
+import { Bid } from './bid';
 
 
 export class Job {
@@ -16,6 +17,8 @@ export class Job {
   remote: boolean;
   address: Address;
   user: User;
+  jobBids: Bid[];
+  // bids: Bid[];
   constructor(
     id?: number,
     active: boolean = true,

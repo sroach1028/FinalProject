@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Bid {
@@ -32,14 +33,14 @@ public class Bid {
 	
 	private Boolean rejected;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "bid")
 	private List<Booking> bookings;
 
-
+	@JsonIgnoreProperties({"bids"})
 	@ManyToOne
 	@JoinColumn(name = "bidder_id")
 	private User bidder;
-	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "job_id")

@@ -1,3 +1,4 @@
+import { ActiveBidPipe } from './../../pipes/active-bid.pipe';
 import { JobService } from 'src/app/services/job.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +8,8 @@ import { Job } from 'src/app/models/job';
 import { Router } from '@angular/router';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
+import { BidService } from 'src/app/services/bid.service';
+import { Bid } from 'src/app/models/bid';
 
 @Component({
   selector: 'app-user',
@@ -19,13 +22,15 @@ export class UserComponent implements OnInit {
   userSkills: UserSkill[] = [];
   updateGig: Job = null;
   selected: Job = null;
-  userJobs: Job[] = [];
+  userJobs: Job[];
   skillName: string;
   skills: Skill[];
   user: User;
+  bids: Bid[];
   // tslint:disable-next-line: max-line-length
 
-  constructor(private userSvc: UserService, private userSkillSvc: UserSkillService, private jobSvc: JobService, private router: Router) {
+  constructor(private bidSvc: BidService, private userSvc: UserService, private userSkillSvc: UserSkillService,
+              private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe) {
     // //reloads current URL with new search term
     // this.navigationSubscription = this.router.events.subscribe(
     //   (e: any) => {
@@ -60,6 +65,7 @@ export class UserComponent implements OnInit {
   }
 
   setUpdateGig(job: Job) {
+    this.selected = job;
     this.updateGig = Object.assign({}, job);
     console.log(this.updateGig);
   }
@@ -82,22 +88,21 @@ export class UserComponent implements OnInit {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
-        console.log('-------------');
       },
       err => console.error('Reload error in Component')
       );
-    this.getUserSkills();
     this.getUserJobs();
+    this.getUserSkills();
   }
 
     getUserJobs() {
     this.userSvc.getJobsByUsername().subscribe(
       data => {
+        console.log(data);
         this.userJobs = data;
-        console.error(this.userJobs);
       },
       err => console.error('Reload error in Component')
-    );
+      );
     }
 
     getUserSkills() {
@@ -117,6 +122,15 @@ export class UserComponent implements OnInit {
         this.skillName = data.name;
       }
     );
+  }
+
+  showBids(job: Job){
+    this.selected = job;
+    this.bids = job.jobBids;
+  }
+
+  hideBids(){
+    this.bids = null;
   }
 
 
