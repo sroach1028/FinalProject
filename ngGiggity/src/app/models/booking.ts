@@ -26,7 +26,7 @@ export class Booking {
     this.expectedCompleteDate = expectedCompleteDate;
     this.notes = notes;
     this.accepted = accepted;
-    this.bid = bid ;
-    this.job = job ;
+    this.bid = bid;
+    this.job = job;
   }
 }
