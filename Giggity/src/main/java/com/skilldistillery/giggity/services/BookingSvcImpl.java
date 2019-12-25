@@ -1,5 +1,6 @@
 package com.skilldistillery.giggity.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -42,6 +43,7 @@ public class BookingSvcImpl implements BookingService {
 
 	@Override
 	public Booking create(Booking booking) {
+		booking.setStartDate(LocalDate.now());
 		return repo.saveAndFlush(booking);
 	}
 

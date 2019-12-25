@@ -1,3 +1,4 @@
+import { Bid } from './bid';
 import { Job } from './job';
 
 export class Booking {
@@ -7,11 +8,11 @@ export class Booking {
   expectedCompleteDate: Date;
   notes: string;
   accepted: boolean;
-  jobId: number;
-  bidId: number;
+  job: Job;
+  bid: Bid;
   constructor(
-    bidId?: number,
-    jobId?: number,
+    bid?: Bid,
+    job?: Job,
     startDate?: Date,
     accepted?: boolean,
     completeDate?: Date,
@@ -25,7 +26,7 @@ export class Booking {
     this.expectedCompleteDate = expectedCompleteDate;
     this.notes = notes;
     this.accepted = accepted;
-    this.bidId = bidId ;
-    this.jobId = jobId ;
+    this.bid = bid ;
+    this.job = job ;
   }
 }
