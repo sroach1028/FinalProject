@@ -138,6 +138,7 @@ export class UserComponent implements OnInit {
     this.booking.job = this.selected;
     this.bookingSvc.createBooking(this.booking).subscribe(
       data => {
+        this.router.navigateByUrl('/bookings');
       },
       err => console.error('Create error in search-result-Component createBid')
     );
@@ -148,12 +149,9 @@ rejectBid(rejectedBid: Bid) {
   console.log(rejectedBid);
   this.bidSvc.updateBid(rejectedBid).subscribe(
     data => {
-      rejectedBid = data;
     },
     err => console.error('Create error in search-result-Component createBid')
 
   );
-  this.bids = null;
 }
-
 }

@@ -39,15 +39,15 @@ export class BookingsComponent implements OnInit {
   }
 
   showAll() {
-    this.userSvc.getBookings(this.user.id).subscribe(
+    this.bookingSvc.findAll(this.user.id).subscribe(
       data => {
         this.allBoookings = data;
       },
-      err => {
-        console.error('Get error in Compnent');
-      }
+      err => console.error('Reload error in Component')
+
     );
   }
+
   // active() {
   //   this.bookingSvc.findActive(this.user.id).subscribe(
   //     data => {

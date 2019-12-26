@@ -33,6 +33,22 @@ export class BookingService {
       );
   }
 
+  findAll(uid: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<Booking[]>(this.baseUrl + 'api/booking/job/user/' + uid, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
+
   findHistory(uid: number) {
     const httpOptions = {
       headers: new HttpHeaders({
