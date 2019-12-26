@@ -1,10 +1,11 @@
+import { User } from './user';
 export class Bid {
   id: number;
   available: boolean;
   bidAmount: number;
   description: string;
   accepted: boolean;
-  bidderId: number;
+  bidder: User;
 
   constructor(
     id?: number,
@@ -12,13 +13,13 @@ export class Bid {
     bidAmount?: number,
     accepted?: boolean,
     description?: string,
-    bidderId?: number
+    bidder?: User
   ) {
     this.id = id;
     this.available = available;
     this.bidAmount = bidAmount;
     this.description = description;
     this.accepted = accepted;
-    this.bidderId = bidderId;
+    this.bidder = bidder;
   }
 }

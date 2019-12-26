@@ -36,10 +36,10 @@ public class BookingSvcImpl implements BookingService {
 		return repo.findByJob_Id(jid);
 	}
 
-//	@Override
-//	public List<Booking> getAllByUser(int uid) {
-//		return repo.findBySeller_Id(uid);
-//	}
+	@Override
+	public List<Booking> getAllByJobRequester(int reqid) {
+		return repo.findByJob_User_Id(reqid);
+	}
 
 	@Override
 	public Booking create(Booking booking) {

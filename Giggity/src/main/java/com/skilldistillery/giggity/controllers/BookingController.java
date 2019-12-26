@@ -50,10 +50,10 @@ public class BookingController {
 		return svc.getAllByJob(jid);
 	}
 
-//	@GetMapping("booking/user/{uid}")
-//	public List<Booking> getByUser(@PathVariable int uid, HttpServletRequest req, HttpServletResponse resp) {
-//		return svc.getAllByUser(uid);
-//	}
+	@GetMapping("booking/job/user/{reqid}")
+	public List<Booking> getByJobRequester(@PathVariable int reqid, HttpServletRequest req, HttpServletResponse resp) {
+		return svc.getAllByJobRequester(reqid);
+	}
 
 	@PostMapping("booking")
 	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp) {

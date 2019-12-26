@@ -27,7 +27,6 @@ public class Booking {
 	@ManyToOne
 	@JoinColumn(name = "bid_id")
 	private Bid bid;
-	
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job job;

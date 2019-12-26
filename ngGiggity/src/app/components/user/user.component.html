@@ -149,7 +149,7 @@
                     <td>{{bid.bidAmount}}</td>
                     <td>{{bid.description}}</td>
                     <td><button (click)="acceptBid(bid)" class="btn btn-sm btn-success">&#10003;</button></td>
-                    <td><button (click)="rejectBid(bid)" class="btn btn-sm btn-danger">&#10007;</button></td>
+                    <td><button (click)="bids=null; rejectBid(bid)" class="btn btn-sm btn-danger">&#10007;</button></td>
                   </tr>
                 </tbody>
               </table>

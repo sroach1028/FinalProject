@@ -19,4 +19,6 @@ public interface BookingService {
     public Booking update(int bid, Booking booking);
 
     public boolean delete(int bid);
+
+	List<Booking> getAllByJobRequester(int reqid);
 }
