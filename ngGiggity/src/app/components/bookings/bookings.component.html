@@ -1,11 +1,11 @@
-<button (click)="showAll()">See All</button>
+<button (click)="showAll()">Your Bookings</button>
 <div class="row" *ngIf="allBoookings">
-  <h1>Total Bookings {{allBoookings.length}} </h1>
-  <div class="col-lg-3"></div>
-  <div class="col-lg-6">
+    <h1>Total Bookings {{allBoookings.length}} </h1>
+  <div class="col-lg-1"></div>
+  <div class="col-lg-9">
     <ol>
-      <div class="container">
       <li *ngFor="let booking of allBoookings">
+        <div class="container">
         <div class="card">
           <div>
             <h6 class="card-header bg-dark text-light">Gig Booked: {{booking.startDate}}</h6>
@@ -21,8 +21,8 @@
             </div>
           </div>
         </div>
+      </div>
       </li>
-    </div>
     </ol>
   </div>
 </div>

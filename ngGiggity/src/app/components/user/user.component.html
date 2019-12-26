@@ -1,7 +1,7 @@
 <div class="jumbotron">
 <div class="container">
-
-    <div class="col-sm-12 col-lg-4">
+<div class="row">
+    <div class="col-lg-4">
         <div class="card h-100 bg-info text-light">
           <h2 class="card-header text-dark">{{userSelected.firstName}}'s Skills</h2>
           <div class="card-body">
@@ -16,6 +16,12 @@
         </div>
       </div>
 
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+          <h5><a class="text-light" [routerLink]="['/bookings']">VIEW BOOKINGS</a>
+          </h5>
+      </div>
+    </div>
     <div class="span well bg-light">
         <div>
         <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img [src]="userSelected.avatarImage.imageUrl" name="aboutme" width="140" height="140" class="img-circle"></a>
