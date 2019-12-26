@@ -133,10 +133,6 @@ export class UserComponent implements OnInit {
     this.bids = job.jobBids;
   }
 
-  hideBids(){
-    this.bids = null;
-  }
-
   acceptBid(bid: Bid) {
     this.booking.bid = bid;
     this.booking.job = this.selected;
@@ -147,6 +143,17 @@ export class UserComponent implements OnInit {
     );
   }
 
+rejectBid(rejectedBid: Bid) {
+  rejectedBid.accepted = false;
+  console.log(rejectedBid);
+  this.bidSvc.updateBid(rejectedBid).subscribe(
+    data => {
+      rejectedBid = data;
+    },
+    err => console.error('Create error in search-result-Component createBid')
 
+  );
+  this.bids = null;
+}
 
 }

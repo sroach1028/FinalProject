@@ -74,8 +74,8 @@ export class BookingsComponent implements OnInit {
 
   createBooking(job: Job, bid: Bid) {
     console.log(this.booking);
-    this.booking.jobId = job.id;
-    this.booking.bidId = bid.id;
+    this.booking.job = job;
+    this.booking.bid = bid;
     this.bookingSvc.createBooking(this.booking).subscribe(
       data => {
       },
