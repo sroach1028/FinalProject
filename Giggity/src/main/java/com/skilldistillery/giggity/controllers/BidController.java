@@ -68,6 +68,7 @@ public class BidController {
 		try {
 			// try to update the provided post
 			bid = bidSvc.updateBid(id, bid);
+			System.out.println(bid);
 			if(bid==null) {
 				resp.setStatus(404);
 			}
