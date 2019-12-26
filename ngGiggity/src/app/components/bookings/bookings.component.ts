@@ -21,9 +21,7 @@ export class BookingsComponent implements OnInit {
 
   ngOnInit() {
     this.getLoggedUser();
-    console.log(this.user);
-    console.log(this.activeBookings);
-    console.log(this.transactionHistory);
+    // this.showAll();
   }
 
   getLoggedUser() {
