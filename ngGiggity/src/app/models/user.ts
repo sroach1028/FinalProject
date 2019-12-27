@@ -2,6 +2,7 @@ import { Address } from './address';
 import { Image } from './image';
 import { Skill } from './skill';
 import { Job } from './job';
+import { UserSkill } from './user-skill';
 export class User {
   id: number;
   firstName: string;
@@ -14,7 +15,7 @@ export class User {
   phone: string;
   address: Address;
   avatarImage: Image;
-  skills: Skill[];
+  skills: UserSkill[];
   jobs: Job[];
   constructor(
     id?: number,

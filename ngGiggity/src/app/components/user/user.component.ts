@@ -106,7 +106,7 @@ export class UserComponent implements OnInit {
       err => console.error('Reload error in Component')
     );
     this.getUserJobs();
-    this.getUserSkills();
+    // this.getUserSkills();
     this.showBidsByBidder();
     this.getAllSkills();
   }
@@ -219,7 +219,7 @@ export class UserComponent implements OnInit {
     const userSkill = new UserSkill();
     userSkill.skill = skill;
 
-    const desc: string = descForm.value;
+    const desc: string = descForm.value.userSkillDescription;
 
     userSkill.description = desc;
     console.log(userSkill.description);

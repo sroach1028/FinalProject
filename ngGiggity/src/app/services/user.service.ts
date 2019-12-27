@@ -83,7 +83,7 @@ export class UserService {
       );
   }
 
-  getSkillsByUsername(){
+  getSkillsByUsername() {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",

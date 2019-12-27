@@ -10,8 +10,9 @@
             <h5 *ngIf="userSelected && userSkills.length > 0"><a class="text-light" [routerLink]="['/post']">OFFER UP
                 YOUR SKILLS FOR MONEY</a></h5>
             <ol>
-              <li *ngFor="let skill of userSkills">
+              <li *ngFor="let skill of userSelected.skills">
                 <a>{{skill.skill.name}}</a>
+                <p>{{skill.description}}</p>
               </li>
             </ol>
           </div>
