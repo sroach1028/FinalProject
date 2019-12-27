@@ -29,6 +29,7 @@ export class UserComponent implements OnInit {
   skills: Skill[];
   user: User;
   bids: Bid[];
+  sellersBids: Bid[];
   selectedBid: Bid;
   booking: Booking = new Booking();
   // tslint:disable-next-line: max-line-length
@@ -97,6 +98,7 @@ export class UserComponent implements OnInit {
     );
     this.getUserJobs();
     this.getUserSkills();
+    this.showBidsByBidder();
   }
 
   getUserJobs() {
@@ -131,6 +133,18 @@ export class UserComponent implements OnInit {
   showBids(job: Job) {
     this.selected = job;
     this.bids = job.jobBids;
+  }
+
+  showBidsByBidder() {
+    this.bidSvc.getBidsByBidder().subscribe(
+      data => {
+        this.sellersBids = data;
+        console.log(this.sellersBids);
+      },
+      err => {
+        console.error('Get error in search-result-Component showBidsByBidder')
+      }
+    );
   }
 
   acceptBid(bid: Bid) {
