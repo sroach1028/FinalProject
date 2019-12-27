@@ -16,6 +16,12 @@ public class BidSvcImpl implements BidService {
 	
 	@Autowired
 	BidRepo bidRepo;
+	
+	@Override
+	public List<Bid> getBidsByBidderId(int bidderId) {
+		List<Bid> bids = bidRepo.findByBidderId(bidderId);
+		return bids;
+	}
 
 	@Override
 	public List<Bid> getBidsByJobId(Integer jobId) {
@@ -65,6 +71,8 @@ public class BidSvcImpl implements BidService {
 		return true;
 		
 	}
+
+	
 	
 	
 

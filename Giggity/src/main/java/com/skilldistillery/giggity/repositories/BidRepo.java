@@ -9,6 +9,7 @@ import com.skilldistillery.giggity.entities.User;
 
 public interface BidRepo extends JpaRepository<Bid, Integer> {
 	public Bid findById(int id);
+	public List<Bid> findByBidderId(int bidderId);
 //	public List<Bid> findByAvailable(Boolean avail);
 //	public List<Bid> findByBidAmountBetween(Double lowAmt, Double highAmt);
 //	public List<Bid> findByDescriptionLike(String desc);

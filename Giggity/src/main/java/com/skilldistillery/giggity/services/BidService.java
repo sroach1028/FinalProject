@@ -7,6 +7,8 @@ import com.skilldistillery.giggity.entities.Bid;
 public interface BidService {
 
 	List<Bid> getBidsByJobId(Integer jobId);
+	
+	List<Bid> getBidsByBidderId(int bidderId);
 
 	Bid addBid(Bid bid);
 	
