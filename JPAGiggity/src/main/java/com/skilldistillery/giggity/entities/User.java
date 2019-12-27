@@ -47,7 +47,7 @@ public class User {
 	@OneToMany(mappedBy = "bidder")
 	private List<Bid> bids;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 
