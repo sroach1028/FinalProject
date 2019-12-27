@@ -100,9 +100,9 @@
 
 <div *ngIf="!selected && !beginSearch && jobs !== null && !users">
   <h1 class="text-dark">
-    <span>Available Gigs Matching Your Search: {{jobs.length}}
+    <span>Available Gigs Matching Your Search: <span class="badge badge-secondary">{{jobs.length}}</span>
       <h6>(select for more details)</h6>
-      <button type="button" class="btn btn-secondary" (click)="backToSearch()">
+      <button *ngIf="jobs.length > 2" type="button" class="btn btn-secondary" (click)="backToSearch()">
           New Search
         </button>
     </span>
