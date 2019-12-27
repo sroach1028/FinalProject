@@ -36,9 +36,10 @@ public class BidController {
 	@Autowired
 	UserService userSvc;
 	
-	@GetMapping("bids/bidder/{bidderId}")
-	public List<Bid> getBidsByBidderID(@PathVariable Integer bidderId, HttpServletResponse res, Principal principal) {
-		List<Bid> bids = bidSvc.getBidsByBidderId(bidderId);
+	@GetMapping("bids/bidder")
+	public List<Bid> getBidsByBidderID(HttpServletResponse res, Principal principal) {
+		User bidder = userSvc.getUserByUsername(principal.getName());
+		List<Bid> bids = bidSvc.getBidsByBidderId(bidder.getId());
 		if (bids.isEmpty()) {
 			res.setStatus(404);
 		}

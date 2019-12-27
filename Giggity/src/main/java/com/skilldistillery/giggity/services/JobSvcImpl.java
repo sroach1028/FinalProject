@@ -178,4 +178,9 @@ public class JobSvcImpl implements JobService {
 		return repo.findByUser_Username(username);
 	}
 
+//	@Override
+//	public List<Job> getByJobByBidderId(int bidderId) {
+//		return repo.findByBidderId(bidderId); 
+//	}
+
 }
