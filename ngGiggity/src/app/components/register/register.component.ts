@@ -1,3 +1,6 @@
+import { Skill } from './../../models/skill';
+import { SkillService } from './../../services/skill.service';
+import { UserSkill } from './../../models/user-skill';
 import { UserService } from './../../services/user.service';
 import { Address } from './../../models/address';
 import { Component, OnInit } from '@angular/core';
@@ -13,8 +16,10 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authSvc: AuthService, private router: Router, private usersvc: UserService) { }
+  constructor(private authSvc: AuthService, private router: Router, private usersvc: UserService, private skillsvc: SkillService) { }
   error = false;
+
+
 
   register(form: NgForm) {
     form.value.role = 'standard';
@@ -59,7 +64,6 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

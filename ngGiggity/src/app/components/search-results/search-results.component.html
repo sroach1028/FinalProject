@@ -39,7 +39,7 @@
           </button>
         </form>
         <br />
-        <form name="username">
+        <!-- <form name="username">
           <h3>Search Users</h3>
           <hr />
           <div class="form-group">
@@ -50,7 +50,7 @@
           <button type="button" class="btn btn-primary btn-block btn-block" (click)="searchByUsername()">
             Search by Username
           </button>
-        </form>
+        </form> -->
 
         <br />
         <form name="jobRemote">
@@ -64,7 +64,7 @@
   </div>
 </div>
 
-<div *ngIf="users && !jobs">
+<!-- <div *ngIf="users && !jobs">
   <h1 class="text-dark"><span>User Search Results</span></h1>
   <table class="table table-striped table-hover table-danger border border-info">
     <thead class="thead thead-dark">
@@ -96,7 +96,7 @@
     </tfoot>
   </table>
 </div>
-<br />
+<br /> -->
 
 <div *ngIf="!selected && !beginSearch && jobs !== null && !users">
   <h1 class="text-dark">

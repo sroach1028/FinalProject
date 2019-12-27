@@ -24,6 +24,7 @@ public class UserSvcImpl implements UserService {
 	}
 	@Override
 	public List<User> getUsersByUsername(String username) {
+		
 		List<User> users = new ArrayList<User>();
 		
 		username = "%" + username + "%";

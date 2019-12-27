@@ -6,7 +6,7 @@ export class UserSkill {
   name: string;
   skill: Skill;
   constructor(
-    id: number,
+    id?: number,
     description?: string,
     skill?: Skill
   ) {

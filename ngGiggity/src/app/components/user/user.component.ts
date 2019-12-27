@@ -1,3 +1,5 @@
+import { NgForm } from '@angular/forms';
+import { SkillService } from './../../services/skill.service';
 import { BookingService } from './../../services/booking.service';
 import { ActiveBidPipe } from './../../pipes/active-bid.pipe';
 import { JobService } from 'src/app/services/job.service';
@@ -32,10 +34,13 @@ export class UserComponent implements OnInit {
   sellersBids: Bid[];
   selectedBid: Bid;
   booking: Booking = new Booking();
+  selectSkills=null;
+  userSkillDescription: string;
+
   // tslint:disable-next-line: max-line-length
 
   constructor(private bidSvc: BidService, private userSvc: UserService, private userSkillSvc: UserSkillService,
-    private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe, private bookingSvc: BookingService) {
+    private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe, private bookingSvc: BookingService, private skillsvc: SkillService) {
     // //reloads current URL with new search term
     // this.navigationSubscription = this.router.events.subscribe(
     //   (e: any) => {
@@ -58,6 +63,10 @@ export class UserComponent implements OnInit {
     //     }
     //   }
     // );
+  }
+
+  chooseSkills() {
+    this.selectSkills = true;
   }
 
   remove(job: Job) {
@@ -99,6 +108,7 @@ export class UserComponent implements OnInit {
     this.getUserJobs();
     this.getUserSkills();
     this.showBidsByBidder();
+    this.getAllSkills();
   }
 
   getUserJobs() {
@@ -192,5 +202,35 @@ export class UserComponent implements OnInit {
       err => console.error('Create error in search-result-Component createBid')
 
     );
+  }
+
+  getAllSkills(){
+    this.skillsvc.index().subscribe(
+      data => {
+        this.skills = data;
+      },
+      err => {
+        console.log('Error getting SKills in User component')
+      }
+    );
+  }
+
+  addUserSkill(skill: Skill, descForm: NgForm) {
+    const userSkill = new UserSkill();
+    userSkill.skill = skill;
+
+    const desc: string = descForm.value;
+
+    userSkill.description = desc;
+    console.log(userSkill.description);
+
+    this.userSkillSvc.createUserSkill(userSkill).subscribe(
+      data => {
+        console.log('User skill added')
+      },
+      err => {
+        console.log('Error getting SKills in User component')
+      }
+    )
   }
 }

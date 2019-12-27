@@ -124,7 +124,6 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.getLoggedUser();
-    console.log(this.user);
     if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
       this.jobBySkillName();
@@ -141,6 +140,7 @@ export class SearchResultsComponent implements OnInit {
     this.usersvc.getUserSByUsername(this.username).subscribe(
       data => {
         this.users = data;
+        console.log(this.users);
       },
       err => {
         console.error('Username search error in Search-results component');
