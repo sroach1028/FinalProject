@@ -23,7 +23,8 @@ public interface JobService {
 	public  List<Job> getByBuyerRating(int rating);
 	public  List<Job> getByJobBidId(int bidId);
 	public  List<Job> getByJobImagesId(int jobImageId);
-	
+//	public  List<Job> getByJobByBidderId(int bidderId);
+
     public Job create(Job job);
 
     public Job update(int jid, Job job);

@@ -204,6 +204,18 @@ public class JobController {
 		return results;
 	}
 	
+//	@GetMapping("jobs/jobBidderId/{bidderId}")
+//	public List<Job> getByBidderID(@PathVariable int bidderId, HttpServletRequest req, HttpServletResponse resp) {
+//		List<Job> results = new ArrayList<>();
+//		results = svc.getByJobByBidderId(bidderId);
+//		if (results.size() == 0) {
+//			resp.setStatus(404);
+//		} else {
+//			resp.setStatus(200);
+//		}
+//		return results;
+//	}
+	
 	@GetMapping("jobs/jobImage/{jobImageId}")
 	public List<Job> getByJobImageId(@PathVariable int jobImageId, HttpServletRequest req, HttpServletResponse resp) {
 		List<Job> results = new ArrayList<>();
