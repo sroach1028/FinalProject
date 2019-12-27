@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
 
   constructor(private bidSvc: BidService, private userSvc: UserService, private userSkillSvc: UserSkillService,
-              private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe, private bookingSvc: BookingService) {
+    private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe, private bookingSvc: BookingService) {
     // //reloads current URL with new search term
     // this.navigationSubscription = this.router.events.subscribe(
     //   (e: any) => {
@@ -94,29 +94,29 @@ export class UserComponent implements OnInit {
         this.userSelected = data;
       },
       err => console.error('Reload error in Component')
-      );
+    );
     this.getUserJobs();
     this.getUserSkills();
   }
 
-    getUserJobs() {
+  getUserJobs() {
     this.userSvc.getJobsByUsername().subscribe(
       data => {
         console.log(data);
         this.userJobs = data;
       },
       err => console.error('Reload error in Component')
-      );
-    }
+    );
+  }
 
-    getUserSkills() {
+  getUserSkills() {
     this.userSvc.getSkillsByUsername().subscribe(
       data => {
         this.userSkills = data;
       },
       err => console.error('Reload error in Component')
     );
-    }
+  }
 
   getSkillName(id) {
     this.userSkillSvc.findSkillName(id).subscribe(
@@ -128,12 +128,13 @@ export class UserComponent implements OnInit {
     );
   }
 
-  showBids(job: Job){
+  showBids(job: Job) {
     this.selected = job;
     this.bids = job.jobBids;
   }
 
   acceptBid(bid: Bid) {
+    this.selectedBid = bid;
     this.booking.bid = bid;
     this.booking.job = this.selected;
     this.bookingSvc.createBooking(this.booking).subscribe(
@@ -142,16 +143,40 @@ export class UserComponent implements OnInit {
       },
       err => console.error('Create error in search-result-Component createBid')
     );
+
+    for (let rejectBid of this.bids) {
+      rejectBid.accepted = false;
+      rejectBid.rejected = true;
+      this.bidSvc.updateBid(rejectBid).subscribe(
+        data => {
+          rejectBid = data;
+        },
+        err => {
+          console.error('Update error in search-result-Component acceptBid');
+        }
+      );
+    }
+
+    this.selectedBid.accepted = true;
+    this.selectedBid.rejected = false;
+    this.bidSvc.updateBid(this.selectedBid).subscribe(
+      data => {
+        this.selectedBid = data;
+      },
+      err => {
+        console.error('Update error in search-result-Component acceptBid');
+      }
+    );
   }
 
-rejectBid(rejectedBid: Bid) {
-  rejectedBid.accepted = false;
-  console.log(rejectedBid);
-  this.bidSvc.updateBid(rejectedBid).subscribe(
-    data => {
-    },
-    err => console.error('Create error in search-result-Component createBid')
+  rejectBid(rejectedBid: Bid) {
+    rejectedBid.accepted = false;
+    console.log(rejectedBid);
+    this.bidSvc.updateBid(rejectedBid).subscribe(
+      data => {
+      },
+      err => console.error('Create error in search-result-Component createBid')
 
-  );
-}
+    );
+  }
 }
