@@ -41,7 +41,7 @@ public class Bid {
 	@ManyToOne
 	@JoinColumn(name = "bidder_id")
 	private User bidder;
-	@JsonIgnore
+	@JsonIgnoreProperties({"jobBids"})
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job job;
