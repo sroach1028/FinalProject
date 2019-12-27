@@ -5,6 +5,7 @@ export class Bid {
   bidAmount: number;
   description: string;
   accepted: boolean;
+  rejected: boolean;
   bidder: User;
 
   constructor(
@@ -12,6 +13,7 @@ export class Bid {
     available?: boolean,
     bidAmount?: number,
     accepted?: boolean,
+    rejected?: boolean,
     description?: string,
     bidder?: User
   ) {
@@ -20,6 +22,7 @@ export class Bid {
     this.bidAmount = bidAmount;
     this.description = description;
     this.accepted = accepted;
+    this.rejected = rejected;
     this.bidder = bidder;
   }
 }
