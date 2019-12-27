@@ -118,7 +118,7 @@
                 <li *ngFor="let job of userJobs | jobsActive">
                   <div *ngIf="!selected || selected.id === job.id" class="card bg-dark text-light ">
                     <div class="card-header">
-                      <h5>Date Posted: {{job.dateCreated}}</h5>
+                      <h5>Date Posted: {{job.dateCreated | date: "short"}}</h5>
                     </div>
                     <div class="card-body">
                       <h5>Gig: {{job.title}}</h5>
