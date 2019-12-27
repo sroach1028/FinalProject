@@ -1,3 +1,4 @@
+import { UserSkill } from 'src/app/models/user-skill';
 import { Skill } from 'src/app/models/skill';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -30,6 +31,23 @@ export class UserSkillService {
           return throwError('KABOOM');
         })
       );
-
   }
+
+  createUserSkill(userSkill: UserSkill) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.post<UserSkill>(this.baseUrl + 'api/userSkill/', userSkill, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          console.log('SKILLSERVICE');
+          return throwError('KABOOM');
+        })
+      );
+  }
+
 }

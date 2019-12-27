@@ -100,11 +100,10 @@ public class UserSkillController {
 		return results;
 	}
 	
-	@PostMapping("userSkill/{sid}")
-	public UserSkill create(@RequestBody UserSkill us, @PathVariable Integer sid, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+	@PostMapping("userSkill/")
+	public UserSkill create(@RequestBody UserSkill us, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		User user = userSvc.getUserByUsername(principal.getName());
 		us.setUser(user);
-		us.setSkill(skillSvc.findById(sid));
 		
 		try {
 			// try to create the provided post

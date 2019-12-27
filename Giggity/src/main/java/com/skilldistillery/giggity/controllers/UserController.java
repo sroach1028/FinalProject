@@ -36,6 +36,7 @@ public class UserController {
 
 	@GetMapping("users/username/{username}")
 	public List<User> getUsersByUsername(@PathVariable String username, HttpServletResponse res) {
+		
 		List<User> users = svc.getUsersByUsername(username);
 		if (users == null) {
 			res.setStatus(404);
@@ -43,6 +44,7 @@ public class UserController {
 			res.setStatus(200);
 		return users;
 	}
+	
 	@GetMapping("users/username/")
 	public User getUserByUsername(HttpServletResponse res, Principal principal) {
 		User user = svc.getUserByUsername(principal.getName());
