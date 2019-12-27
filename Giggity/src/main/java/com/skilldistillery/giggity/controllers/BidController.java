@@ -36,7 +36,7 @@ public class BidController {
 	@Autowired
 	UserService userSvc;
 	
-	@GetMapping("bids/{bidderId}")
+	@GetMapping("bids/bidder/{bidderId}")
 	public List<Bid> getBidsByBidderID(@PathVariable Integer bidderId, HttpServletResponse res, Principal principal) {
 		List<Bid> bids = bidSvc.getBidsByBidderId(bidderId);
 		if (bids.isEmpty()) {
