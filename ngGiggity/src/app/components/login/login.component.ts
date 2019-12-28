@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
     const user: User = form.value;
     this.authSvc.login(user.username, user.password).subscribe(
       goodStuff => {
-        console.log('succsessful login');
         this.router.navigateByUrl('/user');
 
       },

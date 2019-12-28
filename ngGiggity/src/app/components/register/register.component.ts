@@ -45,10 +45,8 @@ export class RegisterComponent implements OnInit {
     this.error = false;
     this.authSvc.register(user).subscribe(
       data => {
-        console.log('RegisterComponent.register(): user registered.');
         this.authSvc.login(user.username, user.password).subscribe(
           next => {
-            console.log('RegisterComponent.register(): user logged in, routing to /user (profile).');
             this.router.navigateByUrl('/user');
           },
           error => {

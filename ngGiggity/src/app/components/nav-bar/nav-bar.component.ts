@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit {
 
   searchBy(event: any) {
     this.searchDisplay = event.target.value;
-    console.log(event);
   }
 
   isLoggedIn() {
