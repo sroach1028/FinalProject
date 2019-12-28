@@ -140,7 +140,6 @@ export class SearchResultsComponent implements OnInit {
     this.usersvc.getUserSByUsername(this.username).subscribe(
       data => {
         this.users = data;
-        console.log(this.users);
       },
       err => {
         console.error('Username search error in Search-results component');
@@ -178,8 +177,6 @@ export class SearchResultsComponent implements OnInit {
   }
 
   createBookingBuyer() {
-    // this.getLoggedUser();
-    console.log(this.user);
     this.booking.job = this.selected;
     this.bookingsvc.createBooking(this.booking).subscribe(
       data => {
@@ -192,11 +189,8 @@ export class SearchResultsComponent implements OnInit {
   createBid(form: NgForm) {
 
     this.bid = form.value;
-    console.log(this.bid.description);
-    console.log(this.bid.bidAmount);
     this.bidSvc.createBid(this.bid, this.selected.id).subscribe(
       data => {
-        // this.router.navigateByUrl('/');
 
       },
       err => console.error('Create error in search-result-Component createBid')

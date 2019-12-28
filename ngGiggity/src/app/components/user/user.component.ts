@@ -108,7 +108,6 @@ export class UserComponent implements OnInit {
       err => console.error('Reload error in User Component')
     );
     this.getUserJobs();
-    // this.getUserSkills();
     this.showBidsByBidder();
     this.getAllSkills();
   }
@@ -191,7 +190,6 @@ export class UserComponent implements OnInit {
 
   rejectBid(rejectedBid: Bid) {
     rejectedBid.accepted = false;
-    console.log(rejectedBid);
     this.bidSvc.updateBid(rejectedBid).subscribe(
       data => {},
       err => console.error('Create error in search-result-Component createBid')
@@ -216,7 +214,6 @@ export class UserComponent implements OnInit {
     const desc: string = descForm.value.userSkillDescription;
 
     userSkill.description = desc;
-    console.log(userSkill.description);
 
     this.userSkillSvc.createUserSkill(userSkill).subscribe(
       data => {
@@ -233,7 +230,6 @@ export class UserComponent implements OnInit {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
-        console.log(this.userSelected);
       },
       err => {
         console.error('userToUpdate Error: User Component');

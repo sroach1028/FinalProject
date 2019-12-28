@@ -22,7 +22,6 @@ export class PostComponent implements OnInit {
   reload() {
     this.skillSvc.index().subscribe(
       (aGoodThingHappened) => {
-        console.log(aGoodThingHappened);
         this.skills = aGoodThingHappened;
       },
       (didntWork) => {
@@ -36,29 +35,15 @@ this.reload();
 
   postJob(form: NgForm) {
     const newJob = form.value;
-    // this.getSkill();
-    // console.log(this.skillSel);
-    console.log(newJob);
     newJob.skill = new Skill( newJob.skillId );
     delete newJob.skillId;
 
     newJob.active = true;
-    console.log(newJob);
     this.jobSvc.postJob(newJob).subscribe(
       data => {
-        console.log(data);
         this.router.navigateByUrl('/user');
       },
       err => console.error('Reload error in Component')
       );
   }
-
-  // getSkill() {
-  //   this.skills.forEach(e => {
-  //     if (e.name === this.skillSel) {
-  //       newJob.skill = e;
-  //     }
-  //   });
-  // }
-
 }

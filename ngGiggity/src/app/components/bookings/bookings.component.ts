@@ -21,16 +21,12 @@ export class BookingsComponent implements OnInit {
 
   ngOnInit() {
     this.getLoggedUser();
-    // this.showAll();
   }
 
   getLoggedUser() {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.user = data;
-        console.log(this.user.firstName);
-        // this.active();
-        // this.history();
       },
       err => console.error('Reload error in Component')
     );
@@ -71,7 +67,6 @@ export class BookingsComponent implements OnInit {
   // }
 
   createBooking(job: Job, bid: Bid) {
-    console.log(this.booking);
     this.booking.job = job;
     this.booking.bid = bid;
     this.bookingSvc.createBooking(this.booking).subscribe(
