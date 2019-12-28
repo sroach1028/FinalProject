@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
 skills: Skill[] = [];
 totalskills: number;
+
 reload() {
   this.skillSvc.index().subscribe(
     (aGoodThingHappened) => {
