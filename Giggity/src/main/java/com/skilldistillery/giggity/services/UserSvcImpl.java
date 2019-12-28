@@ -9,7 +9,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.giggity.entities.Address;
 import com.skilldistillery.giggity.entities.User;
+import com.skilldistillery.giggity.repositories.AddressRepo;
 import com.skilldistillery.giggity.repositories.UserRepo;
 
 @Service
@@ -17,6 +19,9 @@ import com.skilldistillery.giggity.repositories.UserRepo;
 public class UserSvcImpl implements UserService {
 	@Autowired
 	private UserRepo userRepo;
+	
+	@Autowired
+	private AddressRepo addRepo;
 
 	@Override
 	public User getUserByUsername(String username) {
@@ -52,6 +57,34 @@ public class UserSvcImpl implements UserService {
 		}
 		else
 			return false;
+	}
+	@Override
+	public User updateUser(User u, int uid) {
+		User toUpdate = userRepo.findById(uid);
+		if(toUpdate != null) {
+			toUpdate.setFirstName(u.getFirstName());
+			toUpdate.setLastName(u.getLastName());
+			toUpdate.setUsername(u.getUsername());
+			toUpdate.setEmail(u.getEmail());
+			toUpdate.setPassword(u.getPassword());
+			toUpdate.setEnabled(u.getEnabled());
+			toUpdate.setRole(u.getRole());
+			toUpdate.setPhone(u.getPhone());
+			toUpdate.setAddress(u.getAddress());
+			toUpdate.setAvatarImage(u.getAvatarImage());
+			//update address too
+			Address toModify = addRepo.findById(toUpdate.getAddress().getId());
+			if(toModify != null) {
+				toModify.setCity(toUpdate.getAddress().getCity());
+				toModify.setStreet(toUpdate.getAddress().getStreet());
+				toModify.setState(toUpdate.getAddress().getState());
+				toModify.setZip(toUpdate.getAddress().getZip());
+			}
+			addRepo.saveAndFlush(toModify);
+			toUpdate.setAddress(u.getAddress());
+		}
+		userRepo.saveAndFlush(toUpdate);
+		return toUpdate;
 	}
 
 }
