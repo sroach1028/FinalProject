@@ -1,5 +1,7 @@
 package com.skilldistillery.giggity.services;
 
-public interface AddressService {
+import com.skilldistillery.giggity.entities.Address;
 
+public interface AddressService {
+	public Address getById(int id);
 }

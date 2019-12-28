@@ -17,6 +17,12 @@ import { UserSkill } from '../models/user-skill';
 export class UserService {
   private baseUrl = environment.baseUrl;
 
+  constructor(
+    private http: HttpClient,
+    private datePipe: DatePipe,
+    private authSvc: AuthService
+  ) { }
+
   index() {
     if (!this.authSvc.checkLogin()) {
       return null;
@@ -115,9 +121,19 @@ export class UserService {
       );
   }
 
-  constructor(
-    private http: HttpClient,
-    private datePipe: DatePipe,
-    private authSvc: AuthService
-  ) { }
+  updateUser(user: User) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.put<User>(this.baseUrl + 'api/users/' + user.id, user, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
 }

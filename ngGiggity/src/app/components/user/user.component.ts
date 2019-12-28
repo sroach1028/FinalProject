@@ -22,7 +22,7 @@ import { Booking } from 'src/app/models/booking';
 })
 export class UserComponent implements OnInit {
   title = 'Profile';
-  userSelected = null;
+  userSelected: User = null;
   userSkills: UserSkill[] = [];
   updateGig: Job = null;
   selected: Job = null;
@@ -34,13 +34,22 @@ export class UserComponent implements OnInit {
   sellersBids: Bid[];
   selectedBid: Bid;
   booking: Booking = new Booking();
-  selectSkills=null;
+  selectSkills = null;
   userSkillDescription: string;
+  updateProfile = false;
 
   // tslint:disable-next-line: max-line-length
 
-  constructor(private bidSvc: BidService, private userSvc: UserService, private userSkillSvc: UserSkillService,
-    private jobSvc: JobService, private router: Router, private activeBid: ActiveBidPipe, private bookingSvc: BookingService, private skillsvc: SkillService) {
+  constructor(
+    private bidSvc: BidService,
+    private userSvc: UserService,
+    private userSkillSvc: UserSkillService,
+    private jobSvc: JobService,
+    private router: Router,
+    private activeBid: ActiveBidPipe,
+    private bookingSvc: BookingService,
+    private skillsvc: SkillService
+  ) {
     // //reloads current URL with new search term
     // this.navigationSubscription = this.router.events.subscribe(
     //   (e: any) => {
@@ -51,14 +60,10 @@ export class UserComponent implements OnInit {
     //         this.jobSvc.findJobBySkill(this.keyword).subscribe(
     //           data => {
     //             this.selected = data.find(this.checkSkill)
-
-
     //           },
     //           err => {
-
     //           }
     //         );
-
     //       }
     //     }
     //   }
@@ -81,29 +86,26 @@ export class UserComponent implements OnInit {
   setUpdateGig(job: Job) {
     this.selected = job;
     this.updateGig = Object.assign({}, job);
-    console.log(this.updateGig);
   }
 
   update(job: Job) {
     this.jobSvc.update(job.id, job).subscribe(
       data => {
-        console.error('HEY I\'M IN UPDATE WITH DATA');
-        // this.router.navigateByUrl('search/' + job.skill.name);
-        // this.router.navigateByUrl('#/user');
         this.ngOnInit();
 
         this.updateGig = null;
       },
       err => {
-        console.error('Update error in Compnent');
-      });
+        console.error('Update Job error in User Compnent');
+      }
+    );
   }
   ngOnInit() {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
       },
-      err => console.error('Reload error in Component')
+      err => console.error('Reload error in User Component')
     );
     this.getUserJobs();
     // this.getUserSkills();
@@ -114,7 +116,6 @@ export class UserComponent implements OnInit {
   getUserJobs() {
     this.userSvc.getJobsByUsername().subscribe(
       data => {
-        console.log(data);
         this.userJobs = data;
       },
       err => console.error('Reload error in Component')
@@ -131,13 +132,9 @@ export class UserComponent implements OnInit {
   }
 
   getSkillName(id) {
-    this.userSkillSvc.findSkillName(id).subscribe(
-      data => {
-        console.log('--------------------------');
-        console.log(data);
-        this.skillName = data.name;
-      }
-    );
+    this.userSkillSvc.findSkillName(id).subscribe(data => {
+      this.skillName = data.name;
+    });
   }
 
   showBids(job: Job) {
@@ -149,10 +146,9 @@ export class UserComponent implements OnInit {
     this.bidSvc.getBidsByBidder().subscribe(
       data => {
         this.sellersBids = data;
-        console.log(this.sellersBids);
       },
       err => {
-        console.error('Get error in search-result-Component showBidsByBidder')
+        console.error('Get error in search-result-Component showBidsByBidder');
       }
     );
   }
@@ -197,20 +193,18 @@ export class UserComponent implements OnInit {
     rejectedBid.accepted = false;
     console.log(rejectedBid);
     this.bidSvc.updateBid(rejectedBid).subscribe(
-      data => {
-      },
+      data => {},
       err => console.error('Create error in search-result-Component createBid')
-
     );
   }
 
-  getAllSkills(){
+  getAllSkills() {
     this.skillsvc.index().subscribe(
       data => {
         this.skills = data;
       },
       err => {
-        console.log('Error getting SKills in User component')
+        console.log('Error getting SKills in User component');
       }
     );
   }
@@ -226,11 +220,36 @@ export class UserComponent implements OnInit {
 
     this.userSkillSvc.createUserSkill(userSkill).subscribe(
       data => {
-        console.log('User skill added')
       },
       err => {
-        console.log('Error getting SKills in User component')
+        console.log('Error getting SKills in User component');
       }
-    )
+    );
+    this.selectSkills = null;
+  }
+
+  userToUpdate() {
+    this.updateProfile = true;
+    this.userSvc.getUserByUsername().subscribe(
+      data => {
+        this.userSelected = data;
+        console.log(this.userSelected);
+      },
+      err => {
+        console.error('userToUpdate Error: User Component');
+      }
+    );
+  }
+
+  updateUser() {
+    this.userSvc.updateUser(this.userSelected).subscribe(
+      data => {
+        this.userSelected = data;
+      },
+      err => {
+        console.error('Update User Error: User Component');
+      }
+    );
+    this.updateProfile = false;
   }
 }

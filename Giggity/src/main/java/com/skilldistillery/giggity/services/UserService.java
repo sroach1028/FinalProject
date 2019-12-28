@@ -10,6 +10,8 @@ public interface UserService {
 	public User getUserByUsername(String username);
 
 	public List<User> getUsersByUsername(String username);
+	
+	public User updateUser(User u, int uid);
 
 	public boolean destroy(Integer id);
 }
