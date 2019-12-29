@@ -86,15 +86,6 @@
 </div>
 <br /> -->
 
-<!-- M A P -->
-<div *ngIf="selected && !selected.remote">
-    <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
-        <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng" [markerDraggable]="location.marker.draggable"></agm-marker>
-    </agm-map>
-    </div>
- <!-- E N D M A P -->
-
-
 <div *ngIf="!selected && !beginSearch && jobs !== null && !users">
   <h1 class="text-dark">
     <span>Available Gigs Matching Your Search: <span class="badge badge-secondary">{{jobs.length}}</span>
@@ -189,11 +180,19 @@
       </div>
       <!-- END MODAL 2 -->
 
+<!-- M A P -->
+<div *ngIf="selected && !selected.remote">
+  <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
+      <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng" [markerDraggable]="location.marker.draggable"></agm-marker>
+  </agm-map>
+  </div>
+<!-- E N D M A P -->
+
 <div *ngIf="selected && !updateGig">
   <div class="col-sm-12">
 <div class="card text-center border-dark mb-3 w-50" style="margin-left: 100px; width: 18rem;">
   <div class="card-header text-white">
-    <!-- Posted By {{selected.user.firstName}} in {{selected.user.address.city}}, {{selected.user.address.state}} -->
+    Posted By {{selected.user.firstName}} in {{selected.user.address.city}}, {{selected.user.address.state}}
   </div>
   <img class="card-img-top" [src]="selected.imageUrl" alt="Job Image" />
   <div class="card-body">

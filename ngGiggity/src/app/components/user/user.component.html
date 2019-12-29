@@ -6,7 +6,7 @@
       <div class="col-10">
         <div class="span well bg-light">
           <br />
-          <div>
+          <div *ngIf="userSelected">
             <a href="#aboutModal" data-toggle="modal" data-target="#myModal"
               ><img
                 [src]="userSelected.avatarImage.imageUrl"
@@ -46,6 +46,7 @@
       role="dialog"
       aria-labelledby="myModalLabel"
       aria-hidden="true"
+      *ngIf="userSelected"
     >
       <div class="modal-dialog">
         <div class="modal-content">
@@ -109,7 +110,7 @@
     <br />
 
     <!-- USER SKILLS BOX START -->
-    <div class="row">
+    <div class="row" *ngIf="userSelected">
       <div class="col-2"></div>
       <div class="col-8">
         <div class="card h-100 text-dark text-center">
@@ -174,6 +175,7 @@
     <br />
 
     <!-- GIGS BOX START -->
+    <div *ngIf="userJobs">
     <div class="row" *ngFor="let job of userJobs | jobsActive">
       <div class="col-2"></div>
       <div class="col-8">
@@ -213,6 +215,7 @@
       </div>
       <div class="col-2"></div>
     </div>
+  </div>
     <!-- GIGS BOX END -->
 
     <br />
@@ -402,7 +405,7 @@
           </h2>
           <div class="card-body">
             <h5 *ngIf="userSelected">Request Someone to Do Your Gig</h5>
-            <a class="text-light" [routerLink]="['/post']"
+            <a class="text-primary" [routerLink]="['/post']"
               ><small>Post a Gig</small></a
             >
           </div>
