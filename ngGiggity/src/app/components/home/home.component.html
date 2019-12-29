@@ -10,7 +10,7 @@
       <div class="carousel-item active">
               <div class = "card h-100" style="width: 35em;">
                   <div class="card-body">
-                  <h1 class="card-header bg-dark text-center text-white">{{skills[skills.length-1].name}}</h1>
+                  <h1 class="card-header text-center text-white">{{skills[skills.length-1].name}}</h1>
                   <h5 class="text-secondary">{{skills[skills.length-1].description}}</h5>
                 </div>
                     <div class="card-footer text-center">
@@ -23,7 +23,7 @@
       <div class="carousel-item" *ngFor="let skill of skills">
           <div class = "card h-100" style="width: 35em;">
               <div class="card-body">
-              <h1 class="card-header bg-dark text-center text-white">{{skill.name}}</h1>
+              <h1 class="card-header text-center text-white">{{skill.name}}</h1>
               <h5 class="text-secondary">{{skill.description}}</h5>
             </div>
                 <div class="card-footer text-center">

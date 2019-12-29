@@ -139,3 +139,11 @@ background-color: #F1F1F1;
   }
 }
 
+.card-header {
+  background-color: rgb(24, 24, 83);
+}
+
+#gigUpdate label, #updateUser label {
+  color: white;
+}
+
