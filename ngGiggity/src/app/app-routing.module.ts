@@ -9,7 +9,6 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { PostComponent } from './components/post/post.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 
-
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },

@@ -13,3 +13,6 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.sebm-google-map-container {
+  height: 300px;
+}

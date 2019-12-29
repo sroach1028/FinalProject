@@ -1,6 +1,5 @@
 import { UserService } from './services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +17,8 @@ import { PostComponent } from './components/post/post.component';
 import { JobsActivePipe } from './pipes/jobs-active.pipe';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { ActiveBidPipe } from './pipes/active-bid.pipe';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { NgModule } from '@angular/core';
 
 
 
@@ -38,11 +39,12 @@ import { ActiveBidPipe } from './pipes/active-bid.pipe';
   ],
   imports: [
     BrowserModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyAVKu5FES1dQUOW37cwC8GQ1j_MChOY_x0'}),
     AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService, UserService, DatePipe, ActiveBidPipe],
+  providers: [AuthService, UserService, DatePipe, ActiveBidPipe, GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
