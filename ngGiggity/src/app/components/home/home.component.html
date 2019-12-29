@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1 class = "display-4 text-white">Work-For-Hire</h1>
+  <h1 class = "display-4 text-light">Work-For-Hire</h1>
   <div class="row">
     <ng-container>
       <div class="col-sm-3"></div>
@@ -15,7 +15,7 @@
                 </div>
                     <div class="card-footer text-center">
                       <div>
-                    <button class="btn btn-primary" [routerLink]="['/search', skills[skills.length-1].name]">Find Gigs</button>
+                    <button class="btn btn-info" [routerLink]="['/search', skills[skills.length-1].name]">Find Gigs</button>
                   </div>
                   </div>
               </div>
@@ -28,18 +28,18 @@
             </div>
                 <div class="card-footer text-center">
                   <div>
-                <button class="btn btn-primary" [routerLink]="['/search', skill.name]">Find Gigs</button>
+                <button class="btn btn-info" [routerLink]="['/search', skill.name]">Find Gigs</button>
               </div>
               </div>
           </div>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselGigs" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
         <span class="sr-only text-info">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselGigs" role="button" data-slide="next">
-        <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
   </div>
@@ -49,3 +49,7 @@
 </ng-container>
 </div>
 </div>
+
+
+
+
