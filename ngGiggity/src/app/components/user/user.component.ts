@@ -110,6 +110,7 @@ export class UserComponent implements OnInit {
     this.getUserJobs();
     this.showBidsByBidder();
     this.getAllSkills();
+    this.getUserSkills();
   }
 
   getUserJobs() {
@@ -139,6 +140,11 @@ export class UserComponent implements OnInit {
   showBids(job: Job) {
     this.selected = job;
     this.bids = job.jobBids;
+  }
+
+  viewAllGigs() {
+    this.bids = null;
+    this.selected = null;
   }
 
   showBidsByBidder() {
@@ -222,8 +228,10 @@ export class UserComponent implements OnInit {
         console.log('Error getting SKills in User component');
       }
     );
+    this.userSkills.push(userSkill);
     this.selectSkills = null;
-  }
+    this.ngOnInit();
+    }
 
   userToUpdate() {
     this.updateProfile = true;
@@ -248,4 +256,5 @@ export class UserComponent implements OnInit {
     );
     this.updateProfile = false;
   }
+
 }
