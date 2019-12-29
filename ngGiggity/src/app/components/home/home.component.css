@@ -16,3 +16,6 @@ body, html {
 .sebm-google-map-container {
   height: 300px;
 }
+.card-header {
+  background-color: rgb(24, 24, 83);
+}
