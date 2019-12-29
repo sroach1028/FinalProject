@@ -12,7 +12,7 @@ import { Booking } from 'src/app/models/booking';
 import { Bid } from 'src/app/models/bid';
 import { Form, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { MapsAPILoader, AgmMap } from '@agm/core';
+import { MapsAPILoader, AgmMap, MarkerManager } from '@agm/core';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 
 //MAP FIELD
@@ -50,14 +50,9 @@ export class SearchResultsComponent implements OnInit {
   // MAP FIELDS
   geocoder: any;
   public location: Location = {
-    lat: 39.7392,
-    lng: -104.9903,
-    marker: {
-      lat: 39.7392,
-      lng: -104.9903,
-      draggable: true
-    },
-    zoom: 4
+    lat: 39.5501,
+    lng: -105.7821,
+    zoom: 7
   };
   @ViewChild(AgmMap, {static: false}) map: AgmMap;
   // END MAP FIELDS
@@ -81,6 +76,12 @@ export class SearchResultsComponent implements OnInit {
   users: User[];
   beginSearch = true;
   username = null;
+  markers: Marker[] = [];
+  public newMarker: Marker = {
+    lat: 0,
+    lng: 0,
+    draggable: true
+  };
 
   // C O N S T R U C T O R
   constructor(
@@ -116,11 +117,20 @@ export class SearchResultsComponent implements OnInit {
   updateOnMap() {
     // tslint:disable-next-line: variable-name
     let full_address: string = this.location.address_level_1 || " "
-    if (this.location.address_level_2) { full_address = full_address + ' ' + this.location.address_level_2; }
+    if (this.location.address_level_2) { full_address = full_address + ' ' + this.jobCity; }
     if (this.location.address_state) { full_address = full_address + ' ' + this.location.address_state; }
     if (this.location.address_country) { full_address = full_address + ' ' + this.location.address_country; }
     console.log(full_address);
     this.findLocation(full_address);
+  }
+  updateMarkers() {
+    // tslint:disable-next-line: variable-name
+    let full_address: string = this.location.address_level_1 || " "
+    if (this.location.address_level_2) { full_address = full_address + ' ' + this.location.address_level_2; }
+    if (this.location.address_state) { full_address = full_address + ' ' + this.location.address_state; }
+    if (this.location.address_country) { full_address = full_address + ' ' + this.location.address_country; }
+    console.log(full_address);
+    this.findAdditionalLocation(full_address);
   }
 
   findLocation(address) {
@@ -162,6 +172,53 @@ export class SearchResultsComponent implements OnInit {
         alert("Sorry, this search produced no results.");
       }
     })
+  }
+  findAdditionalLocation(address) {
+    if (!this.geocoder) {this.geocoder = new google.maps.Geocoder(); }
+    this.geocoder.geocode({
+      'address': address
+    }, (results, status) => {
+      console.log(results);
+
+      if (status == google.maps.GeocoderStatus.OK) {
+        for (var i = 0; i < results[0].address_components.length; i++) {
+          let types = results[0].address_components[i].types
+
+          if (types.indexOf('locality') != -1) {
+            this.location.address_level_2 = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('country') != -1) {
+            this.location.address_country = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('postal_code') != -1) {
+            this.location.address_zip = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('administrative_area_level_1') != -1) {
+            this.location.address_state = results[0].address_components[i].long_name
+          }
+        }
+
+        if (results[0].geometry.location) {
+          this.newMarker.lat = results[0].geometry.location.lat();
+          this.newMarker.lng = results[0].geometry.location.lng();
+          this.markers.push(this.newMarker);
+          console.log(this.markers);
+        }
+        this.map.triggerResize();
+
+      }
+    });
+  }
+
+  addMarkers(selectedJobs: Job[]){
+    console.log("made it to addMarkers");
+    console.log(selectedJobs.length);
+    selectedJobs.forEach(job => {
+      this.location.address_level_1 = job.address.street;
+      this.location.address_level_2 = job.address.city;
+      this.location.address_state = job.address.state;
+      this.updateMarkers();
+    });
   }
   // E N D    MAP METHODS
 
@@ -214,10 +271,10 @@ export class SearchResultsComponent implements OnInit {
   }
 
   jobByCity() {
-    this.updateOnMap();
     this.jobSvc.findJobByCity(this.jobCity).subscribe(
       aGoodThingHappened => {
         this.jobs = aGoodThingHappened;
+        this.addMarkers(this.jobs);
       },
       didntWork => {
         console.error(didntWork);
