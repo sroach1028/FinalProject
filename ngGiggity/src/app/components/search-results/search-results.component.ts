@@ -119,6 +119,9 @@ export class SearchResultsComponent implements OnInit {
 
   // M A P    M E T H O D S
   updateOnMap() {
+    if (this.selected.remote){
+      return;
+    }
     this.location.address_level_1 = this.selected.address.street;
     this.location.address_level_2 = this.selected.address.city;
     this.location.address_state = this.selected.address.state;
