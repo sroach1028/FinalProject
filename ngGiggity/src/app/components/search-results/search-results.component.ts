@@ -52,6 +52,11 @@ export class SearchResultsComponent implements OnInit {
   public location: Location = {
     lat: 39.5501,
     lng: -105.7821,
+    marker: {
+      lat: 39.5501,
+      lng: -105.7821,
+      draggable: true
+    },
     zoom: 7
   };
   @ViewChild(AgmMap, {static: false}) map: AgmMap;
@@ -106,7 +111,6 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.getLoggedUser();
-    this.location.marker.draggable = true;
     if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
       this.jobBySkillName();
@@ -115,23 +119,18 @@ export class SearchResultsComponent implements OnInit {
 
   // M A P    M E T H O D S
   updateOnMap() {
-    // tslint:disable-next-line: variable-name
-    let full_address: string = this.location.address_level_1 || " "
-    if (this.location.address_level_2) { full_address = full_address + ' ' + this.jobCity; }
-    if (this.location.address_state) { full_address = full_address + ' ' + this.location.address_state; }
-    if (this.location.address_country) { full_address = full_address + ' ' + this.location.address_country; }
-    console.log(full_address);
-    this.findLocation(full_address);
-  }
-  updateMarkers() {
+    this.location.address_level_1 = this.selected.address.street;
+    this.location.address_level_2 = this.selected.address.city;
+    this.location.address_state = this.selected.address.state;
     // tslint:disable-next-line: variable-name
     let full_address: string = this.location.address_level_1 || " "
     if (this.location.address_level_2) { full_address = full_address + ' ' + this.location.address_level_2; }
     if (this.location.address_state) { full_address = full_address + ' ' + this.location.address_state; }
     if (this.location.address_country) { full_address = full_address + ' ' + this.location.address_country; }
     console.log(full_address);
-    this.findAdditionalLocation(full_address);
+    this.findLocation(full_address);
   }
+
 
   findLocation(address) {
     if (!this.geocoder) {this.geocoder = new google.maps.Geocoder(); }
@@ -163,7 +162,6 @@ export class SearchResultsComponent implements OnInit {
           this.location.lng = results[0].geometry.location.lng();
           this.location.marker.lat = results[0].geometry.location.lat();
           this.location.marker.lng = results[0].geometry.location.lng();
-          this.location.marker.draggable = true;
           this.location.viewport = results[0].geometry.viewport;
         }
         this.map.triggerResize();
@@ -172,53 +170,6 @@ export class SearchResultsComponent implements OnInit {
         alert("Sorry, this search produced no results.");
       }
     })
-  }
-  findAdditionalLocation(address) {
-    if (!this.geocoder) {this.geocoder = new google.maps.Geocoder(); }
-    this.geocoder.geocode({
-      'address': address
-    }, (results, status) => {
-      console.log(results);
-
-      if (status == google.maps.GeocoderStatus.OK) {
-        for (var i = 0; i < results[0].address_components.length; i++) {
-          let types = results[0].address_components[i].types
-
-          if (types.indexOf('locality') != -1) {
-            this.location.address_level_2 = results[0].address_components[i].long_name
-          }
-          if (types.indexOf('country') != -1) {
-            this.location.address_country = results[0].address_components[i].long_name
-          }
-          if (types.indexOf('postal_code') != -1) {
-            this.location.address_zip = results[0].address_components[i].long_name
-          }
-          if (types.indexOf('administrative_area_level_1') != -1) {
-            this.location.address_state = results[0].address_components[i].long_name
-          }
-        }
-
-        if (results[0].geometry.location) {
-          this.newMarker.lat = results[0].geometry.location.lat();
-          this.newMarker.lng = results[0].geometry.location.lng();
-          this.markers.push(this.newMarker);
-          console.log(this.markers);
-        }
-        this.map.triggerResize();
-
-      }
-    });
-  }
-
-  addMarkers(selectedJobs: Job[]){
-    console.log("made it to addMarkers");
-    console.log(selectedJobs.length);
-    selectedJobs.forEach(job => {
-      this.location.address_level_1 = job.address.street;
-      this.location.address_level_2 = job.address.city;
-      this.location.address_state = job.address.state;
-      this.updateMarkers();
-    });
   }
   // E N D    MAP METHODS
 
@@ -274,7 +225,6 @@ export class SearchResultsComponent implements OnInit {
     this.jobSvc.findJobByCity(this.jobCity).subscribe(
       aGoodThingHappened => {
         this.jobs = aGoodThingHappened;
-        this.addMarkers(this.jobs);
       },
       didntWork => {
         console.error(didntWork);
