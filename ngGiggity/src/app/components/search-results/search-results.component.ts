@@ -1,8 +1,7 @@
 import { BidService } from './../../services/bid.service';
 import { BookingService } from './../../services/booking.service';
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Component, Input, ViewChild, NgZone, OnInit } from '@angular/core';
 import { Address } from 'src/app/models/address';
 import { Job } from 'src/app/models/job';
 import { Skill } from 'src/app/models/skill';
@@ -12,6 +11,34 @@ import { User } from 'src/app/models/user';
 import { Booking } from 'src/app/models/booking';
 import { Bid } from 'src/app/models/bid';
 import { Form, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { MapsAPILoader, AgmMap, MarkerManager } from '@agm/core';
+import { GoogleMapsAPIWrapper } from '@agm/core';
+
+//MAP FIELD
+declare var google: any;
+
+//MAP INTERFACES
+interface Marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
+}
+
+interface Location {
+  lat: number;
+  lng: number;
+  viewport?: Object;
+  zoom: number;
+  address_level_1?:string;
+  address_level_2?: string;
+  address_country?: string;
+  address_zip?: string;
+  address_state?: string;
+  marker?: Marker;
+}
+
 
 @Component({
   selector: 'app-search-results',
@@ -19,7 +46,23 @@ import { Form, NgForm } from '@angular/forms';
   styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
-  // F I E L D S
+
+  // MAP FIELDS
+  geocoder: any;
+  public location: Location = {
+    lat: 39.5501,
+    lng: -105.7821,
+    marker: {
+      lat: 39.5501,
+      lng: -105.7821,
+      draggable: true
+    },
+    zoom: 7
+  };
+  @ViewChild(AgmMap, {static: false}) map: AgmMap;
+  // END MAP FIELDS
+
+  // CLASS FIELDS
   jobs: Job[];
   jobTitle: string = null;
   title = 'Available Jobs';
@@ -38,6 +81,12 @@ export class SearchResultsComponent implements OnInit {
   users: User[];
   beginSearch = true;
   username = null;
+  markers: Marker[] = [];
+  public newMarker: Marker = {
+    lat: 0,
+    lng: 0,
+    draggable: true
+  };
 
   // C O N S T R U C T O R
   constructor(
@@ -47,8 +96,85 @@ export class SearchResultsComponent implements OnInit {
     private skillSvc: SkillService,
     private usersvc: UserService,
     private bookingsvc: BookingService,
-    private bidSvc: BidService
-  ) { }
+    private bidSvc: BidService,
+    public mapsApiLoader: MapsAPILoader,
+    private zone: NgZone,
+    private wrapper: GoogleMapsAPIWrapper
+  ) {
+    this.mapsApiLoader = mapsApiLoader;
+    this.zone = zone;
+    this.wrapper = wrapper;
+    this.mapsApiLoader.load().then(() => {
+    this.geocoder = new google.maps.Geocoder();
+    });
+  }
+
+  ngOnInit() {
+    this.getLoggedUser();
+    if (this.currentRoute.snapshot.paramMap.get('skillName')) {
+      this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
+      this.jobBySkillName();
+    }
+  }
+
+  // M A P    M E T H O D S
+  updateOnMap() {
+    if (this.selected.remote){
+      return;
+    }
+    this.location.address_level_1 = this.selected.address.street;
+    this.location.address_level_2 = this.selected.address.city;
+    this.location.address_state = this.selected.address.state;
+    // tslint:disable-next-line: variable-name
+    let full_address: string = this.location.address_level_1 || " "
+    if (this.location.address_level_2) { full_address = full_address + ' ' + this.location.address_level_2; }
+    if (this.location.address_state) { full_address = full_address + ' ' + this.location.address_state; }
+    if (this.location.address_country) { full_address = full_address + ' ' + this.location.address_country; }
+    console.log(full_address);
+    this.findLocation(full_address);
+  }
+
+
+  findLocation(address) {
+    if (!this.geocoder) {this.geocoder = new google.maps.Geocoder(); }
+    this.geocoder.geocode({
+      'address': address
+    }, (results, status) => {
+      console.log(results);
+
+      if (status == google.maps.GeocoderStatus.OK) {
+        for (var i = 0; i < results[0].address_components.length; i++) {
+          let types = results[0].address_components[i].types
+
+          if (types.indexOf('locality') != -1) {
+            this.location.address_level_2 = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('country') != -1) {
+            this.location.address_country = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('postal_code') != -1) {
+            this.location.address_zip = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('administrative_area_level_1') != -1) {
+            this.location.address_state = results[0].address_components[i].long_name
+          }
+        }
+
+        if (results[0].geometry.location) {
+          this.location.lat = results[0].geometry.location.lat();
+          this.location.lng = results[0].geometry.location.lng();
+          this.location.marker.lat = results[0].geometry.location.lat();
+          this.location.marker.lng = results[0].geometry.location.lng();
+          this.location.viewport = results[0].geometry.viewport;
+        }
+        this.map.triggerResize();
+
+      } else {
+        alert("Sorry, this search produced no results.");
+      }
+    })
+  }
+  // E N D    MAP METHODS
 
   // M E T H O D S
   // onChange(deviceValue) {
@@ -120,14 +246,6 @@ export class SearchResultsComponent implements OnInit {
       }
     );
     this.beginSearch = false;
-  }
-
-  ngOnInit() {
-    this.getLoggedUser();
-    if (this.currentRoute.snapshot.paramMap.get('skillName')) {
-      this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
-      this.jobBySkillName();
-    }
   }
 
   backToSearch() {

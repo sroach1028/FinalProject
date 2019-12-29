@@ -5,6 +5,9 @@
   width: 100px;
   height: 100px;
 }
+.sebm-google-map-container {
+  height: 300px;
+}
 
 .card-header, .thead {
   background-color: rgb(24, 24, 83);

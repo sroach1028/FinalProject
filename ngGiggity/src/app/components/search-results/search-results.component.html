@@ -32,25 +32,13 @@
           <div class="form-group">
             <label name="jobCity" for="jobCity">City</label>
             <input name="jobCity" type="jobCity" class="form-control" id="jobCity" placeholder="City"
-              [(ngModel)]="jobCity" [ngModelOptions]="{ standalone: true }" />
+              [(ngModel)]="jobCity" [(ngModel)]="location.address_level_2" [ngModelOptions]="{ standalone: true }" />
           </div>
           <button type="button" class="btn btn-primary btn-block btn-block" (click)="jobByCity()">
             Search by City
           </button>
         </form>
         <br />
-        <!-- <form name="username">
-          <h3>Search Users</h3>
-          <hr />
-          <div class="form-group">
-            <label name="username" for="username">Username</label>
-            <input name="username" type="username" class="form-control" id="username" placeholder="Username"
-              [(ngModel)]="username" [ngModelOptions]="{ standalone: true }" />
-          </div>
-          <button type="button" class="btn btn-primary btn-block btn-block" (click)="searchByUsername()">
-            Search by Username
-          </button>
-        </form> -->
 
         <br />
         <form name="jobRemote">
@@ -98,6 +86,15 @@
 </div>
 <br /> -->
 
+<!-- M A P -->
+<div *ngIf="selected && !selected.remote">
+    <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
+        <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng" [markerDraggable]="location.marker.draggable"></agm-marker>
+    </agm-map>
+    </div>
+ <!-- E N D M A P -->
+
+
 <div *ngIf="!selected && !beginSearch && jobs !== null && !users">
   <h1 class="text-dark">
     <span>Available Gigs Matching Your Search: <span class="badge badge-secondary">{{jobs.length}}</span>
@@ -117,7 +114,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr #data (click)="displaySelected(job)" class="border border-info" *ngFor="let job of jobs | jobsActive">
+      <tr #data (click)="displaySelected(job); updateOnMap()" class="border border-info" *ngFor="let job of jobs | jobsActive">
         <td><img [src]="job.imageUrl" class="img-thumbnail picture hidden-xs" style="width: 150px; height: 150px" />
           {{ job.title }}</td>
         <td>{{ job.skill.name }}</td>
@@ -145,7 +142,7 @@
 
 
       <!-- Modal 1-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -166,7 +163,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- END MODAL 1 -->
 
       <!-- Modal 2-->
@@ -175,7 +172,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="bidSubmittedModalLabel">Contact {{selected.user.firstName}}</h5>
+              <!-- <h5 class="modal-title" id="bidSubmittedModalLabel">Contact {{selected.user.firstName}}</h5> -->
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -196,7 +193,7 @@
   <div class="col-sm-12">
 <div class="card text-center border-dark mb-3 w-50" style="margin-left: 100px; width: 18rem;">
   <div class="card-header text-white">
-    Posted By {{selected.user.firstName}} in {{selected.user.address.city}}, {{selected.user.address.state}}
+    <!-- Posted By {{selected.user.firstName}} in {{selected.user.address.city}}, {{selected.user.address.state}} -->
   </div>
   <img class="card-img-top" [src]="selected.imageUrl" alt="Job Image" />
   <div class="card-body">
@@ -225,10 +222,37 @@
       <br />
       <hr />
       <ng-container class="container-fluid">
+
+                      <!-- Modal 1-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Contact {{selected.user.firstName}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <p>{{selected.user.phone}}</p><br>
+              <p>{{selected.user.email}}</p>
+              <img id="modal" class="img-thumbnail" [src]="selected.user.avatarImage.imageUrl" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MODAL 1 -->
+
           <button *ngIf="!newBid" style="float: right;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Contact {{selected.user.firstName}}
             </button>
         <!-- Button trigger modal -->
+
+
 
         <button *ngIf="!newBid" style="float: left;" class="btn btn-secondary" (click)="displaySelected(null)">
           B a c k
@@ -260,7 +284,7 @@
       <hr />
       <ng-container class="container-fluid">
           <button *ngIf="!newBid && user" style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Contact {{selected.user.firstName}}
+              <!-- Contact {{selected.user.firstName}} -->
             </button>
         <!-- Button trigger modal -->
 
@@ -289,3 +313,4 @@
 </div>
 </div>
 </div>
+

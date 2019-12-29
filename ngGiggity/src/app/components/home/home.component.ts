@@ -1,7 +1,11 @@
 import { JobService } from 'src/app/services/job.service';
 import { SkillService } from './../../services/skill.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, NgZone, OnInit } from '@angular/core';
+import { MapsAPILoader, AgmMap } from '@agm/core';
+import { GoogleMapsAPIWrapper } from '@agm/core';
 import { Skill } from 'src/app/models/skill';
+
+// END MAP STUFF
 
 @Component({
   selector: 'app-home',
@@ -9,7 +13,6 @@ import { Skill } from 'src/app/models/skill';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
 
 skills: Skill[] = [];
 totalskills: number;
@@ -26,7 +29,7 @@ reload() {
   );
 }
 
-  constructor(private skillSvc: SkillService, private jobSvc: JobService) { }
+  constructor(private skillSvc: SkillService, private jobSvc: JobService){}
 
   ngOnInit() {
     this.reload();
