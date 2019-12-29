@@ -108,7 +108,7 @@
     </span>
   </h1>
   <table class="table table-striped table-hover table-striped border border-info">
-    <thead class="thead thead-dark">
+    <thead class="thead" style="color: white">
       <tr>
         <th>Job</th>
         <th>Skill</th>
@@ -161,8 +161,8 @@
                 <img id="modal" class="img-thumbnail" [src]="selected.user.avatarImage.imageUrl" />
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button style="float: left;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button style="float: right;" type="button" class="btn btn-success">Save changes</button>
             </div>
           </div>
         </div>
@@ -195,7 +195,7 @@
 <div *ngIf="selected && !updateGig">
   <div class="col-sm-12">
 <div class="card text-center border-dark mb-3 w-50" style="margin-left: 100px; width: 18rem;">
-  <div class="card-header text-white bg-dark">
+  <div class="card-header text-white">
     Posted By {{selected.user.firstName}} in {{selected.user.address.city}}, {{selected.user.address.state}}
   </div>
   <img class="card-img-top" [src]="selected.imageUrl" alt="Job Image" />
@@ -219,18 +219,18 @@
 
 <!-- BID BUTTON (IF LOGGED IN) -->
     <div *ngIf="user" class="text-center">
-        <button class="btn btn-warning" (click)="newBid = true;" data-target="#exampleModal">
+        <button class="btn btn-success" (click)="newBid = true;" data-target="#exampleModal">
             B I D
           </button>
       <br />
       <hr />
       <ng-container class="container-fluid">
-          <button *ngIf="!newBid" style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          <button *ngIf="!newBid" style="float: right;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Contact {{selected.user.firstName}}
             </button>
         <!-- Button trigger modal -->
 
-        <button *ngIf="!newBid" style="float: right;" class="btn btn-info" (click)="displaySelected(null)">
+        <button *ngIf="!newBid" style="float: left;" class="btn btn-secondary" (click)="displaySelected(null)">
           B a c k
         </button>
         <div *ngIf="newBid">
@@ -239,10 +239,10 @@
               <div class="form-group container-fluid">
                 <input type="number" name="bidAmount" class="form-control" placeholder="Bid Amount" ngModel>
                 <input type="text" name="description" class="form-control" placeholder="Message to Requestee" ngModel> <br>
-                <button *ngIf="newBid" style="float: left;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#bidSubmittedModal" (click)="createBid(createForm)">
+                <button *ngIf="newBid" style="float: right;" type="button" class="btn btn-success" data-toggle="modal" data-target="#bidSubmittedModal" (click)="createBid(createForm)">
                     Submit Bid
                   </button>
-                  <button class="btn btn-info" style="float: right;" (click)="newBid = false;">C A N C E L</button>
+                  <button class="btn btn-secondary" style="float: left;" (click)="newBid = false;">C A N C E L</button>
               </div>
             </form>
           </div>
@@ -264,7 +264,7 @@
             </button>
         <!-- Button trigger modal -->
 
-        <button *ngIf="!newBid" style="float: right;" class="btn btn-info" (click)="displaySelected(null)">
+        <button *ngIf="!newBid" style="float: left;" class="btn btn-secondary" (click)="displaySelected(null)">
           B a c k
         </button>
         <div *ngIf="newBid">
