@@ -13,3 +13,7 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.card-header {
+  background-color: rgb(24, 24, 83);
+}

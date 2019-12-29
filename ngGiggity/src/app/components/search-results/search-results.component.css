@@ -6,3 +6,6 @@
   height: 100px;
 }
 
+.card-header, .thead {
+  background-color: rgb(24, 24, 83);
+}

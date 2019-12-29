@@ -1,10 +1,9 @@
-<h1>IN JOB POSTING COMPONENT</h1>
 <div class="card mx-auto bg-dark mt-5" style="width: 40rem;">
-  <div class="card-title text-center">
+  <div class="card-title text-center text-white">
     <h3 class="display-4">Post New Job</h3>
   </div>
   <form #createForm="ngForm">
-    Remote Job: <input type="checkbox" name="remote" id="" ngModel>
+    <label style="color: white" for="remote">Remote Job: </label> <input type="checkbox" name="remote" id="remote" ngModel>
     <div class="form-group container-fluid">
       <input type="text" name="title" class="form-control" placeholder="Title" ngModel>
       <select name="skillId" ngModel class="form-control">
@@ -14,8 +13,8 @@
       <input type="number" name="price" class="form-control" placeholder="Price" ngModel>
       <input type="text" name="description" class="form-control" placeholder="Description" ngModel>
       <input type="hidden" name="active" class="form-control" ngModel>
-      <input type="submit" class="btn btn-warning" value="CREATE" (click)="postJob(createForm)">
-      <button [routerLink]="['/user']" class="float-right btn btn-danger">CANCEL</button>
+      <input type="submit" class="float-right btn btn-success" value="CREATE" (click)="postJob(createForm)">
+      <button [routerLink]="['/user']" class="float-left btn btn-secondary">CANCEL</button>
     </div>
   </form>
 </div>
