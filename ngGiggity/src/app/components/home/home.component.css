@@ -19,3 +19,12 @@ body, html {
 .card-header {
   background-color: rgb(24, 24, 83);
 }
+
+.card {
+  min-height: 300px;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+      top: 75%;
+}
