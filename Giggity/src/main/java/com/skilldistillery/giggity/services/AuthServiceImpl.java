@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.repositories.AddressRepo;
+import com.skilldistillery.giggity.repositories.ImageRepo;
 import com.skilldistillery.giggity.repositories.UserRepo;
 
 @Service
@@ -17,6 +18,8 @@ public class AuthServiceImpl implements AuthService {
 	private UserRepo uRepo;
 	@Autowired
 	private AddressRepo addyRepo;
+	@Autowired
+	private ImageRepo imageRepo;
 
 	@Autowired
 	private PasswordEncoder encoder;
@@ -28,6 +31,8 @@ public class AuthServiceImpl implements AuthService {
 		user.setPassword(encrypted);
 
 		user.setEnabled(true);
+		
+		user.setAvatarImage(imageRepo.findById(1));
 
 		user.setRole("standard");
 		addyRepo.saveAndFlush(user.getAddress());
