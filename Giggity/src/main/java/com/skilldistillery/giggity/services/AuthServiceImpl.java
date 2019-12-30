@@ -49,11 +49,42 @@ public class AuthServiceImpl implements AuthService {
 		for (User user : allUsers) {
 			if ((user.getEmail().equalsIgnoreCase(email)) || (user.getUsername().equalsIgnoreCase(username))) {
 				isUnique = false;
-				System.err.println("EMAIL: "+ user.getEmail() + " " + "UserNmae: " + user.getUsername());
 			}
 
 		}
 
+		return isUnique;
+	}
+
+	@Override
+	public boolean isUserUsernameUnique(String username) {
+		List<User> allUsers = uRepo.findAll();
+		
+		boolean isUnique = true;
+		
+		for (User user : allUsers) {
+			if ((user.getUsername().equalsIgnoreCase(username))) {
+				isUnique = false;
+			}
+			
+		}
+		
+		return isUnique;
+	}
+
+	@Override
+	public boolean isUserEmailUnique(String email) {
+		List<User> allUsers = uRepo.findAll();
+		
+		boolean isUnique = true;
+		
+		for (User user : allUsers) {
+			if ((user.getEmail().equalsIgnoreCase(email))) {
+				isUnique = false;
+			}
+			
+		}
+		
 		return isUnique;
 	}
 
