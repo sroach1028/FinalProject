@@ -147,3 +147,14 @@ background-color: #F1F1F1;
   color: white;
 }
 
+hr{
+  width:1000px;
+  height: 5px;
+  float: left;
+  color: black;
+  padding-top: 3px;
+  background-color: rgba(255,255,255,.5);
+  border: none;
+  border-bottom: 3px solid black;
+}
+
