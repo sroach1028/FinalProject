@@ -1,5 +1,5 @@
 <div class="row" *ngIf="allBoookings">
-  <h1>Your requested Gigs: {{allBoookings.length}} </h1>
+  <h1>Total Gigs You've Hired Out: {{allBoookings.length}} </h1>
   <div class="col-lg-1"></div>
   <div class="col-lg-9">
     <ol>
@@ -9,6 +9,7 @@
             <div class="card">
               <div>
                 <h6 class="card-header bg-dark text-light">Gig Booked: {{booking.startDate}}</h6>
+                <h6 class="card-header bg-dark text-success" *ngIf="booking.completeDate !== null">Gig Completed: {{booking.completeDate}}</h6>
               </div>
               <div class="card-body">
                 <h6>{{booking.job.title}}</h6>
@@ -19,7 +20,7 @@
                   <p>Contact Seller here</p>
                   <p>Email: {{booking.bid.bidder.email}}</p>
                   <p>From the Bidder: {{booking.bid.description}}</p>
-                  <button (click)="updateBooking(booking)" class="btn btn-sm btn-success">
+                  <button (click)="updateBooking(booking)" class="btn btn-sm btn-success" *ngIf="booking.completeDate === null">
                     &#10003;
                   </button>
                 </div>

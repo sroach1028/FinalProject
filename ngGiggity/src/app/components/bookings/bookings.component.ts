@@ -12,8 +12,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./bookings.component.css']
 })
 export class BookingsComponent implements OnInit {
-  allBoookings: Booking[] = null;
-  activeBookings: Booking[];
+  allBoookings: Booking[] = [];
+  activeBookings: Booking[] = [];
   yourGigs: Booking[];
   transactionHistory: Booking[] = [];
   booking: Booking = new Booking();
@@ -43,7 +43,8 @@ export class BookingsComponent implements OnInit {
         this.allBoookings.forEach(b => {
         if (b.completeDate !== null){
           this.transactionHistory.push(b);
-          this.allBoookings.pop(b);
+        } else {
+          this.activeBookings.push(b);
         }
         });
       },
@@ -65,7 +66,7 @@ export class BookingsComponent implements OnInit {
   updateBooking(booking: Booking) {
     this.bookingSvc.updateBooking(booking).subscribe(
       data => {
-
+        this.ngOnInit();
       },
       err => console.error('Reload error in Component')
 
