@@ -1,3 +1,43 @@
+<Header><link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script></Header>
+
+  <div class="container">
+    <br>
+	<br>
+  <h1 style="text-align: center;">Total Gigs You've Hired Out: {{allBoookings.length}} </h1>
+	<div class="row" id="ads" *ngIf="allBoookings">
+
+    <!-- Category Card -->
+    <div class="col-md-4" *ngFor="let booking of allBoookings">
+        <div class="card rounded">
+            <div class="card-image">
+                <span class="card-notify-badge">Booked: {{booking.startDate}}</span>
+                <span class="card-notify-year">${{booking.bid.bidAmount}}</span>
+                <img class="img-fluid" src="{{booking.job.imageUrl}}" alt="Image not Availible" />
+            </div>
+            <div class="card-image-overlay m-auto">
+                <span class="card-detail-badge">Claimed By: {{booking.bid.bidder.firstName}}</span>
+                <span class="card-detail-badge"><a href="mailto:{{booking.bid.bidder.email}}" target="_blank">
+                Email Seller</a></span>
+                <span class="card-detail-badge"><a href="https://www.paypal.com/us/signin" target="_blank">
+                Pay Seller</a></span>
+            </div>
+            <div class="card-body text-center">
+                <div class="ad-title m-auto">
+                    <h5>{{booking.job.title}}</h5>
+                    <p>{{booking.job.description}}</p>
+                </div>
+                <a class="ad-btn" href="#">View</a>
+                <h6 class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed: {{booking.completeDate}}</h6>
+                <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
 <div class="row" *ngIf="allBoookings">
   <h1>Total Gigs You've Hired Out: {{allBoookings.length}} </h1>
   <div class="col-lg-1"></div>
@@ -21,8 +61,10 @@
                   <p>Contact Seller here</p>
                   <p>Email: {{booking.bid.bidder.email}}</p>
                   <a href="mailto:{{booking.bid.bidder.email}}" target="_blank">
-                    <i class="far fa-paper-plane"></i>
                     <h2 class="text-black mb-5">Email Seller</h2>
+                  </a>
+                  <a href="https://www.paypal.com/us/signin" target="_blank">
+                    <h2 class="text-black mb-5">Pay Seller</h2>
                   </a>
                   <p>From the Bidder: {{booking.bid.description}}</p>
                   <label>Mark Gig Completed<button (click)="updateBooking(booking)" class="btn btn-sm btn-success" *ngIf="booking.completeDate === null">
@@ -61,7 +103,6 @@
                   <p>Contact your client here</p>
                   <p>Email: {{booking.job.user.email}}</p>
                   <a href="mailto:{{booking.job.user.email}}" target="_blank">
-                    <i class="far fa-paper-plane"></i>
                     <h2 class="text-black mb-5">Email Client</h2>
                   </a>
                   <p>From the Bidder: {{booking.bid.description}}</p>
