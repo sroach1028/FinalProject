@@ -12,3 +12,7 @@
 .card-header, .thead {
   background-color: rgb(24, 24, 83);
 }
+.showHand:hover{
+  color: black;
+  cursor: pointer;
+}

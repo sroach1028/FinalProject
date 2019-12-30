@@ -161,7 +161,7 @@
           <tr
             #data
             (click)="displaySelected(job); updateOnMap()"
-            *ngFor="let job of jobs | jobsActive"
+            *ngFor="let job of jobs | jobsActive" class="showHand"
           >
             <td>
               <img
