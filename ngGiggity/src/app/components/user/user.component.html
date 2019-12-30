@@ -153,13 +153,12 @@
 
     <!-- USER REQUESTS BOX START -->
     <div class="row" *ngIf="userSelected">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <div class="card h-100 text-dark text-center">
-          <h2 class="card-header text-white">
-            {{ userSelected.firstName }}'s Requests
-          </h2>
-          <div class="card-body">
+      <div class="col-1"></div>
+        <div>
+          <h1 class="display-2">
+            Your Gigs Posted
+          </h1>
+          <div>
             <button
                 class="btn btn-success text-center"
                 [routerLink]="['/post']">
@@ -167,8 +166,6 @@
               </button>
           </div>
         </div>
-      </div>
-      <div class="col-2"></div>
     </div>
     <!-- USER REQUESTS BOX END -->
 
@@ -198,7 +195,7 @@
                 *ngIf="job.jobBids.length > 0"
                 (click)="showBids(job)"
               >
-                View Bids for this Gig
+                You've received BIDS!
               </button>
             </div>
             <button
@@ -395,36 +392,30 @@
 
     <br>
 
-    <!-- WHAT IS THIS? SAME AS LINE 153-171 ?? -->
+    <!-- WHAT IS THIS? SAME AS LINE 153-171 BIDS HEADER?? -->
     <div class="row" *ngIf="sellersBids">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <div class="card h-100 text-dark text-center">
-          <h2 class="card-header text-white">
-            {{ userSelected.firstName }}'s Bids Awaiting Approval
-          </h2>
-          <div class="card-body">
-            <h5 *ngIf="userSelected">Request Someone to Do Your Gig</h5>
-            <a class="text-primary" [routerLink]="['/post']"
-              ><small>Post a Gig</small></a
-            >
-          </div>
+      <div class="col-1"></div>
+        <div>
+          <h1 class="display-3 text-light">
+            Your Bids Awaiting Approval
+          </h1>
         </div>
-      </div>
-      <div class="col-2"></div>
     </div>
-    <!-- WHAT IS THIS? SAME AS LINE 153-171 ?? -->
+    <!-- WHAT IS THIS? SAME AS LINE 153-171 BIDS HEADER?? -->
 
     <br>
 
-    <!-- WHAT IS THIS? -->
+    <!-- B I D S  P O S T E D -->
+    <div class="row">
+    <div class="col-lg-2">
+    </div>
     <div class="col-lg-8">
       <ul>
         <li *ngFor="let bid of sellersBids">
-          <div class="card-header">
+          <div class="card-header bg-light">
             <h5>Date Posted: {{ bid.job.dateCreated | date: "short" }}</h5>
           </div>
-          <div class="card-body">
+          <div class="card-body bg-light">
             <h5>Gig: {{ bid.job.title }}</h5>
             <h6>Skill Required: {{ bid.job.skill.name }}</h6>
             <p>About the Gig: {{ bid.job.description }}</p>
@@ -435,8 +426,9 @@
       </ul>
     </div>
   </div>
+  </div>
 </div>
-  <!-- WHAT IS THIS? -->
+  <!-- WHAT IS THIS? B I D S-->
 
   <br>
 
