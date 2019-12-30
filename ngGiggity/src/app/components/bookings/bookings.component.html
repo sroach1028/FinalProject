@@ -10,6 +10,7 @@
               <div>
                 <h6 class="card-header bg-dark text-light">Gig Booked: {{booking.startDate}}</h6>
                 <h6 class="card-header bg-dark text-success" *ngIf="booking.completeDate !== null">Gig Completed: {{booking.completeDate}}</h6>
+                <h6 class="card-header bg-dark text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
               </div>
               <div class="card-body">
                 <h6>{{booking.job.title}}</h6>
@@ -19,10 +20,14 @@
                   <h6>Claimed By: {{booking.bid.bidder.firstName}}</h6>
                   <p>Contact Seller here</p>
                   <p>Email: {{booking.bid.bidder.email}}</p>
+                  <a href="mailto:{{booking.bid.bidder.email}}" target="_blank">
+                    <i class="far fa-paper-plane"></i>
+                    <h2 class="text-black mb-5">Email Seller</h2>
+                  </a>
                   <p>From the Bidder: {{booking.bid.description}}</p>
-                  <button (click)="updateBooking(booking)" class="btn btn-sm btn-success" *ngIf="booking.completeDate === null">
+                  <label>Mark Gig Completed<button (click)="updateBooking(booking)" class="btn btn-sm btn-success" *ngIf="booking.completeDate === null">
                     &#10003;
-                  </button>
+                  </button></label>
                 </div>
               </div>
             </div>
@@ -39,11 +44,13 @@
   <div class="col-lg-9">
     <ol>
       <div *ngFor="let booking of yourGigs">
-        <li *ngIf="booking.completeDate === null">
+        <li>
           <div class="container">
             <div class="card">
               <div>
                 <h6 class="card-header bg-dark text-light">Gig Booked: {{booking.startDate}}</h6>
+                <h6 class="card-header bg-dark text-success" *ngIf="booking.completeDate !== null">Gig Completed: {{booking.completeDate}}</h6>
+                <h6 class="card-header bg-dark text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
               </div>
               <div class="card-body">
                 <h6>{{booking.job.title}}</h6>
@@ -52,7 +59,11 @@
                   <h6>Bid: ${{booking.bid.bidAmount}}</h6>
                   <h6>Claimed By: {{booking.bid.bidder.firstName}}</h6>
                   <p>Contact your client here</p>
-                  <p>Email: {{booking.bid.bidder.email}}</p>
+                  <p>Email: {{booking.job.user.email}}</p>
+                  <a href="mailto:{{booking.job.user.email}}" target="_blank">
+                    <i class="far fa-paper-plane"></i>
+                    <h2 class="text-black mb-5">Email Client</h2>
+                  </a>
                   <p>From the Bidder: {{booking.bid.description}}</p>
                 </div>
               </div>
@@ -64,7 +75,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="transactionHistory">
+<!-- <div class="row" *ngIf="transactionHistory">
   <h1>Your Transaction History: {{transactionHistory.length}} </h1>
   <div class="col-lg-1"></div>
   <div class="col-lg-9">
@@ -97,4 +108,4 @@
     </div>
     </ol>
   </div>
-</div>
+</div> -->
