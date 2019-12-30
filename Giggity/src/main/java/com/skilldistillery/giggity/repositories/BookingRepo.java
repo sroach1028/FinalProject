@@ -19,5 +19,6 @@ public interface BookingRepo extends JpaRepository<Booking, Integer> {
 	public List<Booking> findByMessages_Id(int id);
 	public List<Booking> findByJob_Id(int id);
 	public List<Booking> findByJob_User_Id(int id);
+	public List<Booking> findByBid_Bidder_Id(int id);
 	public List<Booking> findByJob_TitleLike(String title);
 }

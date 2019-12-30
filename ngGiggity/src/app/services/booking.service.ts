@@ -49,6 +49,22 @@ export class BookingService {
       );
   }
 
+  findByBidder(uid: number){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<Booking[]>(this.baseUrl + 'api/booking/bid/bidder/' + uid, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
+
   findHistory(uid: number) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -75,6 +91,22 @@ export class BookingService {
       })
     };
     return this.http.post(this.baseUrl + 'api/booking/', booking, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('in bookingservice create booking');
+        })
+      );
+  }
+
+  updateBooking(booking: Booking) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.put(this.baseUrl + 'api/booking/' + booking.id, booking, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

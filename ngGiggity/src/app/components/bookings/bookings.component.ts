@@ -14,12 +14,14 @@ import { UserService } from 'src/app/services/user.service';
 export class BookingsComponent implements OnInit {
   allBoookings: Booking[] = null;
   activeBookings: Booking[];
-  transactionHistory: Booking[];
+  yourGigs: Booking[];
+  transactionHistory: Booking[] = [];
   booking: Booking = new Booking();
   user: User;
   constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
 
   ngOnInit() {
+
     this.getLoggedUser();
   }
 
@@ -27,6 +29,8 @@ export class BookingsComponent implements OnInit {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.user = data;
+        this.showAll();
+        this.showByBidder();
       },
       err => console.error('Reload error in Component')
     );
@@ -36,11 +40,39 @@ export class BookingsComponent implements OnInit {
     this.bookingSvc.findAll(this.user.id).subscribe(
       data => {
         this.allBoookings = data;
+        this.allBoookings.forEach(b => {
+        if (b.completeDate !== null){
+          this.transactionHistory.push(b);
+          this.allBoookings.pop(b);
+        }
+        });
       },
       err => console.error('Reload error in Component')
 
     );
   }
+
+  showByBidder() {
+    this.bookingSvc.findByBidder(this.user.id).subscribe(
+      data => {
+        this.yourGigs = data;
+      },
+      err => console.error('Reload error in Component')
+
+    );
+  }
+
+  updateBooking(booking: Booking) {
+    this.bookingSvc.updateBooking(booking).subscribe(
+      data => {
+
+      },
+      err => console.error('Reload error in Component')
+
+    );
+  }
+
+
 
   // active() {
   //   this.bookingSvc.findActive(this.user.id).subscribe(

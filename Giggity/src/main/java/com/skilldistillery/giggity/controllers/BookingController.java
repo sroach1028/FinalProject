@@ -55,6 +55,11 @@ public class BookingController {
 		return svc.getAllByJobRequester(reqid);
 	}
 
+	@GetMapping("booking/bid/bidder/{bidderid}")
+	public List<Booking> getByServicer(@PathVariable int bidderid, HttpServletRequest req, HttpServletResponse resp) {
+		return svc.getAllByBidBidder(bidderid);
+	}
+
 	@PostMapping("booking")
 	public Booking create(@RequestBody Booking booking, HttpServletRequest req, HttpServletResponse resp) {
 		LocalDate now = LocalDate.now();
@@ -83,6 +88,8 @@ public class BookingController {
 	@PutMapping("booking/{id}")
 	public Booking updateBooking(@PathVariable Integer id, @RequestBody Booking booking, HttpServletRequest req,
 			HttpServletResponse resp) {
+		LocalDate now = LocalDate.now();
+		booking.setCompleteDate(now);
 		try {
 			// try to update the provided post
 			booking = svc.update(id, booking);

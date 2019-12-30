@@ -21,4 +21,6 @@ public interface BookingService {
     public boolean delete(int bid);
 
 	List<Booking> getAllByJobRequester(int reqid);
+	
+	List<Booking> getAllByBidBidder(int bidderid);
 }

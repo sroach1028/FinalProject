@@ -73,4 +73,9 @@ public class BookingSvcImpl implements BookingService {
 		}
 	}
 
+	@Override
+	public List<Booking> getAllByBidBidder(int bidderid) {
+		return repo.findByBid_Bidder_Id(bidderid);
+	}
+
 }
