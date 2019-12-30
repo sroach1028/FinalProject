@@ -19,6 +19,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
 import { ActiveBidPipe } from './pipes/active-bid.pipe';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NgModule } from '@angular/core';
+import { AltProfileComponent } from './components/alt-profile/alt-profile.component';
 
 
 
@@ -35,7 +36,8 @@ import { NgModule } from '@angular/core';
     PostComponent,
     JobsActivePipe,
     BookingsComponent,
-    ActiveBidPipe
+    ActiveBidPipe,
+    AltProfileComponent
   ],
   imports: [
     BrowserModule,

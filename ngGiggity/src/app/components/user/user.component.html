@@ -76,17 +76,16 @@
                 {{ userSelected.firstName }} {{ userSelected.lastName }}
               </h3>
               <span><strong>Skills: </strong></span>
-              <span class="label label-warning">HTML5/CSS</span>
-              <span class="label label-info">Adobe CS 5.5</span>
-              <span class="label label-info">Microsoft Office</span>
-              <span class="label label-success">Windows XP, Vista, 7</span>
+              <div *ngFor="let skill of userSelected.skills">
+              <span class="label label-warning">{{ skill.skill.name }}</span>
+              </div>
+
             </div>
             <hr />
             <div>
               <p class="text-left">
                 <strong>Bio: </strong><br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem
-                dui, tempor sit amet commodo a, vulputate vel tellus.
+                {{userSelected.bio}}
               </p>
               <br />
             </div>
@@ -511,6 +510,17 @@
                 id="email"
                 [(ngModel)]="userSelected.email"
                 [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <input
+              name="bio"
+              type="text"
+              class="form-control"
+              id="bio"
+              [(ngModel)]="userSelected.bio"
+              [ngModelOptions]="{ standalone: true }"
               />
             </div>
             <div class="form-group">
