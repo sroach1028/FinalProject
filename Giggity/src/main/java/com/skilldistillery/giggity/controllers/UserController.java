@@ -1,6 +1,5 @@
 package com.skilldistillery.giggity.controllers;
 
-
 import java.security.Principal;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.giggity.entities.User;
+import com.skilldistillery.giggity.services.AuthService;
 import com.skilldistillery.giggity.services.UserService;
 
 @RestController
@@ -26,20 +26,22 @@ public class UserController {
 	@Autowired
 	private UserService svc;
 
+	@Autowired
+	private AuthService authService;
+
 	@GetMapping("users/id/{id}")
 	public User getUser(@PathVariable int id, HttpServletResponse res) {
 		User user = svc.getUserById(id);
 		if (user == null) {
 			res.setStatus(404);
-		}
-		else 
+		} else
 			res.setStatus(200);
 		return user;
 	}
 
 	@GetMapping("users/username/{username}")
 	public List<User> getUsersByUsername(@PathVariable String username, HttpServletResponse res) {
-		
+
 		List<User> users = svc.getUsersByUsername(username);
 		if (users == null) {
 			res.setStatus(404);
@@ -47,7 +49,7 @@ public class UserController {
 			res.setStatus(200);
 		return users;
 	}
-	
+
 	@GetMapping("users/username/")
 	public User getUserByUsername(HttpServletResponse res, Principal principal) {
 		User user = svc.getUserByUsername(principal.getName());
@@ -57,53 +59,65 @@ public class UserController {
 			res.setStatus(200);
 		return user;
 	}
-	
+
 	@GetMapping("api/users/getUser")
 	public User getUser(HttpServletResponse res, Principal principal) {
-		User loggedInUser = svc.getUserByUsername(principal.getName());		
+		User loggedInUser = svc.getUserByUsername(principal.getName());
 		if (loggedInUser == null) {
 			res.setStatus(404);
 		} else
 			res.setStatus(200);
 		return loggedInUser;
 	}
-	
+
 	@PutMapping("api/users/{uid}")
 	public User updateJob(@RequestBody User u, @PathVariable Integer uid, HttpServletRequest req,
 			HttpServletResponse resp, Principal principal) {
-		User loggedInUser = svc.getUserByUsername(principal.getName());		
-		if(loggedInUser != null) {
-		try {
-			// try to update the provided post
-			u = svc.updateUser(u, uid);
-			if(u==null) {
-				resp.setStatus(404);
+		User loggedInUser = svc.getUserByUsername(principal.getName());
+		if (loggedInUser != null) {
+			if ((!loggedInUser.getEmail().equalsIgnoreCase(u.getEmail()))) {
+				if (!authService.isUserEmailUnique(u.getEmail())) {
+					resp.setStatus(403);
+					return null;
+				}
 			}
-			// if successful, send 200
-			resp.setStatus(200);
-		} catch (Exception e) {
-			// if update fails, return 404 error
-			e.printStackTrace();
-			resp.setStatus(400);
-			// set the returning post to null
-			u = null;
-		}
-		
-		}
-		else {
+			if ((!loggedInUser.getUsername().equalsIgnoreCase(u.getUsername()))) {
+				if (!authService.isUserUsernameUnique(u.getUsername())) {
+					resp.setStatus(403);
+					return null;
+
+				}
+			}
+
+			try {
+				// try to update the provided post
+				u = svc.updateUser(u, uid);
+				if (u == null) {
+					resp.setStatus(404);
+				}
+				// if successful, send 200
+				resp.setStatus(200);
+			} catch (Exception e) {
+				// if update fails, return 404 error
+				e.printStackTrace();
+				resp.setStatus(400);
+				// set the returning post to null
+				u = null;
+			}
+
+		} else {
 			u = null;
 			resp.setStatus(403);
 		}
 		return u;
 
 	}
-	
+
 	@DeleteMapping("api/users/remove/{id}")
 	public void deleteUser(@PathVariable Integer id, HttpServletResponse res) {
 		if (!svc.destroy(id)) {
 			res.setStatus(404);
-		}
-		else 
+		} else
 			res.setStatus(200);
 	}
 
