@@ -12,5 +12,6 @@ public interface ImageRepo extends JpaRepository<Image, Integer> {
 //	public List<Image> findByJobs_TitleLike(String title);
 //	public List<Image> findBySkills_Id(int id);
 //	public List<Image> findBySkills_NameLike(String skill);
+	public Image findById(int id);
 	
 }
