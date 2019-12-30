@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.giggity.entities.Address;
 import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.repositories.AddressRepo;
+import com.skilldistillery.giggity.repositories.ImageRepo;
 import com.skilldistillery.giggity.repositories.UserRepo;
 
 @Service
@@ -22,6 +23,9 @@ public class UserSvcImpl implements UserService {
 	
 	@Autowired
 	private AddressRepo addRepo;
+	
+	@Autowired
+	private ImageRepo imgRepo;
 
 	@Override
 	public User getUserByUsername(String username) {
@@ -80,6 +84,8 @@ public class UserSvcImpl implements UserService {
 				toModify.setState(toUpdate.getAddress().getState());
 				toModify.setZip(toUpdate.getAddress().getZip());
 			}
+			imgRepo.saveAndFlush(u.getAvatarImage());
+			
 			addRepo.saveAndFlush(toModify);
 			toUpdate.setAddress(u.getAddress());
 		}

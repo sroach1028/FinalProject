@@ -515,12 +515,23 @@
             <div class="form-group">
               <label for="phone">Phone</label>
               <input
-                name="phone"
+              name="phone"
+              type="text"
+              class="form-control"
+              id="phone"
+              [(ngModel)]="userSelected.phone"
+              [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">Avatar URL</label>
+              <input
+                name="avatarImg"
                 type="text"
                 class="form-control"
-                id="phone"
-                [(ngModel)]="userSelected.phone"
-                [ngModelOptions]="{ standalone: true }"
+                id="avatar"
+                [(ngModel)]="userSelected.avatarImage.imageUrl"
+
               />
             </div>
             <hr />
@@ -613,3 +624,4 @@
   </div>
 </div>
 <!-- USER PROFILE INFO UPDATE END -->
+<!-- USER AVATAR IMAGE UPDATE -->
