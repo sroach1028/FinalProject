@@ -82,6 +82,7 @@ public class UserSvcImpl implements UserService {
 			toUpdate.setRole(u.getRole());
 			toUpdate.setPhone(u.getPhone());
 			toUpdate.setAddress(u.getAddress());
+			toUpdate.setBio(u.getBio());
 			toUpdate.setAvatarImage(u.getAvatarImage());
 			//update address too
 			Address toModify = addRepo.findById(toUpdate.getAddress().getId());

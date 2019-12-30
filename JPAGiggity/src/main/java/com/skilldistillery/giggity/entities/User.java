@@ -38,6 +38,8 @@ public class User {
 	private String role;
 
 	private String phone;
+	
+	private String bio;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "poster")
@@ -189,7 +191,16 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
 
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
 
 	@Override
 	public int hashCode() {
@@ -330,6 +341,8 @@ public class User {
 		builder.append(address);
 		builder.append(", jobs=");
 		builder.append(jobs);
+		builder.append(", bio=");
+		builder.append(bio);
 		builder.append("]");
 		return builder.toString();
 	}
