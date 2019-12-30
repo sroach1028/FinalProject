@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.giggity.entities.Address;
+import com.skilldistillery.giggity.entities.Image;
 import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.repositories.AddressRepo;
 import com.skilldistillery.giggity.repositories.ImageRepo;
@@ -65,6 +66,12 @@ public class UserSvcImpl implements UserService {
 	@Override
 	public User updateUser(User u, int uid) {
 		User toUpdate = userRepo.findById(uid);
+		
+		if((!toUpdate.getAvatarImage().getImageUrl().equals(u.getAvatarImage().getImageUrl()))) {
+			Image newImage = new Image();
+			newImage.setImageUrl(u.getAvatarImage().getImageUrl());
+			imgRepo.saveAndFlush(newImage);
+		}
 		if(toUpdate != null) {
 			toUpdate.setFirstName(u.getFirstName());
 			toUpdate.setLastName(u.getLastName());
@@ -84,7 +91,6 @@ public class UserSvcImpl implements UserService {
 				toModify.setState(toUpdate.getAddress().getState());
 				toModify.setZip(toUpdate.getAddress().getZip());
 			}
-			imgRepo.saveAndFlush(u.getAvatarImage());
 			
 			addRepo.saveAndFlush(toModify);
 			toUpdate.setAddress(u.getAddress());
