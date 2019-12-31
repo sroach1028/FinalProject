@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
     user.phone = form.value.phone;
     user.role = form.value.role;
     user.enabled = form.value.enabled;
+    user.bio = form.value.bio;
 
     const address = new Address();
     address.street = form.value.street;
