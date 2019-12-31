@@ -145,6 +145,7 @@ export class UserComponent implements OnInit {
   viewAllGigs() {
     this.bids = null;
     this.selected = null;
+    this.updateGig = null;
   }
 
   showBidsByBidder() {

@@ -1,5 +1,5 @@
-<div class="jumbotron" *ngIf="!selectSkills && !updateProfile">
-  <div class="container-fluid">
+<div class="jumbotron">
+  <div class="container-fluid" *ngIf="!selectSkills && !updateProfile">
     <!-- USER IMAGE & NAME BOX START -->
     <div class="row">
       <div class="col-1"></div>
@@ -26,6 +26,13 @@
     <div class="row">
       <div class="col-1"></div>
       <div class="col-10">
+        <button
+        style="float:left"
+        class="btn btn-success"
+        [routerLink]="['/bookings']"
+      >
+        View Gig Bookings
+      </button>
         <button
           style="float:right"
           class="btn btn-warning"
@@ -77,15 +84,13 @@
               </h3>
               <span><strong>Skills: </strong></span>
               <div *ngFor="let skill of userSelected.skills">
-              <span class="label label-warning">{{ skill.skill.name }}</span>
+                <span class="label label-warning">{{ skill.skill.name }}</span>
               </div>
-
             </div>
-            <hr />
             <div>
               <p class="text-left">
                 <strong>Bio: </strong><br />
-                {{userSelected.bio}}
+                {{ userSelected.bio }}
               </p>
               <br />
             </div>
@@ -104,535 +109,606 @@
         </div>
       </div>
     </div>
+  </div>
     <!-- USER DETAILS MODAL END -->
 
     <br />
 
     <!-- USER SKILLS BOX START -->
-    <div class="row" *ngIf="userSelected">
-      <div class="col-2"></div>
-      <div class="col-8">
+    <div class="container-fluid" *ngIf="userSelected  && !updateProfile && !selectSkills">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
         <div class="card h-100 text-dark text-center">
           <h2 class="card-header text-white">
             {{ userSelected.firstName }}'s Skills
           </h2>
           <div class="card-body">
-              <button *ngIf="userSelected && userSkills.length == 0"
-                class="btn btn-success text-center"
-                (click)="chooseSkills()">
+            <button
+              *ngIf="userSelected && userSkills.length == 0"
+              class="btn btn-success text-center"
+              (click)="chooseSkills()"
+            >
               Add Your Skills
-              </button>
+            </button>
 
-              <button *ngIf="userSelected && userSkills.length > 0"
-                class="btn btn-success text-center"
-                [routerLink]="['/post']">
+            <button
+              *ngIf="userSelected && userSkills.length > 0"
+              class="btn btn-success text-center"
+              [routerLink]="['/post']"
+            >
               Add More Skills
-              </button>
+            </button>
             <ul>
               <li *ngFor="let skill of userSelected.skills">
-                <strong>Skill:</strong> {{ skill.skill.name }} | <strong>Desc:</strong> {{ skill.description }}
+                <strong>Skill:</strong> {{ skill.skill.name }} |
+                <strong>Desc:</strong> {{ skill.description }}
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="col-2"></div>
+      <div class="col-1"></div>
+    </div>
     </div>
     <!-- USER SKILLS BOX END -->
 
     <br />
 
-    <div class="col-lg-4"></div>
-      <div class="col-lg-4">
-        <h5>
-          <a class="text-light" [routerLink]="['/bookings']">VIEW BOOKINGS</a>
-        </h5>
-      </div>
-    <!-- </div> -->
 
-    <!-- ACCORDIAN STARTS -->
-<div id="accordion">
+<!-- ACCORDIAN START -->
     <!-- USER REQUESTS BOX START -->
-    <div class="row" *ngIf="userSelected">
-      <div class="col-lg-2">
-      </div>
-      <div class="col-lg-8">
-        <div id="headingOne" class="btn btn-link" data-toggle="collapse" data-target="#gigs" aria-expanded="true" aria-controls="gigs">
-          <h1 class="display-2 text-light">
-            Your Gigs Posted
-          </h1>
-        </div>
-        </div>
-        <div class="col-lg-2">
-            <br><br><button
-                class="btn btn-success text-center"
-                [routerLink]="['/post']">
-              Post a Gig
-              </button>
-        </div>
-      </div>
-
-    <!-- USER REQUESTS BOX END -->
-
-    <br />
-
-    <!-- GIGS BOX START -->
-    <div *ngIf="userJobs" id="gigs" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-    <div class="row" *ngFor="let job of userJobs | jobsActive">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <div
-          *ngIf="!selected || selected.id === job.id"
-          class="card h-100 text-dark text-center">
-          <div class="card-header text-white">
-            <h5>Date Posted: {{ job.dateCreated | date: "short" }}</h5>
-          </div>
-          <div class="card-body">
-            <h5>Gig: {{ job.title }}</h5>
-            <h6>Skill Required: {{ job.skill.name }}</h6>
-            <p>About the Gig: {{ job.description }}</p>
-          </div>
-          <div class="card-footer">
-            <div class="text-center">
-              <button
-                class="btn btn-success text-center"
-                *ngIf="job.jobBids.length > 0"
-                (click)="showBids(job)">
-                You've received BIDS!
-              </button>
-            </div>
-            <button
-              class="btn-sm btn-warning float-right"
-              (click)="setUpdateGig(job)">
-              U p d a t e
-            </button>
-            <button class="btn-sm btn-danger float-left" (click)="remove(job)">
-              D e l e t e
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <!-- GIGS BOX END -->
-    <div class="row">
-      <hr class="bg-primary">
-    </div>
-    <!-- BIDS BOX START -->
-    <div class="row" *ngIf="bids">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <table
-          class="table table-striped table-hover table-light border border-info"
-        >
-          <thead>
-            <tr>
-              <th>Offer</th>
-              <th>Message</th>
-              <th>Accept</th>
-              <th>Reject</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bid of bids | activeBid">
-              <td>{{ bid.bidAmount | currency }}</td>
-              <td>{{ bid.description }}</td>
-              <td>
-                <button (click)="acceptBid(bid)" class="btn btn-sm btn-success">
-                  &#10003;
-                </button>
-              </td>
-              <td>
-                <button
-                  (click)="bids = null; rejectBid(bid)"
-                  class="btn btn-sm btn-danger"
-                >
-                  &#10007;
-                </button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <button (click)="viewAllGigs()" class="btn btn-secondary">
-                  Back
-                </button>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div class="col-2"></div>
-    </div>
-    <!-- BIDS BOX END -->
-
-        <!-- WHAT IS THIS? SAME AS LINE 153-171 BIDS HEADER?? -->
-        <div class="row" *ngIf="sellersBids">
-          <div class="col-1"></div>
-            <div class="btn btn-link collapsed" data-toggle="collapse" data-target="#bids" aria-expanded="false" aria-controls="bids">
-              <h1 class="display-3 text-light">
-                Your Bids Awaiting Approval
-              </h1>
-            </div>
-        </div>
-        <!-- WHAT IS THIS? SAME AS LINE 153-171 BIDS HEADER?? -->
-
-        <br>
-
-        <!-- B I D S  P O S T E D -->
-        <div class="collapse" id="bids" data-parent="#accordion">
-          <div class="row border-bottom border-white">
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-8">
-              <ul>
-                <li *ngFor="let bid of sellersBids">
-                  <div class="card-header bg-light">
-                    <h5>Date Posted: {{ bid.job.dateCreated | date: "short" }}</h5>
+    <div class="accordion" id="accordion">
+      <div class="row" *ngIf="userSelected  && !updateProfile && !selectSkills">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="card">
+              <h2 class="card-header btn-link text-white text-center" id="requestedGigs" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{ userSelected.firstName }}'s Requested Gigs
+              </h2>
+            <div class="card-body">
+              <div
+                id="collapseOne"
+                class="collapse hide"
+                aria-labelledby="requestedGigs"
+                data-parent="#accordion"
+              >
+                <div class="row" *ngFor="let job of userJobs | jobsActive">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div
+                      *ngIf="!selected || selected.id === job.id"
+                      class="card h-100 text-dark text-center"
+                    >
+                      <div class="card-header text-white">
+                        <h5>
+                          Date Posted: {{ job.dateCreated | date: "short" }}
+                        </h5>
+                      </div>
+                      <div class="card-body">
+                        <h5>Gig: {{ job.title }}</h5>
+                        <h6>Skill Required: {{ job.skill.name }}</h6>
+                        <p>About the Gig: {{ job.description }}</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="text-center">
+                          <button
+                            class="btn btn-success text-center"
+                            *ngIf="job.jobBids.length > 0"
+                            (click)="showBids(job)"
+                          >
+                            You've received BIDS!
+                          </button>
+                        </div>
+                        <button
+                          class="btn-sm btn-warning float-right"
+                          (click)="setUpdateGig(job)"
+                        >
+                          U p d a t e
+                        </button>
+                        <button
+                          class="btn-sm btn-danger float-left"
+                          (click)="remove(job)"
+                        >
+                          D e l e t e
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card-body bg-light">
-                    <h5>Gig: {{ bid.job.title }}</h5>
-                    <h6>Skill Required: {{ bid.job.skill.name }}</h6>
-                    <p>About the Gig: {{ bid.job.description }}</p>
-                    <a>Offer: {{ bid.bidAmount | currency }}</a>
-                    <a style="float: right"> Message: {{ bid.description }}</a>
+                </div>
+                <div class="col-1"></div>
+              </div>
+              <!-- USER REQUESTS BOX END -->
+
+              <br />
+
+              <!-- GIGS BOX START -->
+              <div
+                *ngIf="userJobs"
+                id="gigs"
+                class="collapse"
+                aria-labelledby="headingOne"
+                data-parent="#accordion"
+              >
+                <div class="row" *ngFor="let job of userJobs | jobsActive">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div
+                      *ngIf="!selected || selected.id === job.id"
+                      class="card h-100 text-dark text-center"
+                    >
+                      <div class="card-header text-white">
+                        <h5>
+                          Date Posted: {{ job.dateCreated | date: "short" }}
+                        </h5>
+                      </div>
+                      <div class="card-body">
+                        <h5>Gig: {{ job.title }}</h5>
+                        <h6>Skill Required: {{ job.skill.name }}</h6>
+                        <p>About the Gig: {{ job.description }}</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="text-center">
+                          <button
+                            class="btn btn-success text-center"
+                            *ngIf="job.jobBids.length > 0"
+                            (click)="showBids(job)"
+                          >
+                            You've received BIDS!
+                          </button>
+                        </div>
+                        <button
+                          class="btn-sm btn-warning float-right"
+                          (click)="setUpdateGig(job)"
+                        >
+                          U p d a t e
+                        </button>
+                        <button
+                          class="btn-sm btn-danger float-left"
+                          (click)="remove(job)"
+                        >
+                          D e l e t e
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-      <!-- WHAT IS THIS? B I D S-->
-    </div> <!--ACCORDIAN END -->
+                </div>
+              </div>
+              <!-- GIGS BOX END -->
 
+              <br>
 
-    <!-- GIG UPDATE FORM START -->
-    <div class="row" *ngIf="updateGig">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <form name="gigUpdate" id="gigUpdate">
-          <div class="form-group">
-            <label for="title">T i t l e</label>
-            <input
-              name="title"
-              type="text"
-              class="form-control"
-              id="title"
-              [(ngModel)]="updateGig.title"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <div class="form-group">
-            <label for="description">D e s c r i p t i o n</label>
-            <input
-              name="description"
-              type="text"
-              class="form-control"
-              id="description"
-              [(ngModel)]="updateGig.description"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <div class="form-group">
-            <label for="price">P r i c e</label>
-            <input
-              name="price"
-              type="number"
-              class="form-control"
-              id="price"
-              [(ngModel)]="updateGig.price"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <div class="form-group">
-            <label for="imageUrl">I m a g e</label>
-            <input
-              name="imageUrl"
-              type="text"
-              class="form-control"
-              id="imageUrl"
-              [(ngModel)]="updateGig.imageUrl"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <div class="form-group">
-            <label for="skill">C a t e g o r y</label>
-            <select name="skill" type="text" class="form-control" id="skill">
-              <option selected>{{ updateGig.skill.name }}</option>
-              <option *ngFor="let skill of skills">{{ skill.name }}</option>
-            </select>
-            <div class="form-group">
-              <label for="remote"
-                >R e m o t e
-                <input
-                  name="remote"
-                  type="checkbox"
-                  class="form-control"
-                  id="inlineCheckbox1"
-                  [(ngModel)]="updateGig.remote"
-                  [ngModelOptions]="{ standalone: true }"
-              /></label>
-            </div>
-            <div class="form-group">
-              <label for="active"
-                >A c t i v e
-                <input
-                  name="active"
-                  type="checkbox"
-                  class="form-control"
-                  id="inlineCheckbox2"
-                  [(ngModel)]="updateGig.active"
-                  [ngModelOptions]="{ standalone: true }"
-                />
-              </label>
-            </div>
-            <button
-              class="btn btn-warning"
-              style="float: right"
-              (click)="update(updateGig)"
-            >
-              U p d a t e
-            </button>
-            <button
-              class="btn btn-secondary"
-              style="float: left"
-              (click)="updateGig = null"
-            >
-              C a n c e l
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="col-2"></div>
-    </div>
-    <!-- GIG UPDATE FORM END -->
+              <div class="row">
+              </div>
+              <!-- BIDS BOX START -->
+              <div class="row" *ngIf="bids">
+                <div class="col-1"></div>
+                <div class="col-10">
+                  <table
+                    class="table table-striped table-hover table-light"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Offer</th>
+                        <th>Message</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let bid of bids | activeBid">
+                        <td>{{ bid.bidAmount | currency }}</td>
+                        <td>{{ bid.description }}</td>
+                        <td>
+                          <button
+                            (click)="acceptBid(bid)"
+                            class="btn btn-sm btn-success"
+                          >
+                            &#10003;
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            (click)="bids = null; rejectBid(bid)"
+                            class="btn btn-sm btn-danger"
+                          >
+                            &#10007;
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>
+                          <button
+                            (click)="viewAllGigs()"
+                            class="btn btn-secondary"
+                          >
+                            Back
+                          </button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="col-1"></div>
+              </div>
+              <!-- BIDS BOX END -->
 
-    <br>
-
-
-
-  <br>
-
-  <!-- ADD USER SKILLS BOX START -->
-<div class="jumbotron" *ngIf="selectSkills">
-    <div class="container-fluid">
-      <div class="row" *ngFor="let skill of skills">
-        <div class="col-2"></div>
-      <div class="col-8">
-            <div class="card h-100 text-dark text-center">
-              <h2 class="card-header text-white">{{ skill.name }}</h2>
-              <div class="card-body">
-                <p>{{ skill.description }}</p>
-                <form #userSkillDescForm="ngForm">
-                  <label for="userSkillDescription">Describe Your Skill:</label>
-                  <input
-                    name="userSkillDescription"
-                    type="text"
-                    class="form-control"
-                    id="userSkillDescription"
-                    ngModel
-                  />
-                </form>
-                <button
-                  style="float: left"
-                  class="btn btn-secondary"
-                  (click)="selectSkills = null"
+              <!-- WHAT IS THIS? SAME AS LINE 153-171 BIDS HEADER?? -->
+              <div class="row" *ngIf="sellersBids">
+                <div class="col-1"></div>
+                <div
+                  class="btn btn-link collapsed"
+                  data-toggle="collapse"
+                  data-target="#bids"
+                  aria-expanded="false"
+                  aria-controls="bids"
                 >
-                  Back
-                </button>
-                <button
-                  style="float: right"
-                  class="btn btn-success"
-                  (click)="addUserSkill(skill, userSkillDescForm)"
-                >
-                  Add This Skill
-                </button>
+                  <h1 class="display-3 text-light">
+                    Your Bids Awaiting Approval
+                  </h1>
+                </div>
+              </div>
+              <!-- WHAT IS THIS? SAME AS LINE 153-171 BIDS HEADER?? -->
+
+              <br />
+
+              <!-- B I D S  P O S T E D -->
+              <div class="collapse" id="bids" data-parent="#accordion">
+                <div class="row border-bottom border-white">
+                  <div class="col-lg-2"></div>
+                  <div class="col-lg-8">
+                    <ul>
+                      <li *ngFor="let bid of sellersBids">
+                        <div class="card-header bg-light">
+                          <h5>
+                            Date Posted:
+                            {{ bid.job.dateCreated | date: "short" }}
+                          </h5>
+                        </div>
+                        <div class="card-body bg-light">
+                          <h5>Gig: {{ bid.job.title }}</h5>
+                          <h6>Skill Required: {{ bid.job.skill.name }}</h6>
+                          <p>About the Gig: {{ bid.job.description }}</p>
+                          <a>Offer: {{ bid.bidAmount | currency }}</a>
+                          <a style="float: right">
+                            Message: {{ bid.description }}</a
+                          >
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
-            <br />
           </div>
-      </div>
-    </div>
-  </div>
-<!-- ADD USER SKILLS BOX END -->
-
-<!-- USER PROFILE INFO UPDATE START -->
-<div class="jumbotron" *ngIf="updateProfile">
-  <div class="container-fluid">
-    <div class="container">
-      <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-          <h2 style="color: white" align="center">Update User Information</h2>
-          <form name="updateUser" id="updateUser">
-            <strong style="color: white">Personal:</strong><br />
-            <div class="form-group">
-              <input
-                name="id"
-                type="text"
-                class="form-control"
-                id="id"
-                [(ngModel)]="userSelected.id"
-                hidden
-              />
-            </div>
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input
-                name="firstName"
-                type="text"
-                class="form-control"
-                id="firstName"
-                [(ngModel)]="userSelected.firstName"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input
-                name="lastName"
-                type="text"
-                class="form-control"
-                id="lastName"
-                [(ngModel)]="userSelected.lastName"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                name="email"
-                type="text"
-                class="form-control"
-                id="email"
-                [(ngModel)]="userSelected.email"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="bio">Bio</label>
-              <input
-              name="bio"
-              type="text"
-              class="form-control"
-              id="bio"
-              [(ngModel)]="userSelected.bio"
-              [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input
-              name="phone"
-              type="text"
-              class="form-control"
-              id="phone"
-              [(ngModel)]="userSelected.phone"
-              [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="phone">Avatar URL</label>
-              <input
-                name="avatarImg"
-                type="text"
-                class="form-control"
-                id="avatar"
-                [(ngModel)]="userSelected.avatarImage.imageUrl"
-
-              />
-            </div>
-            <hr />
-            <strong style="color: white">Address:</strong><br />
-            <div class="form-group">
-              <label for="street">Street</label><br />
-              <input
-                type="text"
-                name="street"
-                class="form-control"
-                [(ngModel)]="userSelected.address.street"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="city">City</label><br />
-              <input
-                type="text"
-                name="city"
-                class="form-control"
-                [(ngModel)]="userSelected.address.city"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="state">State</label><br />
-              <input
-                type="text"
-                name="state"
-                class="form-control"
-                [(ngModel)]="userSelected.address.state"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="zip">Zip</label><br />
-              <input
-                type="text"
-                name="zip"
-                class="form-control"
-                [(ngModel)]="userSelected.address.zip"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <hr />
-            <strong style="color: white">Login Info:</strong><br />
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input
-                name="username"
-                type="text"
-                class="form-control"
-                id="username"
-                [(ngModel)]="userSelected.username"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input
-                name="password"
-                type="password"
-                class="form-control"
-                id="password"
-                [(ngModel)]="userSelected.password"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="form-group">
-              <button
-                style="float: left"
-                class="btn btn-secondary"
-                (click)="updateProfile = null"
-              >
-                Cancel
-              </button>
-              <button
-                style="float: right"
-                class="btn btn-warning"
-                (click)="updateUser()"
-              >
-                Update
-              </button>
-            </div>
-          </form>
+          <br />
         </div>
-        <div class="col-2"></div>
+        <div class="col-1"></div>
+        <!-- WHAT IS THIS? B I D S-->
       </div>
     </div>
-  </div>
-</div>
-<!-- USER PROFILE INFO UPDATE END -->
-<!-- USER AVATAR IMAGE UPDATE -->
+      <!--ACCORDIAN END -->
+
+       <!-- GIG UPDATE FORM START -->
+       <div class="row" *ngIf="updateGig  && !updateProfile">
+       <div class="col-1"></div>
+       <div class="col-10">
+         <form name="gigUpdate" id="gigUpdate">
+           <div class="form-group">
+             <label for="title">T i t l e</label>
+             <input
+               name="title"
+               type="text"
+               class="form-control"
+               id="title"
+               [(ngModel)]="updateGig.title"
+               [ngModelOptions]="{ standalone: true }"
+             />
+           </div>
+           <div class="form-group">
+             <label for="description">D e s c r i p t i o n</label>
+             <input
+               name="description"
+               type="text"
+               class="form-control"
+               id="description"
+               [(ngModel)]="updateGig.description"
+               [ngModelOptions]="{ standalone: true }"
+             />
+           </div>
+           <div class="form-group">
+             <label for="price">P r i c e</label>
+             <input
+               name="price"
+               type="number"
+               class="form-control"
+               id="price"
+               [(ngModel)]="updateGig.price"
+               [ngModelOptions]="{ standalone: true }"
+             />
+           </div>
+           <div class="form-group">
+             <label for="imageUrl">I m a g e</label>
+             <input
+               name="imageUrl"
+               type="text"
+               class="form-control"
+               id="imageUrl"
+               [(ngModel)]="updateGig.imageUrl"
+               [ngModelOptions]="{ standalone: true }"
+             />
+           </div>
+           <div class="form-group">
+             <label for="skill">C a t e g o r y</label>
+             <select name="skill" type="text" class="form-control" id="skill">
+               <option selected>{{ updateGig.skill.name }}</option>
+               <option *ngFor="let skill of skills">{{ skill.name }}</option>
+             </select>
+             <div class="form-group">
+               <label for="remote"
+                 >R e m o t e
+                 <input
+                   name="remote"
+                   type="checkbox"
+                   class="form-control"
+                   id="inlineCheckbox1"
+                   [(ngModel)]="updateGig.remote"
+                   [ngModelOptions]="{ standalone: true }"
+               /></label>
+             </div>
+             <div class="form-group">
+               <label for="active"
+                 >A c t i v e
+                 <input
+                   name="active"
+                   type="checkbox"
+                   class="form-control"
+                   id="inlineCheckbox2"
+                   [(ngModel)]="updateGig.active"
+                   [ngModelOptions]="{ standalone: true }"
+                 />
+               </label>
+             </div>
+             <button
+               class="btn btn-warning"
+               style="float: right"
+               (click)="update(updateGig)"
+             >
+               U p d a t e
+             </button>
+             <button
+               class="btn btn-secondary"
+               style="float: left"
+               (click)="viewAllGigs()"
+             >
+               C a n c e l
+             </button>
+           </div>
+         </form>
+       </div>
+       <div class="col-1"></div>
+     </div>
+     <!-- GIG UPDATE FORM END -->
+
+      <!-- ADD USER SKILLS BOX START -->
+        <div class="container-fluid" *ngIf="selectSkills && !updateProfile">
+          <div class="row" *ngFor="let skill of skills">
+            <div class="col-1"></div>
+            <div class="col-10">
+              <div class="card h-100 text-dark text-center">
+                <h2 class="card-header text-white">{{ skill.name }}</h2>
+                <div class="card-body">
+                  <p>{{ skill.description }}</p>
+                  <form #userSkillDescForm="ngForm">
+                    <label for="userSkillDescription"
+                      >Describe Your Skill:</label
+                    >
+                    <input
+                      name="userSkillDescription"
+                      type="text"
+                      class="form-control"
+                      id="userSkillDescription"
+                      ngModel
+                    />
+                  </form>
+                  <button
+                    style="float: left"
+                    class="btn btn-secondary"
+                    (click)="selectSkills = null"
+                  >
+                    Back
+                  </button>
+                  <button
+                    style="float: right"
+                    class="btn btn-success"
+                    (click)="addUserSkill(skill, userSkillDescForm)"
+                  >
+                    Add This Skill
+                  </button>
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+        </div>
+      <!-- ADD USER SKILLS BOX END -->
+
+      <!-- USER PROFILE INFO UPDATE START -->
+        <div class="container-fluid" *ngIf="updateProfile">
+          <div class="container">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10">
+                <h2 style="color: white" align="center">
+                  Update User Information
+                </h2>
+                <form name="updateUser" id="updateUser">
+                  <strong style="color: white">Personal:</strong><br />
+                  <div class="form-group">
+                    <input
+                      name="id"
+                      type="text"
+                      class="form-control"
+                      id="id"
+                      [(ngModel)]="userSelected.id"
+                      hidden
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input
+                      name="firstName"
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      [(ngModel)]="userSelected.firstName"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input
+                      name="lastName"
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      [(ngModel)]="userSelected.lastName"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                      name="email"
+                      type="text"
+                      class="form-control"
+                      id="email"
+                      [(ngModel)]="userSelected.email"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <input
+                      name="bio"
+                      type="text"
+                      class="form-control"
+                      id="bio"
+                      [(ngModel)]="userSelected.bio"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input
+                      name="phone"
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      [(ngModel)]="userSelected.phone"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Avatar URL</label>
+                    <input
+                      name="avatarImg"
+                      type="text"
+                      class="form-control"
+                      id="avatar"
+                      [(ngModel)]="userSelected.avatarImage.imageUrl"
+                    />
+                  </div>
+                  <hr />
+                  <strong style="color: white">Address:</strong><br />
+                  <div class="form-group">
+                    <label for="street">Street</label><br />
+                    <input
+                      type="text"
+                      name="street"
+                      class="form-control"
+                      [(ngModel)]="userSelected.address.street"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="city">City</label><br />
+                    <input
+                      type="text"
+                      name="city"
+                      class="form-control"
+                      [(ngModel)]="userSelected.address.city"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="state">State</label><br />
+                    <input
+                      type="text"
+                      name="state"
+                      class="form-control"
+                      [(ngModel)]="userSelected.address.state"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="zip">Zip</label><br />
+                    <input
+                      type="text"
+                      name="zip"
+                      class="form-control"
+                      [(ngModel)]="userSelected.address.zip"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <hr />
+                  <strong style="color: white">Login Info:</strong><br />
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                      name="username"
+                      type="text"
+                      class="form-control"
+                      id="username"
+                      [(ngModel)]="userSelected.username"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                      name="password"
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      [(ngModel)]="userSelected.password"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <button
+                      style="float: left"
+                      class="btn btn-secondary"
+                      (click)="updateProfile = null"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      style="float: right"
+                      class="btn btn-warning"
+                      (click)="updateUser()"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-1"></div>
+            </div>
+          </div>
+        </div>
+      <!-- USER PROFILE INFO UPDATE END -->
+      <!-- USER AVATAR IMAGE UPDATE -->
+
