@@ -39,6 +39,12 @@
           <h6 class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
             {{booking.completeDate}}</h6>
           <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+          <button class="card-footer bg-light"
+              [routerLink]="['/user']"
+              class="btn btn-secondary"
+            >
+              Back to User Profile
+            </button>
         </div>
       </div>
     </div>
@@ -156,6 +162,12 @@
           <h6 class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
             {{booking.completeDate}}</h6>
           <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+          <button class="card-footer bg-light"
+              [routerLink]="['/user']"
+              class="btn btn-secondary"
+            >
+              Back to User Profile
+            </button>
         </div>
       </div>
     </div>
