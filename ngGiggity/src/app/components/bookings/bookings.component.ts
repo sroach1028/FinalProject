@@ -21,7 +21,7 @@ export class BookingsComponent implements OnInit {
   constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
 
   ngOnInit() {
-
+    this.randombg();
     this.getLoggedUser();
   }
 
@@ -107,6 +107,29 @@ export class BookingsComponent implements OnInit {
       },
       err => console.error('Create error in search-result-Component createBid')
     );
+  }
+
+
+  randombg(){
+    let images = [
+
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/art.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/carpentry.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/construction.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/development.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/homeimprovement.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/landscaping.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/marketing.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/mechanic.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/photography.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/plumbing.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/tutoring.png')",
+      "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/writing.png')"
+
+    ];
+    let random= Math.floor(Math.random() * images.length) + 0;
+
+    document.getElementById("randBackground").style.backgroundImage=images[random];
   }
 
 }
