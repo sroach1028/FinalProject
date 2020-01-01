@@ -4,11 +4,11 @@ import { BookingService } from './../../services/booking.service';
 import { ActiveBidPipe } from './../../pipes/active-bid.pipe';
 import { JobService } from 'src/app/services/job.service';
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserSkill } from 'src/app/models/user-skill';
 import { UserSkillService } from 'src/app/services/user-skill.service';
 import { Job } from 'src/app/models/job';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
 import { BidService } from 'src/app/services/bid.service';
@@ -20,18 +20,18 @@ import { Booking } from 'src/app/models/booking';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
-  title = 'Profile';
-  userSelected: User = null;
-  userSkills: UserSkill[] = [];
+export class UserComponent implements OnInit, OnDestroy {
+  title = 'Profile'; //
+  userSelected: User = null; //
+  userSkills: UserSkill[] = []; //
   updateGig: Job = null;
   selected: Job = null;
-  userJobs: Job[];
+  userJobs: Job[]; //
   skillName: string;
-  skills: Skill[];
+  skills: Skill[]; //
   user: User;
   bids: Bid[];
-  sellersBids: Bid[];
+  sellersBids: Bid[]; //
   selectedBid: Bid;
   booking: Booking = new Booking();
   selectSkills = null;
@@ -39,6 +39,7 @@ export class UserComponent implements OnInit {
   updateProfile = false;
   username;
 
+  navigationSubscription;
 
   // tslint:disable-next-line: max-line-length
 
@@ -52,24 +53,33 @@ export class UserComponent implements OnInit {
     private bookingSvc: BookingService,
     private skillsvc: SkillService
   ) {
-    // //reloads current URL with new search term
-    // this.navigationSubscription = this.router.events.subscribe(
-    //   (e: any) => {
-    //     if (e instanceof NavigationEnd) {
-    //       console.log("Inside instanceOf NavigationEnd");
-    //       this.keyword = this.currentRoute.snapshot.paramMap.get('skillName');
-    //       if (this.keyword) {
-    //         this.jobSvc.findJobBySkill(this.keyword).subscribe(
-    //           data => {
-    //             this.selected = data.find(this.checkSkill)
-    //           },
-    //           err => {
-    //           }
-    //         );
-    //       }
-    //     }
-    //   }
-    // );
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.updateGig = null;
+        this.selected = null;
+        this.skillName = null;
+        this.selectedBid = null;
+        this.booking = null;
+        this.selectSkills = null;
+        this.userSkillDescription = null;
+        this.updateProfile = false;
+        this.ngOnInit();
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.userSvc.getUserByUsername().subscribe(
+      data => {
+        this.userSelected = data;
+      },
+      err => console.error('Reload error in User Component')
+    );
+    this.getUserJobs();
+    this.showBidsByBidder();
+    this.getAllSkills();
+    this.getUserSkills();
   }
 
   chooseSkills() {
@@ -81,7 +91,7 @@ export class UserComponent implements OnInit {
     this.update(job);
   }
   showProfile(username: string) {
-    this.username = username;
+    this.userSvc.profileUsername(username);
   }
 
   displaySelected(job) {
@@ -104,18 +114,6 @@ export class UserComponent implements OnInit {
         console.error('Update Job error in User Compnent');
       }
     );
-  }
-  ngOnInit() {
-    this.userSvc.getUserByUsername().subscribe(
-      data => {
-        this.userSelected = data;
-      },
-      err => console.error('Reload error in User Component')
-    );
-    this.getUserJobs();
-    this.showBidsByBidder();
-    this.getAllSkills();
-    this.getUserSkills();
   }
 
   getUserJobs() {
@@ -228,8 +226,7 @@ export class UserComponent implements OnInit {
     userSkill.description = desc;
 
     this.userSkillSvc.createUserSkill(userSkill).subscribe(
-      data => {
-      },
+      data => { },
       err => {
         console.log('Error getting SKills in User component');
       }
@@ -263,4 +260,12 @@ export class UserComponent implements OnInit {
     this.updateProfile = false;
   }
 
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
 }

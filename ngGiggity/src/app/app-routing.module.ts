@@ -12,8 +12,8 @@ import { AltProfileComponent } from './components/alt-profile/alt-profile.compon
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'home', component: HomeComponent, runGuardsAndResolvers: 'always' },
+  { path: 'user', component: UserComponent, runGuardsAndResolvers: 'always' },
   { path: 'profile', component: AltProfileComponent },
   { path: 'users/username/:username', component: UserComponent },
   { path: 'login', component: LoginComponent },
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true, onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,5 +1,5 @@
 import { BookingService } from './../../services/booking.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit,} from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Job } from 'src/app/models/job';
@@ -12,7 +12,7 @@ import { Booking } from 'src/app/models/booking';
 })
 export class AltProfileComponent implements OnInit {
 
-  @Input() username: string;
+  username: string;
 
   user: User;
   userJobs: Job[];
@@ -28,6 +28,7 @@ export class AltProfileComponent implements OnInit {
   constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
 
   ngOnInit() {
+    this.username = this.userSvc.profile;
     this.userSvc.findUserByUsername(this.username).subscribe(
       data => {
         this.user = data;
