@@ -16,6 +16,8 @@
         </li>
 
         <li class="nav-item">
+          <a *ngIf="isLoggedIn()" class="nav-link" style="margin-right: 55px" [routerLink]="['/user']">Welcome {{ userSelected.firstName }} {{ userSelected.lastName }}!</a></li>
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/search']">Search</a>
         </li>
         <li class="nav-item" *ngIf="!isLoggedIn()">
