@@ -62,33 +62,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @ViewChild(AgmMap, {static: false}) map: AgmMap;
   // END MAP FIELDS
 
-  // CLASS FIELDS
-  navigationSubscription;
-  jobs: Job[];
-  jobTitle: string = null;
-  title = 'Available Jobs';
-  urlId: number;
-  selected: Job = null;
-  jobSkill: Skill = null;
-  jobSkillName = null;
-  jobCity = null;
-  jobAddress: Address = new Address();
-  booking: Booking = new Booking();
-  bid: Bid = new Bid();
-  newBid = false;
-  user: User;
-  updateGig: Job = null;
-  skills: Skill[];
-  users: User[];
-  beginSearch = true;
-  username = null;
-  markers: Marker[] = [];
-  public newMarker: Marker = {
-    lat: 0,
-    lng: 0,
-    draggable: true
-  };
-
   // C O N S T R U C T O R
   constructor(
     private jobSvc: JobService,
@@ -105,6 +78,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
+        this.beginSearch = true;
+        this.selected = null;
+        this.updateGig = null;
         this.ngOnInit();
       }
     });
@@ -116,6 +92,33 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.geocoder = new google.maps.Geocoder();
     });
   }
+
+   // CLASS FIELDS
+   navigationSubscription;
+   jobs: Job[];
+   jobTitle: string = null;
+   title = 'Available Jobs';
+   urlId: number;
+   selected: Job = null;
+   jobSkill: Skill = null;
+   jobSkillName = null;
+   jobCity = null;
+   jobAddress: Address = new Address();
+   booking: Booking = new Booking();
+   bid: Bid = new Bid();
+   newBid = false;
+   user: User;
+   updateGig: Job = null;
+   skills: Skill[];
+   users: User[];
+   beginSearch = true;
+   username = null;
+   markers: Marker[] = [];
+   public newMarker: Marker = {
+     lat: 0,
+     lng: 0,
+     draggable: true
+   };
 
   ngOnInit() {
     this.getLoggedUser();
