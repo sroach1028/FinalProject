@@ -99,5 +99,11 @@ public class UserSvcImpl implements UserService {
 		userRepo.saveAndFlush(toUpdate);
 		return toUpdate;
 	}
+	@Override
+	public User findUserByUsername(String username) {
+		User profile = userRepo.findByUsername(username);
+		
+		return profile;
+	}
 
 }

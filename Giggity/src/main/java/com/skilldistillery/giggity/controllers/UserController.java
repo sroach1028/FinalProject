@@ -49,6 +49,16 @@ public class UserController {
 			res.setStatus(200);
 		return users;
 	}
+	@GetMapping("profile/username/{username}")
+	public User findUsersByUsername(@PathVariable String username, HttpServletResponse res) {
+		
+		User user = svc.findUserByUsername(username);
+		if (user == null) {
+			res.setStatus(404);
+		} else
+			res.setStatus(200);
+		return user;
+	}
 
 	@GetMapping("users/username/")
 	public User getUserByUsername(HttpServletResponse res, Principal principal) {

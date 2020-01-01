@@ -60,6 +60,17 @@ export class UserService {
       );
 
   }
+  findUserByUsername(username: string) {
+
+    return this.http.get<User>(this.baseUrl + 'profile/username/' + username)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+
+  }
 
   getUserSByUsername(term: string) {
 
@@ -81,6 +92,16 @@ export class UserService {
       })
     };
     return this.http.get<Job[]>(this.baseUrl + 'api/jobs/username/', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
+  findJobsByUsername(username: string) {
+
+    return this.http.get<Job[]>(this.baseUrl + 'jobs/username/' + username)
       .pipe(
         catchError((err: any) => {
           console.log(err);
