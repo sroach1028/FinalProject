@@ -1,27 +1,27 @@
-import { NgForm } from "@angular/forms";
-import { SkillService } from "./../../services/skill.service";
-import { BookingService } from "./../../services/booking.service";
-import { ActiveBidPipe } from "./../../pipes/active-bid.pipe";
-import { JobService } from "src/app/services/job.service";
-import { UserService } from "./../../services/user.service";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { UserSkill } from "src/app/models/user-skill";
-import { UserSkillService } from "src/app/services/user-skill.service";
-import { Job } from "src/app/models/job";
-import { Router, NavigationEnd } from "@angular/router";
-import { Skill } from "src/app/models/skill";
-import { User } from "src/app/models/user";
-import { BidService } from "src/app/services/bid.service";
-import { Bid } from "src/app/models/bid";
-import { Booking } from "src/app/models/booking";
+import { NgForm } from '@angular/forms';
+import { SkillService } from './../../services/skill.service';
+import { BookingService } from './../../services/booking.service';
+import { ActiveBidPipe } from './../../pipes/active-bid.pipe';
+import { JobService } from 'src/app/services/job.service';
+import { UserService } from './../../services/user.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UserSkill } from 'src/app/models/user-skill';
+import { UserSkillService } from 'src/app/services/user-skill.service';
+import { Job } from 'src/app/models/job';
+import { Router, NavigationEnd } from '@angular/router';
+import { Skill } from 'src/app/models/skill';
+import { User } from 'src/app/models/user';
+import { BidService } from 'src/app/services/bid.service';
+import { Bid } from 'src/app/models/bid';
+import { Booking } from 'src/app/models/booking';
 
 @Component({
-  selector: "app-user",
-  templateUrl: "./user.component.html",
-  styleUrls: ["./user.component.css"]
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit, OnDestroy {
-  title = "Profile"; //
+  title = 'Profile'; //
   userSelected: User = null; //
   userSkills: UserSkill[] = []; //
   updateGig: Job = null;
@@ -37,6 +37,8 @@ export class UserComponent implements OnInit, OnDestroy {
   selectSkills = null;
   userSkillDescription: string;
   updateProfile = false;
+  username;
+
   navigationSubscription;
 
   // tslint:disable-next-line: max-line-length
@@ -72,7 +74,7 @@ export class UserComponent implements OnInit, OnDestroy {
       data => {
         this.userSelected = data;
       },
-      err => console.error("Reload error in User Component")
+      err => console.error('Reload error in User Component')
     );
     this.getUserJobs();
     this.showBidsByBidder();
@@ -87,6 +89,9 @@ export class UserComponent implements OnInit, OnDestroy {
   remove(job: Job) {
     job.active = false;
     this.update(job);
+  }
+  showProfile(username: string) {
+    this.userSvc.profileUsername(username);
   }
 
   displaySelected(job) {
@@ -106,7 +111,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.updateGig = null;
       },
       err => {
-        console.error("Update Job error in User Compnent");
+        console.error('Update Job error in User Compnent');
       }
     );
   }
@@ -116,7 +121,7 @@ export class UserComponent implements OnInit, OnDestroy {
       data => {
         this.userJobs = data;
       },
-      err => console.error("Reload error in Component")
+      err => console.error('Reload error in Component')
     );
   }
 
@@ -125,7 +130,7 @@ export class UserComponent implements OnInit, OnDestroy {
       data => {
         this.userSkills = data;
       },
-      err => console.error("Reload error in Component")
+      err => console.error('Reload error in Component')
     );
   }
 
@@ -152,7 +157,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.sellersBids = data;
       },
       err => {
-        console.error("Get error in search-result-Component showBidsByBidder");
+        console.error('Get error in search-result-Component showBidsByBidder');
       }
     );
   }
@@ -163,9 +168,9 @@ export class UserComponent implements OnInit, OnDestroy {
     this.booking.job = this.selected;
     this.bookingSvc.createBooking(this.booking).subscribe(
       data => {
-        this.router.navigateByUrl("/bookings");
+        this.router.navigateByUrl('/bookings');
       },
-      err => console.error("Create error in search-result-Component createBid")
+      err => console.error('Create error in search-result-Component createBid')
     );
 
     for (let rejectBid of this.bids) {
@@ -176,7 +181,7 @@ export class UserComponent implements OnInit, OnDestroy {
           rejectBid = data;
         },
         err => {
-          console.error("Update error in search-result-Component acceptBid");
+          console.error('Update error in search-result-Component acceptBid');
         }
       );
     }
@@ -188,7 +193,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.selectedBid = data;
       },
       err => {
-        console.error("Update error in search-result-Component acceptBid");
+        console.error('Update error in search-result-Component acceptBid');
       }
     );
   }
@@ -196,8 +201,8 @@ export class UserComponent implements OnInit, OnDestroy {
   rejectBid(rejectedBid: Bid) {
     rejectedBid.accepted = false;
     this.bidSvc.updateBid(rejectedBid).subscribe(
-      data => {},
-      err => console.error("Create error in search-result-Component createBid")
+      data => { },
+      err => console.error('Create error in search-result-Component createBid')
     );
   }
 
@@ -207,7 +212,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.skills = data;
       },
       err => {
-        console.log("Error getting SKills in User component");
+        console.log('Error getting SKills in User component');
       }
     );
   }
@@ -221,9 +226,9 @@ export class UserComponent implements OnInit, OnDestroy {
     userSkill.description = desc;
 
     this.userSkillSvc.createUserSkill(userSkill).subscribe(
-      data => {},
+      data => { },
       err => {
-        console.log("Error getting SKills in User component");
+        console.log('Error getting SKills in User component');
       }
     );
     this.userSkills.push(userSkill);
@@ -238,7 +243,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userSelected = data;
       },
       err => {
-        console.error("userToUpdate Error: User Component");
+        console.error('userToUpdate Error: User Component');
       }
     );
   }
@@ -249,7 +254,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userSelected = data;
       },
       err => {
-        console.error("Update User Error: User Component");
+        console.error('Update User Error: User Component');
       }
     );
     this.updateProfile = false;

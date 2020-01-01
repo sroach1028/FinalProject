@@ -16,6 +16,7 @@ import { UserSkill } from '../models/user-skill';
 })
 export class UserService {
   private baseUrl = environment.baseUrl;
+  profile;
 
   constructor(
     private http: HttpClient,
@@ -44,6 +45,10 @@ export class UserService {
         );
     }
   }
+  profileUsername(profile: string) {
+    console.log('LOOOOOKK HERERE: ' + profile)
+this.profile = profile;
+  }
   getUserByUsername() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -51,7 +56,18 @@ export class UserService {
         Authorization: "Basic " + this.authSvc.getCredentials()
       })
     };
-    return this.http.get<User>(this.baseUrl + 'users/username/',  httpOptions)
+    return this.http.get<User>(this.baseUrl + 'users/username/', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+
+  }
+  findUserByUsername(username: string) {
+
+    return this.http.get<User>(this.baseUrl + 'profile/username/' + username)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -73,7 +89,7 @@ export class UserService {
 
   }
 
-  getJobsByUsername(){
+  getJobsByUsername() {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
@@ -81,6 +97,16 @@ export class UserService {
       })
     };
     return this.http.get<Job[]>(this.baseUrl + 'api/jobs/username/', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
+  findJobsByUsername(username: string) {
+
+    return this.http.get<Job[]>(this.baseUrl + 'jobs/username/' + username)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -105,7 +131,7 @@ export class UserService {
       );
   }
 
-  getBookings(id){
+  getBookings(id) {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",

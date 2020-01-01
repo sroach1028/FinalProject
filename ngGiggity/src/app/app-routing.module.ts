@@ -8,11 +8,13 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PostComponent } from './components/post/post.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { AltProfileComponent } from './components/alt-profile/alt-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent, runGuardsAndResolvers: 'always' },
   { path: 'user', component: UserComponent, runGuardsAndResolvers: 'always' },
+  { path: 'profile', component: AltProfileComponent },
   { path: 'users/username/:username', component: UserComponent },
   { path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always' },
   { path: 'register', component: RegisterComponent, runGuardsAndResolvers: 'always' },

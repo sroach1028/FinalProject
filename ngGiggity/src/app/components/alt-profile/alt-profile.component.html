@@ -1,1 +1,74 @@
-<p>alt-profile works!</p>
+<div class="jumbotron">
+  <div class="container-fluid">
+    <!-- USER IMAGE & NAME BOX START -->
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="span well bg-light">
+          <br />
+          <div>
+            <a data-toggle="modal" data-target="#myModal"
+              ><img
+                [src]="user.avatarImage.imageUrl"
+                name="aboutme"
+                width="auto"
+                height="275"
+                class="image rounded-circle"
+            /></a>
+            <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+            <span class="card-detail-badge"><a href="mailto:{{user.email}}" target="_blank">
+              Contact Me</a></span>
+          </div>
+          <br />
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="span well bg-secondary">
+            <br />
+            <h3>Skills: </h3><br>
+            <p *ngFor="let skill of user.skills">
+              <strong>Skill:</strong> {{ skill.skill.name }} |
+              <br><strong>Desc:</strong> {{ skill.skill.description }}
+            </p>
+
+
+            <h3>About Me:</h3><br>
+            <p>{{user.bio}}</p>
+
+            <br />
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="span well bg-secondary">
+            <br />
+<h3>History</h3><br>
+<!-- {{yourGigs.length}} -->
+<p *ngFor="let booking of yourGigs">
+  <strong>Job Completed: </strong> {{booking.job.title}} <br> Skill: {{booking.job.skill.name}} <br> Description: {{booking.job.description}}
+
+  <br> ------------------------------------------------------------------------------
+</p>
+
+            <br />
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+
+
+
+  </div>
