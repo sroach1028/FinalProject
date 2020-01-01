@@ -37,6 +37,8 @@ export class UserComponent implements OnInit {
   selectSkills = null;
   userSkillDescription: string;
   updateProfile = false;
+  username;
+
 
   // tslint:disable-next-line: max-line-length
 
@@ -77,6 +79,9 @@ export class UserComponent implements OnInit {
   remove(job: Job) {
     job.active = false;
     this.update(job);
+  }
+  showProfile(username: string) {
+    this.username = username;
   }
 
   displaySelected(job) {
@@ -198,7 +203,7 @@ export class UserComponent implements OnInit {
   rejectBid(rejectedBid: Bid) {
     rejectedBid.accepted = false;
     this.bidSvc.updateBid(rejectedBid).subscribe(
-      data => {},
+      data => { },
       err => console.error('Create error in search-result-Component createBid')
     );
   }
@@ -232,7 +237,7 @@ export class UserComponent implements OnInit {
     this.userSkills.push(userSkill);
     this.selectSkills = null;
     this.ngOnInit();
-    }
+  }
 
   userToUpdate() {
     this.updateProfile = true;

@@ -286,6 +286,7 @@
                   >
                     <thead>
                       <tr>
+                        <th>User</th>
                         <th>Offer</th>
                         <th>Message</th>
                         <th>Accept</th>
@@ -294,6 +295,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let bid of bids | activeBid">
+                        <td (click)=showProfile(bid.bidder.username) [routerLink]="['/profile']">{{ bid.bidder.username}}</td>
                         <td>{{ bid.bidAmount | currency }}</td>
                         <td>{{ bid.description }}</td>
                         <td>
