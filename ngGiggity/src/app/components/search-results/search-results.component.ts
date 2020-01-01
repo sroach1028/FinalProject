@@ -1,7 +1,7 @@
 import { BidService } from './../../services/bid.service';
 import { BookingService } from './../../services/booking.service';
 import { UserService } from './../../services/user.service';
-import { Component, Input, ViewChild, NgZone, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { Address } from 'src/app/models/address';
 import { Job } from 'src/app/models/job';
 import { Skill } from 'src/app/models/skill';
@@ -45,7 +45,7 @@ interface Location {
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy {
 
   // MAP FIELDS
   geocoder: any;
@@ -63,6 +63,7 @@ export class SearchResultsComponent implements OnInit {
   // END MAP FIELDS
 
   // CLASS FIELDS
+  navigationSubscription;
   jobs: Job[];
   jobTitle: string = null;
   title = 'Available Jobs';
@@ -101,6 +102,13 @@ export class SearchResultsComponent implements OnInit {
     private zone: NgZone,
     private wrapper: GoogleMapsAPIWrapper
   ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+
     this.mapsApiLoader = mapsApiLoader;
     this.zone = zone;
     this.wrapper = wrapper;
@@ -313,6 +321,15 @@ export class SearchResultsComponent implements OnInit {
       },
       err => console.error('Create error in search-result-Component createBid')
     );
+  }
+
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
 }
