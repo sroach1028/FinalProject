@@ -56,7 +56,6 @@ public class UserSkillController {
 	@GetMapping("userSkill/username")
 	public List<UserSkill> getSkillsByUsername(HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		List<UserSkill> results = new ArrayList<>();
-		System.err.println("*********************");
 		results = svc.getUserSkillByUsername(principal.getName());
 		if (results.size() == 0) {
 			resp.setStatus(404);
