@@ -339,14 +339,6 @@ public class Job {
 		builder.append(dateUpdated);
 		builder.append(", user=");
 		builder.append(user);
-		builder.append(", bookings=");
-		builder.append(bookings);
-		builder.append(", buyerReviews=");
-		builder.append(buyerReviews);
-		builder.append(", jobBids=");
-		builder.append(jobBids);
-		builder.append(", jobImages=");
-		builder.append(jobImages);
 		builder.append("]");
 		return builder.toString();
 	}

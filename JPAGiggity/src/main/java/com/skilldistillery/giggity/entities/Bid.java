@@ -209,8 +209,6 @@ public class Bid {
 		builder.append(accepted);
 		builder.append(", rejected=");
 		builder.append(rejected);
-		builder.append(", bookings=");
-		builder.append(bookings);
 		builder.append(", bidder=");
 		builder.append(bidder);
 		builder.append(", job=");
