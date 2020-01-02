@@ -8,7 +8,7 @@
 
 <div class="container"> <br>
   <br>
-  <h1 style="text-align: center;">Total Gigs You've Hired Out: {{allBoookings.length}} </h1>
+  <h1 style="text-align: center;">Total Gigs You've Hired Out: <span class="badge badge-secondary">{{allBoookings.length}}</span> </h1>
   <div class="row" id="ads" *ngIf="allBoookings">
 
     <!-- Category Card -->
@@ -135,7 +135,7 @@
 
 <div class="container"> <br>
   <br>
-  <h1 style="text-align: center;">Your Gigs to complete: {{yourGigs.length}} </h1>
+  <h1 style="text-align: center;">Your Gigs to complete: <span class="badge badge-secondary">{{yourGigs.length}}</span></h1>
   <div class="row" id="ads" *ngIf="allBoookings">
 
     <!-- Category Card -->
