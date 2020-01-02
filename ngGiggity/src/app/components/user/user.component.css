@@ -158,4 +158,9 @@ hr{
   border: none;
   border-bottom: 3px solid black;
 }
+.showHand:hover{
+  color: red;
+  cursor: pointer;
+}
+
 
