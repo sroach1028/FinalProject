@@ -1,0 +1,10 @@
+.container-fluid {
+  background-image: url('src/assets/giggity404.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1, h2 {
+  font-family: Comic sans MS;
+}

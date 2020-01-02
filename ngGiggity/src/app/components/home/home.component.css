@@ -1,13 +1,10 @@
 body, html {
   height: 100%;
 }
-/* .jumbotron {
-  background-image: {{ background }};
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
+.jumbotron {
+  background: none
+}
 
 #randBackground {
   background-position: center;

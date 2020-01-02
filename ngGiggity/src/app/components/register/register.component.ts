@@ -3,23 +3,30 @@ import { SkillService } from './../../services/skill.service';
 import { UserSkill } from './../../models/user-skill';
 import { UserService } from './../../services/user.service';
 import { Address } from './../../models/address';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy  {
 
-  constructor(private authSvc: AuthService, private router: Router, private usersvc: UserService, private skillsvc: SkillService) { }
+  constructor(private authSvc: AuthService, private router: Router, private usersvc: UserService, private skillsvc: SkillService) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.error = false;
+        this.ngOnInit();
+      }
+    });
+   }
   error = false;
-
-
+  navigationSubscription;
 
   register(form: NgForm) {
     form.value.role = 'standard';
@@ -64,5 +71,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
 
 }

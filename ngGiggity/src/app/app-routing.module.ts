@@ -11,20 +11,20 @@ import { BookingsComponent } from './components/bookings/bookings.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'home', component: HomeComponent, runGuardsAndResolvers: 'always' },
+  { path: 'user', component: UserComponent, runGuardsAndResolvers: 'always' },
   { path: 'users/username/:username', component: UserComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'post', component: PostComponent },
-  { path: 'search', component: SearchResultsComponent },
+  { path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always' },
+  { path: 'register', component: RegisterComponent, runGuardsAndResolvers: 'always' },
+  { path: 'post', component: PostComponent, runGuardsAndResolvers: 'always' },
+  { path: 'search', component: SearchResultsComponent, runGuardsAndResolvers: 'always'},
   { path: 'bookings', component: BookingsComponent },
   { path: 'search/:skillName', component: SearchResultsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true, onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

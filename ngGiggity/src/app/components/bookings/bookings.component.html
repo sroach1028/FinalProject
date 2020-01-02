@@ -3,8 +3,8 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </Header>
-<body>
-
+<body id="randBackground">
+  <br><br>
 
 <div class="container"> <br>
   <br>
@@ -39,6 +39,12 @@
           <h6 class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
             {{booking.completeDate}}</h6>
           <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+          <button class="card-footer bg-light"
+              [routerLink]="['/user']"
+              class="btn btn-secondary"
+            >
+              Back to User Profile
+            </button>
         </div>
       </div>
     </div>
@@ -156,10 +162,18 @@
           <h6 class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
             {{booking.completeDate}}</h6>
           <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+          <button class="card-footer bg-light"
+              [routerLink]="['/user']"
+              class="btn btn-secondary"
+            >
+              Back to User Profile
+            </button>
         </div>
       </div>
     </div>
 
   </div>
 </div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
