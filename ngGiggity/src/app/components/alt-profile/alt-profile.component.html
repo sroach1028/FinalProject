@@ -7,17 +7,11 @@
         <div class="span well bg-light">
           <br />
           <div>
-            <a data-toggle="modal" data-target="#myModal"
-              ><img
-                [src]="user.avatarImage.imageUrl"
-                name="aboutme"
-                width="auto"
-                height="275"
-                class="image rounded-circle"
-            /></a>
+            <a data-toggle="modal" data-target="#myModal"><img [src]="user.avatarImage.imageUrl" name="aboutme"
+                width="auto" height="275" class="image rounded-circle" /></a>
             <h3>{{ user.firstName }} {{ user.lastName }}</h3>
             <span class="card-detail-badge"><a href="mailto:{{user.email}}" target="_blank">
-              Contact Me</a></span>
+                Contact Me</a></span>
           </div>
           <br />
         </div>
@@ -25,41 +19,40 @@
       <div class="col-1"></div>
     </div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-          <div class="span well bg-secondary">
-            <br />
-            <h3>Skills: </h3><br>
-            <p *ngFor="let skill of user.skills">
-              <strong>Skill:</strong> {{ skill.skill.name }}
-            </p>
 
+    <div class="container-fluid" id="skillDiv">
+      <h3>Skills: </h3>
+      <li *ngFor="let skill of user.skills">
+        {{ skill.skill.name }}
+      </li>
 
-            <h3>About Me:</h3><br>
-            <p>{{user.bio}}</p>
-
-            <br />
-          </div>
-        </div>
-        <div class="col-1"></div>
-      </div>
+    </div>
+    <div class="container-fluid" id="about">
+      <h3>About Me:</h3>
+      <font size="2">{{user.bio}}</font>
     </div>
 
-    <div class="container-fluid">
+
+
+
+
+    <div style="padding-top: 20px;"  id="hist" class="container-fluid">
       <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
           <div class="span well bg-secondary">
             <br />
-<h3>History</h3><br>
-<!-- {{yourGigs.length}} -->
-<p *ngFor="let booking of yourGigs">
-  <strong>Job Completed: {{booking.completeDate}}</strong> <br> Job Title: {{booking.job.title}} <br> Skill Used: {{booking.job.skill.name}} <br> <font size="3"> Description: {{booking.job.description}} </font>
+            <h3>History</h3><br>
+            <!-- {{yourGigs.length}} -->
+            <p *ngFor="let booking of yourGigs">
+              <strong>Job Completed: {{booking.completeDate}}</strong> <br> <br><strong> Job Title: </strong>
+              <br>{{booking.job.title}} <br><br> <strong> Skill Used: </strong><br>
+              <font size="3"> {{booking.job.skill.name}} </font><br><br>
+              <font size="3"> <strong> Description: </strong>
+                <br> {{booking.job.description}} </font>
 
-  <br> ------------------------------------------------------------------------------
-</p>
+              <br> ------------------------------------------------------------------------------
+            </p>
 
             <br />
           </div>
