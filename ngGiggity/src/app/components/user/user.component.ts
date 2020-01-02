@@ -26,7 +26,7 @@ export class UserComponent implements OnInit, OnDestroy {
   userSkills: UserSkill[] = []; //
   updateGig: Job = null;
   selected: Job = null;
-  userJobs: Job[]; //
+  userJobs: Job[] = []; //
   skillName: string;
   skills: Skill[]; //
   user: User;
