@@ -109,9 +109,8 @@ export class BookingsComponent implements OnInit {
     );
   }
 
-
-  randombg(){
-    let images = [
+  randombg() {
+    const images = [
 
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/art.png')",
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/art2.png')",
@@ -137,9 +136,9 @@ export class BookingsComponent implements OnInit {
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/writing.png')"
 
     ];
-    let random= Math.floor(Math.random() * images.length) + 0;
+    const random = Math.floor(Math.random() * images.length) + 0;
 
-    document.getElementById("randBackground").style.backgroundImage=images[random];
+    document.getElementById("randBackground").style.backgroundImage = images[random];
   }
 
 }
