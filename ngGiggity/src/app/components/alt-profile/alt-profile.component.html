@@ -33,8 +33,7 @@
             <br />
             <h3>Skills: </h3><br>
             <p *ngFor="let skill of user.skills">
-              <strong>Skill:</strong> {{ skill.skill.name }} |
-              <br><strong>Desc:</strong> {{ skill.skill.description }}
+              <strong>Skill:</strong> {{ skill.skill.name }}
             </p>
 
 
@@ -57,7 +56,7 @@
 <h3>History</h3><br>
 <!-- {{yourGigs.length}} -->
 <p *ngFor="let booking of yourGigs">
-  <strong>Job Completed: </strong> {{booking.job.title}} <br> Skill: {{booking.job.skill.name}} <br> Description: {{booking.job.description}}
+  <strong>Job Completed: {{booking.completeDate}}</strong> <br> Job Title: {{booking.job.title}} <br> Skill Used: {{booking.job.skill.name}} <br> <font size="3"> Description: {{booking.job.description}} </font>
 
   <br> ------------------------------------------------------------------------------
 </p>
