@@ -329,18 +329,10 @@ public class User {
 		builder.append(role);
 		builder.append(", phone=");
 		builder.append(phone);
-		builder.append(", posts=");
-		builder.append(posts);
-		builder.append(", bids=");
-		builder.append(bids);
-		builder.append(", skills=");
-		builder.append(skills);
 		builder.append(", avatarImage=");
 		builder.append(avatarImage);
 		builder.append(", address=");
 		builder.append(address);
-		builder.append(", jobs=");
-		builder.append(jobs);
 		builder.append(", bio=");
 		builder.append(bio);
 		builder.append("]");

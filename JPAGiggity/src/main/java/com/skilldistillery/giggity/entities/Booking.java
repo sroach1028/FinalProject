@@ -232,10 +232,6 @@ public class Booking {
 		builder.append(notes);
 		builder.append(", accepted=");
 		builder.append(accepted);
-		builder.append(", sellerReviews=");
-		builder.append(sellerReviews);
-		builder.append(", messages=");
-		builder.append(messages);
 		builder.append("]");
 		return builder.toString();
 	}

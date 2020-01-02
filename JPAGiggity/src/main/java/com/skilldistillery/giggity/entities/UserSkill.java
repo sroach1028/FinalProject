@@ -182,8 +182,6 @@ public class UserSkill {
 		builder.append(logoImage);
 		builder.append(", skill=");
 		builder.append(skill);
-		builder.append(", portfolioImages=");
-		builder.append(portfolioImages);
 		builder.append("]");
 		return builder.toString();
 	}

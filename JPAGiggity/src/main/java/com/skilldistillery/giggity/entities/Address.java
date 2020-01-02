@@ -148,8 +148,6 @@ public class Address {
 		builder.append(zip);
 		builder.append(", street=");
 		builder.append(street);
-		builder.append(", jobAddresses=");
-		builder.append(jobAddresses);
 		builder.append("]");
 		return builder.toString();
 	}
