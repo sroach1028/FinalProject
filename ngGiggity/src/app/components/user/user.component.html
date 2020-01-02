@@ -350,8 +350,8 @@
                 <div class="col-10">
                   <div class="card h-100 text-dark text-center">
                     <div class="card-header text-white">
-                      <h5>
-                        Awaiting {{ bid.job.user.username }}'s Approval - Date Posted:
+                      <h5 (click)="showProfile(bid.bidder.username)" [routerLink]="['/profile']">
+                        Awaiting Requester Approval - Date Posted:
                         {{ bid.job.dateCreated | date: "short" }}
                       </h5>
                     </div>
@@ -359,6 +359,8 @@
                       <h5>Gig: {{ bid.job.title }}</h5>
                       <h6>Skill Required: {{ bid.job.skill.name }}</h6>
                       <p>About the Gig: {{ bid.job.description }}</p>
+                      <a>Requester: </a>
+                      <a class="showHand" (click)="showProfile(bid.job.user.username)" [routerLink]="['/profile']">{{ bid.job.user.username }}</a>
                     </div>
                     <div class="card-footer">
                       <a style="float: left">Offer: {{ bid.bidAmount | currency }}</a>
