@@ -335,9 +335,9 @@
                     <tr *ngFor="let bid of bids | activeBid">
                       <td
                         (click)="showProfile(bid.bidder.username)"
-                        [routerLink]="['/profile']"
+
                       >
-                        {{ bid.bidder.username }}
+                        <a href="/profile">{{ bid.bidder.username }}</a>
                       </td>
                       <td>{{ bid.bidAmount | currency }}</td>
                       <td>{{ bid.description }}</td>
