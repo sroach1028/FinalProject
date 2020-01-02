@@ -60,7 +60,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   randombg() {
-    let images = [
+    const images = [
+
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/art.png')",
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/art2.png')",
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/baking.png')",
@@ -83,11 +84,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/tutoring.png')",
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/videography.png')",
       "linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/writing.png')"
-    ];
-    let random = Math.floor(Math.random() * images.length) + 0;
 
-    document.getElementById("randBackground").style.backgroundImage =
-      images[random];
+    ];
+    const random = Math.floor(Math.random() * images.length) + 0;
+
+    document.getElementById("randBackground").style.backgroundImage = images[random];
   }
 
   ngOnDestroy() {
