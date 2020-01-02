@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { PostComponent } from './components/post/post.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { AltProfileComponent } from './components/alt-profile/alt-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, runGuardsAndResolvers: 'always' },
   { path: 'post', component: PostComponent, runGuardsAndResolvers: 'always' },
   { path: 'search', component: SearchResultsComponent, runGuardsAndResolvers: 'always'},
+  { path: 'profile', component: AltProfileComponent },
   { path: 'bookings', component: BookingsComponent },
   { path: 'search/:skillName', component: SearchResultsComponent },
   { path: '**', component: PageNotFoundComponent }
