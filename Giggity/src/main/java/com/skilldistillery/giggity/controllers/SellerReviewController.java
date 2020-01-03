@@ -27,22 +27,29 @@ public class SellerReviewController {
 
 	@Autowired
 	SellerReviewService svc;
-	
+
 	@GetMapping("sellerReview/{id}")
 	public SellerReview getById(@PathVariable int id, HttpServletRequest req, HttpServletResponse resp) {
 		return svc.findById(id);
 	}
-	
+
 	@GetMapping("sellerReview/booking/{id}")
 	public SellerReview getByBookingId(@PathVariable int id, HttpServletRequest req, HttpServletResponse resp) {
 		return svc.findByBookingId(id);
 	}
-	
+
 	@GetMapping("sellerReview/job/{id}")
 	public SellerReview getByJobId(@PathVariable int id, HttpServletRequest req, HttpServletResponse resp) {
 		return svc.findByBookingId(id);
 	}
-	
+
+	@GetMapping("sellerReview/")
+	public List<SellerReview> getAllReviews(HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+		
+		
+		return svc.findAll();
+	}
+
 //	@GetMapping("sellerReview/jobTitle/{title}")
 //	public List<SellerReview> getByJobTitle(@PathVariable String title, HttpServletRequest req, HttpServletResponse resp) {
 //		List<SellerReview> sr = svc.findByJobTitle(title);
@@ -54,9 +61,10 @@ public class SellerReviewController {
 //		
 //		return sr;
 //	}
-	
+
 	@PostMapping("sellerReview")
-	public SellerReview create(@RequestBody SellerReview sr, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
+	public SellerReview create(@RequestBody SellerReview sr, HttpServletRequest req, HttpServletResponse resp,
+			Principal principal) {
 
 		try {
 			// try to create the provided post
@@ -78,15 +86,15 @@ public class SellerReviewController {
 
 		return sr;
 	}
-	
+
 	@PutMapping("sellerReview/{id}")
-	public SellerReview updateJob(@PathVariable Integer id, @RequestBody SellerReview  sr, HttpServletRequest req,
+	public SellerReview updateJob(@PathVariable Integer id, @RequestBody SellerReview sr, HttpServletRequest req,
 			HttpServletResponse resp) {
 
 		try {
 			// try to update the provided post
 			sr = svc.update(id, sr);
-			if(sr==null) {
+			if (sr == null) {
 				resp.setStatus(404);
 			}
 			// if successful, send 200
@@ -102,10 +110,10 @@ public class SellerReviewController {
 		return sr;
 
 	}
-	
+
 	@DeleteMapping("sellerReview/{id}")
 	public void deleteJob(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		try {
 			if (svc.delete(id)) {
 				// if successful, send 204 - no content to send back
