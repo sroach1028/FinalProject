@@ -26,7 +26,7 @@ public class SellerReviewSvcImpl implements SellerReviewService {
 	public SellerReview findByBookingId(int id) {
 		return repo.findByBooking_Id(id);
 	}
-	
+
 	@Override
 	public SellerReview findByJobID(int id) {
 		return repo.findByBooking_Job_Id(id);
@@ -39,6 +39,7 @@ public class SellerReviewSvcImpl implements SellerReviewService {
 
 	@Override
 	public SellerReview create(SellerReview sellerReview) {
+		sellerReview.setReviewDate(LocalDateTime.now());
 		return repo.saveAndFlush(sellerReview);
 	}
 
@@ -64,5 +65,11 @@ public class SellerReviewSvcImpl implements SellerReviewService {
 		}
 	}
 
-	
+	@Override
+	public List<SellerReview> findAll() {
+		List<SellerReview> allReview = repo.findAll();
+
+		return allReview;
+	}
+
 }
