@@ -1,9 +1,10 @@
 import { BookingService } from './../../services/booking.service';
-import { Component, OnInit,} from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Job } from 'src/app/models/job';
 import { Booking } from 'src/app/models/booking';
+import { SellerReview } from 'src/app/models/seller-review';
 
 @Component({
   selector: 'app-alt-profile',
@@ -19,7 +20,8 @@ export class AltProfileComponent implements OnInit {
   transactionHistory: Booking[] = [];
   allBoookings: Booking[] = [];
   yourGigs: Booking[];
-
+  sellerReviews: SellerReview[] = [];
+  averageSellerReview = 0;
 
   constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
 
@@ -30,10 +32,45 @@ export class AltProfileComponent implements OnInit {
         this.user = data;
         this.showByBidder(data.id);
         this.showHistory(data.id);
+        this.allSellerReview();
       },
       err => console.error('Reload error in User Component')
     );
     this.getUserJobs();
+  }
+  allSellerReview() {
+    this.bookingSvc.findAllSellerReviews().subscribe(
+      data => {
+        console.log('BALAJJDHFSJDF": ' + this.sellerReviews);
+
+        console.log('LOOOOOOOOOOOOOOOOOOOOOOK: ' + this.sellerReviews.length);
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < data.length; i++) {
+
+          if (data[i].booking.bid.bidder.id === this.user.id) {
+            this.sellerReviews.push(data[i]);
+
+          }
+
+
+
+        }
+        console.log('LOOOOOOOOOOOOOOOOOOOOOOK: ' + this.sellerReviews.length);
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < data.length; i++) {
+          this.averageSellerReview = this.averageSellerReview + data[i].rating;
+
+
+
+        }
+        console.log(this.averageSellerReview = this.averageSellerReview / this.sellerReviews.length);
+      },
+      err => console.error('Reload error in Component')
+
+    );
+
+
+
   }
 
   getUserJobs() {
