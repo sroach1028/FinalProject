@@ -31,13 +31,14 @@ export class UserComponent implements OnInit, OnDestroy {
   skills: Skill[]; //
   user: User;
   bids: Bid[];
-  sellersBids: Bid[]; //
+  sellersBids: Bid[] = []; //
   selectedBid: Bid;
   booking: Booking = new Booking();
   selectSkills = null;
   userSkillDescription: string;
   updateProfile = false;
   username;
+  gobblegoo: boolean = true;
 
   navigationSubscription;
 
@@ -123,6 +124,15 @@ export class UserComponent implements OnInit, OnDestroy {
       },
       err => console.error('Reload error in Component')
     );
+  }
+
+  hasActives(job: Job) : boolean {
+    job.jobBids.forEach(bid => {
+      if (bid.accepted === false && bid.rejected === false) {
+          return true;
+      }
+    });
+    return false;
   }
 
   getUserSkills() {
