@@ -38,7 +38,6 @@ export class UserComponent implements OnInit, OnDestroy {
   userSkillDescription: string;
   updateProfile = false;
   username;
-  gobblegoo: boolean = true;
 
   navigationSubscription;
 
@@ -127,12 +126,14 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   hasActives(job: Job) : boolean {
+    var hasActive: boolean = false;
     job.jobBids.forEach(bid => {
+      console.log(bid);
       if (bid.accepted === false && bid.rejected === false) {
-          return true;
+          hasActive = true;
       }
     });
-    return false;
+    return hasActive;
   }
 
   getUserSkills() {
@@ -184,8 +185,13 @@ export class UserComponent implements OnInit, OnDestroy {
     );
 
     for (let rejectBid of this.bids) {
-      rejectBid.accepted = false;
-      rejectBid.rejected = true;
+      if (rejectBid.id === this.selectedBid.id){
+        rejectBid.accepted = true;
+        rejectBid.rejected = false;
+      } else {
+        rejectBid.accepted = false;
+        rejectBid.rejected = true;
+      }
       this.bidSvc.updateBid(rejectBid).subscribe(
         data => {
           rejectBid = data;
@@ -196,23 +202,27 @@ export class UserComponent implements OnInit, OnDestroy {
       );
     }
 
-    this.selectedBid.accepted = true;
-    this.selectedBid.rejected = false;
-    this.bidSvc.updateBid(this.selectedBid).subscribe(
-      data => {
-        this.selectedBid = data;
-      },
-      err => {
-        console.error('Update error in search-result-Component acceptBid');
-      }
-    );
+    // this.selectedBid.accepted = true;
+    // this.selectedBid.rejected = false;
+    // this.bidSvc.updateBid(this.selectedBid).subscribe(
+    //   data => {
+    //     this.selectedBid = data;
+    //   },
+    //   err => {
+    //     console.error('Update error in USER acceptBid');
+    //   }
+    // );
   }
 
   rejectBid(rejectedBid: Bid) {
     rejectedBid.accepted = false;
+    rejectedBid.rejected = true;
+    if (this.hasActives(this.selected) === false){
+        this.selected = null;
+    }
     this.bidSvc.updateBid(rejectedBid).subscribe(
       data => { },
-      err => console.error('Create error in search-result-Component createBid')
+      err => console.error('Create error in USER createBid')
     );
   }
 

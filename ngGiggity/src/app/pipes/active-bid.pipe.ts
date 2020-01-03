@@ -10,7 +10,7 @@ export class ActiveBidPipe implements PipeTransform {
     const results = [];
 
     bids.forEach(bid => {
-      if (bid.accepted !== false) {
+      if (bid.accepted === false && bid.rejected === false) {
         results.push(bid);
       }
     });
