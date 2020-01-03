@@ -64,7 +64,9 @@ export class AltProfileComponent implements OnInit {
 
 
           }
-          console.log(this.averageSellerReview = this.averageSellerReview / this.sellerReviews.length);
+          this.averageSellerReview = this.averageSellerReview / this.sellerReviews.length;
+
+          this.averageSellerReview = this.averageSellerReview + ' / 5';
         } else {
           this.averageSellerReview = 'No reviews';
         }
