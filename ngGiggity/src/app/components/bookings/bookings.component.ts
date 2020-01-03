@@ -1,28 +1,50 @@
+import { NgForm } from '@angular/forms';
+import { SellerReview } from './../../models/seller-review';
 import { Bid } from 'src/app/models/bid';
 import { Job } from 'src/app/models/job';
 import { BookingService } from './../../services/booking.service';
 import { User } from 'src/app/models/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Booking } from 'src/app/models/booking';
 import { UserService } from 'src/app/services/user.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookings',
   templateUrl: './bookings.component.html',
   styleUrls: ['./bookings.component.css']
 })
-export class BookingsComponent implements OnInit {
+export class BookingsComponent implements OnInit, OnDestroy {
   allBoookings: Booking[] = [];
   activeBookings: Booking[] = [];
   yourGigs: Booking[];
   transactionHistory: Booking[] = [];
   booking: Booking = new Booking();
   user: User;
-  constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
+  review: SellerReview = new SellerReview();
+  sellerReviews: SellerReview[] = [];
+  // tslint:disable-next-line: max-line-length
+  constructor(private userSvc: UserService, private bookingSvc: BookingService, private router: Router) {this.navigationSubscription = this.router.events.subscribe((e: any) => {
+    // If it is a NavigationEnd event re-initalise the component
+    if (e instanceof NavigationEnd) {
+      this.ngOnInit();
+    }
+  }); }
+  reviewForm = true;
+  navigationSubscription;
 
   ngOnInit() {
     this.randombg();
     this.getLoggedUser();
+    this.allSellerReview();
+  }
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   getLoggedUser() {
@@ -35,17 +57,51 @@ export class BookingsComponent implements OnInit {
       err => console.error('Reload error in Component')
     );
   }
+  sellerReview(form: NgForm) {
+    this.review = form.value;
+
+    console.log(this.review);
+
+
+    this.bookingSvc.createSellerReview(this.review).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => console.error('review didnt work')
+
+    );
+
+
+
+
+
+
+  }
+  showForm() {
+    this.reviewForm = false;
+  }
+
+  allSellerReview() {
+this.bookingSvc.findAllSellerReviews().subscribe(
+  data => {
+    console.log(data);
+    this.sellerReviews = data;
+  },
+  err => console.error('Reload error in Component')
+
+);
+  }
 
   showAll() {
     this.bookingSvc.findAll(this.user.id).subscribe(
       data => {
         this.allBoookings = data;
         this.allBoookings.forEach(b => {
-        if (b.completeDate !== null){
-          this.transactionHistory.push(b);
-        } else {
-          this.activeBookings.push(b);
-        }
+          if (b.completeDate !== null) {
+            this.transactionHistory.push(b);
+          } else {
+            this.activeBookings.push(b);
+          }
         });
       },
       err => console.error('Reload error in Component')

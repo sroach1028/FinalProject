@@ -1,3 +1,4 @@
+import { SellerReview } from './../models/seller-review';
 import { Booking } from './../models/booking';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -64,6 +65,22 @@ export class BookingService {
         })
       );
   }
+  findAllSellerReviews() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.get<SellerReview[]>(this.baseUrl + 'api/sellerReview/', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+  }
+
 
   findHistory(uid: number) {
     const httpOptions = {
@@ -95,6 +112,23 @@ export class BookingService {
         catchError((err: any) => {
           console.log(err);
           return throwError('in bookingservice create booking');
+        })
+      );
+  }
+  createSellerReview(review: SellerReview) {
+    console.log(review);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.post(this.baseUrl + 'api/sellerReview/', review, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('in bookingservice create sellerReview');
         })
       );
   }
