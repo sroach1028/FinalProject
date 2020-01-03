@@ -19,15 +19,13 @@ export class NavBarComponent implements OnInit {
   searchDisplay = 'user';
   userSelected: User = null;
   userFullName: string = null;
+  loggedIn = false;
 
   searchBy(event: any) {
     this.searchDisplay = event.target.value;
   }
 
   isLoggedIn() {
-    if (this.authSvc.checkLogin() && this.userFullName === null) {
-      this.getUser();
-    }
     return this.authSvc.checkLogin();
   }
 
@@ -37,7 +35,11 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loggedIn = this.authSvc.checkLogin();
 
+    if (this.loggedIn === true) {
+      this.getUser();
+    }
   }
 
   getUser() {
