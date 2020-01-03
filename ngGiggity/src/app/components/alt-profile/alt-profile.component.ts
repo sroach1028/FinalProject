@@ -15,14 +15,10 @@ export class AltProfileComponent implements OnInit {
   username: string;
 
   user: User;
-  userJobs: Job[];
+  userJobs: Job[] = [];
   transactionHistory: Booking[] = [];
   allBoookings: Booking[] = [];
   yourGigs: Booking[];
-
-
-
-
 
 
   constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
@@ -48,6 +44,7 @@ export class AltProfileComponent implements OnInit {
       err => console.error('Reload error in Component')
     );
   }
+
   showHistory(user: number) {
     this.bookingSvc.findAll(user).subscribe(
       data => {
@@ -62,6 +59,7 @@ export class AltProfileComponent implements OnInit {
 
     );
   }
+
   showByBidder(user: number) {
     this.bookingSvc.findByBidder(user).subscribe(
       data => {
