@@ -66,12 +66,10 @@ public class UserSvcImpl implements UserService {
 	@Override
 	public User updateUser(User u, int uid) {
 		User toUpdate = userRepo.findById(uid);
+		Image newImage = new Image();
 		
-		if((!toUpdate.getAvatarImage().getImageUrl().equals(u.getAvatarImage().getImageUrl()))) {
-			Image newImage = new Image();
 			newImage.setImageUrl(u.getAvatarImage().getImageUrl());
 			imgRepo.saveAndFlush(newImage);
-		}
 		if(toUpdate != null) {
 			toUpdate.setFirstName(u.getFirstName());
 			toUpdate.setLastName(u.getLastName());
@@ -83,7 +81,7 @@ public class UserSvcImpl implements UserService {
 			toUpdate.setPhone(u.getPhone());
 			toUpdate.setAddress(u.getAddress());
 			toUpdate.setBio(u.getBio());
-			toUpdate.setAvatarImage(u.getAvatarImage());
+			toUpdate.setAvatarImage(newImage);
 			//update address too
 			Address toModify = addRepo.findById(toUpdate.getAddress().getId());
 			if(toModify != null) {
