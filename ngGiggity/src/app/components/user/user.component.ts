@@ -128,7 +128,6 @@ export class UserComponent implements OnInit, OnDestroy {
   hasActives(job: Job) : boolean {
     var hasActive: boolean = false;
     job.jobBids.forEach(bid => {
-      console.log(bid);
       if (bid.accepted === false && bid.rejected === false) {
           hasActive = true;
       }
