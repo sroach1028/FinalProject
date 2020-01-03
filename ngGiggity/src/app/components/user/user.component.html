@@ -156,6 +156,7 @@
                       </h5>
                     </div>
                     <div class="card-body">
+                      <img [src]="job.imageUrl" alt="Gig Image">
                       <h5>Gig: {{ job.title }}</h5>
                       <h6>Skill Required: {{ job.skill.name }}</h6>
                       <p>About the Gig: {{ job.description }}</p>
@@ -344,7 +345,9 @@
             {{ userSelected.firstName }}'s Bids Made: {{sellersBids.length}}
           </h2>
           <div class="card-body">
-            <h2 *ngIf="sellersBids.length === 0" class="btn-link" [routerLink]="['/search']">Start Bidding on Gigs!</h2>
+            <div *ngIf="sellersBids.length === 0" class="text-center">
+            <button  class="btn btn-success text-center" [routerLink]="['/search']">Start Bidding on Gigs!</button>
+          </div>
             <div id="collapse2" class="collapse hide" aria-labelledby="bidsMade" data-parent="#accordion2">
               <div class="row" *ngFor="let bid of sellersBids">
                 <div class="col-1"></div>
