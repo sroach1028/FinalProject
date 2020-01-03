@@ -20,17 +20,17 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/search']">Search</a>
         </li>
-        <li class="nav-item" *ngIf="!loggedIn">
+        <li class="nav-item" *ngIf="loggedIn === false">
           <a class="nav-link" [routerLink]="['/login']">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!loggedIn">
+        <li class="nav-item" *ngIf="loggedIn === false">
           <a class="nav-link" [routerLink]="['/register']">Register</a>
         </li>
         <li class="nav-item">
-          <a *ngIf="loggedIn" class="nav-link" [routerLink]="['/user']">Profile</a>
+          <a *ngIf="loggedIn === true" class="nav-link" [routerLink]="['/user']">Profile</a>
         </li>
         <li class="nav-item">
-          <a *ngIf="loggedIn" class="nav-link" (click)=logOut() [routerLink]="['/login']">Logout</a>
+          <a *ngIf="loggedIn === true" class="nav-link" (click)=logOut() [routerLink]="['/login']">Logout</a>
         </li>
       </ul>
     </div>

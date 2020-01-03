@@ -87,7 +87,8 @@
         <div class="card">
           <h2 class="card-header btn-link text-white text-center" id="userSkillsAccordian" data-toggle="collapse"
             data-target="#collapseSkills" aria-expanded="true" aria-controls="collapseSkills">
-            {{ userSelected.firstName }}'s Skills
+            {{ userSelected.firstName }}'s Skills: <span
+            class="badge badge-dark">{{userSkills.length}}</span>
           </h2>
           <div class="card-body">
             <div id="collapseSkills" class="collapse hide" aria-labelledby="requestedGigs" data-parent="#accordion">
@@ -142,7 +143,8 @@
         <div class="card">
           <h2 class="card-header btn-link text-white text-center" id="requestedGigs" data-toggle="collapse"
             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            {{ userSelected.firstName }}'s Requested Gigs: {{userJobs.length}}
+            {{ userSelected.firstName }}'s Requested Gigs: <span
+            class="badge badge-dark">{{userJobs.length}}</span>
           </h2>
           <div class="card-body">
             <div id="collapseOne" class="collapse hide" aria-labelledby="requestedGigs" data-parent="#accordion">
@@ -342,7 +344,8 @@
         <div class="card" *ngIf="userSelected">
           <h2 class="card-header btn-link text-white text-center" id="bidsMade" data-toggle="collapse"
             data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-            {{ userSelected.firstName }}'s Bids Made: {{sellersBids.length}}
+            {{ userSelected.firstName }}'s Bids Made: <span
+            class="badge badge-dark">{{sellersBids.length}}</span>
           </h2>
           <div class="card-body">
             <div *ngIf="sellersBids.length === 0" class="text-center">
