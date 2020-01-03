@@ -359,6 +359,7 @@
                       <h5>Gig: {{ bid.job.title }}</h5>
                       <h6>Skill Required: {{ bid.job.skill.name }}</h6>
                       <p>About the Gig: {{ bid.job.description }}</p>
+                      <a (click)="showProfile(bid.job.user.username)" [routerLink]="['/profile']">Posted By: {{ bid.job.user.username }} </a>
                     </div>
                     <div class="card-footer">
                       <a style="float: left">Offer: {{ bid.bidAmount | currency }}</a>
