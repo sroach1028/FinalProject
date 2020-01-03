@@ -3,8 +3,8 @@ import { HomeComponent } from './../home/home.component';
 import { NgForm } from '@angular/forms';
 import { UserService } from './../../services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -12,14 +12,21 @@ import { User } from 'src/app/models/user';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
 
-  constructor(private authSvc: AuthService, private usersvc: UserService, private router: Router) { }
+  constructor(private authSvc: AuthService, private usersvc: UserService, private router: Router) {this.navigationSubscription = this.router.events.subscribe((e: any) => {
+    // If it is a NavigationEnd event re-initalise the component
+    if (e instanceof NavigationEnd) {
+      this.ngOnInit();
+    }
+  }); }
 
   searchDisplay = 'user';
   userSelected: User = null;
   userFullName: string = null;
   loggedIn = false;
+  navigationSubscription;
+
 
   searchBy(event: any) {
     this.searchDisplay = event.target.value;
@@ -30,14 +37,14 @@ export class NavBarComponent implements OnInit {
   }
 
   logOut() {
-    this.authSvc.logout();
     this.userFullName = null;
+    this.loggedIn = false;
+    this.authSvc.logout();
   }
 
   ngOnInit() {
-    this.loggedIn = this.authSvc.checkLogin();
-
-    if (this.loggedIn === true) {
+    if(this.authSvc.checkLogin()) {
+      this.loggedIn = true;
       this.getUser();
     }
   }
@@ -52,6 +59,16 @@ export class NavBarComponent implements OnInit {
     );
 
     this.userSelected = null;
+  }
+
+
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
 }
