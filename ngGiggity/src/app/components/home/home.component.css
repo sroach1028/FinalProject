@@ -27,3 +27,8 @@ body, html {
 .carousel-control-next{
       top: 75%;
 }
+
+#randBackground {
+  background-repeat: no-repeat;
+  background-size: cover;
+}

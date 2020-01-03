@@ -7,14 +7,9 @@
         <div class="span well bg-light">
           <br />
           <div *ngIf="userSelected">
-            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"
-              ><img
-                [src]="userSelected.avatarImage.imageUrl"
-                name="aboutme"
-                width="auto"
-                height="275"
-                class="image rounded-circle"
-            /></a>
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img
+                [src]="userSelected.avatarImage.imageUrl" name="aboutme" width="auto" height="275"
+                class="image rounded-circle" /></a>
             <h3>{{ userSelected.firstName }} {{ userSelected.lastName }}</h3>
             <h6><em>Click my image to learn more</em></h6>
           </div>
@@ -26,18 +21,10 @@
     <div class="row">
       <div class="col-1"></div>
       <div class="col-10">
-        <button
-          style="float:left"
-          class="btn btn-success"
-          [routerLink]="['/bookings']"
-        >
+        <button style="float:left" class="btn btn-success" [routerLink]="['/bookings']">
           View Gig Bookings
         </button>
-        <button
-          style="float:right"
-          class="btn btn-warning"
-          (click)="userToUpdate()"
-        >
+        <button style="float:right" class="btn btn-warning" (click)="userToUpdate()">
           Update User Profile
         </button>
       </div>
@@ -46,24 +33,12 @@
     <!-- USER IMAGE & NAME BOX END -->
 
     <!-- USER DETAILS MODAL START -->
-    <div
-      class="modal fade"
-      id="myModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      aria-hidden="true"
-      *ngIf="userSelected"
-    >
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+      *ngIf="userSelected">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-hidden="true"
-            ></button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <h4 class="modal-title" id="myModalLabel">
               More About {{ userSelected.firstName }}
               {{ userSelected.lastName }}
@@ -71,14 +46,8 @@
           </div>
           <div class="modal-body">
             <div>
-              <img
-                [src]="userSelected.avatarImage.imageUrl"
-                name="aboutme"
-                width="140"
-                height="140"
-                border="0"
-                class="img-circle"
-              />
+              <img [src]="userSelected.avatarImage.imageUrl" name="aboutme" width="140" height="140" border="0"
+                class="img-circle" />
               <h3 class="media-heading">
                 {{ userSelected.firstName }} {{ userSelected.lastName }}
               </h3>
@@ -96,11 +65,7 @@
           </div>
           <div class="modal-footer">
             <div>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 Back
               </button>
             </div>
@@ -113,49 +78,50 @@
 
   <br />
 
+  <!-- ACCORDIAN START -->
   <!-- USER SKILLS BOX START -->
-  <div
-    class="container-fluid"
-    *ngIf="userSelected && !updateProfile && !selectSkills"
-  >
-    <div class="row">
+  <div class="accordion" id="accordionSkills">
+    <div class="row" *ngIf="userSelected && !updateProfile && !selectSkills">
       <div class="col-1"></div>
       <div class="col-10">
-        <div class="card h-100 text-dark text-center">
-          <h2 class="card-header text-white">
+        <div class="card">
+          <h2 class="card-header btn-link text-white text-center" id="userSkillsAccordian" data-toggle="collapse"
+            data-target="#collapseSkills" aria-expanded="true" aria-controls="collapseSkills">
             {{ userSelected.firstName }}'s Skills
           </h2>
           <div class="card-body">
-            <button
-              *ngIf="userSelected && !userSkills"
-              class="btn btn-success text-center"
-              (click)="chooseSkills()"
-            >
-              Add Your Skills
-            </button>
-            <button
-              *ngIf="userSelected && userSkills"
-              class="btn btn-success text-center"
-              (click)="chooseSkills()"
-            >
-              Add More Skills
-            </button>
-            <ul>
-              <li *ngFor="let skill of userSelected.skills">
-                <strong>Skill:</strong> {{ skill.skill.name }} |
-                <strong>Desc:</strong> {{ skill.description }}
-              </li>
-            </ul>
+            <div id="collapseSkills" class="collapse hide" aria-labelledby="requestedGigs" data-parent="#accordion">
+              <div class="row" *ngFor="let skill of userSelected.skills">
+                <div class="col-1"></div>
+                <div class="col-10">
+                  <div class="card h-100 text-dark text-center">
+                    <div class="card-header text-white">
+                      <h5><strong>Skill: </strong>{{ skill.skill.name }}</h5>
+                    </div>
+                    <div class="card-body">
+                      <h5>Description</h5>
+                      <hr>
+                      <blockquote>{{ skill.description }}</blockquote>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1"></div>
+              </div>
+            </div>
           </div>
           <div class="card-footer">
-            <button
-            *ngIf="userSelected && userSkills"
-            class="btn btn-success text-center"
-            [routerLink]="['/post']"
-          >
-            Post a Gig
-          </button>
-
+            <button style="float: left" *ngIf="userSelected && !userSkills" class="btn btn-info text-center"
+              (click)="chooseSkills()">
+              Add Your Skills
+            </button>
+            <button style="float: left" *ngIf="userSelected && userSkills" class="btn btn-info text-center"
+              (click)="chooseSkills()">
+              Add More Skills
+            </button>
+            <button style="float: right" *ngIf="userSelected && userSkills" class="btn btn-success text-center"
+              [routerLink]="['/post']">
+              Post a Gig
+            </button>
           </div>
         </div>
       </div>
@@ -163,6 +129,7 @@
     </div>
   </div>
   <!-- USER SKILLS BOX END -->
+  <!-- ACCORDIAN END -->
 
   <br />
 
@@ -173,30 +140,16 @@
       <div class="col-1"></div>
       <div class="col-10">
         <div class="card">
-          <h2
-            class="card-header btn-link text-white text-center"
-            id="requestedGigs"
-            data-toggle="collapse"
-            data-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
-          >
+          <h2 class="card-header btn-link text-white text-center" id="requestedGigs" data-toggle="collapse"
+            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             {{ userSelected.firstName }}'s Requested Gigs
           </h2>
           <div class="card-body">
-            <div
-              id="collapseOne"
-              class="collapse hide"
-              aria-labelledby="requestedGigs"
-              data-parent="#accordion"
-            >
+            <div id="collapseOne" class="collapse hide" aria-labelledby="requestedGigs" data-parent="#accordion">
               <div class="row" *ngFor="let job of userJobs | jobsActive">
                 <div class="col-1"></div>
                 <div class="col-10">
-                  <div
-                    *ngIf="!selected || selected.id === job.id"
-                    class="card h-100 text-dark text-center"
-                  >
+                  <div *ngIf="!selected || selected.id === job.id" class="card h-100 text-dark text-center">
                     <div class="card-header text-white">
                       <h5>
                         Date Posted: {{ job.dateCreated | date: "short" }}
@@ -209,49 +162,31 @@
                     </div>
                     <div class="card-footer">
                       <div class="text-center">
-                        <button
-                          class="btn btn-success text-center"
-                          *ngIf="job.jobBids.length > 0"
-                          (click)="showBids(job)"
-                        >
+                        <button class="btn btn-success text-center" *ngIf="job.jobBids.length > 0"
+                          (click)="showBids(job)">
                           You've received BIDS!
                         </button>
                       </div>
-                      <button
-                        class="btn-sm btn-warning float-right"
-                        (click)="setUpdateGig(job)"
-                      >
+                      <button class="btn-sm btn-warning float-right" (click)="setUpdateGig(job)">
                         U p d a t e
                       </button>
-                      <button
-                        class="btn-sm btn-danger float-left"
-                        (click)="remove(job)"
-                      >
+                      <button class="btn-sm btn-danger float-left" (click)="remove(job)">
                         D e l e t e
                       </button>
                     </div>
                   </div>
                 </div>
+                <div class="col-1"></div>
               </div>
-              <div class="col-1"></div>
             </div>
             <!-- USER REQUESTS BOX END -->
 
             <!-- GIGS BOX START -->
-            <div
-              *ngIf="userJobs"
-              id="gigs"
-              class="collapse"
-              aria-labelledby="headingOne"
-              data-parent="#accordion"
-            >
+            <div *ngIf="userJobs" id="gigs" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="row" *ngFor="let job of userJobs | jobsActive">
                 <div class="col-1"></div>
                 <div class="col-10">
-                  <div
-                    *ngIf="!selected || selected.id === job.id"
-                    class="card h-100 text-dark text-center"
-                  >
+                  <div *ngIf="!selected || selected.id === job.id" class="card h-100 text-dark text-center">
                     <div class="card-header text-white">
                       <h5>
                         Date Posted: {{ job.dateCreated | date: "short" }}
@@ -264,24 +199,15 @@
                     </div>
                     <div class="card-footer">
                       <div class="text-center">
-                        <button
-                          class="btn btn-success text-center"
-                          *ngIf="job.jobBids.length > 0"
-                          (click)="showBids(job)"
-                        >
+                        <button class="btn btn-success text-center" *ngIf="job.jobBids.length > 0"
+                          (click)="showBids(job)">
                           You've received BIDS!
                         </button>
                       </div>
-                      <button
-                        class="btn-sm btn-warning float-right"
-                        (click)="setUpdateGig(job)"
-                      >
+                      <button class="btn-sm btn-warning float-right" (click)="setUpdateGig(job)">
                         U p d a t e
                       </button>
-                      <button
-                        class="btn-sm btn-danger float-left"
-                        (click)="remove(job)"
-                      >
+                      <button class="btn-sm btn-danger float-left" (click)="remove(job)">
                         D e l e t e
                       </button>
                     </div>
@@ -308,27 +234,18 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let bid of bids | activeBid">
-                      <td
-                        (click)="showProfile(bid.bidder.username)"
-                        [routerLink]="['/profile']"
-                      >
+                      <td class="showHand" (click)="showProfile(bid.bidder.username)" [routerLink]="['/profile']">
                         {{ bid.bidder.username }}
                       </td>
                       <td>{{ bid.bidAmount | currency }}</td>
                       <td>{{ bid.description }}</td>
                       <td>
-                        <button
-                          (click)="acceptBid(bid)"
-                          class="btn btn-sm btn-success"
-                        >
+                        <button (click)="acceptBid(bid)" class="btn btn-sm btn-success">
                           &#10003;
                         </button>
                       </td>
                       <td>
-                        <button
-                          (click)="bids = null; rejectBid(bid)"
-                          class="btn btn-sm btn-danger"
-                        >
+                        <button (click)="bids = null; rejectBid(bid)" class="btn btn-sm btn-danger">
                           &#10007;
                         </button>
                       </td>
@@ -337,10 +254,7 @@
                   <tfoot>
                     <tr>
                       <td>
-                        <button
-                          (click)="viewAllGigs()"
-                          class="btn btn-secondary"
-                        >
+                        <button (click)="viewAllGigs()" class="btn btn-secondary">
                           Back
                         </button>
                       </td>
@@ -353,109 +267,62 @@
             <!-- BIDS BOX END -->
           </div>
 
-<!-- GIG UPDATE FORM START -->
-<div class="row" *ngIf="updateGig && !updateProfile">
-  <div class="col-1"></div>
-  <div class="col-10">
-    <form name="gigUpdate" id="gigUpdate">
-      <div class="form-group">
-        <label for="title">T i t l e</label>
-        <input
-          name="title"
-          type="text"
-          class="form-control"
-          id="title"
-          [(ngModel)]="updateGig.title"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="form-group">
-        <label for="description">D e s c r i p t i o n</label>
-        <input
-          name="description"
-          type="text"
-          class="form-control"
-          id="description"
-          [(ngModel)]="updateGig.description"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="form-group">
-        <label for="price">P r i c e</label>
-        <input
-          name="price"
-          type="number"
-          class="form-control"
-          id="price"
-          [(ngModel)]="updateGig.price"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="form-group">
-        <label for="imageUrl">I m a g e</label>
-        <input
-          name="imageUrl"
-          type="text"
-          class="form-control"
-          id="imageUrl"
-          [(ngModel)]="updateGig.imageUrl"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="form-group">
-        <label for="skill">C a t e g o r y</label>
-        <select name="skill" type="text" class="form-control" id="skill">
-          <option selected>{{ updateGig.skill.name }}</option>
-          <option *ngFor="let skill of skills">{{ skill.name }}</option>
-        </select>
-        <div class="form-group">
-          <label for="remote"
-            >R e m o t e
-            <input
-              name="remote"
-              type="checkbox"
-              class="form-control"
-              id="inlineCheckbox1"
-              [(ngModel)]="updateGig.remote"
-              [ngModelOptions]="{ standalone: true }"
-          /></label>
-        </div>
-        <div class="form-group">
-          <label for="active"
-            >A c t i v e
-            <input
-              name="active"
-              type="checkbox"
-              class="form-control"
-              id="inlineCheckbox2"
-              [(ngModel)]="updateGig.active"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </label>
-        </div>
-        <button
-          class="btn btn-warning"
-          style="float: right"
-          (click)="update(updateGig)"
-        >
-          U p d a t e
-        </button>
-        <button
-          class="btn btn-secondary"
-          style="float: left"
-          (click)="viewAllGigs()"
-        >
-          C a n c e l
-        </button>
-      </div>
-    </form>
-  </div>
-  <div class="col-1"></div>
-</div>
-<!-- GIG UPDATE FORM END -->
-
-
-
+          <!-- GIG UPDATE FORM START -->
+          <div class="row" *ngIf="updateGig && !updateProfile">
+            <div class="col-1"></div>
+            <div class="col-10">
+              <form name="gigUpdate" id="gigUpdate">
+                <div class="form-group">
+                  <label for="title">T i t l e</label>
+                  <input name="title" type="text" class="form-control" id="title" [(ngModel)]="updateGig.title"
+                    [ngModelOptions]="{ standalone: true }" />
+                </div>
+                <div class="form-group">
+                  <label for="description">D e s c r i p t i o n</label>
+                  <input name="description" type="text" class="form-control" id="description"
+                    [(ngModel)]="updateGig.description" [ngModelOptions]="{ standalone: true }" />
+                </div>
+                <div class="form-group">
+                  <label for="price">P r i c e</label>
+                  <input name="price" type="number" class="form-control" id="price" [(ngModel)]="updateGig.price"
+                    [ngModelOptions]="{ standalone: true }" />
+                </div>
+                <div class="form-group">
+                  <label for="imageUrl">I m a g e</label>
+                  <input name="imageUrl" type="text" class="form-control" id="imageUrl" [(ngModel)]="updateGig.imageUrl"
+                    [ngModelOptions]="{ standalone: true }" />
+                </div>
+                <div class="form-group">
+                  <label for="skill">C a t e g o r y</label>
+                  <select name="skill" type="text" class="form-control" id="skill">
+                    <option selected>{{ updateGig.skill.name }}</option>
+                    <option *ngFor="let skill of skills">{{
+                      skill.name
+                    }}</option>
+                  </select>
+                  <div class="form-group">
+                    <label for="remote">R e m o t e
+                      <input name="remote" type="checkbox" class="form-control" id="inlineCheckbox1"
+                        [(ngModel)]="updateGig.remote" [ngModelOptions]="{ standalone: true }" /></label>
+                  </div>
+                  <div class="form-group">
+                    <label for="active">A c t i v e
+                      <input name="active" type="checkbox" class="form-control" id="inlineCheckbox2"
+                        [(ngModel)]="updateGig.active" [ngModelOptions]="{ standalone: true }" />
+                    </label>
+                  </div>
+                  <button class="btn btn-warning" style="float: right" (click)="update(updateGig)">
+                    U p d a t e
+                  </button>
+                  <button class="btn btn-secondary" style="float: left" (click)="viewAllGigs()">
+                    C a n c e l
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="col-1"></div>
+          </div>
+          <!-- GIG UPDATE FORM END -->
         </div>
       </div>
       <div class="col-1"></div>
@@ -472,44 +339,33 @@
       <div class="col-1"></div>
       <div class="col-10">
         <div class="card">
-          <h2
-            class="card-header btn-link text-white text-center"
-            id="bidsMade"
-            data-toggle="collapse"
-            data-target="#collapse2"
-            aria-expanded="true"
-            aria-controls="collapse2"
-          >
+          <h2 class="card-header btn-link text-white text-center" id="bidsMade" data-toggle="collapse"
+            data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
             {{ userSelected.firstName }}'s Bids Made
           </h2>
           <div class="card-body">
-            <div
-              id="collapse2"
-              class="collapse hide"
-              aria-labelledby="bidsMade"
-              data-parent="#accordion2"
-            >
+            <div id="collapse2" class="collapse hide" aria-labelledby="bidsMade" data-parent="#accordion2">
               <div class="row" *ngFor="let bid of sellersBids">
                 <div class="col-1"></div>
                 <div class="col-10">
                   <div class="card h-100 text-dark text-center">
                     <div class="card-header text-white">
-                      <h5>
-                        Awaiting Seller Approval - Date Posted: {{ bid.job.dateCreated | date: "short" }}
+                      <h5 (click)="showProfile(bid.bidder.username)" [routerLink]="['/profile']">
+                        Awaiting Requester Approval - Date Posted:
+                        {{ bid.job.dateCreated | date: "short" }}
                       </h5>
                     </div>
                     <div class="card-body">
                       <h5>Gig: {{ bid.job.title }}</h5>
                       <h6>Skill Required: {{ bid.job.skill.name }}</h6>
                       <p>About the Gig: {{ bid.job.description }}</p>
+                      <a>Requester: </a>
+                      <a class="showHand" (click)="showProfile(bid.job.user.username)" [routerLink]="['/profile']">{{ bid.job.user.username }}</a>
                     </div>
                     <div class="card-footer">
-                      <a style="float: left"
-                        >Offer: {{ bid.bidAmount | currency }}</a
-                      >
+                      <a style="float: left">Offer: {{ bid.bidAmount | currency }}</a>
                       <a style="float: right">
-                        Message Sent: {{ bid.description }}</a
-                      >
+                        Message Sent: {{ bid.description }}</a>
                     </div>
                   </div>
                 </div>
@@ -538,26 +394,12 @@
             <p>{{ skill.description }}</p>
             <form #userSkillDescForm="ngForm">
               <label for="userSkillDescription">Describe Your Skill:</label>
-              <input
-                name="userSkillDescription"
-                type="text"
-                class="form-control"
-                id="userSkillDescription"
-                ngModel
-              />
+              <input name="userSkillDescription" type="text" class="form-control" id="userSkillDescription" ngModel />
             </form>
-            <button
-              style="float: left"
-              class="btn btn-secondary"
-              (click)="selectSkills = null"
-            >
+            <button style="float: left" class="btn btn-secondary" (click)="selectSkills = null">
               Back
             </button>
-            <button
-              style="float: right"
-              class="btn btn-success"
-              (click)="addUserSkill(skill, userSkillDescForm)"
-            >
+            <button style="float: right" class="btn btn-success" (click)="addUserSkill(skill, userSkillDescForm)">
               Add This Skill
             </button>
           </div>
@@ -580,159 +422,77 @@
           <form name="updateUser" id="updateUser">
             <strong style="color: white">Personal:</strong><br />
             <div class="form-group">
-              <input
-                name="id"
-                type="text"
-                class="form-control"
-                id="id"
-                [(ngModel)]="userSelected.id"
-                hidden
-              />
+              <input name="id" type="text" class="form-control" id="id" [(ngModel)]="userSelected.id" hidden />
             </div>
             <div class="form-group">
               <label for="firstName">First Name</label>
-              <input
-                name="firstName"
-                type="text"
-                class="form-control"
-                id="firstName"
-                [(ngModel)]="userSelected.firstName"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="firstName" type="text" class="form-control" id="firstName"
+                [(ngModel)]="userSelected.firstName" [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="lastName">Last Name</label>
-              <input
-                name="lastName"
-                type="text"
-                class="form-control"
-                id="lastName"
-                [(ngModel)]="userSelected.lastName"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="lastName" type="text" class="form-control" id="lastName" [(ngModel)]="userSelected.lastName"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input
-                name="email"
-                type="text"
-                class="form-control"
-                id="email"
-                [(ngModel)]="userSelected.email"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="email" type="text" class="form-control" id="email" [(ngModel)]="userSelected.email"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="bio">Bio</label>
-              <input
-                name="bio"
-                type="text"
-                class="form-control"
-                id="bio"
-                [(ngModel)]="userSelected.bio"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="bio" type="text" class="form-control" id="bio" [(ngModel)]="userSelected.bio"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>
-              <input
-                name="phone"
-                type="text"
-                class="form-control"
-                id="phone"
-                [(ngModel)]="userSelected.phone"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="phone" type="text" class="form-control" id="phone" [(ngModel)]="userSelected.phone"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="phone">Avatar URL</label>
-              <input
-                name="avatarImg"
-                type="text"
-                class="form-control"
-                id="avatar"
-                [(ngModel)]="userSelected.avatarImage.imageUrl"
-              />
+              <input name="avatarImg" type="text" class="form-control" id="avatar"
+                [(ngModel)]="userSelected.avatarImage.imageUrl" />
             </div>
             <hr />
             <strong style="color: white">Address:</strong><br />
             <div class="form-group">
               <label for="street">Street</label><br />
-              <input
-                type="text"
-                name="street"
-                class="form-control"
-                [(ngModel)]="userSelected.address.street"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input type="text" name="street" class="form-control" [(ngModel)]="userSelected.address.street"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="city">City</label><br />
-              <input
-                type="text"
-                name="city"
-                class="form-control"
-                [(ngModel)]="userSelected.address.city"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input type="text" name="city" class="form-control" [(ngModel)]="userSelected.address.city"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="state">State</label><br />
-              <input
-                type="text"
-                name="state"
-                class="form-control"
-                [(ngModel)]="userSelected.address.state"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input type="text" name="state" class="form-control" [(ngModel)]="userSelected.address.state"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="zip">Zip</label><br />
-              <input
-                type="text"
-                name="zip"
-                class="form-control"
-                [(ngModel)]="userSelected.address.zip"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input type="text" name="zip" class="form-control" [(ngModel)]="userSelected.address.zip"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <hr />
             <strong style="color: white">Login Info:</strong><br />
             <div class="form-group">
               <label for="username">Username</label>
-              <input
-                name="username"
-                type="text"
-                class="form-control"
-                id="username"
-                [(ngModel)]="userSelected.username"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="username" type="text" class="form-control" id="username" [(ngModel)]="userSelected.username"
+                [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input
-                name="password"
-                type="password"
-                class="form-control"
-                id="password"
-                [(ngModel)]="userSelected.password"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input name="password" type="password" class="form-control" id="password"
+                [(ngModel)]="userSelected.password" [ngModelOptions]="{ standalone: true }" />
             </div>
             <div class="form-group">
-              <button
-                style="float: left"
-                class="btn btn-secondary"
-                (click)="updateProfile = null"
-              >
+              <button style="float: left" class="btn btn-secondary" (click)="updateProfile = null">
                 Cancel
               </button>
-              <button
-                style="float: right"
-                class="btn btn-warning"
-                (click)="updateUser()"
-              >
+              <button style="float: right" class="btn btn-warning" (click)="updateUser()">
                 Update
               </button>
             </div>

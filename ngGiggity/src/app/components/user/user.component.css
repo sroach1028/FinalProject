@@ -159,3 +159,14 @@ hr{
   border-bottom: 3px solid black;
 }
 
+
+.showHand:hover{
+  color: red;
+  cursor: pointer;
+}
+
+.showHand {
+  color: blue;
+  text-decoration: underline;
+}
+

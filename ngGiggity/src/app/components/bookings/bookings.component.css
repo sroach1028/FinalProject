@@ -109,3 +109,8 @@ body {
 .container {
   background: none;
 }
+
+#randBackground {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
