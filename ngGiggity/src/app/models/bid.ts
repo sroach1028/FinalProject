@@ -24,8 +24,8 @@ export class Bid {
     this.available = available;
     this.bidAmount = bidAmount;
     this.description = description;
-    this.accepted = accepted;
-    this.rejected = rejected;
+    this.accepted = false;
+    this.rejected = false;
     this.bidder = bidder;
     this.job = job;
   }

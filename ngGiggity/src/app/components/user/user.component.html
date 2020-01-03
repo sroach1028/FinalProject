@@ -162,7 +162,7 @@
                     </div>
                     <div class="card-footer">
                       <div class="text-center">
-                        <button class="btn btn-success text-center" *ngIf="hasActives(job)"
+                        <button class="btn btn-success text-center" *ngIf="hasActives(job) === true"
                           (click)="showBids(job)">
                           You've Got BIDS!
                         </button>
