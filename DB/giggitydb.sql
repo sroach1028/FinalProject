@@ -408,6 +408,7 @@ INSERT INTO `image` (`id`, `image_url`) VALUES (2, 'https://fiverr-res.cloudinar
 INSERT INTO `image` (`id`, `image_url`) VALUES (3, 'http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-16-180x180.png');
 INSERT INTO `image` (`id`, `image_url`) VALUES (4, 'https://www.rd.com/wp-content/uploads/2018/02/10_Things-Your-Car-Mechanic-Won%E2%80%99t-Tell-You_572422051_Minerva-Studio.jpg');
 INSERT INTO `image` (`id`, `image_url`) VALUES (5, 'https://i.imgur.com/bRhw6wY.jpg');
+INSERT INTO `image` (`id`, `image_url`) VALUES (6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkozSjbf8nqtjhrVXl39eCmIXwjiMEBABm_bsAEgbJ4yb1EYd1Wg&s');
 
 COMMIT;
 
@@ -418,7 +419,7 @@ COMMIT;
 START TRANSACTION;
 USE `giggity`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`, `bio`) VALUES (1, 'admin', 'admin', 'admin', 'admin@admin.com', '$2a$10$KMIQ9vF8CXH7U2Nqn3wTV.dUq0EzW94gzEvT7yb6rx9fuyFyY6OSS', 1, 'admin', '111111111', 1, 1, NULL);
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`, `bio`) VALUES (2, 'Kelly', 'Cromeans', 'kellyc', 'cromeans15@gmail.com', '$2a$10$1SSwukC6.gWafhjs52eOUuFFxxXIOSRYwgv4z19EmJEE9UFq0WF9O', 1, 'user', '7196662811', 2, 5, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`, `bio`) VALUES (2, 'Kelly', 'Cromeans', 'kellyc', 'cromeans15@gmail.com', '$2a$10$1SSwukC6.gWafhjs52eOUuFFxxXIOSRYwgv4z19EmJEE9UFq0WF9O', 1, 'user', '7196662811', 2, 6, 'Always looking to make some extra cash. I can do a myraid of auto mechanic work, academic help, or write your college research papers.');
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`, `bio`) VALUES (3, 'Alex', 'Sandervladi', 'alexs', 'aleksand@yahoo.com', '$2a$10$KMIQ9vF8CXH7U2Nqn3wTV.dUq0EzW94gzEvT7yb6rx9fuyFyY6OSS', 1, 'user', '3515874430', 3, 2, NULL);
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`, `bio`) VALUES (4, 'Kullen', 'Kee', 'kullenk', 'kullenk@outlook.com', '$2a$10$KMIQ9vF8CXH7U2Nqn3wTV.dUq0EzW94gzEvT7yb6rx9fuyFyY6OSS', 1, 'user', '5316785542', 4, 3, NULL);
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `enabled`, `role`, `phone`, `address_id`, `image_id`, `bio`) VALUES (5, 'Shaun', 'Roach', 'shaunr', 'sroach@AOL.com', '$2a$10$KMIQ9vF8CXH7U2Nqn3wTV.dUq0EzW94gzEvT7yb6rx9fuyFyY6OSS', 1, 'user', '6678741212', 5, 4, NULL);
