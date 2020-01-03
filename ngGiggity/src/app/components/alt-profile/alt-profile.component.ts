@@ -21,7 +21,7 @@ export class AltProfileComponent implements OnInit {
   allBoookings: Booking[] = [];
   yourGigs: Booking[];
   sellerReviews: SellerReview[] = [];
-  averageSellerReview = 0;
+  averageSellerReview;
 
   constructor(private userSvc: UserService, private bookingSvc: BookingService) { }
 
@@ -41,9 +41,9 @@ export class AltProfileComponent implements OnInit {
   allSellerReview() {
     this.bookingSvc.findAllSellerReviews().subscribe(
       data => {
-        console.log('BALAJJDHFSJDF": ' + this.sellerReviews);
 
-        console.log('LOOOOOOOOOOOOOOOOOOOOOOK: ' + this.sellerReviews.length);
+        // tslint:disable-next-line: prefer-for-of
+        console.log('LOOOOOOOOOOOOOOOOOOOOOOK: ' + data.length);
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < data.length; i++) {
 
@@ -55,15 +55,19 @@ export class AltProfileComponent implements OnInit {
 
 
         }
-        console.log('LOOOOOOOOOOOOOOOOOOOOOOK: ' + this.sellerReviews.length);
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < data.length; i++) {
-          this.averageSellerReview = this.averageSellerReview + data[i].rating;
+        if (this.sellerReviews.length > 0) {
+          this.averageSellerReview = 0;
+          // tslint:disable-next-line: prefer-for-of
+          for (let i = 0; i < this.sellerReviews.length; i++) {
+            this.averageSellerReview = this.averageSellerReview + this.sellerReviews[i].rating;
 
 
 
+          }
+          console.log(this.averageSellerReview = this.averageSellerReview / this.sellerReviews.length);
+        } else {
+          this.averageSellerReview = 'No reviews';
         }
-        console.log(this.averageSellerReview = this.averageSellerReview / this.sellerReviews.length);
       },
       err => console.error('Reload error in Component')
 
