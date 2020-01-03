@@ -1,0 +1,143 @@
+<div class="jumbotron">
+  <div class="container-fluid">
+    <!-- USER IMAGE & NAME BOX START -->
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="span well bg-light">
+          <br />
+          <img
+            [src]="user.avatarImage.imageUrl"
+            name="aboutme"
+            height="275"
+            class="image rounded-circle"
+          />
+          <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+          <h4>About Me:</h4>
+          <blockquote>{{ user.bio }}</blockquote>
+          <a
+            href="mailto:{{ user.email }}"
+            target="_blank"
+            class="btn btn-lg btn-info"
+            >Contact</a
+          >
+          <br />
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+
+    <br />
+
+    <!-- ACCORDIAN START -->
+    <!-- USER SKILLS BOX START -->
+    <div class="accordion" id="accordianSkills">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="card">
+            <h2
+              class="card-header btn-link text-white text-center"
+              id="userSkillsAccordian"
+              data-toggle="collapse"
+              data-target="#collapseSkills"
+              aria-expanded="true"
+              aria-controls="collapseSkills"
+            >
+              {{ user.firstName }}'s Skills
+            </h2>
+            <div class="card-body">
+              <div
+                id="collapseSkills"
+                class="collapse hide"
+                aria-labelledby="userSkills"
+                data-parent="#accordion"
+              >
+                <div class="row" *ngFor="let skill of user.skills">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div class="card h-100 text-dark text-center">
+                      <div class="card-header text-white">
+                        <h5><strong>Skill: </strong>{{ skill.skill.name }}</h5>
+                      </div>
+                      <div class="card-body">
+                        <h5>Description</h5>
+                        <hr />
+                        <blockquote>{{ skill.skill.description }}</blockquote>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+      <!-- USER SKILLS BOX END -->
+      <!-- ACCORDIAN END -->
+
+      <br />
+
+      <!-- ACCORDIAN START -->
+      <!-- USER GIG HISTORY BOX START -->
+      <div class="accordion" id="accordianGigs">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <div class="card">
+              <h2
+                class="card-header btn-link text-white text-center"
+                id="userSkillsAccordian"
+                data-toggle="collapse"
+                data-target="#collapseGigs"
+                aria-expanded="true"
+                aria-controls="collapseGigs"
+              >
+                {{ user.firstName }}'s Job History
+              </h2>
+              <div class="card-body">
+                <div
+                  id="collapseGigs"
+                  class="collapse hide"
+                  aria-labelledby="userGigs"
+                  data-parent="#accordion"
+                >
+                  <div class="row" *ngFor="let booking of yourGigs">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                      <div class="card h-100 text-dark text-center">
+                        <div class="card-header text-white">
+                          <h5>
+                            <strong>Job Title: </strong>{{ booking.job.title }}
+                          </h5>
+                        </div>
+                        <div class="card-body">
+                          <h5>Skill Used</h5>
+                          <hr />
+                          <blockquote>{{ booking.job.skill.name }}</blockquote>
+                          <h5>Description</h5>
+                          <hr />
+                          <blockquote>{{ booking.job.description }}</blockquote>
+                          <br />
+                          <h5>Date Completed</h5>
+                          <hr />
+                          <blockquote>{{ booking.completeDate }}</blockquote>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-1"></div>
+          </div>
+        </div>
+        <!-- USER JOB HISTORY BOX END -->
+        <!-- ACCORDIAN END -->
+      </div>
+    </div>
+  </div>
+</div>
