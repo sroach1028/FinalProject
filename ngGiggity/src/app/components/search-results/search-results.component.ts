@@ -316,8 +316,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   createBid(form: NgForm) {
-
     this.bid = form.value;
+    this.bid.accepted = false;
+    this.bid.rejected = false;
     this.bidSvc.createBid(this.bid, this.selected.id).subscribe(
       data => {
 
