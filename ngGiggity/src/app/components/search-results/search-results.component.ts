@@ -95,7 +95,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
    // CLASS FIELDS
    navigationSubscription;
-   jobs: Job[];
+   jobs: Job[] = [];
    jobTitle: string = null;
    title = 'Available Jobs';
    urlId: number;
