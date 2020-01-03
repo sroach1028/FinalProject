@@ -60,7 +60,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.selected = null;
         this.skillName = null;
         this.selectedBid = null;
-        this.booking = null;
+        // this.booking = null;
         this.selectSkills = null;
         this.userSkillDescription = null;
         this.updateProfile = false;

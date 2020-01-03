@@ -145,7 +145,7 @@ background-color: #F1F1F1;
 }
 
 hr{
-  width:1000px;
+  width: auto;
   height: 5px;
   float: left;
   color: black;
