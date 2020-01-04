@@ -7,7 +7,7 @@
 #cardBack{
   background-size: cover;
   background-repeat: no-repeat;
-background-image: url('https://image.freepik.com/free-vector/background-mountains-landscape_23-2148288639.jpg');
+background-image: url('src/assets/cardBack.jpg');
 }
 
 
@@ -39,6 +39,7 @@ img{
 
 .card-header {
   background-color: rgb(24, 24, 83);
+  cursor: pointer;
 }
 
 #gigUpdate label{
