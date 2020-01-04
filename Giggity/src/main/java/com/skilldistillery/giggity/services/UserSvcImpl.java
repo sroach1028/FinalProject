@@ -103,5 +103,9 @@ public class UserSvcImpl implements UserService {
 		
 		return profile;
 	}
+	@Override
+	public List<User> getAllUsers() {
+		return userRepo.findAll();
+	}
 
 }

@@ -49,6 +49,18 @@ public class UserController {
 			res.setStatus(200);
 		return users;
 	}
+	@GetMapping("api/users/all")
+	public List<User> getAllUsers(HttpServletResponse res, Principal principal) {
+		List<User> users = null;
+		if(principal.getName().equals("admin")) {
+		users = svc.getAllUsers();
+		}
+		if (users == null) {
+			res.setStatus(404);
+		} else
+			res.setStatus(200);
+		return users;
+	}
 	@GetMapping("profile/username/{username}")
 	public User findUsersByUsername(@PathVariable String username, HttpServletResponse res) {
 		
@@ -85,13 +97,13 @@ public class UserController {
 			HttpServletResponse resp, Principal principal) {
 		User loggedInUser = svc.getUserByUsername(principal.getName());
 		if (loggedInUser != null) {
-			if ((!loggedInUser.getEmail().equalsIgnoreCase(u.getEmail()))) {
+			if ((!loggedInUser.getEmail().equalsIgnoreCase(u.getEmail())) && (!loggedInUser.getUsername().equals("admin"))) {
 				if (!authService.isUserEmailUnique(u.getEmail())) {
 					resp.setStatus(403);
 					return null;
 				}
 			}
-			if ((!loggedInUser.getUsername().equalsIgnoreCase(u.getUsername()))) {
+			if ((!loggedInUser.getUsername().equalsIgnoreCase(u.getUsername())) && (!loggedInUser.getUsername().equals("admin"))) {
 				if (!authService.isUserUsernameUnique(u.getUsername())) {
 					resp.setStatus(403);
 					return null;
@@ -119,6 +131,7 @@ public class UserController {
 			u = null;
 			resp.setStatus(403);
 		}
+//		System.err.println("SJDHFSDFJSDJFLKJSDLFJLJSDLFLSDKGJ");
 		return u;
 
 	}

@@ -20,6 +20,7 @@ import { ActiveBidPipe } from './pipes/active-bid.pipe';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { AltProfileComponent } from './components/alt-profile/alt-profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 
@@ -37,7 +38,8 @@ import { AltProfileComponent } from './components/alt-profile/alt-profile.compon
     JobsActivePipe,
     BookingsComponent,
     ActiveBidPipe,
-    AltProfileComponent
+    AltProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
