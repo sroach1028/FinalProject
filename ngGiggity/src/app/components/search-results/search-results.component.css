@@ -6,7 +6,7 @@
   height: 100px;
 }
 .sebm-google-map-container {
-  height: 300px;
+  height: 500px;
 }
 
 .card-header, .thead {
@@ -15,4 +15,9 @@
 .showHand:hover{
   color: black;
   cursor: pointer;
+}
+
+#map {
+  height: 500px;
+  width: 100%;
 }

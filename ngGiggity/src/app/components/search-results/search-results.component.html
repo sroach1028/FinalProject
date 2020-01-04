@@ -275,7 +275,7 @@
 <!-- END MODAL 2 -->
 
 <!-- M A P -->
-<div *ngIf="selected && !selected.remote">
+<!-- <div *ngIf="selected && !selected.remote" id="map" class="border border-primary border-rounded">
   <agm-map
     [(latitude)]="location.lat"
     [(longitude)]="location.lng"
@@ -290,7 +290,7 @@
       [markerDraggable]="location.marker.draggable"
     ></agm-marker>
   </agm-map>
-</div>
+</div> -->
 <!-- E N D M A P -->
 
 <br>
@@ -540,3 +540,23 @@
   </div>
 </div>
 <!-- JOB DETAILS CARD END -->
+
+<!-- M A P -->
+<div class="col-sm-1"></div>
+<div *ngIf="selected && !selected.remote" id="map" class="border border-primary border-rounded">
+  <agm-map
+    [(latitude)]="location.lat"
+    [(longitude)]="location.lng"
+    [(zoom)]="location.zoom"
+    [disableDefaultUI]="true"
+    [zoomControl]="true"
+    [(fitBounds)]="location.viewport"
+  >
+    <agm-marker
+      [(latitude)]="location.marker.lat"
+      [(longitude)]="location.marker.lng"
+      [markerDraggable]="location.marker.draggable"
+    ></agm-marker>
+  </agm-map>
+</div>
+<!-- E N D M A P -->
