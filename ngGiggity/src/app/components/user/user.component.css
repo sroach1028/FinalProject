@@ -1,6 +1,22 @@
 body, html {
   height: 100%;
 }
+
+#gigThumb{
+  height:150px;
+  width: 150px;
+}
+
+#cardBack{
+  background-size: cover;
+  background-repeat: no-repeat;
+background-image: url('https://image.freepik.com/free-vector/background-mountains-landscape_23-2148288639.jpg');
+}
+
+img{
+  width: 400px;
+  height: auto;
+}
 .jumbotron {
   /* The image used */
   background-image: url("https://mdbootstrap.com/img/Photos/Others/images/91.jpg");
