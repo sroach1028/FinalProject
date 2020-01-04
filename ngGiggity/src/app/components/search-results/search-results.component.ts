@@ -57,7 +57,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       lng: -105.7821,
       draggable: true
     },
-    zoom: 7
+    zoom: 5
   };
   @ViewChild(AgmMap, {static: false}) map: AgmMap;
   // END MAP FIELDS
