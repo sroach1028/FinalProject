@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'post', component: PostComponent, runGuardsAndResolvers: 'always' },
   { path: 'search', component: SearchResultsComponent, runGuardsAndResolvers: 'always'},
   { path: 'profile', component: AltProfileComponent },
+  { path: 'admin', component: AdminComponent },
   { path: 'bookings', component: BookingsComponent },
   { path: 'search/:skillName', component: SearchResultsComponent },
   { path: '**', component: PageNotFoundComponent }

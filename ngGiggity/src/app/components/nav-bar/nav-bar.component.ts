@@ -14,18 +14,21 @@ import { User } from 'src/app/models/user';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
-  constructor(private authSvc: AuthService, private usersvc: UserService, private router: Router) {this.navigationSubscription = this.router.events.subscribe((e: any) => {
-    // If it is a NavigationEnd event re-initalise the component
-    if (e instanceof NavigationEnd) {
-      this.ngOnInit();
-    }
-  }); }
+  constructor(private authSvc: AuthService, private usersvc: UserService, private router: Router) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   searchDisplay = 'user';
   userSelected: User = null;
   userFullName: string = null;
   loggedIn = false;
   navigationSubscription;
+  isAdmin;
 
 
   searchBy(event: any) {
@@ -40,10 +43,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.userFullName = null;
     this.loggedIn = false;
     this.authSvc.logout();
+    this.isAdmin = false;
   }
 
   ngOnInit() {
-    if(this.authSvc.checkLogin()) {
+    if (this.authSvc.checkLogin()) {
       this.loggedIn = true;
       this.getUser();
     }
@@ -52,6 +56,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   getUser() {
     this.usersvc.getUserByUsername().subscribe(
       data => {
+        if (data.username === 'admin') {
+          this.isAdmin = true;
+        }
         this.userSelected = data;
         this.userFullName = this.userSelected.firstName + ' ' + this.userSelected.lastName;
       },

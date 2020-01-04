@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.giggity.entities.User;
 import com.skilldistillery.giggity.services.AuthService;
+import com.skilldistillery.giggity.services.UserService;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost:4350" })
@@ -20,6 +21,9 @@ public class AuthController {
 
 	@Autowired
 	private AuthService authService;
+	
+	@Autowired
+	private UserService svc;
 
 	@PostMapping("/register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
@@ -41,6 +45,12 @@ public class AuthController {
 
 	@GetMapping("/authenticate")
 	public Principal authenticate(Principal principal) {
+		
+		User loggedInUser = svc.getUserByUsername(principal.getName());
+		if(!loggedInUser.getEnabled()) {
+			principal = null;
+		}
+		
 		return principal;
 	}
 
