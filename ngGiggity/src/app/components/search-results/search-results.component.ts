@@ -109,7 +109,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    newBid = false;
    user: User;
    updateGig: Job = null;
-   skills: Skill[];
+   skills: Skill[] = [];
    users: User[];
    beginSearch = true;
    username = null;
@@ -124,8 +124,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.getLoggedUser();
     if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
-      this.jobBySkillName();
     }
+    this.getSkills();
   }
 
   // M A P    M E T H O D S
@@ -205,7 +205,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.skills = data;
       },
       err => {
-        console.error('Update error in Compnent');
+        console.error('Get Skills Error in SearchResult Component');
       }
     );
   }
@@ -222,7 +222,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.beginSearch = false;
   }
 
-  jobBySkillName() {
+  jobBySkillName(form: NgForm) {
+    this.jobSkillName = form.value.skillName;
     this.jobSvc.findJobBySkill(this.jobSkillName).subscribe(
       aGoodThingHappened => {
         this.jobs = aGoodThingHappened;
