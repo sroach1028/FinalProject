@@ -1,81 +1,58 @@
 <body id="randBackground">
 
-<div class="jumbotron">
-  <h1 class="display-4 text-black"><strong>Work-For-Hire</strong></h1>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
-      <div
-        id="carouselGigs"
-        class="carousel slide"
-        data-ride="carousel"
-        data-interval="3000"
-      >
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="card h-100">
-              <div class="card-body">
-                <h1 class="card-header text-center text-white">Explore Gigs</h1>
-                <h3 class="text-center"><strong>Description:</strong></h3>
-                <h5 class="text-secondary text-center">Book your next Gig today!!</h5>
-              </div>
-              <div class="card-footer text-center">
-                    <button class="btn btn-info" [routerLink]="['/search']">Search Gigs</button>
+
+  <div class="jumbotron" >
+    <h1 class="display-4 text-black"><strong>Work-For-Hire</strong></h1>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div id="carouselGigs" class="carousel slide" data-ride="carousel" data-interval="3000">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h1 class="card-header text-center text-white">Explore Gigs</h1>
+                  <h3 class="text-center"><strong>Description:</strong></h3>
+                  <h5 class="text-secondary text-center">Book your next Gig today!!</h5>
+                </div>
+                <div class="card-footer text-center">
+                  <button class="btn btn-info" [routerLink]="['/search']">Search Gigs</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="carousel-item" *ngFor="let skill of skills">
-            <div class="card h-100">
-              <div class="card-body">
-                <h1 class="card-header text-center text-white">
-                  {{ skill.name }}
-                </h1>
-                <h3 class="text-center"><strong>Description:</strong></h3>
-                <h5 class="text-secondary text-center">{{ skill.description }}</h5>
-              </div>
-              <div class="card-footer text-center">
-                <div>
-                  <button
-                    class="btn btn-info"
-                    [routerLink]="['/search', skill.name]"
-                  >
-                    Find {{skill.name}} Gigs
-                  </button>
+            <div class="carousel-item" *ngFor="let skill of skills">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h1 class="card-header text-center text-white">
+                    {{ skill.name }}
+                  </h1>
+                  <h3 class="text-center"><strong>Description:</strong></h3>
+                  <h5 class="text-secondary text-center">{{ skill.description }}</h5>
+                </div>
+                <div class="card-footer text-center">
+                  <div>
+                    <button class="btn btn-info" [routerLink]="['/search', skill.name]">
+                      Find {{skill.name}} Gigs
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <a class="carousel-control-prev" href="#carouselGigs" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+            <span class="sr-only text-info">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselGigs" role="button" data-slide="next">
+            <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
-        <a
-          class="carousel-control-prev"
-          href="#carouselGigs"
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            class="carousel-control-prev-icon bg-secondary"
-            aria-hidden="true"
-          ></span>
-          <span class="sr-only text-info">Previous</span>
-        </a>
-        <a
-          class="carousel-control-next"
-          href="#carouselGigs"
-          role="button"
-          data-slide="next"
-        >
-          <span
-            class="carousel-control-next-icon bg-secondary"
-            aria-hidden="true"
-          ></span>
-          <span class="sr-only">Next</span>
-        </a>
       </div>
+      <div class="col-1"></div>
     </div>
-    <div class="col-1"></div>
   </div>
-</div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>

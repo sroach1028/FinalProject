@@ -22,7 +22,7 @@
           <div class="card-image">
             <span class="card-notify-badge">Booked: {{booking.startDate}}</span>
             <span class="card-notify-year">${{booking.bid.bidAmount}}</span>
-            <img class="img-thumbnail img-fluid" src="{{booking.job.imageUrl}}" alt="Image not Availible" />
+            <img class="img-thumbnail img-fluid" src="{{booking.job.imageUrl}}" id="cardImg" alt="Image not Availible" />
           </div>
           <div class="card-image-overlay m-auto">
             <span class="card-detail-badge">Claimed By: {{booking.bid.bidder.firstName}}</span>
