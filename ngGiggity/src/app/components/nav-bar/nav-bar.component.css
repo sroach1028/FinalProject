@@ -1,7 +1,7 @@
 nav{
-  background-color:rgb(24, 24, 83);
+  background-color: black;
   /* background-color:transparent; */
 }
 h1, a{
-  font-family: 'Courier New', Courier, monospace;
+  font-family: fantasy;
 }
