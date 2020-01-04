@@ -61,32 +61,32 @@
     <div class="container-fluid">
     <div class="row">
       <div class="col-1"></div>
-        <div class="col-3">
+        <div class="col-sm">
         <button
-          class="btn btn-block btn-success"
+          class="btn btn-block btn-success text-nowrap"
           [routerLink]="['/bookings']"
         >
           <small>View Bookings</small>
         </button>
       </div>
-        <div class="col-2">
+        <div class="col-sm">
         <button
-        class="btn btn-block btn-success"
+        class="btn btn-block btn-success text-nowrap"
         [routerLink]="['/post']"
       >
         <small>Post Gig</small>
       </button>
     </div>
-    <div class="col-2">
+    <div class="col-sm">
       <button
-      class="btn btn-block btn-warning"
+      class="btn btn-block btn-warning text-nowrap"
       (click)="userToUpdate()"
       >
       <small>Update Profile</small>
     </button>
   </div>
-  <div class="col-3">
-    <button class="btn btn-block btn-info float-right" (click)="chooseSkills()">
+  <div class="col-sm">
+    <button class="btn btn-block btn-info text-nowrap" (click)="chooseSkills()">
       <small>Add Skill</small>
     </button>
   </div>
@@ -563,7 +563,6 @@
                   </div>
                   <button
                     class="btn btn-warning"
-                    style="float: right"
                     (click)="update(updateGig)"
                   >
                     U p d a t e
