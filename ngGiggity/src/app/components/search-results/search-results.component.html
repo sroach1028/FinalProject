@@ -27,8 +27,12 @@
         </button>
       </form>
       <br />
-      <form name="jobSkill">
-        <div class="form-group">
+      <form #jobSkill="ngForm">
+        <select name="skillName" ngModel class="form-control">
+          <option selected disabled>Choose a skill</option>
+          <option value="{{skill.name}}" *ngFor="let skill of skills">{{skill.name}}</option>
+        </select>
+        <!-- <div class="form-group">
           <label name="jobskill" for="jobskill">Skill</label>
           <input
             name="jobskill"
@@ -39,11 +43,11 @@
             [(ngModel)]="jobSkillName"
             [ngModelOptions]="{ standalone: true }"
           />
-        </div>
+        </div> -->
         <button
           type="button"
           class="btn btn-primary btn-block btn-block"
-          (click)="jobBySkillName()"
+          (click)="jobBySkillName(jobSkill)"
         >
           Search by Skill
         </button>
