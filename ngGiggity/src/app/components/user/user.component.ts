@@ -93,10 +93,12 @@ export class UserComponent implements OnInit, OnDestroy {
 
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < data.length; i++) {
+          if (this.userSelected) {
 
-          if (data[i].booking.bid.bidder.id === this.userSelected.id) {
-            this.sellerReviews.push(data[i]);
+            if (data[i].booking.bid.bidder.id === this.userSelected.id) {
+              this.sellerReviews.push(data[i]);
 
+            }
           }
 
 
@@ -314,8 +316,6 @@ export class UserComponent implements OnInit, OnDestroy {
       );
 
     }
-
-
     this.selectSkills = null;
     this.ngOnInit();
 
