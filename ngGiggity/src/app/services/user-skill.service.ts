@@ -50,4 +50,37 @@ export class UserSkillService {
       );
   }
 
+  updateUserSkill(userSkill: UserSkill) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.put<UserSkill>(this.baseUrl + 'api/userSkill/', userSkill, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Error in UserSkill Service - Updating UserSkill');
+        })
+      );
+  }
+
+  deleteUserSkill(userSkill: UserSkill) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Basic " + this.authSvc.getCredentials()
+      })
+    };
+    return this.http.delete(this.baseUrl + 'api/userSkill/' + userSkill.id, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Error in UserSkill Service - Updating UserSkill');
+        })
+      );
+  }
+
+
 }
