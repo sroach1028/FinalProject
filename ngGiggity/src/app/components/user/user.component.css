@@ -10,6 +10,13 @@
 background-image: url('src/assets/cardBack.jpg');
 }
 
+.modal-body, .modal-header, .modal-footer{
+  background-image: url('src/assets/cardBack.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: beige;
+}
+
 
 img{
   width: auto;
@@ -40,6 +47,7 @@ img{
 .card-header {
   background-color: rgb(24, 24, 83);
   cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #gigUpdate label{
@@ -68,3 +76,11 @@ hr{
   text-decoration: underline;
 }
 
+h3, h6 {
+  font-family: fantasy;
+  color: beige;
+}
+
+button{
+  color: white;
+}
