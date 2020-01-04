@@ -13,6 +13,8 @@ public interface UserService {
 	
 	public List<User> getUsersByUsername(String username);
 	
+	public List<User> getAllUsers();
+	
 	public User updateUser(User u, int uid);
 
 	public boolean destroy(Integer id);

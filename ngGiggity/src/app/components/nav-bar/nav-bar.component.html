@@ -17,6 +17,9 @@
 
         <li class="nav-item" *ngIf="userFullName">
           <a class="nav-link" style="margin-right: 55px" [routerLink]="['/user']">Welcome {{ userFullName }}!</a></li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/search']">Search</a>
         </li>
