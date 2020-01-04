@@ -1,4 +1,5 @@
-<div class="jumbotron">
+<div id="jumbotron">
+  <br>
   <div class="container-fluid" *ngIf="!selectSkills">
     <!-- USER IMAGE & NAME BOX START -->
     <div class="row">
@@ -17,9 +18,9 @@
             /></a>
             <h3>{{ userSelected.firstName }} {{ userSelected.lastName }}</h3>
             <h6><em>Click my image to learn more</em></h6>
-            <a style="float: left;"
+            <h6 style="float: left;"
               ><strong> Average User Rating: </strong
-              >{{ averageSellerReview }}</a
+              >{{ averageSellerReview }}</h6
             >
           </div>
           <br />
