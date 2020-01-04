@@ -54,9 +54,11 @@ public class UserSkillSvcImpl implements UserSkillService {
 
 	@Override
 	public UserSkill update(int id, UserSkill userSkill) {
+		System.err.println("OH NO");
+		System.err.println("User skill: " + userSkill);
 		UserSkill update = repo.findById(id);
-		update.setUser(userSkill.getUser());
-		update.setSkill(userSkill.getSkill());
+//		update.setUser(userSkill.getUser());
+//		update.setSkill(userSkill.getSkill());
 		if(userSkill.getDescription() != null) {
 			update.setDescription(userSkill.getDescription());
 		}

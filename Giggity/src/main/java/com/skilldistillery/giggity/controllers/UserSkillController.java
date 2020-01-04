@@ -131,7 +131,7 @@ public class UserSkillController {
 			HttpServletResponse resp) {
 		User user = userSvc.getUserByUsername(principal.getName());
 		us.setUser(user);
-		us.setSkill(skillSvc.findById(us.getSkill().getId()));
+//		us.setSkill(skillSvc.findById(us.getSkill().getId()));
 
 		try {
 			// try to update the provided post
