@@ -9,9 +9,10 @@
           <img [src]="user.avatarImage.imageUrl" name="aboutme" height="275"  class="img-fluid image rounded-circle" />
           <h3>{{ user.firstName }} {{ user.lastName }}</h3>
           <h4>About Me:</h4>
-          <blockquote>{{ user.bio }}</blockquote>
+          <font size="3">{{ user.bio }}</font><br>
           <a style="float: right;" href="mailto:{{ user.email }}" target="_blank" class="btn btn-lg btn-info">Contact</a>
-          <a style="float: left;"><strong> Average User Rating: </strong>{{averageSellerReview}}</a>
+          <br>
+          <h6 style="float: left;"><strong> Average User Rating: </strong>{{averageSellerReview}}</h6>
           <br />
         </div>
       </div>
