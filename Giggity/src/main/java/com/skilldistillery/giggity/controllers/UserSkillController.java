@@ -126,16 +126,16 @@ public class UserSkillController {
 		return us;
 	}
 	
-	@PutMapping("userSkill/{id}/{sid}")
-	public UserSkill updateJob(@PathVariable Integer id, @PathVariable Integer sid, @RequestBody UserSkill us, HttpServletRequest req, Principal principal,
+	@PutMapping("userSkill/")
+	public UserSkill updateUserSkill(@RequestBody UserSkill us, HttpServletRequest req, Principal principal,
 			HttpServletResponse resp) {
 		User user = userSvc.getUserByUsername(principal.getName());
 		us.setUser(user);
-		us.setSkill(skillSvc.findById(sid));
+		us.setSkill(skillSvc.findById(us.getSkill().getId()));
 
 		try {
 			// try to update the provided post
-			us = svc.update(id, us);
+			us = svc.update(us.getId(), us);
 			if(us==null) {
 				resp.setStatus(404);
 			}
@@ -154,7 +154,7 @@ public class UserSkillController {
 	}
 	
 	@DeleteMapping("userSkill/{id}")
-	public void deleteJob(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
+	public void deleteUserSkill(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		
 		try {
 			if (svc.delete(id)) {

@@ -38,6 +38,7 @@ export class UserComponent implements OnInit, OnDestroy {
   userSkillDescription: string;
   updateProfile = false;
   username;
+  updateUserSkillDesc = false;
 
   navigationSubscription;
 
@@ -64,6 +65,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.selectSkills = null;
         this.userSkillDescription = null;
         this.updateProfile = false;
+        this.updateUserSkillDesc = false;
         this.ngOnInit();
       }
     });
@@ -128,7 +130,6 @@ export class UserComponent implements OnInit, OnDestroy {
   hasActives(job: Job) : boolean {
     var hasActive: boolean = false;
     job.jobBids.forEach(bid => {
-      console.log(bid);
       if (bid.accepted === false && bid.rejected === false) {
           hasActive = true;
       }
@@ -245,15 +246,24 @@ export class UserComponent implements OnInit, OnDestroy {
 
     userSkill.description = desc;
 
-    this.userSkillSvc.createUserSkill(userSkill).subscribe(
-      data => { },
-      err => {
-        console.log('Error getting SKills in User component');
+    for(let i = 0; i < this.userSkills.length; i++) {
+      if(this.userSkills[i].skill.id === skill.id) {
+          userSkill.skill = null;
       }
-    );
-    this.userSkills.push(userSkill);
+      this.userSkillSvc.createUserSkill(userSkill).subscribe(
+        data => {
+          this.userSkills.push(userSkill);
+        },
+
+        err => {
+          console.log('Error getting SKills in User component');
+        }
+        );
+      }
+
     this.selectSkills = null;
     this.ngOnInit();
+
   }
 
   userToUpdate() {
@@ -278,6 +288,36 @@ export class UserComponent implements OnInit, OnDestroy {
       }
     );
     this.updateProfile = false;
+  }
+
+  updateUserSkill(userSkillDesc: NgForm) {
+    const userSkill = new UserSkill();
+    userSkill.skill = userSkillDesc.value.id;
+    userSkill.description = userSkillDesc.value.description;
+
+    const desc: string = userSkillDesc.value.userSkillDesc;
+
+    userSkill.description = desc;
+
+    this.userSkillSvc.updateUserSkill(userSkill).subscribe(
+      data => {
+        console.log('UserSkill update completed');
+      },
+      err => {
+        console.error('Update UserSkill Error: User Component');
+      }
+    );
+  }
+
+  deleteUserSkill(skill: UserSkill) {
+    this.userSkillSvc.deleteUserSkill(skill).subscribe(
+      data => {
+        console.log('UserSkill delete completed');
+      },
+      err => {
+        console.error('Delete UserSkill Error: User Component');
+      }
+    );
   }
 
   ngOnDestroy() {
