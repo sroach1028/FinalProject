@@ -1,0 +1,69 @@
+<h2>ADMIN PAGE</h2>
+
+
+
+
+
+
+<!-- SEARCH FORM BEGIN -->
+<div *ngIf="!allUsers">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <button (click)=showUsers()>Show all users</button>
+      <form name="jobTitle">
+        <h3>Search For User</h3>
+        <hr />
+        <!-- <div class="form-group">
+            <label name="jobtitle" for="jobtitle">Gig Title</label>
+            <input name="jobtitle" type="jobtitle" class="form-control" id="jobtitle" placeholder="Gig Title"
+              [(ngModel)]="jobTitle" [ngModelOptions]="{ standalone: true }" />
+          </div> -->
+        <!-- <button type="button" class="btn btn-primary btn-block btn-block" (click)="jobsByTitle()">
+            Search by Gig Title
+          </button> -->
+      </form>
+      <br />
+      <form name="jobSkill">
+        <div class="form-group">
+          <label name="jobskill" for="jobskill">Skill</label>
+          <!-- <input name="jobskill" type="jobskill" class="form-control" id="jobskill" placeholder="Skill" [(ngModel)]="jobSkillName" [ngModelOptions]="{ standalone: true }" /> -->
+        </div>
+        <!-- <button type="button" class="btn btn-primary btn-block btn-block" (click)="jobBySkillName()">
+            Search by Skill
+          </button> -->
+      </form>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="allUsers">
+  <div class="col-sm-1"></div>
+  <table class="table table-striped table-hover table-striped">
+    <thead class="thead" style="color: black">
+      <tr>
+        <th>User</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" class="showHand">
+        <td>
+          <img [src]="user.avatarImage.imageUrl" class="img-thumbnail picture hidden-xs"
+            style="width: 150px; height: 150px" />
+          {{ user.username }}
+        </td>
+        <td>{{ user.firstName}}</td>
+        <td>{{ user.lastName }}</td>
+        <a *ngIf="!user.enabled">
+          <td><button (click)=setActive(user)>Activate</button></td>
+        </a>
+        <a *ngIf="user.enabled">
+          <td><button (click)=setInactive(user)>Deactivate</button></td>
+        </a>
+      </tr>
+    </tbody>
+  </table>
+</div>
