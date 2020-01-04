@@ -114,3 +114,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#cardImg{
+  height: 250px;
+  width: 250px;
+}
