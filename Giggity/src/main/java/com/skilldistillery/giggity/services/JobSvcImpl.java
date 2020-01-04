@@ -113,8 +113,11 @@ public class JobSvcImpl implements JobService {
 
 	@Override
 	public Job create(Job job) {
+		if(job.getImageUrl().length() < 1) {
+			job.setImageUrl("http://fullhdwall.com/wp-content/uploads/2016/08/Work-Expression-In-English.jpg");
+		}
 		job.setDateCreated(LocalDateTime.now());
-		job.setDateUpdated(LocalDateTime.now()); 
+		job.setDateUpdated(LocalDateTime.now());
 		
 		return repo.saveAndFlush(job);
 	}
