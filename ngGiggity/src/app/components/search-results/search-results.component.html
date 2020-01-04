@@ -333,9 +333,16 @@
               class="btn btn-success"
               (click)="newBid = true"
               data-target="#exampleModal"
+              *ngIf="selected.user.id !== user.id"
             >
               B I D
             </button>
+            <h4
+              class="text-primary"
+              *ngIf="selected.user.id === user.id"
+            >
+              You posted this..
+          </h4>
             <br />
             <hr />
             <ng-container class="container-fluid">
