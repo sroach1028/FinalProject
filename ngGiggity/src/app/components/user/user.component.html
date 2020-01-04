@@ -94,7 +94,7 @@
             {{ userSelected.lastName }}
           </h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body text-center">
           <div>
             <img
               [src]="userSelected.avatarImage.imageUrl"
@@ -102,7 +102,7 @@
               width="140"
               height="140"
               border="0"
-              class="img-circle"
+              class="image img-fluid rounded-circle"
             />
             <h3 class="media-heading">
               {{ userSelected.firstName }} {{ userSelected.lastName }}
@@ -306,7 +306,7 @@
                         alt="Gig Image"
                       />
                       <h5>Gig: {{ job.title }}</h5>
-                      <h6>Skill Required: {{ job.skill.name }}</h6>
+                      <h5>Skill Required: {{ job.skill.name }}</h5>
                       <p>About the Gig: {{ job.description }}</p>
                     </div>
                     <div class="card-footer">
@@ -557,7 +557,7 @@
                     </div>
                     <div class="card-body">
                       <h5>Gig: {{ bid.job.title }}</h5>
-                      <h6>Skill Required: {{ bid.job.skill.name }}</h6>
+                      <h5>Skill Required: {{ bid.job.skill.name }}</h5>
                       <p>About the Gig: {{ bid.job.description }}</p>
                       <a
                         (click)="showProfile(bid.job.user.username)"

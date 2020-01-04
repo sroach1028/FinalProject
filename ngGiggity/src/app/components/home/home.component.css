@@ -1,9 +1,6 @@
 body, html {
   height: 100%;
 }
-h1{
-  font-family: 'Courier New', Courier, monospace;
-}
 
 .jumbotron {
   background: none
@@ -19,7 +16,7 @@ h1{
   height: 300px;
 }
 .card-header {
-  background-color: rgb(24, 24, 83);
+  background-color: rgb(24, 71, 84);
 }
 
 .card {
@@ -38,7 +35,9 @@ h1{
 
 #devBy {
   background-color: black;
+  background-size: cover;
   color: white;
+  font-family: fantasy;
 }
 
 
