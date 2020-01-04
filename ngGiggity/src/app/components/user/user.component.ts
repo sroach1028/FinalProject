@@ -127,11 +127,11 @@ export class UserComponent implements OnInit, OnDestroy {
     );
   }
 
-  hasActives(job: Job) : boolean {
+  hasActives(job: Job): boolean {
     var hasActive: boolean = false;
     job.jobBids.forEach(bid => {
       if (bid.accepted === false && bid.rejected === false) {
-          hasActive = true;
+        hasActive = true;
       }
     });
     return hasActive;
@@ -186,7 +186,7 @@ export class UserComponent implements OnInit, OnDestroy {
     );
 
     for (let rejectBid of this.bids) {
-      if (rejectBid.id === this.selectedBid.id){
+      if (rejectBid.id === this.selectedBid.id) {
         rejectBid.accepted = true;
         rejectBid.rejected = false;
       } else {
@@ -218,8 +218,8 @@ export class UserComponent implements OnInit, OnDestroy {
   rejectBid(rejectedBid: Bid) {
     rejectedBid.accepted = false;
     rejectedBid.rejected = true;
-    if (this.hasActives(this.selected) === false){
-        this.selected = null;
+    if (this.hasActives(this.selected) === false) {
+      this.selected = null;
     }
     this.bidSvc.updateBid(rejectedBid).subscribe(
       data => { },
@@ -246,20 +246,22 @@ export class UserComponent implements OnInit, OnDestroy {
 
     userSkill.description = desc;
 
-    for(let i = 0; i < this.userSkills.length; i++) {
-      if(this.userSkills[i].skill.id === skill.id) {
-          userSkill.skill = null;
+    for (let i = 0; i < this.userSkills.length; i++) {
+      if (this.userSkills[i].skill.id === skill.id) {
+        userSkill.skill = null;
       }
-      this.userSkillSvc.createUserSkill(userSkill).subscribe(
-        data => {
-          this.userSkills.push(userSkill);
-        },
+      if (userSkill.skill !== null) {
+        this.userSkillSvc.createUserSkill(userSkill).subscribe(
+          data => {
+            this.userSkills.push(userSkill);
+          },
 
-        err => {
-          console.log('Error getting SKills in User component');
-        }
+          err => {
+            console.log('Error getting SKills in User component');
+          }
         );
       }
+    }
 
     this.selectSkills = null;
     this.ngOnInit();
