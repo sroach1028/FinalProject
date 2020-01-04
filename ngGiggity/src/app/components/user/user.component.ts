@@ -242,31 +242,46 @@ export class UserComponent implements OnInit, OnDestroy {
     const userSkill = new UserSkill();
     userSkill.skill = skill;
 
+    var exists = false;
     const desc: string = descForm.value.userSkillDescription;
 
     userSkill.description = desc;
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.userSkills.length; i++) {
       if (this.userSkills[i].skill.id === skill.id) {
-        userSkill.skill = null;
-      }
-      if (userSkill.skill !== null) {
-        this.userSkillSvc.createUserSkill(userSkill).subscribe(
-          data => {
-            this.userSkills.push(userSkill);
-          },
-
-          err => {
-            console.log('Error getting SKills in User component');
-          }
-        );
+        exists = true;
+        userSkill.id = this.userSkills[i].id;
       }
     }
+    if (!exists) {
+      this.userSkillSvc.createUserSkill(userSkill).subscribe(
+        data => {
+          this.userSkills.push(userSkill);
+        },
+
+        err => {
+          console.log('Error getting SKills in User component');
+        }
+      );
+    } else {
+      this.userSkillSvc.updateUserSkill(userSkill).subscribe(
+        data => {
+          console.log('UserSkill update completed');
+        },
+        err => {
+          console.error('Update UserSkill Error: User Component');
+        }
+      );
+
+    }
+
 
     this.selectSkills = null;
     this.ngOnInit();
 
   }
+
 
   userToUpdate() {
     this.updateProfile = true;
@@ -294,12 +309,12 @@ export class UserComponent implements OnInit, OnDestroy {
 
   updateUserSkill(userSkillDesc: NgForm) {
     const userSkill = new UserSkill();
-    userSkill.skill = userSkillDesc.value.id;
+    userSkill.id = userSkillDesc.value.id;
     userSkill.description = userSkillDesc.value.description;
 
-    const desc: string = userSkillDesc.value.userSkillDesc;
+    // const desc: string = userSkillDesc.value.userSkillDesc;
 
-    userSkill.description = desc;
+    // userSkill.description = desc;
 
     this.userSkillSvc.updateUserSkill(userSkill).subscribe(
       data => {
