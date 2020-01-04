@@ -2,22 +2,25 @@
   <div class="container-fluid" *ngIf="!selectSkills">
     <!-- USER IMAGE & NAME BOX START -->
     <div class="row">
-      <!-- <div class="col-1">
+      <div class="col-2">
+        <!-- <div>
         <button
-        class="btn-lg btn-success"
+        class="btn-lg btn-block btn-success"
         [routerLink]="['/bookings']"
       >
         View Gig Bookings
       </button>
+    </div><br>
       <button
-      class="btn-lg btn-success text-center"
+      class="btn-lg btn-success btn-block text-center"
       [routerLink]="['/post']"
     >
       Post a Gig
-    </button>
-      </div> -->
-      <div class="col-10">
-        <div class="span well bg-light">
+      <br>
+    </button> -->
+      </div>
+      <div class="col-8">
+        <div class="span well bg-light" id="cardBack">
           <br />
           <div *ngIf="userSelected">
             <a href="#aboutModal" data-toggle="modal" data-target="#myModal"
@@ -26,7 +29,7 @@
                 name="aboutme"
                 width="auto"
                 height="275"
-                class="image rounded-circle"
+                class="image img-fluid rounded-circle"
             /></a>
             <h3>{{ userSelected.firstName }} {{ userSelected.lastName }}</h3>
             <h6><em>Click my image to learn more</em></h6>
@@ -34,53 +37,62 @@
           <br />
         </div>
       </div>
-      <div class="col-2">
+
+
+      <!-- <div class="col-2">
           <div>
             <button
-              class="btn-lg btn-warning"
+              class="btn-lg btn-block btn-warning"
               (click)="userToUpdate()"
               >
               Update User Profile
             </button>
           </div><br>
         <div>
-          <button class="btn-lg btn-info text-center float-bottom" (click)="chooseSkills()">
+          <button class="btn-lg btn-block btn-info text-center float-bottom" (click)="chooseSkills()">
             Add Skill To Portfolio
           </button>
         </div>
-    </div>
-    <!-- <div class="row">
+    </div> -->
+  </div>
+  <br>
+</div>
+
+    <div class="container-fluid">
+    <div class="row">
       <div class="col-1"></div>
-      <div class="col-10">
+        <div class="col-3">
         <button
-          style="float:left"
-          class="btn-lg btn-success"
+          class="btn btn-block btn-success"
           [routerLink]="['/bookings']"
         >
-          View Gig Bookings
+          <small>View Bookings</small>
         </button>
-        &nbsp;
+      </div>
+        <div class="col-2">
         <button
-        class="btn-lg btn-success text-center"
+        class="btn btn-block btn-success"
         [routerLink]="['/post']"
       >
-        Post a Gig
+        <small>Post Gig</small>
       </button>
-      &nbsp;
+    </div>
+    <div class="col-2">
       <button
-      style="float:right"
-      class="btn-lg btn-warning"
+      class="btn btn-block btn-warning"
       (click)="userToUpdate()"
       >
-      Update User Profile
+      <small>Update Profile</small>
     </button>
-    <button class="btn-lg btn-info text-center" style="float:right" (click)="chooseSkills()">
-      Add Skill To Profile
+  </div>
+  <div class="col-3">
+    <button class="btn btn-block btn-info float-right" (click)="chooseSkills()">
+      <small>Add Skill</small>
     </button>
-    &nbsp;
-      </div>
-      <div class="col-1"></div>
-    </div> -->
+  </div>
+  <div class="col-1"></div>
+    </div>
+  </div>
     <!-- USER IMAGE & NAME BOX END -->
 
     <!-- USER DETAILS MODAL START -->
@@ -146,33 +158,32 @@
         </div>
       </div>
     </div>
-  </div>
   <!-- USER DETAILS MODAL END -->
 
   <br />
-</div>
+
   <!-- ACCORDIAN START -->
   <!-- USER SKILLS BOX START -->
   <div class="accordion" id="accordionSkills">
     <div class="row" *ngIf="userSelected && !updateProfile && !selectSkills">
-      <div class="col-2">
-        <div>
+      <div class="col-1">
+        <!-- <div>
         <button
         class="btn-lg btn-success"
         [routerLink]="['/bookings']"
       >
         View Gig Bookings
       </button>
-    </div>
-      <br>
+    </div> -->
 
-      <button
+    <!-- <button
       class="btn-lg btn-success text-center"
       [routerLink]="['/post']"
-    >
+      >
       Post a Gig
-    </button>
-      </div>
+    </button> -->
+  </div>
+  <br>
 
       <div class="col-10">
         <div class="card">
@@ -286,6 +297,8 @@
         </div>
       </div>
     </div>
+    <br>
+
   </div>
   <!-- USER SKILLS BOX END -->
   <!-- ACCORDIAN END -->
@@ -294,7 +307,7 @@
   <!-- USER REQUESTS BOX START -->
   <div class="accordion" id="accordion">
     <div class="row" *ngIf="userSelected && !updateProfile && !selectSkills">
-      <div class="col-2"></div>
+      <div class="col-1"></div>
       <div class="col-10">
         <div class="card">
           <h2
@@ -322,13 +335,13 @@
                     *ngIf="!selected || selected.id === job.id"
                     class="card h-100 text-dark text-center"
                   >
-                    <div class="card-header text-white">
+                    <div class="card-header text-white bg-dark">
                       <h5>
                         Date Posted: {{ job.dateCreated | date: "short" }}
                       </h5>
                     </div>
                     <div class="card-body">
-                      <img [src]="job.imageUrl" alt="Gig Image" />
+                      <img class="img-thumbnail" id="gigThumb" [src]="job.imageUrl" alt="Gig Image" />
                       <h5>Gig: {{ job.title }}</h5>
                       <h6>Skill Required: {{ job.skill.name }}</h6>
                       <p>About the Gig: {{ job.description }}</p>
@@ -581,7 +594,7 @@
   <!-- BIDS THIS USER MADE - WAITING TO BE APPROVED BY SELLER START -->
   <div class="accordion" id="accordion2">
     <div class="row" *ngIf="!updateProfile && !selectSkills">
-      <div class="col-2"></div>
+      <div class="col-1"></div>
       <div class="col-10">
         <div class="card" *ngIf="userSelected">
           <h2
@@ -614,7 +627,7 @@
                 <div class="col-1"></div>
                 <div class="col-10">
                   <div class="card h-100 text-dark text-center">
-                    <div class="card-header text-white">
+                    <div class="card-header text-white bg-dark">
                       <h5>
                         Awaiting Seller Approval - Date Posted:
                         {{ bid.job.dateCreated | date: "short" }}
