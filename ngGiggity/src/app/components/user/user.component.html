@@ -2,7 +2,20 @@
   <div class="container-fluid" *ngIf="!selectSkills">
     <!-- USER IMAGE & NAME BOX START -->
     <div class="row">
-      <div class="col-1"></div>
+      <!-- <div class="col-1">
+        <button
+        class="btn-lg btn-success"
+        [routerLink]="['/bookings']"
+      >
+        View Gig Bookings
+      </button>
+      <button
+      class="btn-lg btn-success text-center"
+      [routerLink]="['/post']"
+    >
+      Post a Gig
+    </button>
+      </div> -->
       <div class="col-10">
         <div class="span well bg-light">
           <br />
@@ -21,28 +34,53 @@
           <br />
         </div>
       </div>
-      <div class="col-1"></div>
+      <div class="col-2">
+          <div>
+            <button
+              class="btn-lg btn-warning"
+              (click)="userToUpdate()"
+              >
+              Update User Profile
+            </button>
+          </div><br>
+        <div>
+          <button class="btn-lg btn-info text-center float-bottom" (click)="chooseSkills()">
+            Add Skill To Portfolio
+          </button>
+        </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-1"></div>
       <div class="col-10">
         <button
           style="float:left"
-          class="btn btn-success"
+          class="btn-lg btn-success"
           [routerLink]="['/bookings']"
         >
           View Gig Bookings
         </button>
+        &nbsp;
         <button
-          style="float:right"
-          class="btn btn-warning"
-          (click)="userToUpdate()"
-        >
-          Update User Profile
-        </button>
+        class="btn-lg btn-success text-center"
+        [routerLink]="['/post']"
+      >
+        Post a Gig
+      </button>
+      &nbsp;
+      <button
+      style="float:right"
+      class="btn-lg btn-warning"
+      (click)="userToUpdate()"
+      >
+      Update User Profile
+    </button>
+    <button class="btn-lg btn-info text-center" style="float:right" (click)="chooseSkills()">
+      Add Skill To Profile
+    </button>
+    &nbsp;
       </div>
       <div class="col-1"></div>
-    </div>
+    </div> -->
     <!-- USER IMAGE & NAME BOX END -->
 
     <!-- USER DETAILS MODAL START -->
@@ -112,12 +150,30 @@
   <!-- USER DETAILS MODAL END -->
 
   <br />
-
+</div>
   <!-- ACCORDIAN START -->
   <!-- USER SKILLS BOX START -->
   <div class="accordion" id="accordionSkills">
     <div class="row" *ngIf="userSelected && !updateProfile && !selectSkills">
-      <div class="col-1"></div>
+      <div class="col-2">
+        <div>
+        <button
+        class="btn-lg btn-success"
+        [routerLink]="['/bookings']"
+      >
+        View Gig Bookings
+      </button>
+    </div>
+      <br>
+
+      <button
+      class="btn-lg btn-success text-center"
+      [routerLink]="['/post']"
+    >
+      Post a Gig
+    </button>
+      </div>
+
       <div class="col-10">
         <div class="card">
           <h2
@@ -128,32 +184,53 @@
             aria-expanded="true"
             aria-controls="collapseSkills"
           >
-            {{ userSelected.firstName }}'s Skills:
+            Skills Portfolio:
             <span class="badge badge-dark">{{ userSkills.length }}</span>
           </h2>
           <div class="card-body">
             <div
               id="collapseSkills"
               class="collapse hide"
-              aria-labelledby="requestedGigs"
+              aria-labelledby="collapseSkills"
               data-parent="#accordion"
             >
+            <small
+            id="skillAccordian"
+            data-toggle="collapse"
+            data-target="#collapseInfo"
+            aria-expanded="true"
+            aria-controls="collapseInfo">
+            Details
+            </small>
               <div class="row" *ngFor="let skill of userSelected.skills">
                 <div class="col-1"></div>
                 <div class="col-10">
                   <div class="card h-100 text-dark text-center">
-                    <div class="card-header text-white">
-                      <h5><strong>Skill: </strong>{{ skill.skill.name }}</h5>
+                    <div class="card-header text-light bg-dark">
+                      <h5
+                      id="skillAccordian"
+                      data-toggle="collapse"
+                      data-target="#collapseInfo"
+                      aria-expanded="true"
+                      aria-controls="collapseInfo">
+                     {{ skill.skill.name }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"
+                    id="collapseInfo"
+                    class="collapse hide"
+                    aria-labelledby="requestedGigs"
+                    data-parent="#accordion">
                       <h5>Description</h5>
                       <hr />
                       <blockquote>{{ skill.description }}</blockquote>
-                    </div>
-                    <div class="card-footer" *ngIf="updateUserSkillDesc === false">
+                      <button style="float: left" *ngIf="userSelected && !userSkills"
+                      class="btn btn-info text-center" (click)="chooseSkills()">
+                      Add Your Skills
+                      </button>
                       <button class="btn btn-warning" style="float:right" (click)="updateUserSkillDesc=true">Update Skill</button>
                       <button class="btn btn-danger" style="float:left" (click)="deleteUserSkill(skill)" [routerLink]="['/user']">Delete Skill</button>
                     </div>
+
                     <div class="card-footer" *ngIf="updateUserSkillDesc === true">
                       <form #userSkillDesc="ngForm">
                         <input name=id [(ngModel)]="skill.id" type="hidden">
@@ -180,7 +257,7 @@
               </div>
             </div>
           </div>
-          <div class="card-footer">
+          <!-- <div class="card-footer">
             <button
               style="float: left"
               *ngIf="userSelected && !userSkills"
@@ -205,22 +282,19 @@
             >
               Post a Gig
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
-      <div class="col-1"></div>
     </div>
   </div>
   <!-- USER SKILLS BOX END -->
   <!-- ACCORDIAN END -->
 
-  <br />
-
   <!-- ACCORDIAN START -->
   <!-- USER REQUESTS BOX START -->
   <div class="accordion" id="accordion">
     <div class="row" *ngIf="userSelected && !updateProfile && !selectSkills">
-      <div class="col-1"></div>
+      <div class="col-2"></div>
       <div class="col-10">
         <div class="card">
           <h2
@@ -231,7 +305,7 @@
             aria-expanded="true"
             aria-controls="collapseOne"
           >
-            {{ userSelected.firstName }}'s Requested Gigs:
+            Gig Portfolio:
             <span class="badge badge-dark">{{ userJobs.length }}</span>
           </h2>
           <div class="card-body">
@@ -325,7 +399,6 @@
             </div> -->
             <!-- GIGS BOX END -->
 
-            <div class="row"></div>
             <!-- BIDS BOX START -->
             <div class="row" *ngIf="bids">
               <div class="col-1"></div>
@@ -508,7 +581,7 @@
   <!-- BIDS THIS USER MADE - WAITING TO BE APPROVED BY SELLER START -->
   <div class="accordion" id="accordion2">
     <div class="row" *ngIf="!updateProfile && !selectSkills">
-      <div class="col-1"></div>
+      <div class="col-2"></div>
       <div class="col-10">
         <div class="card" *ngIf="userSelected">
           <h2
@@ -519,7 +592,7 @@
             aria-expanded="true"
             aria-controls="collapse2"
           >
-            {{ userSelected.firstName }}'s Bids Made:
+            Bids Portfolio:
             <span class="badge badge-dark">{{ sellersBids.length }}</span>
           </h2>
           <div class="card-body">
@@ -537,7 +610,7 @@
               aria-labelledby="bidsMade"
               data-parent="#accordion2"
             >
-              <div class="row" *ngFor="let bid of sellersBids">
+              <div class="row" *ngFor="let bid of sellersBids | activeBid">
                 <div class="col-1"></div>
                 <div class="col-10">
                   <div class="card h-100 text-dark text-center">
@@ -619,7 +692,7 @@
             <br />
           </div>
         </div>
-        <div class="col-1"></div>
+        <!-- <div class="col-1"></div> -->
       </div>
   <!-- ADD USER SKILLS BOX END -->
 
