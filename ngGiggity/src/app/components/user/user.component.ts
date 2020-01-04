@@ -14,6 +14,7 @@ import { User } from 'src/app/models/user';
 import { BidService } from 'src/app/services/bid.service';
 import { Bid } from 'src/app/models/bid';
 import { Booking } from 'src/app/models/booking';
+import { SellerReview } from 'src/app/models/seller-review';
 
 @Component({
   selector: 'app-user',
@@ -39,7 +40,8 @@ export class UserComponent implements OnInit, OnDestroy {
   updateProfile = false;
   username;
   updateUserSkillDesc = false;
-
+  averageSellerReview;
+  sellerReviews: SellerReview[] = [];
   navigationSubscription;
 
   // tslint:disable-next-line: max-line-length
@@ -82,6 +84,43 @@ export class UserComponent implements OnInit, OnDestroy {
     this.showBidsByBidder();
     this.getAllSkills();
     this.getUserSkills();
+    this.allSellerReview();
+  }
+
+  allSellerReview() {
+    this.bookingSvc.findAllSellerReviews().subscribe(
+      data => {
+
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < data.length; i++) {
+
+          if (data[i].booking.bid.bidder.id === this.userSelected.id) {
+            this.sellerReviews.push(data[i]);
+
+          }
+
+
+
+        }
+        if (this.sellerReviews.length > 0) {
+          this.averageSellerReview = 0;
+          // tslint:disable-next-line: prefer-for-of
+          for (let i = 0; i < this.sellerReviews.length; i++) {
+            this.averageSellerReview = this.averageSellerReview + this.sellerReviews[i].rating;
+
+
+
+          }
+          this.averageSellerReview = this.averageSellerReview / this.sellerReviews.length;
+
+          this.averageSellerReview = this.averageSellerReview + ' / 5';
+        } else {
+          this.averageSellerReview = 'No reviews';
+        }
+      },
+      err => console.error('Reload error in Component')
+
+    );
   }
 
   chooseSkills() {

@@ -1,24 +1,8 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container" *ngIf="!selectSkills">
+<div class="jumbotron">
+  <div class="container-fluid" *ngIf="!selectSkills">
     <!-- USER IMAGE & NAME BOX START -->
     <div class="row">
-      <div class="col-2">
-        <!-- <div>
-        <button
-        class="btn-lg btn-block btn-success"
-        [routerLink]="['/bookings']"
-      >
-        View Gig Bookings
-      </button>
-    </div><br>
-      <button
-      class="btn-lg btn-success btn-block text-center"
-      [routerLink]="['/post']"
-    >
-      Post a Gig
-      <br>
-    </button> -->
-      </div>
+      <div class="col-2"></div>
       <div class="col-8">
         <div class="span well bg-light" id="cardBack">
           <br />
@@ -33,35 +17,22 @@
             /></a>
             <h3>{{ userSelected.firstName }} {{ userSelected.lastName }}</h3>
             <h6><em>Click my image to learn more</em></h6>
+            <a style="float: left;"
+              ><strong> Average User Rating: </strong
+              >{{ averageSellerReview }}</a
+            >
           </div>
           <br />
         </div>
       </div>
-
-
-      <!-- <div class="col-2">
-          <div>
-            <button
-              class="btn-lg btn-block btn-warning"
-              (click)="userToUpdate()"
-              >
-              Update User Profile
-            </button>
-          </div><br>
-        <div>
-          <button class="btn-lg btn-block btn-info text-center float-bottom" (click)="chooseSkills()">
-            Add Skill To Portfolio
-          </button>
-        </div>
-    </div> -->
+    </div>
+    <br />
   </div>
-  <br>
-</div>
 
-    <div class="container-fluid">
+  <div class="container-fluid" *ngIf="!selectSkills && !updateProfile">
     <div class="row">
       <div class="col-1"></div>
-        <div class="col-sm">
+      <div class="col-sm">
         <button
           class="btn btn-block btn-success text-nowrap"
           [routerLink]="['/bookings']"
@@ -69,95 +40,98 @@
           <small>View Bookings</small>
         </button>
       </div>
-        <div class="col-sm">
+      <div class="col-sm">
         <button
-        class="btn btn-block btn-success text-nowrap"
-        [routerLink]="['/post']"
-      >
-        <small>Post Gig</small>
-      </button>
+          class="btn btn-block btn-success text-nowrap"
+          [routerLink]="['/post']"
+        >
+          <small>Post Gig</small>
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          class="btn btn-block btn-warning text-nowrap"
+          (click)="userToUpdate()"
+        >
+          <small>Update Profile</small>
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          class="btn btn-block btn-info text-nowrap"
+          (click)="chooseSkills()"
+        >
+          <small>Add Skill</small>
+        </button>
+      </div>
+      <div class="col-1"></div>
     </div>
-    <div class="col-sm">
-      <button
-      class="btn btn-block btn-warning text-nowrap"
-      (click)="userToUpdate()"
-      >
-      <small>Update Profile</small>
-    </button>
   </div>
-  <div class="col-sm">
-    <button class="btn btn-block btn-info text-nowrap" (click)="chooseSkills()">
-      <small>Add Skill</small>
-    </button>
-  </div>
-  <div class="col-1"></div>
-    </div>
-  </div>
-    <!-- USER IMAGE & NAME BOX END -->
+  <!-- USER IMAGE & NAME BOX END -->
 
-    <!-- USER DETAILS MODAL START -->
-    <div
-      class="modal fade"
-      id="myModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      aria-hidden="true"
-      *ngIf="userSelected"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
+  <!-- USER DETAILS MODAL START -->
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+    *ngIf="userSelected"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          ></button>
+          <h4 class="modal-title" id="myModalLabel">
+            More About {{ userSelected.firstName }}
+            {{ userSelected.lastName }}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <img
+              [src]="userSelected.avatarImage.imageUrl"
+              name="aboutme"
+              width="140"
+              height="140"
+              border="0"
+              class="img-circle"
+            />
+            <h3 class="media-heading">
+              {{ userSelected.firstName }} {{ userSelected.lastName }}
+            </h3>
+            <span><strong>Skills: </strong></span>
+            <div *ngFor="let skill of userSelected.skills">
+              <span class="label label-warning">{{ skill.skill.name }}</span>
+            </div>
+          </div>
+          <div>
+            <p class="text-left">
+              <strong>Bio: </strong><br />
+              {{ userSelected.bio }}
+            </p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div>
             <button
               type="button"
-              class="close"
+              class="btn btn-secondary"
               data-dismiss="modal"
-              aria-hidden="true"
-            ></button>
-            <h4 class="modal-title" id="myModalLabel">
-              More About {{ userSelected.firstName }}
-              {{ userSelected.lastName }}
-            </h4>
-          </div>
-          <div class="modal-body">
-            <div>
-              <img
-                [src]="userSelected.avatarImage.imageUrl"
-                name="aboutme"
-                width="140"
-                height="140"
-                border="0"
-                class="img-circle"
-              />
-              <h3 class="media-heading">
-                {{ userSelected.firstName }} {{ userSelected.lastName }}
-              </h3>
-              <span><strong>Skills: </strong></span>
-              <div *ngFor="let skill of userSelected.skills">
-                <span class="label label-warning">{{ skill.skill.name }}</span>
-              </div>
-            </div>
-            <div>
-              <p class="text-left">
-                <strong>Bio: </strong><br />
-                {{ userSelected.bio }}
-              </p>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Back
-              </button>
-            </div>
+            >
+              Back
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
   <!-- USER DETAILS MODAL END -->
 
   <br />
@@ -166,24 +140,8 @@
   <!-- USER SKILLS BOX START -->
   <div class="accordion" id="accordionSkills">
     <div class="row" *ngIf="userSelected && !updateProfile && !selectSkills">
-      <div class="col-1">
-        <!-- <div>
-        <button
-        class="btn-lg btn-success"
-        [routerLink]="['/bookings']"
-      >
-        View Gig Bookings
-      </button>
-    </div> -->
-
-    <!-- <button
-      class="btn-lg btn-success text-center"
-      [routerLink]="['/post']"
-      >
-      Post a Gig
-    </button> -->
-  </div>
-  <br>
+      <div class="col-1"></div>
+      <br />
 
       <div class="col-10">
         <div class="card">
@@ -205,46 +163,71 @@
               aria-labelledby="collapseSkills"
               data-parent="#accordion"
             >
-            <small
-            id="skillAccordian"
-            data-toggle="collapse"
-            data-target="#collapseInfo"
-            aria-expanded="true"
-            aria-controls="collapseInfo">
-            Details
-            </small>
+              <small
+                id="skillAccordian"
+                data-toggle="collapse"
+                data-target="#collapseInfo"
+                aria-expanded="true"
+                aria-controls="collapseInfo"
+              >
+                Details
+              </small>
               <div class="row" *ngFor="let skill of userSelected.skills">
                 <div class="col-1"></div>
                 <div class="col-10">
                   <div class="card h-100 text-dark text-center">
                     <div class="card-header text-light bg-dark">
                       <h5
-                      id="skillAccordian"
-                      data-toggle="collapse"
-                      data-target="#collapseInfo"
-                      aria-expanded="true"
-                      aria-controls="collapseInfo">
-                     {{ skill.skill.name }}</h5>
+                        id="skillAccordian"
+                        data-toggle="collapse"
+                        data-target="#collapseInfo"
+                        aria-expanded="true"
+                        aria-controls="collapseInfo"
+                      >
+                        {{ skill.skill.name }}
+                      </h5>
                     </div>
-                    <div class="card-body"
-                    id="collapseInfo"
-                    class="collapse hide"
-                    aria-labelledby="requestedGigs"
-                    data-parent="#accordion">
+                    <div
+                      class="card-body"
+                      id="collapseInfo"
+                      class="collapse hide"
+                      aria-labelledby="requestedGigs"
+                      data-parent="#accordion"
+                    >
                       <h5>Description</h5>
                       <hr />
                       <blockquote>{{ skill.description }}</blockquote>
-                      <button style="float: left" *ngIf="userSelected && !userSkills"
-                      class="btn btn-info text-center" (click)="chooseSkills()">
-                      Add Your Skills
+                      <button
+                        style="float: left"
+                        *ngIf="userSelected && !userSkills"
+                        class="btn btn-info text-center"
+                        (click)="chooseSkills()"
+                      >
+                        Add Your Skills
                       </button>
-                      <button class="btn btn-warning" style="float:right" (click)="updateUserSkillDesc=true">Update Skill</button>
-                      <button class="btn btn-danger" style="float:left" (click)="deleteUserSkill(skill)" [routerLink]="['/user']">Delete Skill</button>
+                      <button
+                        class="btn btn-warning"
+                        style="float:right"
+                        (click)="updateUserSkillDesc = true"
+                      >
+                        Update Skill
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        style="float:left"
+                        (click)="deleteUserSkill(skill)"
+                        [routerLink]="['/user']"
+                      >
+                        Delete Skill
+                      </button>
                     </div>
 
-                    <div class="card-footer" *ngIf="updateUserSkillDesc === true">
+                    <div
+                      class="card-footer"
+                      *ngIf="updateUserSkillDesc === true"
+                    >
                       <form #userSkillDesc="ngForm">
-                        <input name=id [(ngModel)]="skill.id" type="hidden">
+                        <input name="id" [(ngModel)]="skill.id" type="hidden" />
                         <label for="userSkillDesc">Describe Your Skill:</label>
                         <input
                           name="description"
@@ -255,12 +238,13 @@
                         />
                       </form>
                       <button
-                  style="float: right"
-                  class="btn btn-warning"
-                  (click)="updateUserSkill(userSkillDesc)" [routerLink]="['/user']"
-                >
-                  Update This Skill
-                </button>
+                        style="float: right"
+                        class="btn btn-warning"
+                        (click)="updateUserSkill(userSkillDesc)"
+                        [routerLink]="['/user']"
+                      >
+                        Update This Skill
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -268,37 +252,10 @@
               </div>
             </div>
           </div>
-          <!-- <div class="card-footer">
-            <button
-              style="float: left"
-              *ngIf="userSelected && !userSkills"
-              class="btn btn-info text-center"
-              (click)="chooseSkills()"
-            >
-              Add Your Skills
-            </button>
-            <button
-              style="float: left"
-              *ngIf="userSelected && userSkills"
-              class="btn btn-info text-center"
-              (click)="chooseSkills()"
-            >
-              Add More Skills
-            </button>
-            <button
-              style="float: right"
-              *ngIf="userSelected && userSkills"
-              class="btn btn-success text-center"
-              [routerLink]="['/post']"
-            >
-              Post a Gig
-            </button>
-          </div> -->
         </div>
       </div>
     </div>
-    <br>
-
+    <br />
   </div>
   <!-- USER SKILLS BOX END -->
   <!-- ACCORDIAN END -->
@@ -341,7 +298,12 @@
                       </h5>
                     </div>
                     <div class="card-body">
-                      <img class="img-thumbnail" id="gigThumb" [src]="job.imageUrl" alt="Gig Image" />
+                      <img
+                        class="img-thumbnail"
+                        id="gigThumb"
+                        [src]="job.imageUrl"
+                        alt="Gig Image"
+                      />
                       <h5>Gig: {{ job.title }}</h5>
                       <h6>Skill Required: {{ job.skill.name }}</h6>
                       <p>About the Gig: {{ job.description }}</p>
@@ -375,42 +337,6 @@
               </div>
             </div>
             <!-- USER REQUESTS BOX END -->
-
-            <!-- GIGS BOX START -->
-            <!-- <div *ngIf="userJobs" id="gigs" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="row" *ngFor="let job of userJobs | jobsActive">
-                <div class="col-1"></div>
-                <div class="col-10">
-                  <div *ngIf="!selected || selected.id === job.id" class="card h-100 text-dark text-center">
-                    <div class="card-header text-white">
-                      <h5>
-                        Date Posted: {{ job.dateCreated | date: "short" }}
-                      </h5>
-                    </div>
-                    <div class="card-body">
-                      <h5>Gig: {{ job.title }}</h5>
-                      <h6>Skill Required: {{ job.skill.name }}</h6>
-                      <p>About the Gig: {{ job.description }}</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="text-center">
-                        <button class="btn btn-success text-center" *ngIf="true"
-                          (click)="showBids(job)">
-                          You've got BIDS!
-                        </button>
-                      </div>
-                      <button class="btn-sm btn-warning float-right" (click)="setUpdateGig(job)">
-                        U p d a t e
-                      </button>
-                      <button class="btn-sm btn-danger float-left" (click)="remove(job)">
-                        D e l e t e
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- GIGS BOX END -->
 
             <!-- BIDS BOX START -->
             <div class="row" *ngIf="bids">
@@ -561,10 +487,7 @@
                       />
                     </label>
                   </div>
-                  <button
-                    class="btn btn-warning"
-                    (click)="update(updateGig)"
-                  >
+                  <button class="btn btn-warning" (click)="update(updateGig)">
                     U p d a t e
                   </button>
                   <button
@@ -605,7 +528,7 @@
             aria-controls="collapse2"
           >
             Bids Portfolio
-                    </h2>
+          </h2>
           <div class="card-body">
             <div *ngIf="sellersBids.length === 0" class="text-center">
               <button
@@ -663,6 +586,7 @@
   <!-- BIDS THIS USER MADE - WAITING TO BE APPROVED BY SELLER END -->
   <!--ACCORDIAN END -->
 
+  <br />
 
   <!-- ADD USER SKILLS BOX START -->
   <div class="container-fluid" *ngIf="selectSkills && !updateProfile">
@@ -683,27 +607,27 @@
                 ngModel
               />
             </form>
-                <button
-                  style="float: left"
-                  class="btn btn-secondary"
-                  (click)="selectSkills = null"
-                >
-                  Back
-                </button>
-                <button
-                  style="float: right"
-                  class="btn btn-success"
-                  (click)="addUserSkill(skill, userSkillDescForm)"
-                >
-                  Add This Skill
-                </button>
-              </div>
-            </div>
-            <br />
+            <button
+              style="float: left"
+              class="btn btn-secondary"
+              (click)="selectSkills = null"
+            >
+              Back
+            </button>
+            <button
+              style="float: right"
+              class="btn btn-success"
+              (click)="addUserSkill(skill, userSkillDescForm)"
+            >
+              Add This Skill
+            </button>
           </div>
         </div>
-        <!-- <div class="col-1"></div> -->
+        <br />
       </div>
+      <div class="col-1"></div>
+    </div>
+  </div>
   <!-- ADD USER SKILLS BOX END -->
 
   <!-- USER PROFILE INFO UPDATE START -->
