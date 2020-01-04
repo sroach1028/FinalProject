@@ -124,7 +124,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.getLoggedUser();
     if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
-      this.jobBySkillName();
     }
     this.getSkills();
   }
