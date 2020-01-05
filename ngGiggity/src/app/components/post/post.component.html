@@ -1,9 +1,12 @@
+<body id="background">
+<p>&nbsp;</p>
 <div class="card mx-auto mt-5" style="width: 40rem;">
   <div class="card-title text-center text-white">
-    <h3 class="display-4">Post New Job</h3>
+    <br>
+    <h3 class="display-4">Post New Gig</h3>
   </div>
   <form #createForm="ngForm">
-    <label style="color: white" for="remote">Remote Job: </label> <input type="checkbox" name="remote" id="remote" ngModel>
+    <label style="color: white" for="remote">Remote Gig: </label> <input type="checkbox" name="remote" id="remote" ngModel>
     <div class="form-group container-fluid">
       <input type="text" name="title" class="form-control" placeholder="Title" ngModel>
       <select name="skillId" ngModel class="form-control">
@@ -17,6 +20,11 @@
       <br>
       <input type="submit" class="float-right btn btn-success" value="CREATE" (click)="postJob(createForm)">
       <button [routerLink]="['/user']" class="float-left btn btn-secondary">CANCEL</button>
+      <br>
     </div>
+    <br>
   </form>
 </div>
+<br><br>
+</body>
+
