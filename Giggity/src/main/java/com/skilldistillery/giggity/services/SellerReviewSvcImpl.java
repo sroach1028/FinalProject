@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.giggity.entities.Booking;
 import com.skilldistillery.giggity.entities.SellerReview;
+import com.skilldistillery.giggity.repositories.BookingRepo;
 import com.skilldistillery.giggity.repositories.SellerReviewRepo;
 
 @Service
@@ -16,6 +18,8 @@ import com.skilldistillery.giggity.repositories.SellerReviewRepo;
 public class SellerReviewSvcImpl implements SellerReviewService {
 	@Autowired
 	private SellerReviewRepo repo;
+	@Autowired
+	private BookingRepo bookRepo;
 
 	@Override
 	public SellerReview findById(int id) {
@@ -38,9 +42,17 @@ public class SellerReviewSvcImpl implements SellerReviewService {
 //	}
 
 	@Override
-	public SellerReview create(SellerReview sellerReview) {
+	public SellerReview create(SellerReview sellerReview, int id) {
+
+		Booking booking = bookRepo.findById(id);
+
 		sellerReview.setReviewDate(LocalDateTime.now());
-		return repo.saveAndFlush(sellerReview);
+		sellerReview.setBooking(booking);
+		System.err.println("SELLER REVIEW BOOKING: " + sellerReview.getBooking());
+		repo.saveAndFlush(sellerReview);
+		booking.setSellerReview(sellerReview);
+		bookRepo.saveAndFlush(booking);
+		return sellerReview;
 	}
 
 	@Override

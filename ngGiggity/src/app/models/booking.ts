@@ -1,3 +1,4 @@
+import { SellerReview } from './seller-review';
 import { Bid } from './bid';
 import { Job } from './job';
 
@@ -10,6 +11,7 @@ export class Booking {
   accepted: boolean;
   job: Job;
   bid: Bid;
+  sellerReview: SellerReview;
   constructor(
     bid?: Bid,
     job?: Job,
@@ -18,7 +20,9 @@ export class Booking {
     completeDate?: Date,
     expectedCompleteDate?: Date,
     id?: number,
-    notes?: string
+    notes?: string,
+    sellerReviews?: SellerReview
+
   ) {
     this.id = id;
     this.startDate = startDate;
@@ -28,5 +32,6 @@ export class Booking {
     this.accepted = accepted;
     this.bid = bid;
     this.job = job;
+    this.sellerReview = sellerReviews;
   }
 }
