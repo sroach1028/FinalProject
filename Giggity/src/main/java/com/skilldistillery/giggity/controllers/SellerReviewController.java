@@ -62,13 +62,14 @@ public class SellerReviewController {
 //		return sr;
 //	}
 
-	@PostMapping("sellerReview")
-	public SellerReview create(@RequestBody SellerReview sr, HttpServletRequest req, HttpServletResponse resp,
+	@PostMapping("sellerReview/{id}")
+	public SellerReview create(@RequestBody SellerReview sr, @PathVariable int id, HttpServletRequest req, HttpServletResponse resp,
 			Principal principal) {
+		System.err.println("CONTROLLER SELLER REVIEW: "+ sr);
 
 		try {
 			// try to create the provided post
-			sr = svc.create(sr);
+			sr = svc.create(sr, id);
 			// if successful, send 201
 			resp.setStatus(201);
 			// get the link to the created post

@@ -23,20 +23,22 @@ export class BookingsComponent implements OnInit, OnDestroy {
   user: User;
   review: SellerReview = new SellerReview();
   sellerReviews: SellerReview[] = [];
+  bookingReviews = [];
   // tslint:disable-next-line: max-line-length
-  constructor(private userSvc: UserService, private bookingSvc: BookingService, private router: Router) {this.navigationSubscription = this.router.events.subscribe((e: any) => {
-    // If it is a NavigationEnd event re-initalise the component
-    if (e instanceof NavigationEnd) {
-      this.ngOnInit();
-    }
-  }); }
-  reviewForm = true;
+  constructor(private userSvc: UserService, private bookingSvc: BookingService, private router: Router) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+  }
   navigationSubscription;
 
   ngOnInit() {
     this.randombg();
     this.getLoggedUser();
-    this.allSellerReview();
+    // this.allSellerReview();
   }
   ngOnDestroy() {
     // avoid memory leaks here by cleaning up after ourselves. If we
@@ -58,12 +60,16 @@ export class BookingsComponent implements OnInit, OnDestroy {
     );
   }
   sellerReview(form: NgForm) {
-    this.review = form.value;
+    let review = new SellerReview();
+
+    review = form.value;
+
+    review.booking = form.value.booking;
 
     console.log(this.review);
 
 
-    this.bookingSvc.createSellerReview(this.review).subscribe(
+    this.bookingSvc.createSellerReview(review, review.booking.id).subscribe(
       data => {
         console.log(data);
       },
@@ -77,19 +83,26 @@ export class BookingsComponent implements OnInit, OnDestroy {
 
 
   }
-  showForm() {
-    this.reviewForm = false;
-  }
+
 
   allSellerReview() {
-this.bookingSvc.findAllSellerReviews().subscribe(
-  data => {
-    console.log(data);
-    this.sellerReviews = data;
-  },
-  err => console.error('Reload error in Component')
+    this.bookingSvc.findAllSellerReviews().subscribe(
+      data => {
+        console.log(data);
+        this.sellerReviews = data;
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < this.sellerReviews.length; i++) {
+          // tslint:disable-next-line: prefer-for-of
+          for (let j = 0; j < this.allBoookings.length; j++) {
+            if (this.sellerReviews[i].booking.id === this.allBoookings[j].id) {
 
-);
+            }
+          }
+        }
+      },
+      err => console.error('Reload error in Component')
+
+    );
   }
 
   showAll() {

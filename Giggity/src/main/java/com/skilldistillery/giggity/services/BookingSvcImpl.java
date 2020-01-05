@@ -56,7 +56,7 @@ public class BookingSvcImpl implements BookingService {
 		update.setJob(booking.getJob());
 		update.setMessages(booking.getMessages());
 		update.setNotes(booking.getNotes());
-		update.setSellerReviews(booking.getSellerReviews());
+		update.setSellerReview(booking.getSellerReview());
 		update.setStartDate(booking.getStartDate());
 		update.setBid(booking.getBid());
 		return update;

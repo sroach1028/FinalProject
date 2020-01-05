@@ -15,7 +15,7 @@ public interface SellerReviewService {
 
 //	public List<SellerReview> findByJobTitle(String title);
 
-	public SellerReview create(SellerReview buyerReview);
+	public SellerReview create(SellerReview buyerReview , int id);
 
 	public SellerReview update(int bid, SellerReview sellerReview);
 

@@ -52,7 +52,12 @@ public class BookingController {
 
 	@GetMapping("booking/job/user/{reqid}")
 	public List<Booking> getByJobRequester(@PathVariable int reqid, HttpServletRequest req, HttpServletResponse resp) {
-		return svc.getAllByJobRequester(reqid);
+		
+		List<Booking> books = svc.getAllByJobRequester(reqid);
+		System.err.println(books);
+		
+		
+		return books;
 	}
 
 	@GetMapping("booking/bid/bidder/{bidderid}")

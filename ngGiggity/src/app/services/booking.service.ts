@@ -115,7 +115,7 @@ export class BookingService {
         })
       );
   }
-  createSellerReview(review: SellerReview) {
+  createSellerReview(review: SellerReview, id) {
     console.log(review);
 
     const httpOptions = {
@@ -124,7 +124,7 @@ export class BookingService {
         Authorization: 'Basic ' + this.authSvc.getCredentials()
       })
     };
-    return this.http.post(this.baseUrl + 'api/sellerReview/', review, httpOptions)
+    return this.http.post(this.baseUrl + 'api/sellerReview/' + id, review, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
