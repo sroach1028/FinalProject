@@ -1,5 +1,6 @@
 package com.skilldistillery.giggity.entities;
 
+import java.lang.annotation.Repeatable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,11 +37,12 @@ public class Bid {
 	@JsonIgnore
 	@OneToMany(mappedBy = "bid")
 	private List<Booking> bookings;
-
-	@JsonIgnoreProperties({"bids"})
+	
+	@JsonIgnoreProperties({"bids", "jobs", "posts"})
 	@ManyToOne
 	@JoinColumn(name = "bidder_id")
 	private User bidder;
+	
 	@JsonIgnoreProperties({"jobBids"})
 	@ManyToOne
 	@JoinColumn(name = "job_id")

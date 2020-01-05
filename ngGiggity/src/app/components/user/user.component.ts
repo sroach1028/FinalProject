@@ -77,13 +77,15 @@ export class UserComponent implements OnInit, OnDestroy {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
+        this.userSkills= this.userSelected.skills;
+        this.sellersBids = this.userSelected.bids;
       },
       err => console.error('Reload error in User Component')
     );
     this.getUserJobs();
-    this.showBidsByBidder();
+    // this.showBidsByBidder();
     this.getAllSkills();
-    this.getUserSkills();
+    // this.getUserSkills();
     this.allSellerReview();
   }
 

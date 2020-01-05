@@ -45,7 +45,7 @@ public class User {
 	@OneToMany(mappedBy = "poster")
 	private List<SkillMessage> posts;
 	
-	@JsonIgnore
+//	@JsonIgnoreProperties({""})
 	@OneToMany(mappedBy = "bidder")
 	private List<Bid> bids;
 	
