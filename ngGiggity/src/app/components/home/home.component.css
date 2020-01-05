@@ -1,9 +1,10 @@
-body, html {
+body,
+html {
   height: 100%;
 }
 
 .jumbotron {
-  background: none
+  background: none;
 }
 
 #randBackground {
@@ -24,8 +25,8 @@ body, html {
 }
 
 .carousel-control-prev,
-.carousel-control-next{
-      top: 75%;
+.carousel-control-next {
+  top: 75%;
 }
 
 #randBackground {
@@ -35,10 +36,32 @@ body, html {
 
 #devBy {
   font-family: fantasy;
+  background:rgba(255,255,255,0.35);
 }
 
-#easyLinks {
-
+hr {
+  height: 5px;
+  color: black;
+  padding-top: 3px;
+  border: none;
+  border-bottom: 3px solid black;
 }
 
+ul {
+  display: table;
+  margin: 0 auto;
+  font-size: 30px;
+}
 
+li:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+#about {
+    background:rgba(255,255,255,0.35);
+}
+
+#aboutStyle {
+  font-family: fantasy;
+}
