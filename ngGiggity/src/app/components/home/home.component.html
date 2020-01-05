@@ -54,26 +54,30 @@
       <div class="col-1"></div>
     </div>
   </div>
-  <br><br><br><br>
-<!-- Easy Click Links -->
-  <div class="container-fluid" id="easyLinks">
-    <div class="row">
-      <div class="col-3" *ngFor="let skill of skills">
-          <div class="card-footer text-center">
-            <div>
-              <button class="btn btn-info" [routerLink]="['/search', skill.name]">
-                Find {{skill.name}} Gigs
-              </button>
-            </div>
-          </div>
-      </div>
-    </div>
+  <br><br>
+
+  <div class="container" id="about">
+    <br>
+    <h1 class="display-4 text-center" id="aboutStyle"><strong><u>About Gig-City:</u></strong></h1>
+<h3 class="text-center"><span id="aboutStyle" style="font-size:30px;"><strong>Gig-City</strong></span> is online marketplace that matches freelance labor with local and remote demand, allowing consumers to find help with everyday tasks</h3>
+<br>
+<h3 class="text-center">Registered users may list and bid on one-off jobs, or Gigs, online. Both Buyer and Seller can feel safe using <span id="aboutStyle" style="font-size:30px;"><strong>Gig-City</strong></span> because we allow each to rate the other, which generates a user-reputation.</h3>
+<br>
+<h3 class="text-center">Gigs listed are diverse - ranging from inexpensive & simple, one-off jobs, to larger & more involved tasks. Some of the skills currently offered by our users include:</h3>
+<br>
+<ul>
+      <li *ngFor="let skill of skills" [routerLink]="['/search', skill.name]">{{skill.name}}</li>
+    </ul>
+<br>
   </div>
 
-  <br><br><br><br>
-  <div class="container-fluid" id="devBy">
-  <h1 class="text-center">Developed by:</h1>
 
+  <br><br>
+  <div class="container-fluid" id="devBy">
+    <hr>
+    <br>
+  <h1 class="text-center"><strong>Developed by:</strong></h1>
+<br>
 	<div class="row" id="team">
 		<div class="col-lg-3 col-md-6 col-sm-12 text-center">
 			<a href="https://www.linkedin.com/in/kullen-kee/" target="_blank">
@@ -81,8 +85,10 @@
 				style="width: 140px; height: 140px;"
 				src="https://media.licdn.com/dms/image/C5603AQExW_jbu9a9qQ/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=pe47hQjOPBQCycWAnhuuDnppBQ3jxBstV85lzeuNas8"
 				data-holder-rendered="true">
-			</a>
-			<h3>Kullen</h3>
+      </a>
+      <br>
+      <br>
+			<h3><strong>Kullen</strong></h3>
 		</div>
 		<div class="col-lg-3 col-md-6 col-sm-12 text-center">
 			<a href="https://www.linkedin.com/in/shaun-roach-b62284119/" target="_blank">
@@ -90,8 +96,10 @@
 				style="width: 140px; height: 140px;"
 				src="https://media.licdn.com/dms/image/C5603AQEwMKmXgFmd8A/profile-displayphoto-shrink_800_800/0?e=1583366400&v=beta&t=AVxJfe53qgCoA-i9BqY3FxylQpPRcqL2w_qdgP4RrlA"
 				data-holder-rendered="true">
-			</a>
-			<h3>Shaun</h3>
+      </a>
+      <br>
+      <br>
+			<h3><strong>Shaun</strong></h3>
 		</div>
 		<div class="col-lg-3 col-md-6 col-sm-12 text-center">
 			<a href="https://www.linkedin.com/in/tduplantis83" target="_blank">
@@ -99,16 +107,20 @@
 				style="width: 140px; height: 140px;"
 				src="https://avatars2.githubusercontent.com/u/53097987?s=460&v=4"
 				data-holder-rendered="true">
-			</a>
-			<h3>Travis</h3>
+      </a>
+      <br>
+      <br>
+			<h3><strong>Travis</strong></h3>
 		</div>
 		<div class="col-lg-3 col-md-6 col-sm-12 text-center">
 			<a href="https://www.linkedin.com/in/kelly-cromeans-a362b5135/" target="_blank">
 				<img class="rounded-circle" alt="140x140"
 				style="width: 140px; height: 140px;"
 				src="https://i.imgur.com/eRlZ755.jpg" data-holder-rendered="true">
-			</a>
-			<h3>Kelly</h3>
+      </a>
+      <br>
+      <br>
+			<h3><strong>Kelly</strong></h3>
 		</div>
 		<div class="row"></div>
   </div>

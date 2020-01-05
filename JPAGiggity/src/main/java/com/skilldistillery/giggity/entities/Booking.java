@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,7 +24,7 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "bid_id")
 	private Bid bid;
@@ -43,16 +44,14 @@ public class Booking {
 	private String notes;
 
 	private boolean accepted;
+
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "booking")
-	private List<SellerReview> sellerReviews;
-	
+	@OneToOne(mappedBy = "booking")
+	private SellerReview sellerReview;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "booking")
 	private List<BookingMessage> messages;
-
-	
 
 	// C O N S T R U C T O R
 	public Booking() {
@@ -63,7 +62,7 @@ public class Booking {
 	public Bid getBid() {
 		return bid;
 	}
-	
+
 	public void setBid(Bid bid) {
 		this.bid = bid;
 	}
@@ -88,12 +87,12 @@ public class Booking {
 		this.messages = messages;
 	}
 
-	public List<SellerReview> getSellerReviews() {
-		return sellerReviews;
+	public SellerReview getSellerReview() {
+		return sellerReview;
 	}
 
-	public void setSellerReviews(List<SellerReview> sellerReviews) {
-		this.sellerReviews = sellerReviews;
+	public void setSellerReview(SellerReview sellerReview) {
+		this.sellerReview = sellerReview;
 	}
 
 	public void setId(int id) {
@@ -152,7 +151,7 @@ public class Booking {
 		result = prime * result + ((job == null) ? 0 : job.hashCode());
 		result = prime * result + ((messages == null) ? 0 : messages.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
-		result = prime * result + ((sellerReviews == null) ? 0 : sellerReviews.hashCode());
+		result = prime * result + ((sellerReview == null) ? 0 : sellerReview.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
@@ -200,10 +199,10 @@ public class Booking {
 				return false;
 		} else if (!notes.equals(other.notes))
 			return false;
-		if (sellerReviews == null) {
-			if (other.sellerReviews != null)
+		if (sellerReview == null) {
+			if (other.sellerReview != null)
 				return false;
-		} else if (!sellerReviews.equals(other.sellerReviews))
+		} else if (!sellerReview.equals(other.sellerReview))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)

@@ -50,7 +50,7 @@ class BookingTest {
 //	}
 	@Test
 	void test3() {
-		assertNotNull(booking.getSellerReviews());
+		assertNotNull(booking.getSellerReview());
 	}
 	@Test
 	void test4() {
