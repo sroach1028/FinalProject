@@ -61,7 +61,7 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Job> jobs;
 
