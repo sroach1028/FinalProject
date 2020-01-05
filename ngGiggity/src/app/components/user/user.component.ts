@@ -318,7 +318,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
     }
     this.selectSkills = null;
-    this.getUserSkills();
     this.ngOnInit();
 
   }
@@ -359,6 +358,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
     this.userSkillSvc.updateUserSkill(userSkill).subscribe(
       data => {
+        this.getUserSkills();
         console.log('UserSkill update completed');
       },
       err => {
