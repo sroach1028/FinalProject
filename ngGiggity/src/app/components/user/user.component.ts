@@ -43,6 +43,7 @@ export class UserComponent implements OnInit, OnDestroy {
   averageSellerReview;
   sellerReviews: SellerReview[] = [];
   navigationSubscription;
+  activeGigCount: number = 0;
 
   // tslint:disable-next-line: max-line-length
 
@@ -68,7 +69,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userSkillDescription = null;
         this.updateProfile = false;
         this.updateUserSkillDesc = false;
-        this.ngOnInit();
+        // this.ngOnInit();
       }
     });
   }
@@ -77,17 +78,31 @@ export class UserComponent implements OnInit, OnDestroy {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
-        this.userSkills= this.userSelected.skills;
+        this.userSkills = this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
         this.userJobs = this.userSelected.jobs;
+        this.userJobs.forEach(job => {
+          if( job.active === true || job.active === null) {
+            this.activeGigCount =  this.activeGigCount + 1;
+          }
+        });
       },
       err => console.error('Reload error in User Component')
     );
     // this.getUserJobs();
     // this.showBidsByBidder();
     this.getAllSkills();
-    this.getUserSkills();
+    // this.getUserSkills();
     this.allSellerReview();
+    // this.getActiveGigCount();
+  }
+
+  getActiveGigCount(){
+    this.userJobs.forEach(job => {
+      if( job.active === true) {
+        this.activeGigCount =  this.activeGigCount + 1;
+      }
+    });
   }
 
   allSellerReview() {
@@ -134,7 +149,9 @@ export class UserComponent implements OnInit, OnDestroy {
 
   remove(job: Job) {
     job.active = false;
+    this.activeGigCount = 0;
     this.update(job);
+    // this.getActiveGigCount();
   }
   showProfile(username: string) {
     this.userSvc.profileUsername(username);
@@ -302,6 +319,8 @@ export class UserComponent implements OnInit, OnDestroy {
       this.userSkillSvc.createUserSkill(userSkill).subscribe(
         data => {
           console.log(data);
+          this.userSkills.push(data);
+          // this.getUserSkills();
         },
 
         err => {
@@ -319,9 +338,9 @@ export class UserComponent implements OnInit, OnDestroy {
       );
 
     }
+
     this.selectSkills = null;
-    this.getUserSkills();
-    this.ngOnInit();
+    // this.ngOnInit();
 
   }
 
