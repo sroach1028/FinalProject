@@ -70,9 +70,9 @@ public class Job {
 	private List<Bid> jobBids;
 	
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "job_image", joinColumns = @JoinColumn(name = "image_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
-	@JsonIgnore
 	private List<Image> jobImages;
 
 	// C O N S T R U C T O R

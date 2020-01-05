@@ -79,10 +79,11 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userSelected = data;
         this.userSkills= this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
+        this.userJobs = this.userSelected.jobs;
       },
       err => console.error('Reload error in User Component')
     );
-    this.getUserJobs();
+    // this.getUserJobs();
     // this.showBidsByBidder();
     this.getAllSkills();
     // this.getUserSkills();
