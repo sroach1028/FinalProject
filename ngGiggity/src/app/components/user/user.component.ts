@@ -77,7 +77,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
-        this.userSkills= this.userSelected.skills;
+        this.userSkills = this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
         this.userJobs = this.userSelected.jobs;
       },
@@ -86,7 +86,7 @@ export class UserComponent implements OnInit, OnDestroy {
     // this.getUserJobs();
     // this.showBidsByBidder();
     this.getAllSkills();
-    this.getUserSkills();
+    // this.getUserSkills();
     this.allSellerReview();
   }
 
@@ -302,6 +302,8 @@ export class UserComponent implements OnInit, OnDestroy {
       this.userSkillSvc.createUserSkill(userSkill).subscribe(
         data => {
           console.log(data);
+          this.userSkills.push(data);
+          // this.getUserSkills();
         },
 
         err => {
@@ -319,9 +321,9 @@ export class UserComponent implements OnInit, OnDestroy {
       );
 
     }
+
     this.selectSkills = null;
-    this.getUserSkills();
-    this.ngOnInit();
+    // this.ngOnInit();
 
   }
 
