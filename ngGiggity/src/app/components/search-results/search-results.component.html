@@ -177,7 +177,7 @@
               {{ job.title }}
             </td>
             <td>{{ job.skill.name }}</td>
-            <td>{{ job.price }}</td>
+            <td>{{ job.price | currency }}</td>
             <td *ngIf="job.address != null">{{ job.address.state }}</td>
             <td *ngIf="job.address == null">Remote</td>
           </tr>
