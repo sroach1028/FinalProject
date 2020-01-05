@@ -34,10 +34,11 @@ body, html {
 }
 
 #devBy {
-  background-color: black;
-  background-size: cover;
-  color: white;
   font-family: fantasy;
+}
+
+#easyLinks {
+
 }
 
 
