@@ -124,6 +124,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.getLoggedUser();
     if (this.currentRoute.snapshot.paramMap.get('skillName')) {
       this.jobSkillName = this.currentRoute.snapshot.paramMap.get('skillName');
+      this.homeJobSkillNameSearch();
     }
     this.getSkills();
   }
@@ -220,6 +221,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
     );
     this.beginSearch = false;
+  }
+
+  homeJobSkillNameSearch(){
+    this.jobSvc.findJobBySkill(this.jobSkillName).subscribe(
+      aGoodThingHappened => {
+        this.jobs = aGoodThingHappened;
+      },
+      didntWork => {
+        console.error(didntWork);
+      }
+    );
+    this.beginSearch = false;
+    this.jobSkillName = null;
   }
 
   jobBySkillName(form: NgForm) {
