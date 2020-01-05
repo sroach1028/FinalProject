@@ -86,7 +86,7 @@ export class UserComponent implements OnInit, OnDestroy {
     // this.getUserJobs();
     // this.showBidsByBidder();
     this.getAllSkills();
-    // this.getUserSkills();
+    this.getUserSkills();
     this.allSellerReview();
   }
 
