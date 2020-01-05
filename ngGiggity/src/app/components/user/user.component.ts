@@ -299,7 +299,6 @@ export class UserComponent implements OnInit, OnDestroy {
       this.userSkillSvc.createUserSkill(userSkill).subscribe(
         data => {
           console.log(data);
-          this.userSkills.push(userSkill);
         },
 
         err => {
@@ -318,6 +317,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
     }
     this.selectSkills = null;
+    this.getUserSkills();
     this.ngOnInit();
 
   }
@@ -370,13 +370,13 @@ export class UserComponent implements OnInit, OnDestroy {
   deleteUserSkill(skill: UserSkill) {
     this.userSkillSvc.deleteUserSkill(skill).subscribe(
       data => {
-        this.getUserSkills();
         console.log('UserSkill delete completed');
       },
       err => {
         console.error('Delete UserSkill Error: User Component');
       }
-    );
+      );
+    this.getUserSkills();
   }
 
   ngOnDestroy() {

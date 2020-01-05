@@ -56,7 +56,7 @@ this.profile = profile;
         Authorization: "Basic " + this.authSvc.getCredentials()
       })
     };
-    return this.http.get<User>(this.baseUrl + 'users/username/', httpOptions)
+    return this.http.get<User>(this.baseUrl + 'api/users/getUser', httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
