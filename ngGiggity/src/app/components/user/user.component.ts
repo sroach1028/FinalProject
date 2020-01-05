@@ -295,9 +295,10 @@ export class UserComponent implements OnInit, OnDestroy {
         userSkill.id = this.userSkills[i].id;
       }
     }
-    if (!exists) {
+    if (exists === false) {
       this.userSkillSvc.createUserSkill(userSkill).subscribe(
         data => {
+          console.log(data);
           this.userSkills.push(userSkill);
         },
 
@@ -317,6 +318,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
     }
     this.selectSkills = null;
+    this.getUserSkills();
     this.ngOnInit();
 
   }
@@ -368,6 +370,7 @@ export class UserComponent implements OnInit, OnDestroy {
   deleteUserSkill(skill: UserSkill) {
     this.userSkillSvc.deleteUserSkill(skill).subscribe(
       data => {
+        this.getUserSkills();
         console.log('UserSkill delete completed');
       },
       err => {
