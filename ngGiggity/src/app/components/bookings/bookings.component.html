@@ -11,7 +11,7 @@
     <br>
     <div *ngIf="allBoookings">
       <h1 style="text-align: center;">Total Gigs You've Hired Out: <span
-        class="badge badge-secondary">{{allBoookings.length}}</span>
+          class="badge badge-secondary">{{allBoookings.length}}</span>
       </h1>
     </div>
     <div class="row" id="ads" *ngIf="allBoookings">
@@ -22,7 +22,8 @@
           <div class="card-image">
             <span class="card-notify-badge">Booked: {{booking.startDate}}</span>
             <span class="card-notify-year">${{booking.bid.bidAmount}}</span>
-            <img class="img-thumbnail img-fluid" src="{{booking.job.imageUrl}}" id="cardImg" alt="Image not Availible" />
+            <img class="img-thumbnail img-fluid" src="{{booking.job.imageUrl}}" id="cardImg"
+              alt="Image not Availible" />
           </div>
           <div class="card-image-overlay m-auto">
             <span class="card-detail-badge">Claimed By: {{booking.bid.bidder.firstName}}</span>
@@ -36,45 +37,49 @@
               <h5>{{booking.job.title}}</h5>
               <p>{{booking.job.description}}</p>
             </div>
-            <button (click)="updateBooking(booking)" id="ad-btn" class="btn btn-sm btn-success"
+            <button (click)="updateBooking(booking)" class="btn btn-sm btn-success"
               *ngIf="booking.completeDate === null">
-              &#10003; Completed
+              <font size="2">Mark Gig Complete</font>
             </button>
+            <br>
             <p class="card-footer bg-light">From the Bidder: {{booking.bid.description}}</p>
             <div class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
               <h6>{{booking.completeDate}}</h6>
               <br>
-                  <div *ngFor="let review of sellerReviews">
-                <div *ngIf="review.booking.id === booking.id">
-                  {{showForm()}}
+              <div>
 
-                  <p>{{review.rating}}</p> <br>
-                  <p>{{review.comment}}</p>
+                <div *ngIf="booking.sellerReview !== null">
+
+                  <h2>Rating</h2>
+                  <p>{{booking.sellerReview.rating}}</p> <br>
+                  <h2>Comment</h2>
+                  <p>{{booking.sellerReview.comment}}</p>
 
                 </div>
-                <div *ngIf="reviewForm">
+                <div *ngIf="booking.sellerReview === null">
                   <h6>Review Seller:</h6>
                   <form #review="ngForm">
                     <input type="text" name="comment" placeholder="Review comment" ngModel>
                     <input type="number" name="rating" placeholder="Rating 1-5" ngModel>
-                    <input type="hidden" name="booking" placeholder="Review comment" [(ngModel)]=booking> <br>
-                    <button class="btn btn-success" [routerLink]="['/bookings']" (click)=sellerReview(review)>Submit Review</button>
+                    <input type="hidden" name="booking" [(ngModel)]=booking> <br>
+                    <button class="btn btn-success" [routerLink]="['/bookings']" (click)=sellerReview(review)>Submit
+                      Review</button>
                   </form>
 
                 </div>
-                </div>
-          </div>
+              </div>
+            </div>
           </div>
 
-            <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
-            <button class="card-footer bg-light" [routerLink]="['/user']" class="btn btn-secondary">
-              Back to User Profile
-            </button>
-          </div>
+          <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+          <button class="card-footer bg-light" [routerLink]="['/user']" class="btn btn-secondary">
+            Back to User Profile
+          </button>
         </div>
       </div>
-
     </div>
+
+  </div>
 
   <!-- <div class="row" *ngIf="allBoookings">
   <h1>Total Gigs You've Hired Out: {{allBoookings.length}} </h1>
@@ -161,9 +166,9 @@
     <br>
     <div *ngIf="yourGigs">
       <h1 style="text-align: center;">Your Gigs to complete: <span
-        class="badge badge-secondary">{{yourGigs.length}}</span></h1>
+          class="badge badge-secondary">{{yourGigs.length}}</span></h1>
     </div>
-        <div class="row" id="ads" *ngIf="allBoookings">
+    <div class="row" id="ads" *ngIf="allBoookings">
       <!-- Category Card -->
       <div class="col-md-4" *ngFor="let booking of yourGigs">
         <div class="card rounded">
@@ -188,7 +193,18 @@
             </p>
             <h6 class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
               {{booking.completeDate}}</h6>
+
+
             <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+
+            <div *ngIf="booking.sellerReview !== null">
+
+              <h3><u>Rating:</u></h3>
+              <p>{{booking.sellerReview.rating}}</p>
+              <h2><u>Comment:</u></h2>
+              <p>{{booking.sellerReview.comment}}</p>
+
+            </div>
             <button class="card-footer bg-light" [routerLink]="['/user']" class="btn btn-secondary">
               Back to User Profile
             </button>

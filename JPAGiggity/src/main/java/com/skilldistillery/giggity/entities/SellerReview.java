@@ -9,12 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="seller_review")
+@Table(name = "seller_review")
 public class SellerReview {
 
 	// F I E L D S
@@ -29,7 +30,8 @@ public class SellerReview {
 	@Column(name = "review_date")
 	private LocalDateTime reviewDate;
 
-	@ManyToOne
+	@JsonIgnore
+	@OneToOne
 	@JoinColumn(name = "booking_id")
 	private Booking booking;
 
@@ -62,7 +64,6 @@ public class SellerReview {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-
 
 	public LocalDateTime getReviewDate() {
 		return reviewDate;
