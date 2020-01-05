@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -51,7 +52,8 @@ public class Job {
 
 	@Column(name = "date_updated")
 	private LocalDateTime dateUpdated;
-
+	
+	@JsonIgnoreProperties({"skills", "bids", "jobs", "posts"})
 	@ManyToOne
 	@JoinColumn(name = "requestor_id")
 	private User user;
