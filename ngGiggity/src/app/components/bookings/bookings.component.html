@@ -38,7 +38,7 @@
             </div>
             <button (click)="updateBooking(booking)" id="ad-btn" class="btn btn-sm btn-success"
               *ngIf="booking.completeDate === null">
-              &#10003; Mark Completed
+              &#10003; Completed
             </button>
             <p class="card-footer bg-light">From the Bidder: {{booking.bid.description}}</p>
             <div class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
@@ -175,9 +175,9 @@
           <div class="card-image-overlay m-auto">
             <span class="card-detail-badge">Requested By: {{booking.job.user.firstName}}</span>
             <span class="card-detail-badge"><a href="mailto:{{booking.job.user.email}}" target="_blank">
-                Email Seller</a></span>
-            <span class="card-detail-badge"><a href="https://www.paypal.com/us/signin" target="_blank">
-                Pay Seller</a></span>
+                Email Buyer</a></span>
+            <!-- <span class="card-detail-badge"><a href="https://www.paypal.com/us/signin" target="_blank">
+                Pay Seller</a></span> -->
           </div>
           <div class="card-body text-center">
             <div class="ad-title m-auto">
