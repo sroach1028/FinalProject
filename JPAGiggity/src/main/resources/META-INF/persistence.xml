@@ -13,7 +13,7 @@
 <class> com.skilldistillery.giggity.entities.Address</class>
 <class> com.skilldistillery.giggity.entities.Bid</class>
 <class> com.skilldistillery.giggity.entities.Booking</class>
-<class> com.skilldistillery.giggity.entities.BookingMessages</class>
+<class> com.skilldistillery.giggity.entities.BookingMessage</class>
 <class> com.skilldistillery.giggity.entities.BuyerReview</class>
 <class> com.skilldistillery.giggity.entities.Image</class>
 <class> com.skilldistillery.giggity.entities.Job</class>

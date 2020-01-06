@@ -44,6 +44,7 @@ export class UserComponent implements OnInit, OnDestroy {
   sellerReviews: SellerReview[] = [];
   navigationSubscription;
   activeGigCount: number = 0;
+  activeBidCount: number = 0;
 
   // tslint:disable-next-line: max-line-length
 
@@ -75,12 +76,19 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.selected = null;
+
     this.activeGigCount = 0;
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
         this.userSkills = this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
+        // this.sellersBids.forEach(bid => {
+        //   if( bid.accepted === false || bid.rejected === ) {
+        //     this.activeBidCount =  this.activeBidCount + 1;
+        //   }
+        // });
         this.userJobs = this.userSelected.jobs;
         this.userJobs.forEach(job => {
           if( job.active === true || job.active === null) {
@@ -150,8 +158,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   remove(job: Job) {
     job.active = false;
-    this.activeGigCount = 0;
     this.update(job);
+    // this.activeGigCount = 0;
     // this.getActiveGigCount();
   }
   showProfile(username: string) {
@@ -168,15 +176,13 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   update(job: Job) {
+    console.log(job);
     this.jobSvc.update(job.id, job).subscribe(
       data => {
-        this.ngOnInit();
-
         this.updateGig = null;
+        this.ngOnInit();
       },
-      err => {
-        console.error('Update Job error in User Compnent');
-      }
+      err => console.error('Update Job error in User Compnent')
     );
   }
 

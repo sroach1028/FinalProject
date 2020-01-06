@@ -263,7 +263,7 @@ public class JobController {
 	@PutMapping("jobs/{id}")
 	public Job updateJob(@PathVariable Integer id, @RequestBody Job j, HttpServletRequest req,
 			HttpServletResponse resp) {
-
+		System.err.println("IN UPDATE JOB*************************");
 		try {
 			// try to update the provided post
 			j = svc.update(id, j);
