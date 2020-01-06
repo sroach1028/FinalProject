@@ -75,6 +75,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.activeGigCount = 0;
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
@@ -91,7 +92,7 @@ export class UserComponent implements OnInit, OnDestroy {
     );
     // this.getUserJobs();
     // this.showBidsByBidder();
-    this.getAllSkills();
+    // this.getAllSkills();
     // this.getUserSkills();
     this.allSellerReview();
     // this.getActiveGigCount();
@@ -392,13 +393,14 @@ export class UserComponent implements OnInit, OnDestroy {
   deleteUserSkill(skill: UserSkill) {
     this.userSkillSvc.deleteUserSkill(skill).subscribe(
       data => {
+        this.getUserSkills();
+        this.ngOnInit();
         console.log('UserSkill delete completed');
       },
       err => {
         console.error('Delete UserSkill Error: User Component');
       }
       );
-    this.getUserSkills();
   }
 
   ngOnDestroy() {
