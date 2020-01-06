@@ -60,7 +60,7 @@
       <div class="col-sm">
         <button
           class="btn btn-block btn-info text-nowrap"
-          (click)="chooseSkills()"
+          (click)="getAllSkills(); chooseSkills()"
         >
           <small>Add Skill</small>
         </button>
@@ -286,6 +286,9 @@
               aria-labelledby="requestedGigs"
               data-parent="#accordion"
             >
+            <h6  class="text-primary" *ngIf="activeGigCount === 0">
+              No Active Gigs Posted
+            </h6>
               <div class="row" *ngFor="let job of userJobs | jobsActive">
                 <div class="col-1"></div>
                 <div class="col-10">
