@@ -15,7 +15,7 @@ export class AltProfileComponent implements OnInit {
 
   username: string;
 
-  user: User;
+  user: User = null;
   userJobs: Job[] = [];
   transactionHistory: Booking[] = [];
   allBoookings: Booking[] = [];
@@ -46,10 +46,12 @@ export class AltProfileComponent implements OnInit {
         console.log('LOOOOOOOOOOOOOOOOOOOOOOK: ' + data.length);
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < data.length; i++) {
+          if (data[i].booking) {
 
-          if (data[i].booking.bid.bidder.id === this.user.id) {
-            this.sellerReviews.push(data[i]);
+            if (data[i].booking.bid.bidder.id === this.user.id) {
+              this.sellerReviews.push(data[i]);
 
+            }
           }
 
 
