@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "seller_review")
@@ -30,7 +31,7 @@ public class SellerReview {
 	@Column(name = "review_date")
 	private LocalDateTime reviewDate;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"job","startDate","completeDate","expectedCompleteDate", "notes", "messages", "sellerReview"})	
 	@OneToOne
 	@JoinColumn(name = "booking_id")
 	private Booking booking;

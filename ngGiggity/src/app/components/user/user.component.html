@@ -107,6 +107,7 @@
             <h3 class="media-heading">
               {{ userSelected.firstName }} {{ userSelected.lastName }}
             </h3>
+            <br>
             <span><strong>Skills: </strong></span>
             <div *ngFor="let skill of userSelected.skills">
               <span class="label label-warning">{{ skill.skill.name }}</span>
