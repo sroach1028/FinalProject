@@ -266,7 +266,7 @@ export class UserComponent implements OnInit, OnDestroy {
       currentBid.id = rejectBid.id;
       currentBid.accepted = rejectBid.accepted;
       currentBid.rejected = rejectBid.rejected;
-      currentBid.bidder.id = rejectBid.bidder.id;
+      currentBid.bidder = rejectBid.bidder;
 
 
       this.bidSvc.updateBid(currentBid).subscribe(
