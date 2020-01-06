@@ -82,6 +82,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.userSvc.getUserByUsername().subscribe(
       data => {
         this.userSelected = data;
+        this.allSellerReview(data);
         this.userSkills = this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
         this.sellersBids.forEach(bid => {
@@ -102,7 +103,6 @@ export class UserComponent implements OnInit, OnDestroy {
     // this.showBidsByBidder();
     // this.getAllSkills();
     // this.getUserSkills();
-    // this.allSellerReview();
     // this.getActiveGigCount();
   }
 
@@ -114,22 +114,19 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
 
-  allSellerReview() {
+  allSellerReview(userSelected) {
     this.bookingSvc.findAllSellerReviews().subscribe(
       data => {
-
+        console.log(data);
         // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < data.length; i++) {
-          if (this.userSelected) {
-
-            if (data[i].booking.bid.bidder.id === this.userSelected.id) {
+        if (userSelected){
+          console.log("MADE IT IN ALLSELLER IF STATEMENT");
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].booking.bid.bidder.id === userSelected.id) {
               this.sellerReviews.push(data[i]);
 
             }
           }
-
-
-
         }
         if (this.sellerReviews.length > 0) {
           this.averageSellerReview = 0;
