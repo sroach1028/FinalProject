@@ -54,7 +54,7 @@ export class BookingsComponent implements OnInit, OnDestroy {
       data => {
         this.user = data;
         this.showAll();
-        this.showByBidder();
+        // this.showByBidder();
       },
       err => console.error('Reload error in Component')
     );
@@ -120,9 +120,8 @@ export class BookingsComponent implements OnInit, OnDestroy {
       err => console.error('Reload error in Component')
 
     );
-  }
 
-  showByBidder() {
+    // showByBidder //
     this.bookingSvc.findByBidder(this.user.id).subscribe(
       data => {
         this.yourGigs = data;
@@ -131,6 +130,16 @@ export class BookingsComponent implements OnInit, OnDestroy {
 
     );
   }
+
+  // showByBidder() {
+  //   this.bookingSvc.findByBidder(this.user.id).subscribe(
+  //     data => {
+  //       this.yourGigs = data;
+  //     },
+  //     err => console.error('Reload error in Component')
+
+  //   );
+  // }
 
   updateBooking(booking: Booking) {
     this.bookingSvc.updateBooking(booking).subscribe(
