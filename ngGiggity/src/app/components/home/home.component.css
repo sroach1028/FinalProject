@@ -35,7 +35,6 @@ html {
 }
 
 #devBy {
-  font-family: fantasy;
   background:rgba(255,255,255,0.35);
 }
 
@@ -60,10 +59,6 @@ li:hover {
 
 #about {
     background:rgba(255,255,255,0.35);
-}
-
-#aboutStyle {
-  font-family: fantasy;
 }
 
 #catLinks {
