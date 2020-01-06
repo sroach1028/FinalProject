@@ -126,21 +126,21 @@ public class JobSvcImpl implements JobService {
 	public Job update(int jid, Job job) {
 		LocalDateTime now = LocalDateTime.now();
 		Job update = repo.findById(jid);
-		update.setActive(job.getActive());
+		update.setUser(job.getUser());
 		update.setAddress(job.getAddress());
-		update.setBookings(job.getBookings());
-		update.setBuyerReviews(job.getBuyerReviews());
-		update.setDateCreated(job.getDateCreated());
-		update.setDateUpdated(now);
-		update.setDescription(job.getDescription());
-		update.setImageUrl(job.getImageUrl());
-		update.setJobBids(job.getJobBids());
-		update.setJobImages(job.getJobImages());
-		update.setPrice(job.getPrice());
-		update.setRemote(job.getRemote());
 		update.setSkill(job.getSkill());
 		update.setTitle(job.getTitle());
-		update.setUser(job.getUser());
+		update.setDescription(job.getDescription());
+		update.setPrice(job.getPrice());
+		update.setImageUrl(job.getImageUrl());
+		update.setRemote(job.getRemote());
+		update.setActive(job.getActive());
+//		update.setBookings(job.getBookings());
+//		update.setBuyerReviews(job.getBuyerReviews());
+//		update.setDateCreated(job.getDateCreated());
+		update.setDateUpdated(now);
+//		update.setJobBids(job.getJobBids());
+//		update.setJobImages(job.getJobImages());
 		repo.saveAndFlush(update);
 		return update;
 	}

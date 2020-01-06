@@ -102,6 +102,19 @@ export class JobService {
     console.log("made it to update in job svc");
     console.log(id);
     console.log(updateJob);
+    console.log(JSON.stringify(updateJob));
+    const basicJob = new Job();
+    basicJob.user = updateJob.user;
+    basicJob.address = updateJob.address;
+    basicJob.skill = updateJob.skill;
+    basicJob.title = updateJob.title;
+    basicJob.description = updateJob.description;
+    basicJob.price = updateJob.price;
+    basicJob.imageUrl = updateJob.imageUrl;
+    basicJob.remote = updateJob.remote;
+    basicJob.active = updateJob.active;
+    console.log(basicJob);
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -109,7 +122,8 @@ export class JobService {
       })
     };
     return this.http
-      .put<Job>(this.url + '/' + id, updateJob, httpOptions)
+      // .put<Job>(this.url + '/' + id, updateJob, httpOptions)
+      .put<Job>(this.url + '/' + id, basicJob, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

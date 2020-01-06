@@ -163,6 +163,11 @@ this.profile = profile;
   }
 
   updateUser(user: User) {
+    console.log('UserService.updateUser():');
+    console.log(user);
+    console.log(JSON.stringify(user));
+    // TODO: create simple user to PUT
+
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
