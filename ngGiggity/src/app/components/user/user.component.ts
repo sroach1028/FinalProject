@@ -77,7 +77,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selected = null;
-
+    this.activeBidCount = 0;
     this.activeGigCount = 0;
     this.userSvc.getUserByUsername().subscribe(
       data => {
