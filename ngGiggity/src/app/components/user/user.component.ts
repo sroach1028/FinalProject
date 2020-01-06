@@ -86,14 +86,14 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userSkills = this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
         this.sellersBids.forEach(bid => {
-          if( bid.accepted === false && bid.rejected === false) {
-            this.activeBidCount =  this.activeBidCount + 1;
+          if (bid.accepted === false && bid.rejected === false) {
+            this.activeBidCount = this.activeBidCount + 1;
           }
         });
         this.userJobs = this.userSelected.jobs;
         this.userJobs.forEach(job => {
-          if( job.active === true || job.active === null) {
-            this.activeGigCount =  this.activeGigCount + 1;
+          if (job.active === true || job.active === null) {
+            this.activeGigCount = this.activeGigCount + 1;
           }
         });
       },
@@ -106,10 +106,10 @@ export class UserComponent implements OnInit, OnDestroy {
     // this.getActiveGigCount();
   }
 
-  getActiveGigCount(){
+  getActiveGigCount() {
     this.userJobs.forEach(job => {
-      if( job.active === true) {
-        this.activeGigCount =  this.activeGigCount + 1;
+      if (job.active === true) {
+        this.activeGigCount = this.activeGigCount + 1;
       }
     });
   }
@@ -258,7 +258,15 @@ export class UserComponent implements OnInit, OnDestroy {
         rejectBid.accepted = false;
         rejectBid.rejected = true;
       }
-      this.bidSvc.updateBid(rejectBid).subscribe(
+      var currentBid = new Bid();
+
+      currentBid.id = rejectBid.id;
+      currentBid.accepted = rejectBid.accepted;
+      currentBid.rejected = rejectBid.rejected;
+      currentBid.bidder = rejectBid.bidder;
+
+
+      this.bidSvc.updateBid(currentBid).subscribe(
         data => {
           rejectBid = data;
         },
@@ -387,7 +395,7 @@ export class UserComponent implements OnInit, OnDestroy {
       data => {
         this.userSkills.forEach(s => {
           if (s.id === data.id) {
-              s.description = data.description;
+            s.description = data.description;
           }
         });
         // this.ngOnInit();
@@ -410,7 +418,7 @@ export class UserComponent implements OnInit, OnDestroy {
       err => {
         console.error('Delete UserSkill Error: User Component');
       }
-      );
+    );
   }
 
   ngOnDestroy() {

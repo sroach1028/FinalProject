@@ -76,7 +76,7 @@ public class BidController {
 	@PutMapping("bids/{id}")
 	public Bid updateBid(@RequestBody Bid bid, @PathVariable Integer id, HttpServletRequest req,
 			HttpServletResponse resp) {
-
+System.err.println("IN CONTROLLER");
 		try {
 			// try to update the provided post
 			bid = bidSvc.updateBid(id, bid);
