@@ -1,5 +1,6 @@
 import { User } from './user';
 import { Job } from './job';
+import { Booking } from './booking';
 export class Bid {
   id: number;
   available: boolean;
@@ -9,6 +10,7 @@ export class Bid {
   rejected: boolean;
   job: Job;
   bidder: User;
+  bookings: Booking[];
 
   constructor(
     id?: number,
@@ -18,7 +20,8 @@ export class Bid {
     rejected?: boolean,
     description?: string,
     job?: Job,
-    bidder?: User
+    bidder?: User,
+    bookings?: Booking[]
   ) {
     this.id = id;
     this.available = available;
@@ -28,5 +31,6 @@ export class Bid {
     this.rejected = false;
     this.bidder = bidder;
     this.job = job;
+    this.bookings = bookings;
   }
 }
