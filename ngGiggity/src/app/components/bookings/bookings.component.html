@@ -16,52 +16,53 @@
     </div>
     <div class="row text-center" id="ads" *ngIf="allBoookings">
       <!-- Category Card -->
-      <div class="col-md-4" *ngFor="let booking of allBoookings">
+      <div class="col-md-4" *ngFor="let bking of allBoookings">
         <div class="card rounded">
           <div class="card-image">
-            <span class="card-notify-badge">Booked: {{booking.startDate}}</span>
-            <span class="card-notify-year">${{booking.bid.bidAmount}}</span>
-            <img class="img-thumbnail img-fluid" src="{{booking.job.imageUrl}}" id="cardImg"
+            <span class="card-notify-badge">Booked: {{bking.startDate}}</span>
+            <span class="card-notify-year">${{bking.bid.bidAmount}}</span>
+            <img class="img-thumbnail img-fluid" src="{{bking.job.imageUrl}}" id="cardImg"
               alt="Image not Availible" />
           </div>
           <div class="card-image-overlay m-auto">
-            <span class="card-detail-badge">Claimed By: {{booking.bid.bidder.firstName}}</span>
-            <span class="card-detail-badge"><a href="mailto:{{booking.bid.bidder.email}}" target="_blank">
+            <span class="card-detail-badge">Claimed By: {{bking.bid.bidder.firstName}}</span>
+            <span class="card-detail-badge"><a href="mailto:{{bking.bid.bidder.email}}" target="_blank">
                 Email Seller</a></span>
             <span class="card-detail-badge"><a href="https://www.paypal.com/us/signin" target="_blank">
                 Pay Seller</a></span>
           </div>
           <div class="card-body text-center">
             <div class="ad-title m-auto">
-              <h5>{{booking.job.title}}</h5>
-              <p>{{booking.job.description}}</p>
+              <h5>{{bking.job.title}}</h5>
+              <p>{{bking.job.description}}</p>
             </div>
-            <button (click)="updateBooking(booking)" class="btn btn-sm btn-success"
-              *ngIf="booking.completeDate === null">
+            <button (click)="updateBooking(bking)" class="btn btn-sm btn-success"
+              *ngIf="bking.completeDate === null">
               <font size="2">Mark Gig Complete</font>
             </button>
             <br>
-            <p class="card-footer bg-light">From the Bidder: {{booking.bid.description}}</p>
-            <div class="card-footer bg-light text-success" *ngIf="booking.completeDate !== null">Gig Completed:
-              <h6>{{booking.completeDate}}</h6>
+            <p class="card-footer bg-light">From the Bidder: {{bking.bid.description}}</p>
+            <div class="card-footer bg-light text-success" *ngIf="bking.completeDate !== null">Gig Completed:
+              <h6>{{bking.completeDate}}</h6>
               <br>
               <div>
 
-                <div *ngIf="booking.sellerReview !== null">
+                <div *ngIf="bking.sellerReview !== null">
 
                   <h2>Rating</h2>
-                  <p>{{booking.sellerReview.rating}}</p> <br>
+                  <p>{{bking.sellerReview.rating}}</p> <br>
                   <h2>Comment</h2>
-                  <p>{{booking.sellerReview.comment}}</p>
+                  <p>{{bking.sellerReview.comment}}</p>
 
                 </div>
-                <div *ngIf="booking.sellerReview === null">
+                <div *ngIf="bking.sellerReview === null">
                   <h6>Review Seller:</h6>
                   <form #review="ngForm">
                     <input type="text" name="comment" placeholder="Review comment" ngModel>
                     <input type="number" name="rating" placeholder="Rating 1-5" ngModel>
-                    <input type="hidden" name="booking" [(ngModel)]=booking> <br>
-                    <button class="btn btn-success" [routerLink]="['/bookings']" (click)=sellerReview(review)>Submit
+                    <!-- <input type="hidden" name="booking" [(ngModel)]=booking> <br> -->
+                    <!-- <input type="hidden" name="booking" ngModel value='{{bking}}'> <br> -->
+                    <button class="btn btn-success" [routerLink]="['/bookings']" (click)='sellerReview(review, bking)'>Submit
                       Review</button>
                   </form>
 
@@ -70,7 +71,7 @@
             </div>
           </div>
 
-          <h6 class="card-footer bg-light text-danger" *ngIf="booking.completeDate === null">Gig Incomplete</h6>
+          <h6 class="card-footer bg-light text-danger" *ngIf="bking.completeDate === null">Gig Incomplete</h6>
           <button class="card-footer bg-light" [routerLink]="['/user']" class="btn btn-secondary">
             Back to User Profile
           </button>
