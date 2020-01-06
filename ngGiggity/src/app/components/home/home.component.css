@@ -65,3 +65,35 @@ li:hover {
 #aboutStyle {
   font-family: fantasy;
 }
+
+#catLinks {
+  border-top: 1px solid #184954;
+  background: #000000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#a3a5a6), to(#000000));
+  background: -webkit-linear-gradient(top, #a3a5a6, #000000);
+  background: -moz-linear-gradient(top, #a3a5a6, #000000);
+  background: -ms-linear-gradient(top, #a3a5a6, #000000);
+  background: -o-linear-gradient(top, #a3a5a6, #000000);
+  padding: 7px 14px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: white;
+  font-size: 14px;
+  font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  vertical-align: middle;
+  }
+#catLinks:hover {
+  border-top-color: #184754;
+  background: #184754;
+  color: #ccc;
+  }
+#catLinks:active {
+  border-top-color: #2b6f9c;
+  background: #2b6f9c;
+  }
