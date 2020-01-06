@@ -312,7 +312,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
     var exists = false;
     const desc: string = descForm.value.userSkillDescription;
-
+    skill.description = desc;
     userSkill.description = desc;
 
     // tslint:disable-next-line: prefer-for-of
@@ -337,6 +337,7 @@ export class UserComponent implements OnInit, OnDestroy {
     } else {
       this.userSkillSvc.updateUserSkill(userSkill).subscribe(
         data => {
+
           console.log('UserSkill update completed');
         },
         err => {
@@ -387,7 +388,13 @@ export class UserComponent implements OnInit, OnDestroy {
 
     this.userSkillSvc.updateUserSkill(userSkill).subscribe(
       data => {
-        this.getUserSkills();
+        this.userSkills.forEach(s => {
+          if (s.id === data.id) {
+              s.description = data.description;
+          }
+        });
+        // this.ngOnInit();
+        // this.getUserSkills();
         console.log('UserSkill update completed');
       },
       err => {
