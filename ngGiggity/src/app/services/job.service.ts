@@ -99,6 +99,9 @@ export class JobService {
   }
 
   update(id: number, updateJob: Job) {
+    console.log("made it to update in job svc");
+    console.log(id);
+    console.log(updateJob);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -106,7 +109,7 @@ export class JobService {
       })
     };
     return this.http
-      .put<Event>(this.url + '/' + id, updateJob, httpOptions)
+      .put<Job>(this.url + '/' + id, updateJob, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
