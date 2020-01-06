@@ -284,6 +284,11 @@ public class JobController {
 
 	}
 	
+//	@PutMapping("jobs/{id}")
+//	public void updateJob(@PathVariable Integer id, @RequestBody String s) {
+//		
+//	}
+	
 	@DeleteMapping("jobs/{id}")
 	public void deleteJob(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
 		
