@@ -59,12 +59,14 @@ export class BookingsComponent implements OnInit, OnDestroy {
       err => console.error('Reload error in Component')
     );
   }
-  sellerReview(form: NgForm) {
+  sellerReview(form: NgForm, booking: Booking) {
+    console.log(form.value);
     let review = new SellerReview();
 
     review = form.value;
 
-    review.booking = form.value.booking;
+    // review.booking = form.value.booking;
+    review.booking = booking;
 
     console.log(this.review);
 
