@@ -84,11 +84,11 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userSelected = data;
         this.userSkills = this.userSelected.skills;
         this.sellersBids = this.userSelected.bids;
-        // this.sellersBids.forEach(bid => {
-        //   if( bid.accepted === false || bid.rejected === ) {
-        //     this.activeBidCount =  this.activeBidCount + 1;
-        //   }
-        // });
+        this.sellersBids.forEach(bid => {
+          if( bid.accepted === false && bid.rejected === false) {
+            this.activeBidCount =  this.activeBidCount + 1;
+          }
+        });
         this.userJobs = this.userSelected.jobs;
         this.userJobs.forEach(job => {
           if( job.active === true || job.active === null) {
