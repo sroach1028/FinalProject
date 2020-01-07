@@ -241,6 +241,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   acceptBid(bid: Bid) {
+    console.log(bid);
     this.selectedBid = bid;
     this.booking.bid = bid;
     this.booking.job = this.selected;
@@ -264,6 +265,8 @@ export class UserComponent implements OnInit, OnDestroy {
       currentBid.id = rejectBid.id;
       currentBid.accepted = rejectBid.accepted;
       currentBid.rejected = rejectBid.rejected;
+      currentBid.description = rejectBid.description;
+      currentBid.bidAmount = rejectBid.bidAmount;
       currentBid.bidder = rejectBid.bidder;
 
 
