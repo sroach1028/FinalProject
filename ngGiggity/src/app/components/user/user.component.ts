@@ -45,6 +45,7 @@ export class UserComponent implements OnInit, OnDestroy {
   navigationSubscription;
   activeGigCount: number = 0;
   activeBidCount: number = 0;
+  thisSkill: Skill;
 
   // tslint:disable-next-line: max-line-length
 
@@ -382,9 +383,9 @@ export class UserComponent implements OnInit, OnDestroy {
     this.updateProfile = false;
   }
 
-  updateUserSkill(userSkillDesc: NgForm) {
+  updateUserSkill(userSkillDesc: NgForm, skill: UserSkill) {
     const userSkill = new UserSkill();
-    userSkill.id = userSkillDesc.value.id;
+    userSkill.id = skill.id;
     userSkill.description = userSkillDesc.value.description;
 
     // const desc: string = userSkillDesc.value.userSkillDesc;
