@@ -229,8 +229,7 @@
                       *ngIf="updateUserSkillDesc === true"
                     >
                       <form #userSkillDesc="ngForm">
-                        <!-- <input name="id" [(ngModel)]="skill.id" type="hidden" /> -->
-                        <input name="id" type="hidden" />
+                        <!-- <input name="id" value="skill.id" id="id" type="hidden" /> -->
                         <label for="userSkillDesc">Describe Your Skill:</label>
                         <input
                           name="description"
@@ -242,7 +241,7 @@
                         <button
                         style="float: right"
                         class="btn btn-warning"
-                        (click)="updateUserSkill(userSkillDesc)"
+                        (click)="updateUserSkill(userSkillDesc, skill)"
                         [routerLink]="['/user']"
                       >
                         Update This Skill
